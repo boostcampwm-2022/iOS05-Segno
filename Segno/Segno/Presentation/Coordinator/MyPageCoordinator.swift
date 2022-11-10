@@ -1,5 +1,5 @@
 //
-//  LoginCoordinator.swift
+//  MyPageCoordinator.swift
 //  Segno
 //
 //  Created by 이예준 on 2022/11/10.
@@ -7,7 +7,7 @@
 
 import UIKit
 
-final class LoginCoordinator: Coordinator {
+final class MyPageCoordinator: Coordinator {
     var navigationController: UINavigationController
     var childCoordinators: [Coordinator] = []
     
@@ -16,7 +16,7 @@ final class LoginCoordinator: Coordinator {
     }
     
     func start() {
-        let vc = LoginViewController()
+        let vc = MyPageViewController()
         self.navigationController.pushViewController(vc, animated: true)
     }
 }
