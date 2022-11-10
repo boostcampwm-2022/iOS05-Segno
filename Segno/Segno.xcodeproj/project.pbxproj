@@ -17,6 +17,12 @@
 		4F3177AB291BF70B0019BDFC /* RxSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 4F3177AA291BF70B0019BDFC /* RxSwift */; };
 		4F3177B0291BF7950019BDFC /* SnapKit in Frameworks */ = {isa = PBXBuildFile; productRef = 4F3177AF291BF7950019BDFC /* SnapKit */; };
 		4F3177B5291BF7BC0019BDFC /* Kingfisher in Frameworks */ = {isa = PBXBuildFile; productRef = 4F3177B4291BF7BC0019BDFC /* Kingfisher */; };
+		666E6F7D291CF45600CECD4B /* Coordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 666E6F7C291CF45600CECD4B /* Coordinator.swift */; };
+		666E6F7F291CF46800CECD4B /* AppCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 666E6F7E291CF46800CECD4B /* AppCoordinator.swift */; };
+		666E6F81291CF49E00CECD4B /* LoginCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 666E6F80291CF49E00CECD4B /* LoginCoordinator.swift */; };
+		666E6F83291CF4A600CECD4B /* TabBarCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 666E6F82291CF4A600CECD4B /* TabBarCoordinator.swift */; };
+		666E6F85291CF4AD00CECD4B /* MyPageCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 666E6F84291CF4AD00CECD4B /* MyPageCoordinator.swift */; };
+		666E6F87291CF4B400CECD4B /* DiaryCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 666E6F86291CF4B400CECD4B /* DiaryCoordinator.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -27,6 +33,12 @@
 		4F317785291BE4720019BDFC /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		4F317788291BE4720019BDFC /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		4F31778A291BE4720019BDFC /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		666E6F7C291CF45600CECD4B /* Coordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Coordinator.swift; sourceTree = "<group>"; };
+		666E6F7E291CF46800CECD4B /* AppCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppCoordinator.swift; sourceTree = "<group>"; };
+		666E6F80291CF49E00CECD4B /* LoginCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginCoordinator.swift; sourceTree = "<group>"; };
+		666E6F82291CF4A600CECD4B /* TabBarCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarCoordinator.swift; sourceTree = "<group>"; };
+		666E6F84291CF4AD00CECD4B /* MyPageCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyPageCoordinator.swift; sourceTree = "<group>"; };
+		666E6F86291CF4B400CECD4B /* DiaryCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiaryCoordinator.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -125,6 +137,7 @@
 			children = (
 				4F31777C291BE4710019BDFC /* AppDelegate.swift */,
 				4F31777E291BE4710019BDFC /* SceneDelegate.swift */,
+				666E6F7E291CF46800CECD4B /* AppCoordinator.swift */,
 			);
 			path = Application;
 			sourceTree = "<group>";
@@ -168,6 +181,11 @@
 		4F31779C291BEE900019BDFC /* Coordinator */ = {
 			isa = PBXGroup;
 			children = (
+				666E6F7C291CF45600CECD4B /* Coordinator.swift */,
+				666E6F80291CF49E00CECD4B /* LoginCoordinator.swift */,
+				666E6F82291CF4A600CECD4B /* TabBarCoordinator.swift */,
+				666E6F84291CF4AD00CECD4B /* MyPageCoordinator.swift */,
+				666E6F86291CF4B400CECD4B /* DiaryCoordinator.swift */,
 			);
 			path = Coordinator;
 			sourceTree = "<group>";
@@ -268,8 +286,14 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				666E6F81291CF49E00CECD4B /* LoginCoordinator.swift in Sources */,
+				666E6F85291CF4AD00CECD4B /* MyPageCoordinator.swift in Sources */,
+				666E6F7D291CF45600CECD4B /* Coordinator.swift in Sources */,
 				4F317781291BE4710019BDFC /* ViewController.swift in Sources */,
+				666E6F83291CF4A600CECD4B /* TabBarCoordinator.swift in Sources */,
+				666E6F7F291CF46800CECD4B /* AppCoordinator.swift in Sources */,
 				4F31777D291BE4710019BDFC /* AppDelegate.swift in Sources */,
+				666E6F87291CF4B400CECD4B /* DiaryCoordinator.swift in Sources */,
 				4F31777F291BE4710019BDFC /* SceneDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
