@@ -7,10 +7,10 @@
 
 import UIKit
 
-final class ViewController: UIViewController {
+final class LoginViewController: UIViewController {
     let testLabel: UILabel = {
         let label = UILabel()
-        label.text = "Hello World!"
+        label.text = "Login View Controller!"
         label.textColor = .black
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
@@ -31,4 +31,3 @@ final class ViewController: UIViewController {
         ])
     }
 }
-
