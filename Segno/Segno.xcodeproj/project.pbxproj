@@ -9,28 +9,50 @@
 /* Begin PBXBuildFile section */
 		4F31777D291BE4710019BDFC /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F31777C291BE4710019BDFC /* AppDelegate.swift */; };
 		4F31777F291BE4710019BDFC /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F31777E291BE4710019BDFC /* SceneDelegate.swift */; };
-		4F317781291BE4710019BDFC /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F317780291BE4710019BDFC /* ViewController.swift */; };
+		4F317781291BE4710019BDFC /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F317780291BE4710019BDFC /* LoginViewController.swift */; };
 		4F317786291BE4720019BDFC /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 4F317785291BE4720019BDFC /* Assets.xcassets */; };
 		4F317789291BE4720019BDFC /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4F317787291BE4720019BDFC /* LaunchScreen.storyboard */; };
 		4F3177A3291BF70B0019BDFC /* RxCocoa in Frameworks */ = {isa = PBXBuildFile; productRef = 4F3177A2291BF70B0019BDFC /* RxCocoa */; };
-		4F3177A5291BF70B0019BDFC /* RxCocoa-Dynamic in Frameworks */ = {isa = PBXBuildFile; productRef = 4F3177A4291BF70B0019BDFC /* RxCocoa-Dynamic */; };
 		4F3177A7291BF70B0019BDFC /* RxRelay in Frameworks */ = {isa = PBXBuildFile; productRef = 4F3177A6291BF70B0019BDFC /* RxRelay */; };
-		4F3177A9291BF70B0019BDFC /* RxRelay-Dynamic in Frameworks */ = {isa = PBXBuildFile; productRef = 4F3177A8291BF70B0019BDFC /* RxRelay-Dynamic */; };
 		4F3177AB291BF70B0019BDFC /* RxSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 4F3177AA291BF70B0019BDFC /* RxSwift */; };
-		4F3177AD291BF70B0019BDFC /* RxSwift-Dynamic in Frameworks */ = {isa = PBXBuildFile; productRef = 4F3177AC291BF70B0019BDFC /* RxSwift-Dynamic */; };
 		4F3177B0291BF7950019BDFC /* SnapKit in Frameworks */ = {isa = PBXBuildFile; productRef = 4F3177AF291BF7950019BDFC /* SnapKit */; };
-		4F3177B2291BF7950019BDFC /* SnapKit-Dynamic in Frameworks */ = {isa = PBXBuildFile; productRef = 4F3177B1291BF7950019BDFC /* SnapKit-Dynamic */; };
 		4F3177B5291BF7BC0019BDFC /* Kingfisher in Frameworks */ = {isa = PBXBuildFile; productRef = 4F3177B4291BF7BC0019BDFC /* Kingfisher */; };
+		4FEBFAAB291CF30E00E78139 /* DiaryListItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FEBFAAA291CF30E00E78139 /* DiaryListItem.swift */; };
+		4FEBFAAD291CF62E00E78139 /* DiaryDetail.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FEBFAAC291CF62E00E78139 /* DiaryDetail.swift */; };
+		4FEBFAAF291CF9F300E78139 /* MusicInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FEBFAAE291CF9F300E78139 /* MusicInfo.swift */; };
+		4FEBFAB1291CFB5500E78139 /* SHMediaItem+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FEBFAB0291CFB5500E78139 /* SHMediaItem+.swift */; };
+		666E6F7D291CF45600CECD4B /* Coordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 666E6F7C291CF45600CECD4B /* Coordinator.swift */; };
+		666E6F7F291CF46800CECD4B /* AppCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 666E6F7E291CF46800CECD4B /* AppCoordinator.swift */; };
+		666E6F81291CF49E00CECD4B /* LoginCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 666E6F80291CF49E00CECD4B /* LoginCoordinator.swift */; };
+		666E6F83291CF4A600CECD4B /* TabBarCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 666E6F82291CF4A600CECD4B /* TabBarCoordinator.swift */; };
+		666E6F85291CF4AD00CECD4B /* MyPageCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 666E6F84291CF4AD00CECD4B /* MyPageCoordinator.swift */; };
+		666E6F87291CF4B400CECD4B /* DiaryCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 666E6F86291CF4B400CECD4B /* DiaryCoordinator.swift */; };
+		666E6F8A291CF82700CECD4B /* TabBarPageCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 666E6F89291CF82700CECD4B /* TabBarPageCase.swift */; };
+		666E6F8C291CFAC200CECD4B /* DiaryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 666E6F8B291CFAC200CECD4B /* DiaryViewController.swift */; };
+		666E6F8E291CFADD00CECD4B /* MyPageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 666E6F8D291CFADD00CECD4B /* MyPageViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		4F317779291BE4710019BDFC /* Segno.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Segno.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		4F31777C291BE4710019BDFC /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		4F31777E291BE4710019BDFC /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
-		4F317780291BE4710019BDFC /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		4F317780291BE4710019BDFC /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		4F317785291BE4720019BDFC /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		4F317788291BE4720019BDFC /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		4F31778A291BE4720019BDFC /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		4FEBFAAA291CF30E00E78139 /* DiaryListItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiaryListItem.swift; sourceTree = "<group>"; };
+		4FEBFAAC291CF62E00E78139 /* DiaryDetail.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiaryDetail.swift; sourceTree = "<group>"; };
+		4FEBFAAE291CF9F300E78139 /* MusicInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MusicInfo.swift; sourceTree = "<group>"; };
+		4FEBFAB0291CFB5500E78139 /* SHMediaItem+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "SHMediaItem+.swift"; sourceTree = "<group>"; };
+		666E6F7C291CF45600CECD4B /* Coordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Coordinator.swift; sourceTree = "<group>"; };
+		666E6F7E291CF46800CECD4B /* AppCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppCoordinator.swift; sourceTree = "<group>"; };
+		666E6F80291CF49E00CECD4B /* LoginCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginCoordinator.swift; sourceTree = "<group>"; };
+		666E6F82291CF4A600CECD4B /* TabBarCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarCoordinator.swift; sourceTree = "<group>"; };
+		666E6F84291CF4AD00CECD4B /* MyPageCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyPageCoordinator.swift; sourceTree = "<group>"; };
+		666E6F86291CF4B400CECD4B /* DiaryCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiaryCoordinator.swift; sourceTree = "<group>"; };
+		666E6F89291CF82700CECD4B /* TabBarPageCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarPageCase.swift; sourceTree = "<group>"; };
+		666E6F8B291CFAC200CECD4B /* DiaryViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiaryViewController.swift; sourceTree = "<group>"; };
+		666E6F8D291CFADD00CECD4B /* MyPageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyPageViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -38,14 +60,10 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				4F3177A9291BF70B0019BDFC /* RxRelay-Dynamic in Frameworks */,
 				4F3177A7291BF70B0019BDFC /* RxRelay in Frameworks */,
 				4F3177AB291BF70B0019BDFC /* RxSwift in Frameworks */,
 				4F3177B5291BF7BC0019BDFC /* Kingfisher in Frameworks */,
-				4F3177B2291BF7950019BDFC /* SnapKit-Dynamic in Frameworks */,
 				4F3177B0291BF7950019BDFC /* SnapKit in Frameworks */,
-				4F3177A5291BF70B0019BDFC /* RxCocoa-Dynamic in Frameworks */,
-				4F3177AD291BF70B0019BDFC /* RxSwift-Dynamic in Frameworks */,
 				4F3177A3291BF70B0019BDFC /* RxCocoa in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -116,6 +134,9 @@
 		4F317793291BEB670019BDFC /* Entity */ = {
 			isa = PBXGroup;
 			children = (
+				4FEBFAAA291CF30E00E78139 /* DiaryListItem.swift */,
+				4FEBFAAC291CF62E00E78139 /* DiaryDetail.swift */,
+				4FEBFAAE291CF9F300E78139 /* MusicInfo.swift */,
 			);
 			path = Entity;
 			sourceTree = "<group>";
@@ -133,6 +154,7 @@
 			children = (
 				4F31777C291BE4710019BDFC /* AppDelegate.swift */,
 				4F31777E291BE4710019BDFC /* SceneDelegate.swift */,
+				666E6F7E291CF46800CECD4B /* AppCoordinator.swift */,
 			);
 			path = Application;
 			sourceTree = "<group>";
@@ -140,6 +162,7 @@
 		4F317796291BEB900019BDFC /* Extension */ = {
 			isa = PBXGroup;
 			children = (
+				4FEBFAB0291CFB5500E78139 /* SHMediaItem+.swift */,
 			);
 			path = Extension;
 			sourceTree = "<group>";
@@ -161,7 +184,9 @@
 		4F31779A291BEE810019BDFC /* ViewController */ = {
 			isa = PBXGroup;
 			children = (
-				4F317780291BE4710019BDFC /* ViewController.swift */,
+				4F317780291BE4710019BDFC /* LoginViewController.swift */,
+				666E6F8B291CFAC200CECD4B /* DiaryViewController.swift */,
+				666E6F8D291CFADD00CECD4B /* MyPageViewController.swift */,
 			);
 			path = ViewController;
 			sourceTree = "<group>";
@@ -176,6 +201,11 @@
 		4F31779C291BEE900019BDFC /* Coordinator */ = {
 			isa = PBXGroup;
 			children = (
+				666E6F7C291CF45600CECD4B /* Coordinator.swift */,
+				666E6F80291CF49E00CECD4B /* LoginCoordinator.swift */,
+				666E6F88291CF81200CECD4B /* TabBar */,
+				666E6F86291CF4B400CECD4B /* DiaryCoordinator.swift */,
+				666E6F84291CF4AD00CECD4B /* MyPageCoordinator.swift */,
 			);
 			path = Coordinator;
 			sourceTree = "<group>";
@@ -192,6 +222,15 @@
 			children = (
 			);
 			path = Repository;
+			sourceTree = "<group>";
+		};
+		666E6F88291CF81200CECD4B /* TabBar */ = {
+			isa = PBXGroup;
+			children = (
+				666E6F82291CF4A600CECD4B /* TabBarCoordinator.swift */,
+				666E6F89291CF82700CECD4B /* TabBarPageCase.swift */,
+			);
+			path = TabBar;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -212,13 +251,9 @@
 			name = Segno;
 			packageProductDependencies = (
 				4F3177A2291BF70B0019BDFC /* RxCocoa */,
-				4F3177A4291BF70B0019BDFC /* RxCocoa-Dynamic */,
 				4F3177A6291BF70B0019BDFC /* RxRelay */,
-				4F3177A8291BF70B0019BDFC /* RxRelay-Dynamic */,
 				4F3177AA291BF70B0019BDFC /* RxSwift */,
-				4F3177AC291BF70B0019BDFC /* RxSwift-Dynamic */,
 				4F3177AF291BF7950019BDFC /* SnapKit */,
-				4F3177B1291BF7950019BDFC /* SnapKit-Dynamic */,
 				4F3177B4291BF7BC0019BDFC /* Kingfisher */,
 			);
 			productName = Segno;
@@ -280,8 +315,23 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				4FEBFAAD291CF62E00E78139 /* DiaryDetail.swift in Sources */,
+				4FEBFAB1291CFB5500E78139 /* SHMediaItem+.swift in Sources */,
+				4FEBFAAF291CF9F300E78139 /* MusicInfo.swift in Sources */,
 				4F317781291BE4710019BDFC /* ViewController.swift in Sources */,
 				4F31777D291BE4710019BDFC /* AppDelegate.swift in Sources */,
+				4FEBFAAB291CF30E00E78139 /* DiaryListItem.swift in Sources */,
+				666E6F81291CF49E00CECD4B /* LoginCoordinator.swift in Sources */,
+				666E6F85291CF4AD00CECD4B /* MyPageCoordinator.swift in Sources */,
+				666E6F7D291CF45600CECD4B /* Coordinator.swift in Sources */,
+				666E6F8C291CFAC200CECD4B /* DiaryViewController.swift in Sources */,
+				4F317781291BE4710019BDFC /* LoginViewController.swift in Sources */,
+				666E6F8A291CF82700CECD4B /* TabBarPageCase.swift in Sources */,
+				666E6F83291CF4A600CECD4B /* TabBarCoordinator.swift in Sources */,
+				666E6F8E291CFADD00CECD4B /* MyPageViewController.swift in Sources */,
+				666E6F7F291CF46800CECD4B /* AppCoordinator.swift in Sources */,
+				4F31777D291BE4710019BDFC /* AppDelegate.swift in Sources */,
+				666E6F87291CF4B400CECD4B /* DiaryCoordinator.swift in Sources */,
 				4F31777F291BE4710019BDFC /* SceneDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -526,40 +576,20 @@
 			package = 4F3177A1291BF70B0019BDFC /* XCRemoteSwiftPackageReference "RxSwift" */;
 			productName = RxCocoa;
 		};
-		4F3177A4291BF70B0019BDFC /* RxCocoa-Dynamic */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = 4F3177A1291BF70B0019BDFC /* XCRemoteSwiftPackageReference "RxSwift" */;
-			productName = "RxCocoa-Dynamic";
-		};
 		4F3177A6291BF70B0019BDFC /* RxRelay */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = 4F3177A1291BF70B0019BDFC /* XCRemoteSwiftPackageReference "RxSwift" */;
 			productName = RxRelay;
-		};
-		4F3177A8291BF70B0019BDFC /* RxRelay-Dynamic */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = 4F3177A1291BF70B0019BDFC /* XCRemoteSwiftPackageReference "RxSwift" */;
-			productName = "RxRelay-Dynamic";
 		};
 		4F3177AA291BF70B0019BDFC /* RxSwift */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = 4F3177A1291BF70B0019BDFC /* XCRemoteSwiftPackageReference "RxSwift" */;
 			productName = RxSwift;
 		};
-		4F3177AC291BF70B0019BDFC /* RxSwift-Dynamic */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = 4F3177A1291BF70B0019BDFC /* XCRemoteSwiftPackageReference "RxSwift" */;
-			productName = "RxSwift-Dynamic";
-		};
 		4F3177AF291BF7950019BDFC /* SnapKit */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = 4F3177AE291BF7950019BDFC /* XCRemoteSwiftPackageReference "SnapKit" */;
 			productName = SnapKit;
-		};
-		4F3177B1291BF7950019BDFC /* SnapKit-Dynamic */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = 4F3177AE291BF7950019BDFC /* XCRemoteSwiftPackageReference "SnapKit" */;
-			productName = "SnapKit-Dynamic";
 		};
 		4F3177B4291BF7BC0019BDFC /* Kingfisher */ = {
 			isa = XCSwiftPackageProductDependency;
