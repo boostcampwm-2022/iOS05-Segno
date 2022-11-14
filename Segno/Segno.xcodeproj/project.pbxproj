@@ -30,6 +30,7 @@
 		666E6F8A291CF82700CECD4B /* TabBarPageCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 666E6F89291CF82700CECD4B /* TabBarPageCase.swift */; };
 		666E6F8C291CFAC200CECD4B /* DiaryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 666E6F8B291CFAC200CECD4B /* DiaryViewController.swift */; };
 		666E6F8E291CFADD00CECD4B /* MyPageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 666E6F8D291CFADD00CECD4B /* MyPageViewController.swift */; };
+		988414AE2922235B007C9132 /* LocalUtilityRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 988414AD2922235B007C9132 /* LocalUtilityRepository.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -53,6 +54,7 @@
 		666E6F89291CF82700CECD4B /* TabBarPageCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarPageCase.swift; sourceTree = "<group>"; };
 		666E6F8B291CFAC200CECD4B /* DiaryViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiaryViewController.swift; sourceTree = "<group>"; };
 		666E6F8D291CFADD00CECD4B /* MyPageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyPageViewController.swift; sourceTree = "<group>"; };
+		988414AD2922235B007C9132 /* LocalUtilityRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalUtilityRepository.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -220,6 +222,7 @@
 		4F3177A0291BF1810019BDFC /* Repository */ = {
 			isa = PBXGroup;
 			children = (
+				988414AD2922235B007C9132 /* LocalUtilityRepository.swift */,
 			);
 			path = Repository;
 			sourceTree = "<group>";
@@ -317,8 +320,9 @@
 			files = (
 				4FEBFAAD291CF62E00E78139 /* DiaryDetail.swift in Sources */,
 				4FEBFAB1291CFB5500E78139 /* SHMediaItem+.swift in Sources */,
+				988414AE2922235B007C9132 /* LocalUtilityRepository.swift in Sources */,
 				4FEBFAAF291CF9F300E78139 /* MusicInfo.swift in Sources */,
-				4F317781291BE4710019BDFC /* ViewController.swift in Sources */,
+				4F317781291BE4710019BDFC /* LoginViewController.swift in Sources */,
 				4F31777D291BE4710019BDFC /* AppDelegate.swift in Sources */,
 				4FEBFAAB291CF30E00E78139 /* DiaryListItem.swift in Sources */,
 				666E6F81291CF49E00CECD4B /* LoginCoordinator.swift in Sources */,
