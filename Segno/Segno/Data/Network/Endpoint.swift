@@ -40,8 +40,7 @@ extension Endpoint {
     
     func toURLRequest() throws -> URLRequest {
         guard let url = configureURL() else {
-            // TODO: URL 생성 실패 에러 던지기
-            fatalError()
+            throw NetworkError.failedToCreateURL
         }
         
         return URLRequest(url: url)
