@@ -8,12 +8,13 @@
 import UIKit
 
 final class DiaryViewController: UIViewController {
-    let testLabel: UILabel = {
-        let label = UILabel()
-        label.text = "Diary View Controller!"
-        label.textColor = .black
-        label.translatesAutoresizingMaskIntoConstraints = false
-        return label
+    let searchBar: UISearchBar = {
+        let bar = UISearchBar()
+        bar.placeholder = "Search Bar Test!"
+        bar.setImage(UIImage(named: "search_back"), for: .search, state: .normal)
+        bar.setImage(UIImage(named: "search_cancel"), for: .clear, state: .normal)
+        bar.translatesAutoresizingMaskIntoConstraints = false
+        return bar
     }()
     
     override func viewDidLoad() {
@@ -23,11 +24,12 @@ final class DiaryViewController: UIViewController {
 
     private func setupView() {
         view.backgroundColor = .white
-        view.addSubview(testLabel)
+        view.addSubview(searchBar)
         
         NSLayoutConstraint.activate([
-            testLabel.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-            testLabel.centerYAnchor.constraint(equalTo: view.centerYAnchor)
+            searchBar.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+            searchBar.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
+            searchBar.widthAnchor.constraint(equalTo: view.widthAnchor)
         ])
     }
 }
