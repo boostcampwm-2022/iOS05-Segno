@@ -15,13 +15,18 @@ enum SFont {
 
 extension UIFont {
     static func appFont(_ name: SFont, size: CGFloat) -> UIFont {
+        let defaultFont = UIFont.systemFont(ofSize: size)
+        var targetFont: UIFont?
+        
         switch name {
         case .shiningStar:
-            return UIFont(name: "Cafe24ShiningStar", size: size)!
+            targetFont = UIFont(name: "Cafe24ShiningStar", size: size)
         case .surround:
-            return UIFont(name: "Cafe24Ssurround", size: size)!
+            targetFont = UIFont(name: "Cafe24Ssurround", size: size)
         case .surroundAir:
-            return UIFont(name: "Cafe24SsurroundAir", size: size)!
+            targetFont = UIFont(name: "Cafe24SsurroundAir", size: size)
         }
+        
+        return targetFont ?? defaultFont
     }
 }
