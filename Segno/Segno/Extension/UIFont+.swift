@@ -7,16 +7,21 @@
 
 import UIKit
 
+enum SFont {
+    case shiningStar
+    case surround
+    case surroundAir
+}
+
 extension UIFont {
-    static func shiningStar(ofSize size: CGFloat) -> UIFont {
-        return UIFont(name: "Cafe24ShiningStar", size: size)!
-    }
-    
-    static func surround(ofSize size: CGFloat) -> UIFont {
-        return UIFont(name: "Cafe24Ssurround", size: size)!
-    }
-    
-    static func surroundAir(ofSize size: CGFloat) -> UIFont {
-        return UIFont(name: "Cafe24SsurroundAir", size: size)!
+    static func appFont(_ name: SFont, size: CGFloat) -> UIFont {
+        switch name {
+        case .shiningStar:
+            return UIFont(name: "Cafe24ShiningStar", size: size)!
+        case .surround:
+            return UIFont(name: "Cafe24Ssurround", size: size)!
+        case .surroundAir:
+            return UIFont(name: "Cafe24SsurroundAir", size: size)!
+        }
     }
 }
