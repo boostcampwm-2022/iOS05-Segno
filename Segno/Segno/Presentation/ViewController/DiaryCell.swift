@@ -10,7 +10,6 @@ import UIKit
 final class DiaryCell: UICollectionViewCell {
     private lazy var thumbnailImageView: UIImageView = {
         let imageView = UIImageView()
-        imageView.tintColor = .appColor(.color3)
         return imageView
     }()
     
@@ -32,6 +31,8 @@ final class DiaryCell: UICollectionViewCell {
     }
     
     private func setupView() {
+        contentView.backgroundColor = .appColor(.color3)
+        
         thumbnailImageView.image = UIImage(systemName: "popcorn.fill")
         titleLabel.text = "Title"
     }
@@ -47,7 +48,12 @@ final class DiaryCell: UICollectionViewCell {
         }
         
         thumbnailImageView.snp.makeConstraints { make in
-            make.height.equalTo(contentView.frame.height)
+            // TODO: 추후에 사진 비율 맞춰서 height 조절해주기
+            make.height.equalTo(contentView.frame.width * 0.85)
+        }
+        
+        titleLabel.snp.makeConstraints { make in
+            make.top.equalTo(thumbnailImageView.snp.bottom)
         }
     }
     

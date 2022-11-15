@@ -73,7 +73,7 @@ final class DiaryCollectionViewController: UIViewController {
             view.addSubview($0)
             
             $0.snp.makeConstraints { make in
-                make.width.equalToSuperview().inset(Metric.inset)
+                make.width.equalToSuperview()
                 make.centerX.equalTo(view.snp.centerX)
             }
         }
