@@ -7,7 +7,7 @@
 
 import UIKit
 
-final class DiaryViewController: UIViewController {
+final class DiaryCollectionViewController: UIViewController {
     // TODO: 추후에 viewModel도 가져와서 연결하기
     private let layout: UICollectionViewLayout
     
