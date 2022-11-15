@@ -6,10 +6,22 @@
 //
 
 import UIKit
+import SnapKit
 
 final class DiaryCollectionViewController: UIViewController {
     // TODO: 추후에 viewModel도 가져와서 연결하기
     private let layout: UICollectionViewLayout
+    
+    private enum Metric {
+        static let spacingBetweenButtons: CGFloat = 20
+        static let inset: CGFloat = 20
+     
+        static let titleHeight: CGFloat = 100
+        static let titleOffset: CGFloat = 200
+        static let subTitleHeight: CGFloat = 50
+        static let buttonHeight: CGFloat = 50
+        static let buttonRadius: CGFloat = 20
+    }
     
     lazy var searchBar: UISearchBar = {
         let bar = UISearchBar()
@@ -41,27 +53,30 @@ final class DiaryCollectionViewController: UIViewController {
         super.viewDidLoad()
         
         setupView()
+        setupLayout()
     }
-
+    
     private func setupView() {
         view.backgroundColor = .appColor(.background)
-        view.addSubview(searchBar)
+    }
+
+    private func setupLayout() {
+        [searchBar, diaryCollectionView].forEach {
+            view.addSubview($0)
+            
+            $0.snp.makeConstraints { make in
+                make.width.equalToSuperview().inset(Metric.inset)
+                make.centerX.equalTo(view.snp.centerX)
+            }
+        }
         
-        // TODO: 추후에 SnapKit 적용하여 레이아웃 맞추기
-        NSLayoutConstraint.activate([
-            searchBar.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-            searchBar.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
-            searchBar.leadingAnchor.constraint(equalTo: view.leadingAnchor),
-            searchBar.trailingAnchor.constraint(equalTo: view.trailingAnchor)
-        ])
+        searchBar.snp.makeConstraints { make in
+            make.top.equalTo(view.safeAreaLayoutGuide)
+        }
         
-        view.addSubview(diaryCollectionView)
-        
-        NSLayoutConstraint.activate([
-            diaryCollectionView.topAnchor.constraint(equalTo: searchBar.bottomAnchor),
-            diaryCollectionView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor),
-            diaryCollectionView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
-            diaryCollectionView.trailingAnchor.constraint(equalTo: view.trailingAnchor)
-        ])
+        diaryCollectionView.snp.makeConstraints { make in
+            make.top.equalTo(searchBar.snp.bottom)
+            make.bottom.equalTo(view.safeAreaLayoutGuide)
+        }
     }
 }
