@@ -7,9 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		4F31777D291BE4710019BDFC /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F31777C291BE4710019BDFC /* AppDelegate.swift */; };
 		4F31777F291BE4710019BDFC /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F31777E291BE4710019BDFC /* SceneDelegate.swift */; };
-		4F317781291BE4710019BDFC /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F317780291BE4710019BDFC /* LoginViewController.swift */; };
 		4F317786291BE4720019BDFC /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 4F317785291BE4720019BDFC /* Assets.xcassets */; };
 		4F317789291BE4720019BDFC /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4F317787291BE4720019BDFC /* LaunchScreen.storyboard */; };
 		4F3177A3291BF70B0019BDFC /* RxCocoa in Frameworks */ = {isa = PBXBuildFile; productRef = 4F3177A2291BF70B0019BDFC /* RxCocoa */; };
@@ -17,6 +15,11 @@
 		4F3177AB291BF70B0019BDFC /* RxSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 4F3177AA291BF70B0019BDFC /* RxSwift */; };
 		4F3177B0291BF7950019BDFC /* SnapKit in Frameworks */ = {isa = PBXBuildFile; productRef = 4F3177AF291BF7950019BDFC /* SnapKit */; };
 		4F3177B5291BF7BC0019BDFC /* Kingfisher in Frameworks */ = {isa = PBXBuildFile; productRef = 4F3177B4291BF7BC0019BDFC /* Kingfisher */; };
+		4F9A001B292227D7007D9057 /* NetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F9A001A292227D7007D9057 /* NetworkManager.swift */; };
+		4F9A001D29222B1B007D9057 /* Endpoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F9A001C29222B1B007D9057 /* Endpoint.swift */; };
+		4F9A001F29222C97007D9057 /* NetworkError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F9A001E29222C97007D9057 /* NetworkError.swift */; };
+		4F9A00202922337F007D9057 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F317780291BE4710019BDFC /* LoginViewController.swift */; };
+		4F9A00212922338E007D9057 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F31777C291BE4710019BDFC /* AppDelegate.swift */; };
 		4FEBFAAB291CF30E00E78139 /* DiaryListItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FEBFAAA291CF30E00E78139 /* DiaryListItem.swift */; };
 		4FEBFAAD291CF62E00E78139 /* DiaryDetail.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FEBFAAC291CF62E00E78139 /* DiaryDetail.swift */; };
 		4FEBFAAF291CF9F300E78139 /* MusicInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FEBFAAE291CF9F300E78139 /* MusicInfo.swift */; };
@@ -30,8 +33,13 @@
 		666E6F8A291CF82700CECD4B /* TabBarPageCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 666E6F89291CF82700CECD4B /* TabBarPageCase.swift */; };
 		666E6F8C291CFAC200CECD4B /* DiaryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 666E6F8B291CFAC200CECD4B /* DiaryViewController.swift */; };
 		666E6F8E291CFADD00CECD4B /* MyPageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 666E6F8D291CFADD00CECD4B /* MyPageViewController.swift */; };
-		988414AE2922235B007C9132 /* LocalUtilityRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 988414AD2922235B007C9132 /* LocalUtilityRepository.swift */; };
+    988414AE2922235B007C9132 /* LocalUtilityRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 988414AD2922235B007C9132 /* LocalUtilityRepository.swift */; };
 		988414D72923304F007C9132 /* KeychainError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 988414D62923304F007C9132 /* KeychainError.swift */; };
+		791837FA292225C600BC6992 /* Cafe24Shiningstar.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 791837F7292225BF00BC6992 /* Cafe24Shiningstar.ttf */; };
+		791837FB292225C800BC6992 /* Cafe24Ssurround.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 791837F9292225BF00BC6992 /* Cafe24Ssurround.ttf */; };
+		791837FC292225CB00BC6992 /* Cafe24SsurroundAir.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 791837F8292225BF00BC6992 /* Cafe24SsurroundAir.ttf */; };
+		791837FF292225DC00BC6992 /* UIColor+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 791837FD292225DC00BC6992 /* UIColor+.swift */; };
+		79183800292225DC00BC6992 /* UIFont+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 791837FE292225DC00BC6992 /* UIFont+.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -42,6 +50,9 @@
 		4F317785291BE4720019BDFC /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		4F317788291BE4720019BDFC /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		4F31778A291BE4720019BDFC /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		4F9A001A292227D7007D9057 /* NetworkManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkManager.swift; sourceTree = "<group>"; };
+		4F9A001C29222B1B007D9057 /* Endpoint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Endpoint.swift; sourceTree = "<group>"; };
+		4F9A001E29222C97007D9057 /* NetworkError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkError.swift; sourceTree = "<group>"; };
 		4FEBFAAA291CF30E00E78139 /* DiaryListItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiaryListItem.swift; sourceTree = "<group>"; };
 		4FEBFAAC291CF62E00E78139 /* DiaryDetail.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiaryDetail.swift; sourceTree = "<group>"; };
 		4FEBFAAE291CF9F300E78139 /* MusicInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MusicInfo.swift; sourceTree = "<group>"; };
@@ -57,6 +68,11 @@
 		666E6F8D291CFADD00CECD4B /* MyPageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyPageViewController.swift; sourceTree = "<group>"; };
 		988414AD2922235B007C9132 /* LocalUtilityRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalUtilityRepository.swift; sourceTree = "<group>"; };
 		988414D62923304F007C9132 /* KeychainError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeychainError.swift; sourceTree = "<group>"; };
+    791837F7292225BF00BC6992 /* Cafe24Shiningstar.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = Cafe24Shiningstar.ttf; sourceTree = "<group>"; };
+		791837F8292225BF00BC6992 /* Cafe24SsurroundAir.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = Cafe24SsurroundAir.ttf; sourceTree = "<group>"; };
+		791837F9292225BF00BC6992 /* Cafe24Ssurround.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = Cafe24Ssurround.ttf; sourceTree = "<group>"; };
+		791837FD292225DC00BC6992 /* UIColor+.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIColor+.swift"; sourceTree = "<group>"; };
+		791837FE292225DC00BC6992 /* UIFont+.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIFont+.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -108,6 +124,7 @@
 		4F317790291BEB340019BDFC /* Resource */ = {
 			isa = PBXGroup;
 			children = (
+				791837F6292225B800BC6992 /* Font */,
 				4F317785291BE4720019BDFC /* Assets.xcassets */,
 				4F317787291BE4720019BDFC /* LaunchScreen.storyboard */,
 				4F31778A291BE4720019BDFC /* Info.plist */,
@@ -167,6 +184,8 @@
 		4F317796291BEB900019BDFC /* Extension */ = {
 			isa = PBXGroup;
 			children = (
+				791837FD292225DC00BC6992 /* UIColor+.swift */,
+				791837FE292225DC00BC6992 /* UIFont+.swift */,
 				4FEBFAB0291CFB5500E78139 /* SHMediaItem+.swift */,
 			);
 			path = Extension;
@@ -218,6 +237,9 @@
 		4F31779F291BF1780019BDFC /* Network */ = {
 			isa = PBXGroup;
 			children = (
+				4F9A001A292227D7007D9057 /* NetworkManager.swift */,
+				4F9A001C29222B1B007D9057 /* Endpoint.swift */,
+				4F9A001E29222C97007D9057 /* NetworkError.swift */,
 			);
 			path = Network;
 			sourceTree = "<group>";
@@ -237,6 +259,16 @@
 				666E6F89291CF82700CECD4B /* TabBarPageCase.swift */,
 			);
 			path = TabBar;
+			sourceTree = "<group>";
+		};
+		791837F6292225B800BC6992 /* Font */ = {
+			isa = PBXGroup;
+			children = (
+				791837F7292225BF00BC6992 /* Cafe24Shiningstar.ttf */,
+				791837F9292225BF00BC6992 /* Cafe24Ssurround.ttf */,
+				791837F8292225BF00BC6992 /* Cafe24SsurroundAir.ttf */,
+			);
+			path = Font;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -309,6 +341,9 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				791837FA292225C600BC6992 /* Cafe24Shiningstar.ttf in Resources */,
+				791837FB292225C800BC6992 /* Cafe24Ssurround.ttf in Resources */,
+				791837FC292225CB00BC6992 /* Cafe24SsurroundAir.ttf in Resources */,
 				4F317789291BE4720019BDFC /* LaunchScreen.storyboard in Resources */,
 				4F317786291BE4720019BDFC /* Assets.xcassets in Resources */,
 			);
@@ -321,21 +356,25 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				4F9A00212922338E007D9057 /* AppDelegate.swift in Sources */,
+				4F9A00202922337F007D9057 /* LoginViewController.swift in Sources */,
+				4F9A001B292227D7007D9057 /* NetworkManager.swift in Sources */,
 				4FEBFAAD291CF62E00E78139 /* DiaryDetail.swift in Sources */,
 				4FEBFAB1291CFB5500E78139 /* SHMediaItem+.swift in Sources */,
 				988414AE2922235B007C9132 /* LocalUtilityRepository.swift in Sources */,
 				4FEBFAAF291CF9F300E78139 /* MusicInfo.swift in Sources */,
-				4F317781291BE4710019BDFC /* LoginViewController.swift in Sources */,
-				4F31777D291BE4710019BDFC /* AppDelegate.swift in Sources */,
 				4FEBFAAB291CF30E00E78139 /* DiaryListItem.swift in Sources */,
 				666E6F81291CF49E00CECD4B /* LoginCoordinator.swift in Sources */,
 				666E6F85291CF4AD00CECD4B /* MyPageCoordinator.swift in Sources */,
 				666E6F7D291CF45600CECD4B /* Coordinator.swift in Sources */,
 				666E6F8C291CFAC200CECD4B /* DiaryViewController.swift in Sources */,
-				4F317781291BE4710019BDFC /* LoginViewController.swift in Sources */,
 				666E6F8A291CF82700CECD4B /* TabBarPageCase.swift in Sources */,
+				79183800292225DC00BC6992 /* UIFont+.swift in Sources */,
 				666E6F83291CF4A600CECD4B /* TabBarCoordinator.swift in Sources */,
+				4F9A001D29222B1B007D9057 /* Endpoint.swift in Sources */,
+				4F9A001F29222C97007D9057 /* NetworkError.swift in Sources */,
 				666E6F8E291CFADD00CECD4B /* MyPageViewController.swift in Sources */,
+				791837FF292225DC00BC6992 /* UIColor+.swift in Sources */,
 				666E6F7F291CF46800CECD4B /* AppCoordinator.swift in Sources */,
 				988414D72923304F007C9132 /* KeychainError.swift in Sources */,
 				4F31777D291BE4710019BDFC /* AppDelegate.swift in Sources */,
