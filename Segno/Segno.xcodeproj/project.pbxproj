@@ -33,6 +33,7 @@
 		666E6F8A291CF82700CECD4B /* TabBarPageCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 666E6F89291CF82700CECD4B /* TabBarPageCase.swift */; };
 		666E6F8C291CFAC200CECD4B /* DiaryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 666E6F8B291CFAC200CECD4B /* DiaryViewController.swift */; };
 		666E6F8E291CFADD00CECD4B /* MyPageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 666E6F8D291CFADD00CECD4B /* MyPageViewController.swift */; };
+		7918380829233F7100BC6992 /* UIButton+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7918380729233F7100BC6992 /* UIButton+.swift */; };
     988414AE2922235B007C9132 /* LocalUtilityRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 988414AD2922235B007C9132 /* LocalUtilityRepository.swift */; };
 		988414D72923304F007C9132 /* KeychainError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 988414D62923304F007C9132 /* KeychainError.swift */; };
 		791837FA292225C600BC6992 /* Cafe24Shiningstar.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 791837F7292225BF00BC6992 /* Cafe24Shiningstar.ttf */; };
@@ -66,6 +67,7 @@
 		666E6F89291CF82700CECD4B /* TabBarPageCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarPageCase.swift; sourceTree = "<group>"; };
 		666E6F8B291CFAC200CECD4B /* DiaryViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiaryViewController.swift; sourceTree = "<group>"; };
 		666E6F8D291CFADD00CECD4B /* MyPageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyPageViewController.swift; sourceTree = "<group>"; };
+		7918380729233F7100BC6992 /* UIButton+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIButton+.swift"; sourceTree = "<group>"; };
 		988414AD2922235B007C9132 /* LocalUtilityRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalUtilityRepository.swift; sourceTree = "<group>"; };
 		988414D62923304F007C9132 /* KeychainError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeychainError.swift; sourceTree = "<group>"; };
     791837F7292225BF00BC6992 /* Cafe24Shiningstar.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = Cafe24Shiningstar.ttf; sourceTree = "<group>"; };
@@ -187,6 +189,7 @@
 				791837FD292225DC00BC6992 /* UIColor+.swift */,
 				791837FE292225DC00BC6992 /* UIFont+.swift */,
 				4FEBFAB0291CFB5500E78139 /* SHMediaItem+.swift */,
+				7918380729233F7100BC6992 /* UIButton+.swift */,
 			);
 			path = Extension;
 			sourceTree = "<group>";
@@ -364,6 +367,7 @@
 				988414AE2922235B007C9132 /* LocalUtilityRepository.swift in Sources */,
 				4FEBFAAF291CF9F300E78139 /* MusicInfo.swift in Sources */,
 				4FEBFAAB291CF30E00E78139 /* DiaryListItem.swift in Sources */,
+				7918380829233F7100BC6992 /* UIButton+.swift in Sources */,
 				666E6F81291CF49E00CECD4B /* LoginCoordinator.swift in Sources */,
 				666E6F85291CF4AD00CECD4B /* MyPageCoordinator.swift in Sources */,
 				666E6F7D291CF45600CECD4B /* Coordinator.swift in Sources */,
