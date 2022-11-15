@@ -16,8 +16,7 @@ final class DiaryCoordinator: Coordinator {
     }
     
     func start() {
-        // TODO: 추후에 올바른 layout 보내주기
-        let vc = DiaryViewController(layout: UICollectionViewLayout())
+        let vc = DiaryCollectionViewController()
         self.navigationController.pushViewController(vc, animated: true)
     }
 }
