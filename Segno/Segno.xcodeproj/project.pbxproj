@@ -20,7 +20,7 @@
 		4F9A001F29222C97007D9057 /* NetworkError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F9A001E29222C97007D9057 /* NetworkError.swift */; };
 		4F9A00202922337F007D9057 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F317780291BE4710019BDFC /* LoginViewController.swift */; };
 		4F9A00212922338E007D9057 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F31777C291BE4710019BDFC /* AppDelegate.swift */; };
-		4FA324262923600C00DB04D5 /* DiaryListItemDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FA324252923600C00DB04D5 /* DiaryListItemDTO.swift */; };
+		4FA324262923600C00DB04D5 /* DiaryListDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FA324252923600C00DB04D5 /* DiaryListDTO.swift */; };
 		4FA32428292363AB00DB04D5 /* DiaryRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FA32427292363AA00DB04D5 /* DiaryRepository.swift */; };
 		4FA3242B2923646F00DB04D5 /* DiaryListItemEndpoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FA3242A2923646F00DB04D5 /* DiaryListItemEndpoint.swift */; };
 		4FEBFAAB291CF30E00E78139 /* DiaryListItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FEBFAAA291CF30E00E78139 /* DiaryListItem.swift */; };
@@ -57,7 +57,7 @@
 		4F9A001A292227D7007D9057 /* NetworkManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkManager.swift; sourceTree = "<group>"; };
 		4F9A001C29222B1B007D9057 /* Endpoint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Endpoint.swift; sourceTree = "<group>"; };
 		4F9A001E29222C97007D9057 /* NetworkError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkError.swift; sourceTree = "<group>"; };
-		4FA324252923600C00DB04D5 /* DiaryListItemDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiaryListItemDTO.swift; sourceTree = "<group>"; };
+		4FA324252923600C00DB04D5 /* DiaryListDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiaryListDTO.swift; sourceTree = "<group>"; };
 		4FA32427292363AA00DB04D5 /* DiaryRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiaryRepository.swift; sourceTree = "<group>"; };
 		4FA3242A2923646F00DB04D5 /* DiaryListItemEndpoint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiaryListItemEndpoint.swift; sourceTree = "<group>"; };
 		4FEBFAAA291CF30E00E78139 /* DiaryListItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiaryListItem.swift; sourceTree = "<group>"; };
@@ -267,7 +267,7 @@
 		4FA3242429235FF800DB04D5 /* DTO */ = {
 			isa = PBXGroup;
 			children = (
-				4FA324252923600C00DB04D5 /* DiaryListItemDTO.swift */,
+				4FA324252923600C00DB04D5 /* DiaryListDTO.swift */,
 			);
 			path = DTO;
 			sourceTree = "<group>";
@@ -407,7 +407,7 @@
 				791837FF292225DC00BC6992 /* UIColor+.swift in Sources */,
 				666E6F7F291CF46800CECD4B /* AppCoordinator.swift in Sources */,
 				988414D72923304F007C9132 /* KeychainError.swift in Sources */,
-				4FA324262923600C00DB04D5 /* DiaryListItemDTO.swift in Sources */,
+				4FA324262923600C00DB04D5 /* DiaryListDTO.swift in Sources */,
 				666E6F87291CF4B400CECD4B /* DiaryCoordinator.swift in Sources */,
 				4F31777F291BE4710019BDFC /* SceneDelegate.swift in Sources */,
 				4FA32428292363AB00DB04D5 /* DiaryRepository.swift in Sources */,

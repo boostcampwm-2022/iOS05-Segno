@@ -9,16 +9,16 @@ import Foundation
 import RxSwift
 
 protocol DiaryRepository {
-    func getDiaryListItem() -> Single<DiaryListItemDTO>
+    func getDiaryListItem() -> Single<DiaryListDTO>
 }
 
 final class DiaryRepositoryImpl: DiaryRepository {
-    func getDiaryListItem() -> Single<DiaryListItemDTO> {
+    func getDiaryListItem() -> Single<DiaryListDTO> {
         let endpoint = DiaryListItemEndpoint.item
         
         return NetworkManager.shared.call(endpoint)
             .map {
-                let diaryListItemDTO = try JSONDecoder().decode(DiaryListItemDTO.self, from: $0)
+                let diaryListItemDTO = try JSONDecoder().decode(DiaryListDTO.self, from: $0)
                 return diaryListItemDTO
             }
     }
