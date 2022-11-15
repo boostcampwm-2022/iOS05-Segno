@@ -7,6 +7,10 @@
 
 struct DiaryListDTO: Decodable {
     let data: [DiaryListItemDTO]
+    
+    #if DEBUG
+    static let example = DiaryListDTO(data: [DiaryListItemDTO.exampleData])
+    #endif
 }
 
 struct DiaryListItemDTO: Decodable {
@@ -14,4 +18,8 @@ struct DiaryListItemDTO: Decodable {
     let id: String
     let title: String
     let thumbnailPath: String
+    
+    #if DEBUG
+    static let exampleData = DiaryListItemDTO(id: "asdf", title: "예시 데이터입니다.", thumbnailPath: "")
+    #endif
 }
