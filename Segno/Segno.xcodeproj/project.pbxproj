@@ -34,6 +34,8 @@
 		666E6F8C291CFAC200CECD4B /* DiaryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 666E6F8B291CFAC200CECD4B /* DiaryViewController.swift */; };
 		666E6F8E291CFADD00CECD4B /* MyPageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 666E6F8D291CFADD00CECD4B /* MyPageViewController.swift */; };
 		7918380829233F7100BC6992 /* UIButton+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7918380729233F7100BC6992 /* UIButton+.swift */; };
+    988414AE2922235B007C9132 /* LocalUtilityRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 988414AD2922235B007C9132 /* LocalUtilityRepository.swift */; };
+		988414D72923304F007C9132 /* KeychainError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 988414D62923304F007C9132 /* KeychainError.swift */; };
 		791837FA292225C600BC6992 /* Cafe24Shiningstar.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 791837F7292225BF00BC6992 /* Cafe24Shiningstar.ttf */; };
 		791837FB292225C800BC6992 /* Cafe24Ssurround.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 791837F9292225BF00BC6992 /* Cafe24Ssurround.ttf */; };
 		791837FC292225CB00BC6992 /* Cafe24SsurroundAir.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 791837F8292225BF00BC6992 /* Cafe24SsurroundAir.ttf */; };
@@ -66,7 +68,9 @@
 		666E6F8B291CFAC200CECD4B /* DiaryViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiaryViewController.swift; sourceTree = "<group>"; };
 		666E6F8D291CFADD00CECD4B /* MyPageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyPageViewController.swift; sourceTree = "<group>"; };
 		7918380729233F7100BC6992 /* UIButton+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIButton+.swift"; sourceTree = "<group>"; };
-		791837F7292225BF00BC6992 /* Cafe24Shiningstar.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = Cafe24Shiningstar.ttf; sourceTree = "<group>"; };
+		988414AD2922235B007C9132 /* LocalUtilityRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalUtilityRepository.swift; sourceTree = "<group>"; };
+		988414D62923304F007C9132 /* KeychainError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeychainError.swift; sourceTree = "<group>"; };
+    791837F7292225BF00BC6992 /* Cafe24Shiningstar.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = Cafe24Shiningstar.ttf; sourceTree = "<group>"; };
 		791837F8292225BF00BC6992 /* Cafe24SsurroundAir.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = Cafe24SsurroundAir.ttf; sourceTree = "<group>"; };
 		791837F9292225BF00BC6992 /* Cafe24Ssurround.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = Cafe24Ssurround.ttf; sourceTree = "<group>"; };
 		791837FD292225DC00BC6992 /* UIColor+.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIColor+.swift"; sourceTree = "<group>"; };
@@ -135,6 +139,7 @@
 			children = (
 				4F3177A0291BF1810019BDFC /* Repository */,
 				4F31779F291BF1780019BDFC /* Network */,
+				988414D62923304F007C9132 /* KeychainError.swift */,
 			);
 			path = Data;
 			sourceTree = "<group>";
@@ -245,6 +250,7 @@
 		4F3177A0291BF1810019BDFC /* Repository */ = {
 			isa = PBXGroup;
 			children = (
+				988414AD2922235B007C9132 /* LocalUtilityRepository.swift */,
 			);
 			path = Repository;
 			sourceTree = "<group>";
@@ -358,6 +364,7 @@
 				4F9A001B292227D7007D9057 /* NetworkManager.swift in Sources */,
 				4FEBFAAD291CF62E00E78139 /* DiaryDetail.swift in Sources */,
 				4FEBFAB1291CFB5500E78139 /* SHMediaItem+.swift in Sources */,
+				988414AE2922235B007C9132 /* LocalUtilityRepository.swift in Sources */,
 				4FEBFAAF291CF9F300E78139 /* MusicInfo.swift in Sources */,
 				4FEBFAAB291CF30E00E78139 /* DiaryListItem.swift in Sources */,
 				7918380829233F7100BC6992 /* UIButton+.swift in Sources */,
@@ -373,6 +380,8 @@
 				666E6F8E291CFADD00CECD4B /* MyPageViewController.swift in Sources */,
 				791837FF292225DC00BC6992 /* UIColor+.swift in Sources */,
 				666E6F7F291CF46800CECD4B /* AppCoordinator.swift in Sources */,
+				988414D72923304F007C9132 /* KeychainError.swift in Sources */,
+				4F31777D291BE4710019BDFC /* AppDelegate.swift in Sources */,
 				666E6F87291CF4B400CECD4B /* DiaryCoordinator.swift in Sources */,
 				4F31777F291BE4710019BDFC /* SceneDelegate.swift in Sources */,
 			);
