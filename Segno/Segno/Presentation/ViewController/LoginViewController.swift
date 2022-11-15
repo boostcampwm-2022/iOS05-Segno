@@ -30,6 +30,7 @@ final class LoginViewController: UIViewController {
         static let titleOffset: CGFloat = 200
         static let subTitleHeight: CGFloat = 50
         static let buttonHeight: CGFloat = 50
+        static let buttonRadius: CGFloat = 20
     }
     
     // MARK: - View
@@ -53,7 +54,7 @@ final class LoginViewController: UIViewController {
         
         // TODO: Apply color, font
         label.font = .systemFont(ofSize: 15)
-        label.textColor = .black
+        label.textColor = .systemGray
         
         return label
     }()
@@ -99,6 +100,7 @@ final class LoginViewController: UIViewController {
         // TODO: Apply color, font
         label.text = Metric.footerText
         label.textAlignment = .right
+        label.textColor = .systemGray4
         
         return label
     }()
@@ -134,6 +136,20 @@ final class LoginViewController: UIViewController {
     
     private func setupView() {
         view.backgroundColor = UIColor(red: 0.93, green: 0.93, blue: 0.93, alpha: 1)
+        
+        googleButton.layer.cornerRadius = Metric.buttonRadius
+        googleButton.layer.masksToBounds = true
+        
+        appleButton.layer.cornerRadius = Metric.buttonRadius
+        appleButton.layer.masksToBounds = true
+        
+        googleButton.setBackgroundColor(.systemGray5, for: .normal)
+        googleButton.setBackgroundColor(.systemGray4, for: .selected)
+        googleButton.setBackgroundColor(.systemGray4, for: .disabled)
+        
+        appleButton.setBackgroundColor(.systemGray5, for: .normal)
+        appleButton.setBackgroundColor(.systemGray4, for: .selected)
+        appleButton.setBackgroundColor(.systemGray4, for: .disabled)
     }
     
     private func setupLayout() {
