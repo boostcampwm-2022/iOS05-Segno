@@ -11,6 +11,7 @@ import RxSwift
 protocol LocalUtilityRepository {
     func createToken(key: Any, token: Any) -> Single<Bool>
     func getToken(key: Any) -> Single<Any>
+    func deleteToken(key: Any) -> Single<Bool>
 }
 
 final class LocalUtilityRepositoryImpl: LocalUtilityRepository {
@@ -77,6 +78,22 @@ final class LocalUtilityRepositoryImpl: LocalUtilityRepository {
             return true
         } else {
             return false
+        }
+    }
+    
+    func deleteToken(key: Any) -> Single<Bool> {
+        return Single.create { single in
+            let query: [String: Any] = [
+                kSecClass as String: kSecClassGenericPassword,
+                kSecAttrAccount as String: key
+            ]
+            let status = SecItemDelete(query as CFDictionary)
+            if status == errSecSuccess {
+                single(.success(true))
+            } else {
+                single(.failure(KeychainError.unhandledError(status: status)))
+            }
+            return Disposables.create()
         }
     }
 }
