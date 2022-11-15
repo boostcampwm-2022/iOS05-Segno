@@ -22,8 +22,7 @@ final class DiaryCollectionViewController: UIViewController {
     
     lazy var diaryCollectionView: UICollectionView = {
         let collectionView = UICollectionView(frame: .zero, collectionViewLayout: layout)
-        // TODO: 추후에 .black 같은 Magic Number 삭제
-        collectionView.backgroundColor = .black
+        collectionView.backgroundColor = .appColor(.color1)
         collectionView.translatesAutoresizingMaskIntoConstraints = false
         return collectionView
     }()
@@ -45,8 +44,7 @@ final class DiaryCollectionViewController: UIViewController {
     }
 
     private func setupView() {
-        // TODO: 추후에 .white 같은 Magic Number 삭제
-        view.backgroundColor = .white
+        view.backgroundColor = .appColor(.background)
         view.addSubview(searchBar)
         
         // TODO: 추후에 SnapKit 적용하여 레이아웃 맞추기
