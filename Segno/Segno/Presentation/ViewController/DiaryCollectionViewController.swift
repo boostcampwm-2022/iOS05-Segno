@@ -9,18 +9,8 @@ import UIKit
 import SnapKit
 
 final class DiaryCollectionViewController: UIViewController {
-    // TODO: 추후에 viewModel도 가져와서 연결하기
-    private let layout: UICollectionViewLayout
-    
     private enum Metric {
-        static let spacingBetweenButtons: CGFloat = 20
         static let inset: CGFloat = 20
-     
-        static let titleHeight: CGFloat = 100
-        static let titleOffset: CGFloat = 200
-        static let subTitleHeight: CGFloat = 50
-        static let buttonHeight: CGFloat = 50
-        static let buttonRadius: CGFloat = 20
     }
     
     lazy var searchBar: UISearchBar = {
@@ -28,26 +18,15 @@ final class DiaryCollectionViewController: UIViewController {
         bar.placeholder = "Search Bar Test!"
         bar.setImage(UIImage(named: "search_back"), for: .search, state: .normal)
         bar.setImage(UIImage(named: "search_cancel"), for: .clear, state: .normal)
-        bar.translatesAutoresizingMaskIntoConstraints = false
         return bar
     }()
     
     lazy var diaryCollectionView: UICollectionView = {
+        let layout = makeCollectionViewLayout()
         let collectionView = UICollectionView(frame: .zero, collectionViewLayout: layout)
         collectionView.backgroundColor = .appColor(.color1)
-        collectionView.translatesAutoresizingMaskIntoConstraints = false
         return collectionView
     }()
-    
-    init(layout: UICollectionViewLayout) {
-        self.layout = layout
-        
-        super.init(nibName: nil, bundle: nil)
-    }
-    
-    required init?(coder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
-    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -78,5 +57,18 @@ final class DiaryCollectionViewController: UIViewController {
             make.top.equalTo(searchBar.snp.bottom)
             make.bottom.equalTo(view.safeAreaLayoutGuide)
         }
+    }
+}
+
+extension DiaryCollectionViewController {
+    func makeCollectionViewLayout() -> UICollectionViewFlowLayout {
+        let layout = UICollectionViewFlowLayout()
+        let cellWidth: CGFloat = UIScreen.main.bounds.width / 2 - 1
+        
+        layout.itemSize = CGSize(width: cellWidth, height: cellWidth)
+        layout.scrollDirection = .vertical
+        layout.minimumLineSpacing = 1
+        layout.minimumInteritemSpacing = 1
+        return layout
     }
 }
