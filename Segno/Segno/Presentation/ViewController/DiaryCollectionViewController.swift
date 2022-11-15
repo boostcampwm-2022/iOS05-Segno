@@ -6,12 +6,18 @@
 //
 
 import UIKit
+import RxSwift
+import RxCocoa
 import SnapKit
 
 final class DiaryCollectionViewController: UIViewController {
     private enum Metric {
         static let inset: CGFloat = 20
     }
+    
+    private let viewModel: DiaryCollectionViewModel
+    
+    let disposeBag = DisposeBag()
     
     lazy var searchBar: UISearchBar = {
         let bar = UISearchBar()
@@ -28,11 +34,23 @@ final class DiaryCollectionViewController: UIViewController {
         return collectionView
     }()
     
+    init() {
+        self.viewModel = DiaryCollectionViewModel()
+        
+        super.init(nibName: nil, bundle: nil)
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
         setupView()
         setupLayout()
+        bindDataSource()
+        getDatasource()
     }
     
     private func setupView() {
@@ -57,6 +75,19 @@ final class DiaryCollectionViewController: UIViewController {
             make.top.equalTo(searchBar.snp.bottom)
             make.bottom.equalTo(view.safeAreaLayoutGuide)
         }
+    }
+    
+    private func bindDataSource() {
+        // TODO: 추후에 셀이 만들어지면 해당 셀 데이터로 적용
+        viewModel.diaryListItems
+            .subscribe(onNext: { datas in
+                print(datas)
+            })
+            .disposed(by: disposeBag)
+    }
+    
+    private func getDatasource() {
+        viewModel.getDiaryList()
     }
 }
 
