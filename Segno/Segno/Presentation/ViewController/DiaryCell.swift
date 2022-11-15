@@ -50,4 +50,12 @@ final class DiaryCell: UICollectionViewCell {
             make.height.equalTo(contentView.frame.height)
         }
     }
+    
+    func configure(with model: DiaryListItem) {
+        // TODO: 추후에 서버에서 path 받아오면 실행해주기
+//        if let path = model.imagePath {
+//            posterImageView.load(from: path)
+//        }
+        titleLabel.text = model.title
+    }
 }

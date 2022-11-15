@@ -11,13 +11,21 @@ import RxCocoa
 import SnapKit
 
 final class DiaryCollectionViewController: UIViewController {
+    typealias DataSource = UICollectionViewDiffableDataSource<Section, DiaryListItem>
+    typealias Snapshot = NSDiffableDataSourceSnapshot<Section, DiaryListItem>
+    
+    enum Section: CaseIterable {
+        case main
+    }
+    
     private enum Metric {
         static let inset: CGFloat = 20
     }
     
-    private let viewModel: DiaryCollectionViewModel
-    
     let disposeBag = DisposeBag()
+    private let viewModel: DiaryCollectionViewModel
+    private var dataSource: DataSource?
+    private var diaryCells: [DiaryListItem] = []
     
     lazy var searchBar: UISearchBar = {
         let bar = UISearchBar()
@@ -49,12 +57,15 @@ final class DiaryCollectionViewController: UIViewController {
         
         setupView()
         setupLayout()
+        
+        dataSource = makeDataSource()
         bindDataSource()
         getDatasource()
     }
     
     private func setupView() {
         view.backgroundColor = .appColor(.background)
+        diaryCollectionView.delegate = self
     }
 
     private func setupLayout() {
@@ -77,11 +88,24 @@ final class DiaryCollectionViewController: UIViewController {
         }
     }
     
+    private func makeDataSource() -> DataSource {
+        let cellRegistration = UICollectionView.CellRegistration<DiaryCell, DiaryListItem> { (cell, _, item) in
+            cell.configure(with: item)
+        }
+        
+        let dataSource = DataSource(collectionView: diaryCollectionView) { collectionView, indexPath, itemIdentifier in
+            return collectionView.dequeueConfiguredReusableCell(
+                using: cellRegistration, for: indexPath, item: itemIdentifier
+            )
+        }
+        
+        return dataSource
+    }
+    
     private func bindDataSource() {
-        // TODO: 추후에 셀이 만들어지면 해당 셀 데이터로 적용
         viewModel.diaryListItems
-            .subscribe(onNext: { datas in
-                print(datas)
+            .subscribe(onNext: { [weak self] datas in
+                self?.updateSnapshot(with: datas)
             })
             .disposed(by: disposeBag)
     }
@@ -102,4 +126,16 @@ extension DiaryCollectionViewController {
         layout.minimumInteritemSpacing = 1
         return layout
     }
+    
+    func updateSnapshot(with models: [DiaryListItem]) {
+        var snapshot = Snapshot()
+        snapshot.appendSections(Section.allCases)
+        snapshot.appendItems(models)
+        
+        dataSource?.apply(snapshot)
+    }
+}
+
+extension DiaryCollectionViewController: UICollectionViewDelegate {
+    
 }
