@@ -5,7 +5,6 @@
 //  Created by YOONJONG on 2022/11/15.
 //
 
-import Foundation
 import RxSwift
 
 final class DiaryCollectionViewModel {
@@ -20,10 +19,9 @@ final class DiaryCollectionViewModel {
     func getDiaryList() {
         useCase.getDiaryList()
             .subscribe(onSuccess: { [weak self] diaryList in
-                self.diaryListItems.onNext(diaryList)
+                self?.diaryListItems.onNext(diaryList)
             }, onFailure: { error in
                 print(error.localizedDescription)
             }).disposed(by: disposeBag)
-
     }
 }
