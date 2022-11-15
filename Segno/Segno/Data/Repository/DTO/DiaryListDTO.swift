@@ -12,7 +12,11 @@ struct DiaryListDTO: Decodable {
     static let example = DiaryListDTO(data: [DiaryListItemDTO.exampleData1,
                                              DiaryListItemDTO.exampleData2,
                                              DiaryListItemDTO.exampleData3,
-                                             DiaryListItemDTO.exampleData4])
+                                             DiaryListItemDTO.exampleData4,
+                                             DiaryListItemDTO.exampleData5,
+                                             DiaryListItemDTO.exampleData6,
+                                             DiaryListItemDTO.exampleData7,
+                                             DiaryListItemDTO.exampleData8])
     #endif
 }
 
@@ -27,5 +31,9 @@ struct DiaryListItemDTO: Decodable {
     static let exampleData2 = DiaryListItemDTO(id: "qwer", title: "예시 데이터2입니다.", thumbnailPath: "")
     static let exampleData3 = DiaryListItemDTO(id: "xzcv", title: "예시 데이터3입니다.", thumbnailPath: "")
     static let exampleData4 = DiaryListItemDTO(id: "hjkl", title: "예시 데이터4입니다.", thumbnailPath: "")
+    static let exampleData5 = DiaryListItemDTO(id: "sdfg", title: "예시 데이터5입니다.", thumbnailPath: "")
+    static let exampleData6 = DiaryListItemDTO(id: "wert", title: "예시 데이터6입니다.", thumbnailPath: "")
+    static let exampleData7 = DiaryListItemDTO(id: "xcvb", title: "예시 데이터7입니다.", thumbnailPath: "")
+    static let exampleData8 = DiaryListItemDTO(id: "ghjk", title: "예시 데이터8입니다.", thumbnailPath: "")
     #endif
 }
