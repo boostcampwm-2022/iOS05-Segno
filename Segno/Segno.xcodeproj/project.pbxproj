@@ -43,6 +43,7 @@
 		791837FF292225DC00BC6992 /* UIColor+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 791837FD292225DC00BC6992 /* UIColor+.swift */; };
 		79183800292225DC00BC6992 /* UIFont+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 791837FE292225DC00BC6992 /* UIFont+.swift */; };
 		7918380829233F7100BC6992 /* UIButton+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7918380729233F7100BC6992 /* UIButton+.swift */; };
+		982A2A472924AE74006F6ACD /* UserDefaultsKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = 982A2A462924AE74006F6ACD /* UserDefaultsKey.swift */; };
 		988414AE2922235B007C9132 /* LocalUtilityRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 988414AD2922235B007C9132 /* LocalUtilityRepository.swift */; };
 		988414D72923304F007C9132 /* KeychainError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 988414D62923304F007C9132 /* KeychainError.swift */; };
 		988414D929235345007C9132 /* DiaryCollectionViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 988414D829235345007C9132 /* DiaryCollectionViewModel.swift */; };
@@ -83,6 +84,7 @@
 		791837FD292225DC00BC6992 /* UIColor+.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIColor+.swift"; sourceTree = "<group>"; };
 		791837FE292225DC00BC6992 /* UIFont+.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIFont+.swift"; sourceTree = "<group>"; };
 		7918380729233F7100BC6992 /* UIButton+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIButton+.swift"; sourceTree = "<group>"; };
+		982A2A462924AE74006F6ACD /* UserDefaultsKey.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDefaultsKey.swift; sourceTree = "<group>"; };
 		988414AD2922235B007C9132 /* LocalUtilityRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalUtilityRepository.swift; sourceTree = "<group>"; };
 		988414D62923304F007C9132 /* KeychainError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeychainError.swift; sourceTree = "<group>"; };
 		988414D829235345007C9132 /* DiaryCollectionViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiaryCollectionViewModel.swift; sourceTree = "<group>"; };
@@ -269,6 +271,7 @@
 				4FA3242429235FF800DB04D5 /* DTO */,
 				988414AD2922235B007C9132 /* LocalUtilityRepository.swift */,
 				4FA32427292363AA00DB04D5 /* DiaryRepository.swift */,
+				982A2A462924AE74006F6ACD /* UserDefaultsKey.swift */,
 			);
 			path = Repository;
 			sourceTree = "<group>";
@@ -395,6 +398,7 @@
 			files = (
 				4F9A00212922338E007D9057 /* AppDelegate.swift in Sources */,
 				4F9A00202922337F007D9057 /* LoginViewController.swift in Sources */,
+				982A2A472924AE74006F6ACD /* UserDefaultsKey.swift in Sources */,
 				4F9A001B292227D7007D9057 /* NetworkManager.swift in Sources */,
 				66F0D7EA2923864E0074872E /* DiaryCell.swift in Sources */,
 				4FEBFAAD291CF62E00E78139 /* DiaryDetail.swift in Sources */,
