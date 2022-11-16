@@ -19,6 +19,7 @@
 		4F4E0D74292521D0005ABA8F /* UserInfoDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F4E0D73292521D0005ABA8F /* UserInfoDTO.swift */; };
 		4F4E0D7629252236005ABA8F /* LoginEndpoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F4E0D7529252236005ABA8F /* LoginEndpoint.swift */; };
 		4F4E0D79292522B7005ABA8F /* BaseURL.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F4E0D78292522B7005ABA8F /* BaseURL.swift */; };
+		4F4E0D7B29252526005ABA8F /* TokenDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F4E0D7A29252526005ABA8F /* TokenDTO.swift */; };
 		4F9A001B292227D7007D9057 /* NetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F9A001A292227D7007D9057 /* NetworkManager.swift */; };
 		4F9A001D29222B1B007D9057 /* Endpoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F9A001C29222B1B007D9057 /* Endpoint.swift */; };
 		4F9A001F29222C97007D9057 /* NetworkError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F9A001E29222C97007D9057 /* NetworkError.swift */; };
@@ -65,6 +66,7 @@
 		4F4E0D73292521D0005ABA8F /* UserInfoDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserInfoDTO.swift; sourceTree = "<group>"; };
 		4F4E0D7529252236005ABA8F /* LoginEndpoint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginEndpoint.swift; sourceTree = "<group>"; };
 		4F4E0D78292522B7005ABA8F /* BaseURL.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseURL.swift; sourceTree = "<group>"; };
+		4F4E0D7A29252526005ABA8F /* TokenDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TokenDTO.swift; sourceTree = "<group>"; };
 		4F9A001A292227D7007D9057 /* NetworkManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkManager.swift; sourceTree = "<group>"; };
 		4F9A001C29222B1B007D9057 /* Endpoint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Endpoint.swift; sourceTree = "<group>"; };
 		4F9A001E29222C97007D9057 /* NetworkError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkError.swift; sourceTree = "<group>"; };
@@ -296,6 +298,7 @@
 			children = (
 				4FA324252923600C00DB04D5 /* DiaryListDTO.swift */,
 				4F4E0D73292521D0005ABA8F /* UserInfoDTO.swift */,
+				4F4E0D7A29252526005ABA8F /* TokenDTO.swift */,
 			);
 			path = DTO;
 			sourceTree = "<group>";
@@ -425,6 +428,7 @@
 				4FEBFAAF291CF9F300E78139 /* MusicInfo.swift in Sources */,
 				4FEBFAAB291CF30E00E78139 /* DiaryListItem.swift in Sources */,
 				7918380829233F7100BC6992 /* UIButton+.swift in Sources */,
+				4F4E0D7B29252526005ABA8F /* TokenDTO.swift in Sources */,
 				666E6F81291CF49E00CECD4B /* LoginCoordinator.swift in Sources */,
 				666E6F85291CF4AD00CECD4B /* MyPageCoordinator.swift in Sources */,
 				4F4E0D79292522B7005ABA8F /* BaseURL.swift in Sources */,
