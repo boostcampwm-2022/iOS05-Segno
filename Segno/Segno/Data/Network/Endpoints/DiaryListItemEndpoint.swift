@@ -12,7 +12,7 @@ enum DiaryListItemEndpoint: Endpoint {
     case item
     
     var baseURL: URL? {
-        return URL(string: "https://baero.me")
+        return URL(string: BaseURL.urlString)
     }
     
     var httpMethod: HTTPMethod {
