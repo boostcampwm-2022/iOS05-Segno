@@ -8,17 +8,12 @@
 import RxSwift
 
 protocol LoginRepository {
-    func sendOAuthRequest()
-    func sendLoginRequest()
+    func sendLoginRequest(id: String)
     func sendLogoutRequest()
 }
 
 final class LoginRepositoryImpl: LoginRepository {
-    func sendOAuthRequest() {
-        
-    }
-    
-    func sendLoginRequest() {
+    func sendLoginRequest(id: String) {
         
     }
     
