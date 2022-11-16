@@ -6,12 +6,26 @@
 //
 
 import UIKit
+import RxSwift
+import RxCocoa
 import SnapKit
 
 final class DiaryCollectionViewController: UIViewController {
+    typealias DataSource = UICollectionViewDiffableDataSource<Section, DiaryListItem>
+    typealias Snapshot = NSDiffableDataSourceSnapshot<Section, DiaryListItem>
+    
+    enum Section: CaseIterable {
+        case main
+    }
+    
     private enum Metric {
         static let inset: CGFloat = 20
     }
+    
+    let disposeBag = DisposeBag()
+    private let viewModel: DiaryCollectionViewModel
+    private var dataSource: DataSource?
+    private var diaryCells: [DiaryListItem] = []
     
     lazy var searchBar: UISearchBar = {
         let bar = UISearchBar()
@@ -28,15 +42,30 @@ final class DiaryCollectionViewController: UIViewController {
         return collectionView
     }()
     
+    init() {
+        self.viewModel = DiaryCollectionViewModel()
+        
+        super.init(nibName: nil, bundle: nil)
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
         setupView()
         setupLayout()
+        
+        dataSource = makeDataSource()
+        bindDataSource()
+        getDatasource()
     }
     
     private func setupView() {
         view.backgroundColor = .appColor(.background)
+        diaryCollectionView.delegate = self
     }
 
     private func setupLayout() {
@@ -44,7 +73,7 @@ final class DiaryCollectionViewController: UIViewController {
             view.addSubview($0)
             
             $0.snp.makeConstraints { make in
-                make.width.equalToSuperview().inset(Metric.inset)
+                make.width.equalToSuperview()
                 make.centerX.equalTo(view.snp.centerX)
             }
         }
@@ -57,6 +86,32 @@ final class DiaryCollectionViewController: UIViewController {
             make.top.equalTo(searchBar.snp.bottom)
             make.bottom.equalTo(view.safeAreaLayoutGuide)
         }
+    }
+    
+    private func makeDataSource() -> DataSource {
+        let cellRegistration = UICollectionView.CellRegistration<DiaryCell, DiaryListItem> { (cell, _, item) in
+            cell.configure(with: item)
+        }
+        
+        let dataSource = DataSource(collectionView: diaryCollectionView) { collectionView, indexPath, itemIdentifier in
+            return collectionView.dequeueConfiguredReusableCell(
+                using: cellRegistration, for: indexPath, item: itemIdentifier
+            )
+        }
+        
+        return dataSource
+    }
+    
+    private func bindDataSource() {
+        viewModel.diaryListItems
+            .subscribe(onNext: { [weak self] datas in
+                self?.updateSnapshot(with: datas)
+            })
+            .disposed(by: disposeBag)
+    }
+    
+    private func getDatasource() {
+        viewModel.getDiaryList()
     }
 }
 
@@ -71,4 +126,16 @@ extension DiaryCollectionViewController {
         layout.minimumInteritemSpacing = 1
         return layout
     }
+    
+    func updateSnapshot(with models: [DiaryListItem]) {
+        var snapshot = Snapshot()
+        snapshot.appendSections(Section.allCases)
+        snapshot.appendItems(models)
+        
+        dataSource?.apply(snapshot)
+    }
+}
+
+extension DiaryCollectionViewController: UICollectionViewDelegate {
+    
 }
