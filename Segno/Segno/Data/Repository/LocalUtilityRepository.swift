@@ -12,6 +12,7 @@ protocol LocalUtilityRepository {
     func createToken(key: Any, token: Any) -> Single<Bool>
     func getToken(key: Any) -> Single<Any>
     func deleteToken(key: Any) -> Single<Bool>
+    func setUserDefaults(_ value: Any, forKey defaultsKey: UserDefaultsKey)
 }
 
 final class LocalUtilityRepositoryImpl: LocalUtilityRepository {
@@ -95,5 +96,10 @@ final class LocalUtilityRepositoryImpl: LocalUtilityRepository {
             }
             return Disposables.create()
         }
+    }
+    
+    func setUserDefaults(_ value: Any, forKey defaultsKey: UserDefaultsKey) {
+        let defaults = UserDefaults.standard
+        defaults.set(value, forKey: defaultsKey.rawValue)
     }
 }
