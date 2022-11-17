@@ -10,6 +10,7 @@ import RxCocoa
 import RxSwift
 import SnapKit
 import AuthenticationServices
+import GoogleSignIn
 
 final class LoginViewController: UIViewController {
     
@@ -123,6 +124,7 @@ final class LoginViewController: UIViewController {
             .bind { _ in
                 // TODO: Bind with Google Login Button Action
                 print("google")
+                self.googleButtonTapped()
             }
             .disposed(by: disposeBag)
         
@@ -195,6 +197,39 @@ final class LoginViewController: UIViewController {
     }
     
     // MARK: - Public
+    private func googleButtonTapped() {
+        let signInConfig = GIDConfiguration.init(clientID: "880830660858-2niv4cb94c63omf91uej9f23o7j15n8r.apps.googleusercontent.com")
+
+        GIDSignIn.sharedInstance.signIn(with: signInConfig, presenting: self) { user, error in
+            guard error == nil else { return }
+            guard let user = user else { return }
+            
+            if let userId = user.userID,                  // For client-side use only!
+               let idToken = user.authentication.idToken, // Safe to send to the server
+               let fullName = user.profile?.name,
+               let givenName = user.profile?.givenName,
+               let familyName = user.profile?.familyName,
+               let email = user.profile?.email {
+                print("Token : \(idToken)")
+                print("User ID : \(userId)")
+                print("User Email : \(email)")
+                print("User Name : \((fullName))")
+            } else {
+                print("Error : User Data Not Found")
+            }
+            
+            // TODO: ViewModel로 적절한 데이터(authentication / idToken 등) 전송
+//            user.authentication.do { [self] authentication, error in
+//                guard error == nil else { print(error); return }
+//                guard let authentication = authentication else { return }
+//
+//                let idToken = authentication.idToken
+//                print(userId)
+//                print(idToken)
+//            }
+        }
+    }
+    
     private func appleButtonTapped() {
         let appleIDProvider = ASAuthorizationAppleIDProvider()
         let request = appleIDProvider.createRequest()
