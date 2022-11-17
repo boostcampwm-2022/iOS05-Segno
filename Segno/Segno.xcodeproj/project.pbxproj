@@ -42,6 +42,7 @@
 		666E6F8C291CFAC200CECD4B /* DiaryCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 666E6F8B291CFAC200CECD4B /* DiaryCollectionViewController.swift */; };
 		666E6F8E291CFADD00CECD4B /* MyPageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 666E6F8D291CFADD00CECD4B /* MyPageViewController.swift */; };
 		66F0D7EE2925FF8B0074872E /* DiaryCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66F0D7ED2925FF8B0074872E /* DiaryCell.swift */; };
+		66F0D7F729260BA20074872E /* GoogleSignIn in Frameworks */ = {isa = PBXBuildFile; productRef = 66F0D7F629260BA20074872E /* GoogleSignIn */; };
 		791837FA292225C600BC6992 /* Cafe24Shiningstar.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 791837F7292225BF00BC6992 /* Cafe24Shiningstar.ttf */; };
 		791837FB292225C800BC6992 /* Cafe24Ssurround.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 791837F9292225BF00BC6992 /* Cafe24Ssurround.ttf */; };
 		791837FC292225CB00BC6992 /* Cafe24SsurroundAir.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 791837F8292225BF00BC6992 /* Cafe24SsurroundAir.ttf */; };
@@ -112,6 +113,7 @@
 				4F3177B5291BF7BC0019BDFC /* Kingfisher in Frameworks */,
 				4F3177B0291BF7950019BDFC /* SnapKit in Frameworks */,
 				4F3177A3291BF70B0019BDFC /* RxCocoa in Frameworks */,
+				66F0D7F729260BA20074872E /* GoogleSignIn in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -358,6 +360,7 @@
 				4F3177AA291BF70B0019BDFC /* RxSwift */,
 				4F3177AF291BF7950019BDFC /* SnapKit */,
 				4F3177B4291BF7BC0019BDFC /* Kingfisher */,
+				66F0D7F629260BA20074872E /* GoogleSignIn */,
 			);
 			productName = Segno;
 			productReference = 4F317779291BE4710019BDFC /* Segno.app */;
@@ -391,6 +394,7 @@
 				4F3177A1291BF70B0019BDFC /* XCRemoteSwiftPackageReference "RxSwift" */,
 				4F3177AE291BF7950019BDFC /* XCRemoteSwiftPackageReference "SnapKit" */,
 				4F3177B3291BF7BC0019BDFC /* XCRemoteSwiftPackageReference "Kingfisher" */,
+				66F0D7F529260BA20074872E /* XCRemoteSwiftPackageReference "GoogleSignIn-iOS" */,
 			);
 			productRefGroup = 4F31777A291BE4710019BDFC /* Products */;
 			projectDirPath = "";
@@ -694,6 +698,14 @@
 				minimumVersion = 7.0.0;
 			};
 		};
+		66F0D7F529260BA20074872E /* XCRemoteSwiftPackageReference "GoogleSignIn-iOS" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/google/GoogleSignIn-iOS";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 6.0.0;
+			};
+		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
@@ -721,6 +733,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 4F3177B3291BF7BC0019BDFC /* XCRemoteSwiftPackageReference "Kingfisher" */;
 			productName = Kingfisher;
+		};
+		66F0D7F629260BA20074872E /* GoogleSignIn */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 66F0D7F529260BA20074872E /* XCRemoteSwiftPackageReference "GoogleSignIn-iOS" */;
+			productName = GoogleSignIn;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};
