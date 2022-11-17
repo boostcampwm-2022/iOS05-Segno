@@ -12,7 +12,8 @@ enum LoginEndpoint: Endpoint {
     case google(String)
     
     var baseURL: URL? {
-        return URL(string: BaseURL.urlString)
+        return URL(string: BaseURL.urlString)?
+            .appendingPathComponent("auth")
     }
     
     var httpMethod: HTTPMethod {

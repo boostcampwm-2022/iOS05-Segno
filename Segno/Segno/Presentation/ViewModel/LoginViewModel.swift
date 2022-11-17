@@ -45,11 +45,12 @@ final class LoginViewModel {
         
         switch authorization.credential {
         case let appleIDCredential as ASAuthorizationAppleIDCredential:
-            let userIdentifier = appleIDCredential.user // 애플에서 준 토큰
-            guard let fullName = appleIDCredential.fullName,
-                  let email = appleIDCredential.email else {
-                return
-            }
+//            let userIdentifier = appleIDCredential.user // 애플에서 준 토큰
+//            guard let fullName = appleIDCredential.fullName,
+//                  let email = appleIDCredential.email else {
+//                return
+//            }
+            let email = appleIDCredential.email ?? "thefirate@gmail.com"
             
             useCase.sendLoginRequest(email: email)
                 .subscribe(onSuccess: { [weak self] _ in

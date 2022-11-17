@@ -30,7 +30,7 @@ final class LoginCoordinator: Coordinator {
 
 extension LoginCoordinator: LoginViewControllerDelegate {
     func loginDidSucceed() {
-        print("로그인 성공. 화면 전환")
+        delegate?.loginDidSucceed(self)
     }
     
     func loginDidFail() {

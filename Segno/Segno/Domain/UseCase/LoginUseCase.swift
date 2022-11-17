@@ -46,7 +46,7 @@ final class LoginUseCaseImpl: LoginUseCase {
         
         return repository.sendLoginRequest(email: email)
             .map {
-                let tokenString = $0.token
+                let tokenString = $0.token ?? "음슴"
                 print(tokenString)
                 return tokenString
             }

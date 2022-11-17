@@ -23,7 +23,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             }
         }
         
-        // AppleLogin 기록에 관한 코드
+        // AppleLogin 기록에 관한 코드 - 향후 자동 로그인 지원에 사용
 //        let appleIDProvider = ASAuthorizationAppleIDProvider()
 //        appleIDProvider.getCredentialState(forUserID: "001342.777c9aea9ed046a2a75c03f01748113d.0743") { (credentialState, error) in
 //            switch credentialState {
