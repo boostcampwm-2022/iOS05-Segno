@@ -12,6 +12,8 @@ protocol LocalUtilityRepository {
     func createToken(key: Any, token: Any) -> Single<Bool>
     func getToken(key: Any) -> Single<Any>
     func deleteToken(key: Any) -> Single<Bool>
+    func setUserDefaults(_ value: Any, forKey defaultsKey: UserDefaultsKey)
+    func getUserDefaultsObject(forKey defaultsKey: UserDefaultsKey) -> Any?
 }
 
 final class LocalUtilityRepositoryImpl: LocalUtilityRepository {
@@ -94,6 +96,20 @@ final class LocalUtilityRepositoryImpl: LocalUtilityRepository {
                 single(.failure(KeychainError.unhandledError(status: status)))
             }
             return Disposables.create()
+        }
+    }
+    
+    func setUserDefaults(_ value: Any, forKey defaultsKey: UserDefaultsKey) {
+        let defaults = UserDefaults.standard
+        defaults.set(value, forKey: defaultsKey.rawValue)
+    }
+    
+    func getUserDefaultsObject(forKey defaultsKey: UserDefaultsKey) -> Any? {
+        let defaults = UserDefaults.standard
+        if let object = defaults.object(forKey: defaultsKey.rawValue) {
+            return object
+        } else {
+            return nil
         }
     }
 }
