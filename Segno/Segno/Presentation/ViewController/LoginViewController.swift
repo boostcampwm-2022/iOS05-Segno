@@ -9,6 +9,7 @@ import UIKit
 import RxCocoa
 import RxSwift
 import SnapKit
+import AuthenticationServices
 
 final class LoginViewController: UIViewController {
     
@@ -130,6 +131,7 @@ final class LoginViewController: UIViewController {
             .bind { _ in
                 // TODO: Bind with Apple Login Button Action
                 print("apple")
+                self.appleButtonTapped()
             }
             .disposed(by: disposeBag)
     }
@@ -193,5 +195,55 @@ final class LoginViewController: UIViewController {
     }
     
     // MARK: - Public
-    
+    private func appleButtonTapped() {
+        let appleIDProvider = ASAuthorizationAppleIDProvider()
+        let request = appleIDProvider.createRequest()
+        request.requestedScopes = [.fullName, .email]
+        
+        let authorizationController = ASAuthorizationController(authorizationRequests: [request])
+        authorizationController.delegate = self
+        authorizationController.presentationContextProvider = self
+        authorizationController.performRequests()
+    }
+}
+
+extension LoginViewController: ASAuthorizationControllerDelegate {
+    // Apple ID 연동 성공 시
+    func authorizationController(controller: ASAuthorizationController, didCompleteWithAuthorization authorization: ASAuthorization) {
+        // TODO: viewModel로 authoriztion 전송하기
+//        viewModel.signIn(withApple: authorization)
+        // TODO: 코디네이터에게 알리기
+        
+        // 아래는 테스트용 출력
+        #if DEBUG
+        switch authorization.credential {
+        // Apple ID
+        case let appleIDCredential as ASAuthorizationAppleIDCredential:
+                
+            // 계정 정보 가져오기
+            let userIdentifier = appleIDCredential.user
+            let fullName = appleIDCredential.fullName
+            let email = appleIDCredential.email
+                
+            print("User ID : \(userIdentifier)")
+            print("User Email : \(email ?? "")")
+            print("User Name : \((fullName?.givenName ?? "") + (fullName?.familyName ?? ""))")
+
+        default:
+            break
+        }
+        #endif
+    }
+        
+    // Apple ID 연동 실패 시
+    func authorizationController(controller: ASAuthorizationController, didCompleteWithError error: Error) {
+        // Handle error.
+        print("didCompleteWithError")
+    }
+}
+
+extension LoginViewController: ASAuthorizationControllerPresentationContextProviding {
+    func presentationAnchor(for controller: ASAuthorizationController) -> ASPresentationAnchor {
+        return self.view.window!
+    }
 }
