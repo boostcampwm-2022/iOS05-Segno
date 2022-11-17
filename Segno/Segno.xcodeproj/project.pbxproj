@@ -15,6 +15,11 @@
 		4F3177AB291BF70B0019BDFC /* RxSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 4F3177AA291BF70B0019BDFC /* RxSwift */; };
 		4F3177B0291BF7950019BDFC /* SnapKit in Frameworks */ = {isa = PBXBuildFile; productRef = 4F3177AF291BF7950019BDFC /* SnapKit */; };
 		4F3177B5291BF7BC0019BDFC /* Kingfisher in Frameworks */ = {isa = PBXBuildFile; productRef = 4F3177B4291BF7BC0019BDFC /* Kingfisher */; };
+		4F4E0D3E2924B925005ABA8F /* LoginRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F4E0D3D2924B925005ABA8F /* LoginRepository.swift */; };
+		4F4E0D74292521D0005ABA8F /* UserInfoDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F4E0D73292521D0005ABA8F /* UserInfoDTO.swift */; };
+		4F4E0D7629252236005ABA8F /* LoginEndpoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F4E0D7529252236005ABA8F /* LoginEndpoint.swift */; };
+		4F4E0D79292522B7005ABA8F /* BaseURL.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F4E0D78292522B7005ABA8F /* BaseURL.swift */; };
+		4F4E0D7B29252526005ABA8F /* TokenDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F4E0D7A29252526005ABA8F /* TokenDTO.swift */; };
 		4F9A001B292227D7007D9057 /* NetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F9A001A292227D7007D9057 /* NetworkManager.swift */; };
 		4F9A001D29222B1B007D9057 /* Endpoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F9A001C29222B1B007D9057 /* Endpoint.swift */; };
 		4F9A001F29222C97007D9057 /* NetworkError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F9A001E29222C97007D9057 /* NetworkError.swift */; };
@@ -57,6 +62,11 @@
 		4F317785291BE4720019BDFC /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		4F317788291BE4720019BDFC /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		4F31778A291BE4720019BDFC /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		4F4E0D3D2924B925005ABA8F /* LoginRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginRepository.swift; sourceTree = "<group>"; };
+		4F4E0D73292521D0005ABA8F /* UserInfoDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserInfoDTO.swift; sourceTree = "<group>"; };
+		4F4E0D7529252236005ABA8F /* LoginEndpoint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginEndpoint.swift; sourceTree = "<group>"; };
+		4F4E0D78292522B7005ABA8F /* BaseURL.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseURL.swift; sourceTree = "<group>"; };
+		4F4E0D7A29252526005ABA8F /* TokenDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TokenDTO.swift; sourceTree = "<group>"; };
 		4F9A001A292227D7007D9057 /* NetworkManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkManager.swift; sourceTree = "<group>"; };
 		4F9A001C29222B1B007D9057 /* Endpoint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Endpoint.swift; sourceTree = "<group>"; };
 		4F9A001E29222C97007D9057 /* NetworkError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkError.swift; sourceTree = "<group>"; };
@@ -255,6 +265,7 @@
 		4F31779F291BF1780019BDFC /* Network */ = {
 			isa = PBXGroup;
 			children = (
+				4F4E0D77292522AC005ABA8F /* Namespaces */,
 				4FA324292923646200DB04D5 /* Endpoints */,
 				4F9A001A292227D7007D9057 /* NetworkManager.swift */,
 				4F9A001C29222B1B007D9057 /* Endpoint.swift */,
@@ -269,14 +280,25 @@
 				4FA3242429235FF800DB04D5 /* DTO */,
 				988414AD2922235B007C9132 /* LocalUtilityRepository.swift */,
 				4FA32427292363AA00DB04D5 /* DiaryRepository.swift */,
+				4F4E0D3D2924B925005ABA8F /* LoginRepository.swift */,
 			);
 			path = Repository;
+			sourceTree = "<group>";
+		};
+		4F4E0D77292522AC005ABA8F /* Namespaces */ = {
+			isa = PBXGroup;
+			children = (
+				4F4E0D78292522B7005ABA8F /* BaseURL.swift */,
+			);
+			path = Namespaces;
 			sourceTree = "<group>";
 		};
 		4FA3242429235FF800DB04D5 /* DTO */ = {
 			isa = PBXGroup;
 			children = (
 				4FA324252923600C00DB04D5 /* DiaryListDTO.swift */,
+				4F4E0D73292521D0005ABA8F /* UserInfoDTO.swift */,
+				4F4E0D7A29252526005ABA8F /* TokenDTO.swift */,
 			);
 			path = DTO;
 			sourceTree = "<group>";
@@ -285,6 +307,7 @@
 			isa = PBXGroup;
 			children = (
 				4FA3242A2923646F00DB04D5 /* DiaryListItemEndpoint.swift */,
+				4F4E0D7529252236005ABA8F /* LoginEndpoint.swift */,
 			);
 			path = Endpoints;
 			sourceTree = "<group>";
@@ -393,6 +416,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				4F4E0D3E2924B925005ABA8F /* LoginRepository.swift in Sources */,
 				4F9A00212922338E007D9057 /* AppDelegate.swift in Sources */,
 				4F9A00202922337F007D9057 /* LoginViewController.swift in Sources */,
 				4F9A001B292227D7007D9057 /* NetworkManager.swift in Sources */,
@@ -404,8 +428,10 @@
 				4FEBFAAF291CF9F300E78139 /* MusicInfo.swift in Sources */,
 				4FEBFAAB291CF30E00E78139 /* DiaryListItem.swift in Sources */,
 				7918380829233F7100BC6992 /* UIButton+.swift in Sources */,
+				4F4E0D7B29252526005ABA8F /* TokenDTO.swift in Sources */,
 				666E6F81291CF49E00CECD4B /* LoginCoordinator.swift in Sources */,
 				666E6F85291CF4AD00CECD4B /* MyPageCoordinator.swift in Sources */,
+				4F4E0D79292522B7005ABA8F /* BaseURL.swift in Sources */,
 				988414DB2923606B007C9132 /* DiaryListUseCase.swift in Sources */,
 				666E6F7D291CF45600CECD4B /* Coordinator.swift in Sources */,
 				666E6F8C291CFAC200CECD4B /* DiaryCollectionViewController.swift in Sources */,
@@ -419,9 +445,11 @@
 				791837FF292225DC00BC6992 /* UIColor+.swift in Sources */,
 				666E6F7F291CF46800CECD4B /* AppCoordinator.swift in Sources */,
 				988414D72923304F007C9132 /* KeychainError.swift in Sources */,
+				4F4E0D7629252236005ABA8F /* LoginEndpoint.swift in Sources */,
 				4FA324262923600C00DB04D5 /* DiaryListDTO.swift in Sources */,
 				666E6F87291CF4B400CECD4B /* DiaryCoordinator.swift in Sources */,
 				4F31777F291BE4710019BDFC /* SceneDelegate.swift in Sources */,
+				4F4E0D74292521D0005ABA8F /* UserInfoDTO.swift in Sources */,
 				4FA32428292363AB00DB04D5 /* DiaryRepository.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
