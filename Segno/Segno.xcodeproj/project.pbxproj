@@ -50,6 +50,7 @@
 		79183800292225DC00BC6992 /* UIFont+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 791837FE292225DC00BC6992 /* UIFont+.swift */; };
 		7918380829233F7100BC6992 /* UIButton+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7918380729233F7100BC6992 /* UIButton+.swift */; };
 		982A2A472924AE74006F6ACD /* UserDefaultsKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = 982A2A462924AE74006F6ACD /* UserDefaultsKey.swift */; };
+		9841D6172925FACC00318EA9 /* LoginUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9841D6162925FACC00318EA9 /* LoginUseCase.swift */; };
 		988414AE2922235B007C9132 /* LocalUtilityRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 988414AD2922235B007C9132 /* LocalUtilityRepository.swift */; };
 		988414D72923304F007C9132 /* KeychainError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 988414D62923304F007C9132 /* KeychainError.swift */; };
 		988414D929235345007C9132 /* DiaryCollectionViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 988414D829235345007C9132 /* DiaryCollectionViewModel.swift */; };
@@ -97,6 +98,7 @@
 		791837FE292225DC00BC6992 /* UIFont+.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIFont+.swift"; sourceTree = "<group>"; };
 		7918380729233F7100BC6992 /* UIButton+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIButton+.swift"; sourceTree = "<group>"; };
 		982A2A462924AE74006F6ACD /* UserDefaultsKey.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDefaultsKey.swift; sourceTree = "<group>"; };
+		9841D6162925FACC00318EA9 /* LoginUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginUseCase.swift; sourceTree = "<group>"; };
 		988414AD2922235B007C9132 /* LocalUtilityRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalUtilityRepository.swift; sourceTree = "<group>"; };
 		988414D62923304F007C9132 /* KeychainError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeychainError.swift; sourceTree = "<group>"; };
 		988414D829235345007C9132 /* DiaryCollectionViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiaryCollectionViewModel.swift; sourceTree = "<group>"; };
@@ -225,6 +227,7 @@
 		4F317797291BEE3D0019BDFC /* UseCase */ = {
 			isa = PBXGroup;
 			children = (
+				9841D6162925FACC00318EA9 /* LoginUseCase.swift */,
 				988414DA2923606B007C9132 /* DiaryListUseCase.swift */,
 			);
 			path = UseCase;
@@ -431,6 +434,7 @@
 				4F9A00202922337F007D9057 /* LoginViewController.swift in Sources */,
 				982A2A472924AE74006F6ACD /* UserDefaultsKey.swift in Sources */,
 				4F9A001B292227D7007D9057 /* NetworkManager.swift in Sources */,
+				9841D6172925FACC00318EA9 /* LoginUseCase.swift in Sources */,
 				4FEBFAAD291CF62E00E78139 /* DiaryDetail.swift in Sources */,
 				4FEBFAB1291CFB5500E78139 /* SHMediaItem+.swift in Sources */,
 				988414AE2922235B007C9132 /* LocalUtilityRepository.swift in Sources */,
@@ -600,7 +604,7 @@
 				CODE_SIGN_ENTITLEMENTS = Segno/Segno.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = "";
+				DEVELOPMENT_TEAM = PN5JFN8NYT;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = Segno/Resource/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
@@ -629,7 +633,7 @@
 				CODE_SIGN_ENTITLEMENTS = Segno/Segno.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = "";
+				DEVELOPMENT_TEAM = PN5JFN8NYT;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = Segno/Resource/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
