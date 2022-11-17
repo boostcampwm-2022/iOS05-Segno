@@ -13,11 +13,18 @@ import RxCocoa
 import RxSwift
 import SnapKit
 
+protocol LoginViewControllerDelegate: AnyObject {
+    func loginDidSucceed()
+    func loginDidFail()
+}
+
 final class LoginViewController: UIViewController {
     
     // MARK: - Property
     private let viewModel: LoginViewModel
     private let disposeBag = DisposeBag()
+    
+    weak var delegate: LoginViewControllerDelegate?
     
     private enum Metric {
         static let googleTitle = "구글 로그인"
@@ -137,7 +144,15 @@ final class LoginViewController: UIViewController {
         viewModel.isLoginSucceeded
             .subscribe(onNext: { [weak self] result in
                 DispatchQueue.main.async {
-                    self?.titleLabel.backgroundColor = result ? .blue : .orange
+                    switch result {
+                    case true:
+                        self?.titleLabel.backgroundColor = .blue
+                        // TODO: 유저 정보를 넣어 줍시다.
+                        self?.delegate?.loginDidSucceed()
+                    case false:
+                        self?.titleLabel.backgroundColor = .orange
+                        self?.delegate?.loginDidFail()
+                    }
                 }
             })
             .disposed(by: disposeBag)
