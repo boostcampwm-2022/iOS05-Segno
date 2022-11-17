@@ -18,12 +18,12 @@ final class AppCoordinator: Coordinator {
     
     func start() {
         // TODO: login이 안되어있으면 LoginCoordinator 실행
-//        let loginCoordinator = LoginCoordinator(navigationController)
-//        loginCoordinator.start()
-//        childCoordinators.append(loginCoordinator)
+        let loginCoordinator = LoginCoordinator(navigationController)
+        loginCoordinator.start()
+        childCoordinators.append(loginCoordinator)
         // TODO: login이 되어있으면 TabBarCoordinator 실행
-        let tabBarCoordinator = TabBarCoordinator(navigationController)
-        tabBarCoordinator.start()
-        childCoordinators.append(tabBarCoordinator)
+//        let tabBarCoordinator = TabBarCoordinator(navigationController)
+//        tabBarCoordinator.start()
+//        childCoordinators.append(tabBarCoordinator)
     }
 }
