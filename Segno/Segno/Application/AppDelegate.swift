@@ -24,22 +24,22 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         }
         
         // AppleLogin 기록에 관한 코드
-        let appleIDProvider = ASAuthorizationAppleIDProvider()
-        appleIDProvider.getCredentialState(forUserID: "000128.42c946e8142749b08b8e429b59b19730.0733") { (credentialState, error) in
-            switch credentialState {
-            case .authorized:
-                // The Apple ID credential is valid.
-                print("해당 ID는 연동되어있습니다.")
-            case .revoked:
-                // The Apple ID credential is either revoked or was not found, so show the sign-in UI.
-                print("해당 ID는 연동되어있지않습니다.")
-            case .notFound:
-                // The Apple ID credential is either was not found, so show the sign-in UI.
-                print("해당 ID를 찾을 수 없습니다.")
-            default:
-                break
-            }
-        }
+//        let appleIDProvider = ASAuthorizationAppleIDProvider()
+//        appleIDProvider.getCredentialState(forUserID: "001342.777c9aea9ed046a2a75c03f01748113d.0743") { (credentialState, error) in
+//            switch credentialState {
+//            case .authorized:
+//                // The Apple ID credential is valid.
+//                print("해당 ID는 연동되어있습니다.")
+//            case .revoked:
+//                // The Apple ID credential is either revoked or was not found, so show the sign-in UI.
+//                print("해당 ID는 연동되어있지않습니다.")
+//            case .notFound:
+//                // The Apple ID credential is either was not found, so show the sign-in UI.
+//                print("해당 ID를 찾을 수 없습니다.")
+//            default:
+//                break
+//            }
+//        }
         
         NotificationCenter.default.addObserver(forName: ASAuthorizationAppleIDProvider.credentialRevokedNotification, object: nil, queue: nil) { (Notification) in
             print("Revoked Notification")

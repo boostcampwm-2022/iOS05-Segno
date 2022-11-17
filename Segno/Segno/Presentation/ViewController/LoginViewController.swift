@@ -16,6 +16,7 @@ import SnapKit
 final class LoginViewController: UIViewController {
     
     // MARK: - Property
+    private let viewModel: LoginViewModel
     private let disposeBag = DisposeBag()
     
     private enum Metric {
@@ -108,6 +109,17 @@ final class LoginViewController: UIViewController {
         return label
     }()
     
+    // MARK: - initializer
+    init(viewModel: LoginViewModel = LoginViewModel()) {
+        self.viewModel = viewModel
+        
+        super.init(nibName: nil, bundle: nil)
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("Not imported")
+    }
+    
     // MARK: - Life Cycle
     
     override func viewDidLoad() {
@@ -115,15 +127,26 @@ final class LoginViewController: UIViewController {
         setupView()
         setupLayout()
         setupRx()
+        
+        testSubscribe()
     }
     
     // MARK: - Private
+    
+    private func testSubscribe() {
+        viewModel.isLoginSucceeded
+            .subscribe(onNext: { [weak self] result in
+                DispatchQueue.main.async {
+                    self?.titleLabel.backgroundColor = result ? .blue : .orange
+                }
+            })
+            .disposed(by: disposeBag)
+    }
     
     private func setupRx() {
         googleButton.rx.tap
             .withUnretained(self)
             .bind { _ in
-                // TODO: Bind with Google Login Button Action
                 print("google")
                 self.googleButtonTapped()
             }
@@ -132,7 +155,6 @@ final class LoginViewController: UIViewController {
         appleButton.rx.tap
             .withUnretained(self)
             .bind { _ in
-                // TODO: Bind with Apple Login Button Action
                 print("apple")
                 self.appleButtonTapped()
             }
@@ -215,6 +237,8 @@ final class LoginViewController: UIViewController {
                 print("User ID : \(userId)")
                 print("User Email : \(email)")
                 print("User Name : \((fullName))")
+                
+                self.viewModel.signIn(withGoogle: email)
             } else {
                 print("Error : User Data Not Found")
             }
@@ -247,7 +271,7 @@ extension LoginViewController: ASAuthorizationControllerDelegate {
     // Apple ID 연동 성공 시
     func authorizationController(controller: ASAuthorizationController, didCompleteWithAuthorization authorization: ASAuthorization) {
         // TODO: viewModel로 authoriztion 전송하기
-//        viewModel.signIn(withApple: authorization)
+        viewModel.signIn(withApple: authorization)
         // TODO: 코디네이터에게 알리기
         
         // 아래는 테스트용 출력
@@ -264,7 +288,7 @@ extension LoginViewController: ASAuthorizationControllerDelegate {
             print("User ID : \(userIdentifier)")
             print("User Email : \(email ?? "")")
             print("User Name : \((fullName?.givenName ?? "") + (fullName?.familyName ?? ""))")
-
+            
         default:
             break
         }
