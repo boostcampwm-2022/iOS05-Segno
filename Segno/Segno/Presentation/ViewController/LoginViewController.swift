@@ -36,7 +36,7 @@ final class LoginViewController: UIViewController {
         
         static let spacingBetweenButtons: CGFloat = 20
         static let inset: CGFloat = 20
-     
+        
         static let titleHeight: CGFloat = 100
         static let titleOffset: CGFloat = 200
         static let subTitleHeight: CGFloat = 50
@@ -237,7 +237,7 @@ final class LoginViewController: UIViewController {
     // MARK: - Public
     private func googleButtonTapped() {
         let signInConfig = GIDConfiguration.init(clientID: "880830660858-2niv4cb94c63omf91uej9f23o7j15n8r.apps.googleusercontent.com")
-
+        
         GIDSignIn.sharedInstance.signIn(with: signInConfig, presenting: self) { user, error in
             guard error == nil else { return }
             guard let user = user else { return }
@@ -252,7 +252,6 @@ final class LoginViewController: UIViewController {
                 print("User ID : \(userId)")
                 print("User Email : \(email)")
                 print("User Name : \((fullName))")
-                
                 self.viewModel.signIn(withGoogle: email)
             } else {
                 print("Error : User Data Not Found")
@@ -264,8 +263,6 @@ final class LoginViewController: UIViewController {
         viewModel.setPresentationContextProvider(self)
         viewModel.performAppleLogin()
     }
-    
-
 }
 
 extension LoginViewController: ASAuthorizationControllerPresentationContextProviding {
