@@ -52,7 +52,7 @@ final class LoginViewModel {
     }
     
     func signIn(withApple email: String) {
-        useCase.sendLoginRequest(email: email)
+        useCase.sendLoginRequest(withApple: email)
                 .subscribe(onSuccess: { [weak self] _ in
                     self?.isLoginSucceeded.onNext(true)
                 }, onFailure: { [weak self] _ in
