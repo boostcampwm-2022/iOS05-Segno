@@ -293,7 +293,15 @@ final class LoginViewController: UIViewController {
             Data(base64Encoded: $0)
         }
         
-        if let json = try? JSONSerialization.jsonObject(with: jwtElement[1], options: []) as? [String : Any] {
+        let data = {
+            if jwtElement.count == 1 {
+                return jwtElement[0]
+            } else {
+                return jwtElement[1]
+            }
+        }()
+        
+        if let json = try? JSONSerialization.jsonObject(with: data, options: []) as? [String : Any] {
             if let email = json["email"] as? String {
                 ret = email
             }
