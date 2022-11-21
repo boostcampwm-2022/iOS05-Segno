@@ -6,5 +6,5 @@
 //
 
 struct TokenDTO: Decodable {
-    let token: String
+    let token: String?
 }
