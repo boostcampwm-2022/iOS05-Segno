@@ -11,44 +11,44 @@ import RxSwift
 
 final class LoginViewModel {
     let useCase: LoginUseCase
+    
     private let disposeBag = DisposeBag()
+    
+    let session = LoginSession.shared
     var isLoginSucceeded = PublishSubject<Bool>()
     
     init(useCase: LoginUseCase = LoginUseCaseImpl()) {
         self.useCase = useCase
+        
+        bindAppleCredential()
+    }
+    
+    func setPresentationContextProvider(_ object: ASAuthorizationControllerPresentationContextProviding) {
+        session.setPresentationContextProvider(object)
+    }
+    
+    func performAppleLogin() {
+        session.performAppleLogin()
+    }
+    
+    private func bindAppleCredential() {
+        session.appleCredentialResult
+            .subscribe(onNext: { result in
+                switch result {
+                case .success(let credential):
+                    print(credential.fullName?.givenName ?? "NO NAME")
+                    print(credential.email ?? "NO EMAIL")
+                    print(credential.user)
+                case .failure(let error):
+                    print(error.localizedDescription)
+                }
+            })
+            .disposed(by: disposeBag)
     }
     
     func signIn(withApple authorization: ASAuthorization) {
-//        return Single.create { single in
-//            switch authorization.credential {
-//            case let appleIDCredential as ASAuthorizationAppleIDCredential:
-//                let userIdentifier = appleIDCredential.user
-//                guard let fullName = appleIDCredential.fullName,
-//                      let email = appleIDCredential.email else {
-//                    single(.success(false))
-//                    return Disposables.create()
-//                }
-//                self.useCase.sendLoginRequest(email: email)
-//                    .subscribe(onSuccess: { _ in
-//                        single(.success(true))
-//                    }, onFailure: { _ in
-//                        single(.success(false))
-//                    })
-//                    .disposed(by: self.disposeBag)
-//            default:
-//                single(.success(false))
-//                break
-//            }
-//            return Disposables.create()
-//        }
-        
         switch authorization.credential {
         case let appleIDCredential as ASAuthorizationAppleIDCredential:
-//            let userIdentifier = appleIDCredential.user // 애플에서 준 토큰
-//            guard let fullName = appleIDCredential.fullName,
-//                  let email = appleIDCredential.email else {
-//                return
-//            }
             let email = appleIDCredential.email ?? "thefirate@gmail.com"
             
             useCase.sendLoginRequest(email: email)

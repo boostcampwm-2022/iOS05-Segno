@@ -16,7 +16,7 @@ final class LoginSession: NSObject {
     static let shared = LoginSession()
     
     var authorizationController: ASAuthorizationController?
-    var appleCredential = PublishSubject<LoginResult>()
+    var appleCredentialResult = PublishSubject<LoginResult>()
     
     private override init() { }
     
@@ -41,11 +41,11 @@ extension LoginSession: ASAuthorizationControllerDelegate {
             return
         }
         
-        appleCredential.onNext(.success(auth))
+        appleCredentialResult.onNext(.success(auth))
     }
     
     func authorizationController(controller: ASAuthorizationController, didCompleteWithError error: Error) {
         
-        appleCredential.onNext(.failure(error))
+        appleCredentialResult.onNext(.failure(error))
     }
 }

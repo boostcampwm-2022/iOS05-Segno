@@ -135,7 +135,6 @@ final class LoginViewController: UIViewController {
         setupLayout()
         setupRx()
         
-        bindAppleCredential()
 //        testSubscribe()
     }
     
@@ -258,76 +257,16 @@ final class LoginViewController: UIViewController {
             } else {
                 print("Error : User Data Not Found")
             }
-            
-            // TODO: ViewModel로 적절한 데이터(authentication / idToken 등) 전송
-//            user.authentication.do { [self] authentication, error in
-//                guard error == nil else { print(error); return }
-//                guard let authentication = authentication else { return }
-//
-//                let idToken = authentication.idToken
-//                print(userId)
-//                print(idToken)
-//            }
         }
     }
     
     private func appleButtonTapped() {
-        LoginSession.shared.setPresentationContextProvider(self)
-        LoginSession.shared.performAppleLogin()
+        viewModel.setPresentationContextProvider(self)
+        viewModel.performAppleLogin()
     }
     
-    private func bindAppleCredential() {
-        let appleCredentialResult = LoginSession.shared.appleCredential
-        
-        appleCredentialResult
-            .subscribe(onNext: { result in
-                switch result {
-                case .success(let credential):
-                    print(credential.fullName?.givenName ?? "NO NAME")
-                    print(credential.email ?? "NO EMAIL")
-                    print(credential.user)
-                case .failure(let error):
-                    print(error.localizedDescription)
-                }
-            })
-            .disposed(by: disposeBag)
-    }
-}
 
-//extension LoginViewController: ASAuthorizationControllerDelegate {
-//    // Apple ID 연동 성공 시
-//    func authorizationController(controller: ASAuthorizationController, didCompleteWithAuthorization authorization: ASAuthorization) {
-//        // TODO: viewModel로 authoriztion 전송하기
-//        viewModel.signIn(withApple: authorization)
-//        // TODO: 코디네이터에게 알리기
-//
-//        // 아래는 테스트용 출력
-//        #if DEBUG
-//        switch authorization.credential {
-//        // Apple ID
-//        case let appleIDCredential as ASAuthorizationAppleIDCredential:
-//
-//            // 계정 정보 가져오기
-//            let userIdentifier = appleIDCredential.user
-//            let fullName = appleIDCredential.fullName
-//            let email = appleIDCredential.email
-//
-//            print("User ID : \(userIdentifier)")
-//            print("User Email : \(email ?? "")")
-//            print("User Name : \((fullName?.givenName ?? "") + (fullName?.familyName ?? ""))")
-//
-//        default:
-//            break
-//        }
-//        #endif
-//    }
-//
-//    // Apple ID 연동 실패 시
-//    func authorizationController(controller: ASAuthorizationController, didCompleteWithError error: Error) {
-//        // Handle error.
-//        print("didCompleteWithError")
-//    }
-//}
+}
 
 extension LoginViewController: ASAuthorizationControllerPresentationContextProviding {
     func presentationAnchor(for controller: ASAuthorizationController) -> ASPresentationAnchor {
