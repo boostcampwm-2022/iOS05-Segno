@@ -135,7 +135,7 @@ final class LoginViewController: UIViewController {
         setupLayout()
         setupRx()
         
-        testSubscribe()
+//        testSubscribe()
     }
     
     // MARK: - Private
@@ -256,99 +256,17 @@ final class LoginViewController: UIViewController {
             } else {
                 print("Error : User Data Not Found")
             }
-            
-            // TODO: ViewModel로 적절한 데이터(authentication / idToken 등) 전송
-            //            user.authentication.do { [self] authentication, error in
-            //                guard error == nil else { print(error); return }
-            //                guard let authentication = authentication else { return }
-            //
-            //                let idToken = authentication.idToken
-            //                print(userId)
-            //                print(idToken)
-            //            }
         }
     }
     
     private func appleButtonTapped() {
-        let appleIDProvider = ASAuthorizationAppleIDProvider()
-        
-        let request = appleIDProvider.createRequest()
-        request.requestedScopes = [.fullName, .email]
-        
-        let authorizationController = ASAuthorizationController(authorizationRequests: [request])
-        authorizationController.delegate = self
-        authorizationController.presentationContextProvider = self
-        authorizationController.performRequests()
-    }
-    
-    func parseEmailFromJWT(_ jwtData: Data?) -> String? {
-        var ret: String?
-        guard let jwtData = jwtData,
-              let jwt = String(data: jwtData, encoding: .ascii) else { return nil }
-        
-        // parse body from jwt
-        let jwtElement = jwt.split(separator: ".").map {
-            String($0)
-        }.compactMap {
-            Data(base64Encoded: $0)
-        }
-        
-        let data = {
-            if jwtElement.count == 1 {
-                return jwtElement[0]
-            } else {
-                return jwtElement[1]
-            }
-        }()
-        
-        if let json = try? JSONSerialization.jsonObject(with: data, options: []) as? [String : Any] {
-            if let email = json["email"] as? String {
-                ret = email
-            }
-        }
-        
-        return ret
-    }
-}
-
-extension LoginViewController: ASAuthorizationControllerDelegate {
-    // Apple ID 연동 성공 시
-    func authorizationController(controller: ASAuthorizationController, didCompleteWithAuthorization authorization: ASAuthorization) {
-        // TODO: 코디네이터에게 알리기
-        
-        // 아래는 테스트용 출력
-#if DEBUG
-        switch authorization.credential {
-            // Apple ID
-        case let appleIDCredential as ASAuthorizationAppleIDCredential:
-            // 계정 정보 가져오기
-            let userIdentifier = appleIDCredential.user
-            let fullName = appleIDCredential.fullName
-            let email = appleIDCredential.email
-            
-            print("User ID : \(userIdentifier)")
-            print("User Email : \(email ?? "")")
-            print("User Name : \((fullName?.givenName ?? "") + (fullName?.familyName ?? ""))")
-            
-            guard let email = parseEmailFromJWT(appleIDCredential.identityToken) else { return }
-            
-            viewModel.signIn(withApple: email)
-            
-        default:
-            break
-        }
-#endif
-    }
-    
-    // Apple ID 연동 실패 시
-    func authorizationController(controller: ASAuthorizationController, didCompleteWithError error: Error) {
-        // Handle error.
-        print("didCompleteWithError")
+        viewModel.setPresentationContextProvider(self)
+        viewModel.performAppleLogin()
     }
 }
 
 extension LoginViewController: ASAuthorizationControllerPresentationContextProviding {
     func presentationAnchor(for controller: ASAuthorizationController) -> ASPresentationAnchor {
-        return self.view.window!
+        return self.view.window ?? UIWindow()
     }
 }
