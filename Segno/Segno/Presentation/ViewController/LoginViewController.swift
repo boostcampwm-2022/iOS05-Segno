@@ -278,22 +278,17 @@ final class LoginViewController: UIViewController {
     
     private func bindAppleCredential() {
         let appleCredentialResult = LoginSession.shared.appleCredential
-            .materialize()
         
         appleCredentialResult
-            .filter {
-                guard $0.error == nil else {
-                    print($0.error?.localizedDescription ?? "Anyway Error")
-                    return false
+            .subscribe(onNext: { result in
+                switch result {
+                case .success(let credential):
+                    print(credential.fullName?.givenName ?? "NO NAME")
+                    print(credential.email ?? "NO EMAIL")
+                    print(credential.user)
+                case .failure(let error):
+                    print(error.localizedDescription)
                 }
-
-                return true
-            }
-            .dematerialize()
-            .subscribe(onNext: { credential in
-                print(credential.fullName?.givenName ?? "NO NAME")
-                print(credential.email ?? "NO EMAIL")
-                print(credential.user)
             })
             .disposed(by: disposeBag)
     }

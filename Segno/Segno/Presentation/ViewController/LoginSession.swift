@@ -10,11 +10,13 @@ import Foundation
 
 import RxSwift
 
+typealias LoginResult = Result<ASAuthorizationAppleIDCredential, Error>
+
 final class LoginSession: NSObject {
     static let shared = LoginSession()
     
     var authorizationController: ASAuthorizationController?
-    var appleCredential = PublishSubject<ASAuthorizationAppleIDCredential>()
+    var appleCredential = PublishSubject<LoginResult>()
     
     private override init() { }
     
@@ -39,11 +41,11 @@ extension LoginSession: ASAuthorizationControllerDelegate {
             return
         }
         
-        appleCredential.onNext(auth)
+        appleCredential.onNext(.success(auth))
     }
     
     func authorizationController(controller: ASAuthorizationController, didCompleteWithError error: Error) {
         
-        appleCredential.onError(error)
+        appleCredential.onNext(.failure(error))
     }
 }
