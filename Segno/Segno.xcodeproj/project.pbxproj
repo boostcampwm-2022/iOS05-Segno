@@ -171,6 +171,7 @@
 		4F317791291BEB490019BDFC /* Data */ = {
 			isa = PBXGroup;
 			children = (
+				4FCAC5C3292B792200BF9CDD /* Session */,
 				4F3177A0291BF1810019BDFC /* Repository */,
 				4F31779F291BF1780019BDFC /* Network */,
 				988414D62923304F007C9132 /* KeychainError.swift */,
@@ -252,7 +253,6 @@
 				4F317780291BE4710019BDFC /* LoginViewController.swift */,
 				666E6F8B291CFAC200CECD4B /* DiaryCollectionViewController.swift */,
 				666E6F8D291CFADD00CECD4B /* MyPageViewController.swift */,
-				4FCAC5C1292B5C9000BF9CDD /* LoginSession.swift */,
 			);
 			path = ViewController;
 			sourceTree = "<group>";
@@ -326,6 +326,14 @@
 				4F4E0D7529252236005ABA8F /* LoginEndpoint.swift */,
 			);
 			path = Endpoints;
+			sourceTree = "<group>";
+		};
+		4FCAC5C3292B792200BF9CDD /* Session */ = {
+			isa = PBXGroup;
+			children = (
+				4FCAC5C1292B5C9000BF9CDD /* LoginSession.swift */,
+			);
+			path = Session;
 			sourceTree = "<group>";
 		};
 		666E6F88291CF81200CECD4B /* TabBar */ = {
