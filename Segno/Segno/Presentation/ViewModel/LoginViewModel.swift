@@ -12,7 +12,6 @@ import RxSwift
 final class LoginViewModel {
     let useCase: LoginUseCase
     private let disposeBag = DisposeBag()
-    
     var isLoginSucceeded = PublishSubject<Bool>()
     
     init(useCase: LoginUseCase = LoginUseCaseImpl()) {
