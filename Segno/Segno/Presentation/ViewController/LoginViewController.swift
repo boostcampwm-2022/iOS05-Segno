@@ -36,7 +36,7 @@ final class LoginViewController: UIViewController {
         
         static let spacingBetweenButtons: CGFloat = 20
         static let inset: CGFloat = 20
-     
+        
         static let titleHeight: CGFloat = 100
         static let titleOffset: CGFloat = 200
         static let subTitleHeight: CGFloat = 50
@@ -237,7 +237,7 @@ final class LoginViewController: UIViewController {
     // MARK: - Public
     private func googleButtonTapped() {
         let signInConfig = GIDConfiguration.init(clientID: "880830660858-2niv4cb94c63omf91uej9f23o7j15n8r.apps.googleusercontent.com")
-
+        
         GIDSignIn.sharedInstance.signIn(with: signInConfig, presenting: self) { user, error in
             guard error == nil else { return }
             guard let user = user else { return }
@@ -252,26 +252,26 @@ final class LoginViewController: UIViewController {
                 print("User ID : \(userId)")
                 print("User Email : \(email)")
                 print("User Name : \((fullName))")
-                
                 self.viewModel.signIn(withGoogle: email)
             } else {
                 print("Error : User Data Not Found")
             }
             
             // TODO: ViewModel로 적절한 데이터(authentication / idToken 등) 전송
-//            user.authentication.do { [self] authentication, error in
-//                guard error == nil else { print(error); return }
-//                guard let authentication = authentication else { return }
-//
-//                let idToken = authentication.idToken
-//                print(userId)
-//                print(idToken)
-//            }
+            //            user.authentication.do { [self] authentication, error in
+            //                guard error == nil else { print(error); return }
+            //                guard let authentication = authentication else { return }
+            //
+            //                let idToken = authentication.idToken
+            //                print(userId)
+            //                print(idToken)
+            //            }
         }
     }
     
     private func appleButtonTapped() {
         let appleIDProvider = ASAuthorizationAppleIDProvider()
+        
         let request = appleIDProvider.createRequest()
         request.requestedScopes = [.fullName, .email]
         
@@ -280,36 +280,66 @@ final class LoginViewController: UIViewController {
         authorizationController.presentationContextProvider = self
         authorizationController.performRequests()
     }
+    
+    func parseEmailFromJWT(_ jwtData: Data?) -> String? {
+        var ret: String?
+        guard let jwtData = jwtData,
+              let jwt = String(data: jwtData, encoding: .ascii) else { return nil }
+        
+        // parse body from jwt
+        let jwtElement = jwt.split(separator: ".").map {
+            String($0)
+        }.compactMap {
+            Data(base64Encoded: $0)
+        }
+        
+        let data = {
+            if jwtElement.count == 1 {
+                return jwtElement[0]
+            } else {
+                return jwtElement[1]
+            }
+        }()
+        
+        if let json = try? JSONSerialization.jsonObject(with: data, options: []) as? [String : Any] {
+            if let email = json["email"] as? String {
+                ret = email
+            }
+        }
+        
+        return ret
+    }
 }
 
 extension LoginViewController: ASAuthorizationControllerDelegate {
     // Apple ID 연동 성공 시
     func authorizationController(controller: ASAuthorizationController, didCompleteWithAuthorization authorization: ASAuthorization) {
-        // TODO: viewModel로 authoriztion 전송하기
-        viewModel.signIn(withApple: authorization)
         // TODO: 코디네이터에게 알리기
         
         // 아래는 테스트용 출력
-        #if DEBUG
+#if DEBUG
         switch authorization.credential {
-        // Apple ID
+            // Apple ID
         case let appleIDCredential as ASAuthorizationAppleIDCredential:
-                
             // 계정 정보 가져오기
             let userIdentifier = appleIDCredential.user
             let fullName = appleIDCredential.fullName
             let email = appleIDCredential.email
-                
+            
             print("User ID : \(userIdentifier)")
             print("User Email : \(email ?? "")")
             print("User Name : \((fullName?.givenName ?? "") + (fullName?.familyName ?? ""))")
             
+            guard let email = parseEmailFromJWT(appleIDCredential.identityToken) else { return }
+            
+            viewModel.signIn(withApple: email)
+            
         default:
             break
         }
-        #endif
+#endif
     }
-        
+    
     // Apple ID 연동 실패 시
     func authorizationController(controller: ASAuthorizationController, didCompleteWithError error: Error) {
         // Handle error.

@@ -8,7 +8,8 @@
 import RxSwift
 
 protocol LoginUseCase {
-    func sendLoginRequest(email: String) -> Single<String>
+    func sendLoginRequest(withApple email: String) -> Single<String>
+    func sendLoginRequest(withGoogle email: String) -> Single<String>
 }
 
 final class LoginUseCaseImpl: LoginUseCase {
@@ -27,24 +28,17 @@ final class LoginUseCaseImpl: LoginUseCase {
         self.localUtilityRepository = localUtilityRepository
     }
 
-    func sendLoginRequest(email: String) -> Single<String> {
-//        return Single.create { single in
-//            self.repository.sendLoginRequest(email: email)
-//                .subscribe(onSuccess: { token in
-//                    print("서버에서 받아온 토큰 : ", token)
-//                    single(.success(true))
-//                    // TODO: UserInformation Entity를 생성하여
-//
-//                    // TODO: LocalUtilityRepository에 전달한다.
-//                }, onFailure: { error in
-//                    single(.failure(error))
-//                })
-//                .disposed(by: self.disposeBag)
-//
-//            return Disposables.create()
-//        }
-        
-        return repository.sendLoginRequest(email: email)
+    func sendLoginRequest(withApple email: String) -> Single<String> {
+        return repository.sendLoginRequest(withApple: email)
+            .map {
+                let tokenString = $0.token ?? "음슴"
+                print(tokenString)
+                return tokenString
+            }
+    }
+    
+    func sendLoginRequest(withGoogle email: String) -> Single<String> {
+        return repository.sendLoginRequest(withGoogle: email)
             .map {
                 let tokenString = $0.token ?? "음슴"
                 print(tokenString)
