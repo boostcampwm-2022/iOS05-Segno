@@ -281,26 +281,25 @@ final class LoginViewController: UIViewController {
         authorizationController.performRequests()
     }
     
-    func jwtParser(_ _jwt: Data?) -> String? {
-        guard let _jwt = _jwt else { return nil}
-        guard let jwt = String(data: _jwt, encoding: .ascii) else { return nil }
+    func parseEmailFromJWT(_ jwtData: Data?) -> String? {
+        var ret: String?
+        guard let jwtData = jwtData,
+              let jwt = String(data: jwtData, encoding: .ascii) else { return nil }
         
-        
-        let jsonString = jwt.split(separator: ".").map {
+        // parse body from jwt
+        let jwtElement = jwt.split(separator: ".").map {
             String($0)
         }.compactMap {
             Data(base64Encoded: $0)
-        }.compactMap {
-            String(data: $0, encoding: .ascii)
-        }
-        guard let data = jsonString[1].data(using: .utf8) else {
-            return nil
         }
         
-        // 태호님 로직 =======
-
+        if let json = try? JSONSerialization.jsonObject(with: jwtElement[1], options: []) as? [String : Any] {
+            if let email = json["email"] as? String {
+                ret = email
+            }
+        }
         
-        return "생성된_이메일@naver.com"
+        return ret
     }
 }
 
@@ -323,11 +322,10 @@ extension LoginViewController: ASAuthorizationControllerDelegate {
             print("User Email : \(email ?? "")")
             print("User Name : \((fullName?.givenName ?? "") + (fullName?.familyName ?? ""))")
             
-            guard let email = jwtParser(appleIDCredential.identityToken) else { return }
+            guard let email = parseEmailFromJWT(appleIDCredential.identityToken) else { return }
             
-            // TODO: viewModel로 authoriztion 전송하기
-//            viewModel.signIn(withApple: email)
-                    
+            viewModel.signIn(withApple: email)
+            
         default:
             break
         }
