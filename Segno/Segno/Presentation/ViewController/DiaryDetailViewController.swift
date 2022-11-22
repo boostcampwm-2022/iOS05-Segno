@@ -33,7 +33,7 @@ final class DiaryDetailViewController: UIViewController {
         return stackView
     }()
     
-    private let datelabel: UILabel = {
+    private let dateLabel: UILabel = {
         let label = UILabel()
         label.font = .systemFont(ofSize: 20, weight: .light)
         label.backgroundColor = #colorLiteral(red: 0.2745098174, green: 0.4862745106, blue: 0.1411764771, alpha: 1)
@@ -92,7 +92,7 @@ final class DiaryDetailViewController: UIViewController {
     private func setupLayout() {
         view.addSubview(scrollView)
         scrollView.addSubview(stackView)
-        [datelabel, titleLabel, tagScrollView, imageView, textView].forEach {
+        [dateLabel, titleLabel, tagScrollView, imageView, textView].forEach {
             stackView.addArrangedSubview($0)
         }
         tagScrollView.addSubview(tagStackView)
@@ -132,7 +132,7 @@ final class DiaryDetailViewController: UIViewController {
     }
     
     private func setTemporaryData() {
-        datelabel.text = "11월 22일 14:54"
+        dateLabel.text = "11월 22일 14:54"
         titleLabel.text = "서현에서"
         
         let tagView1 = TagView(tagTitle: "음악")
