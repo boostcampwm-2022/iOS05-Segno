@@ -31,7 +31,7 @@ final class LoginUseCaseImpl: LoginUseCase {
     func sendLoginRequest(withApple email: String) -> Single<String> {
         return repository.sendLoginRequest(withApple: email)
             .map {
-                let tokenString = $0.token ?? "음슴"
+                let tokenString = $0.token ?? "NO TOKEN"
                 print(tokenString)
                 return tokenString
             }
@@ -40,7 +40,7 @@ final class LoginUseCaseImpl: LoginUseCase {
     func sendLoginRequest(withGoogle email: String) -> Single<String> {
         return repository.sendLoginRequest(withGoogle: email)
             .map {
-                let tokenString = $0.token ?? "음슴"
+                let tokenString = $0.token ?? "NO TOKEN"
                 print(tokenString)
                 return tokenString
             }

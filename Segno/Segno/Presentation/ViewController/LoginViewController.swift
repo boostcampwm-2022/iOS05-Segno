@@ -134,12 +134,12 @@ final class LoginViewController: UIViewController {
         setupLayout()
         setupRx()
         
-//        testSubscribe()
+        subscribeLoginResult()
     }
     
     // MARK: - Private
     
-    private func testSubscribe() {
+    private func subscribeLoginResult() {
         viewModel.isLoginSucceeded
             .subscribe(onNext: { [weak self] result in
                 DispatchQueue.main.async {

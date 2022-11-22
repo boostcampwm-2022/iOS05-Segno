@@ -66,7 +66,6 @@ final class LoginViewModel {
                 .disposed(by: disposeBag)
     }
     
-    // TODO: 서버 이슈 해결된 뒤, 구글 로그인과 애플 로그인 함수 합치기
     func signIn(withGoogle email: String) {
         useCase.sendLoginRequest(withGoogle: email)
             .subscribe(onSuccess: { [weak self] _ in
