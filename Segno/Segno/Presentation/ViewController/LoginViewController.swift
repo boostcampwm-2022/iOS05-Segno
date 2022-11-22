@@ -34,14 +34,13 @@ final class LoginViewController: UIViewController {
         static let subTitleText = "다시 이곳의 추억에서부터"
         static let footerText = "D.S."
         
-        static let spacingBetweenButtons: CGFloat = 20
-        static let inset: CGFloat = 20
-        
-        static let titleHeight: CGFloat = 100
-        static let titleOffset: CGFloat = 200
-        static let subTitleHeight: CGFloat = 50
         static let buttonHeight: CGFloat = 50
         static let buttonRadius: CGFloat = 20
+        static let footerBottomOffset: CGFloat = -100
+        static let inset: CGFloat = 20
+        static let subTitleHeight: CGFloat = 50
+        static let titleHeight: CGFloat = 100
+        static let titleOffset: CGFloat = 200
     }
     
     // MARK: - View
@@ -219,7 +218,7 @@ final class LoginViewController: UIViewController {
         }
         
         footerLabel.snp.makeConstraints { make in
-            make.bottom.equalToSuperview().offset(-100)
+            make.bottom.equalToSuperview().offset(Metric.footerBottomOffset)
         }
         
         buttonStack.snp.makeConstraints { make in

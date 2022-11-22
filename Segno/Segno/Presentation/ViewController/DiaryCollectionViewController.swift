@@ -21,6 +21,13 @@ final class DiaryCollectionViewController: UIViewController {
     
     private enum Metric {
         static let inset: CGFloat = 20
+        
+        static let buttonFontSize: CGFloat = 80
+        static let buttonLabelOffset: CGFloat = 7
+        static let buttonOffset: CGFloat = -20
+        static let buttonRadius: CGFloat = 40
+        static let buttonText: String = "+"
+        static let buttonWidthAndHeight: CGFloat = 80
     }
     
     let disposeBag = DisposeBag()
@@ -47,8 +54,8 @@ final class DiaryCollectionViewController: UIViewController {
     
     lazy var appendButtonLabel: UILabel = {
         let label = UILabel()
-        label.font = .appFont(.surroundAir, size: 80)
-        label.text = "+"
+        label.font = .appFont(.surroundAir, size: Metric.buttonFontSize)
+        label.text = Metric.buttonText
         label.textColor = .appColor(.white)
         return label
     }()
@@ -78,7 +85,7 @@ final class DiaryCollectionViewController: UIViewController {
         view.backgroundColor = .appColor(.background)
         diaryCollectionView.delegate = self
         
-        appendButton.layer.cornerRadius = 40
+        appendButton.layer.cornerRadius = Metric.buttonRadius
         appendButton.layer.masksToBounds = true
         
         appendButton.setBackgroundColor(.appColor(.color4) ?? .red, for: .normal)
@@ -108,15 +115,15 @@ final class DiaryCollectionViewController: UIViewController {
         }
         
         appendButton.snp.makeConstraints { make in
-            make.width.equalTo(80)
-            make.height.equalTo(80)
-            make.bottom.equalTo(view.safeAreaLayoutGuide).offset(-20)
-            make.trailing.equalTo(view.safeAreaLayoutGuide).offset(-20)
+            make.width.equalTo(Metric.buttonWidthAndHeight)
+            make.height.equalTo(Metric.buttonWidthAndHeight)
+            make.bottom.equalTo(view.safeAreaLayoutGuide).offset(Metric.buttonOffset)
+            make.trailing.equalTo(view.safeAreaLayoutGuide).offset(Metric.buttonOffset)
         }
         
         appendButtonLabel.snp.makeConstraints { make in
             make.centerX.equalTo(appendButton)
-            make.centerY.equalTo(appendButton).offset(7)
+            make.centerY.equalTo(appendButton).offset(Metric.buttonLabelOffset)
         }
     }
     
