@@ -38,6 +38,7 @@ final class DiaryCollectionViewController: UIViewController {
     lazy var searchBar: UISearchBar = {
         let bar = UISearchBar()
         bar.placeholder = "Search Bar Test!"
+        bar.searchTextField.font = .appFont(.shiningStar, size: 20)
         bar.setImage(UIImage(named: "search_back"), for: .search, state: .normal)
         bar.setImage(UIImage(named: "search_cancel"), for: .clear, state: .normal)
         return bar

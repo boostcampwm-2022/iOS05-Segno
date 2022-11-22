@@ -8,14 +8,21 @@
 import UIKit
 
 final class DiaryCell: UICollectionViewCell {
+    private enum Metric {
+        static let labelFontSize: CGFloat = 20
+    }
+    
     private lazy var thumbnailImageView: UIImageView = {
         let imageView = UIImageView()
+        imageView.layer.borderWidth = 0.5 // MARK: 추후 삭제
         return imageView
     }()
     
     private lazy var titleLabel: UILabel = {
         let label = UILabel()
+        label.font = .appFont(.shiningStar, size: Metric.labelFontSize)
         label.textAlignment = .center
+        label.layer.borderWidth = 0.5 // MARK: 추후 삭제
         return label
     }()
     
