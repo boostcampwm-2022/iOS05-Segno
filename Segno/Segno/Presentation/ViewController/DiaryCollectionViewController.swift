@@ -20,14 +20,14 @@ final class DiaryCollectionViewController: UIViewController {
     }
     
     private enum Metric {
-        static let inset: CGFloat = 20
-        
         static let buttonFontSize: CGFloat = 80
         static let buttonLabelOffset: CGFloat = 7
         static let buttonOffset: CGFloat = -20
         static let buttonRadius: CGFloat = 40
         static let buttonText: String = "+"
         static let buttonWidthAndHeight: CGFloat = 80
+        static let inset: CGFloat = 20
+        static let navigationTitleSize: CGFloat = 20
     }
     
     let disposeBag = DisposeBag()
@@ -83,6 +83,12 @@ final class DiaryCollectionViewController: UIViewController {
     
     private func setupView() {
         view.backgroundColor = .appColor(.background)
+        
+        title = "일기 리스트"
+        navigationController?.navigationBar.titleTextAttributes = [
+            NSAttributedString.Key.font: UIFont.appFont(.surround, size: Metric.navigationTitleSize),
+            NSAttributedString.Key.foregroundColor: UIColor.appColor(.color4) ?? .red]
+        
         diaryCollectionView.delegate = self
         
         appendButton.layer.cornerRadius = Metric.buttonRadius
