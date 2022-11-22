@@ -60,6 +60,12 @@ final class DiaryDetailViewController: UIViewController {
     
     private var tagViews: [UIView] = []
     
+    private let imageView: UIImageView = {
+        let imageView = UIImageView()
+        imageView.backgroundColor = .systemBlue
+        return imageView
+    }()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -70,7 +76,7 @@ final class DiaryDetailViewController: UIViewController {
     private func setupLayout() {
         view.addSubview(scrollView)
         scrollView.addSubview(stackView)
-        [datelabel, titleLabel, tagScrollView].forEach {
+        [datelabel, titleLabel, tagScrollView, imageView].forEach {
             stackView.addArrangedSubview($0)
         }
         tagScrollView.addSubview(tagStackView)
@@ -95,6 +101,11 @@ final class DiaryDetailViewController: UIViewController {
         tagStackView.snp.makeConstraints {
             $0.edges.equalTo(tagScrollView)
             $0.height.equalTo(tagScrollView.snp.height)
+        }
+        
+        imageView.snp.makeConstraints {
+            $0.width.height.equalTo(view.snp.width)
+            
         }
     }
     
