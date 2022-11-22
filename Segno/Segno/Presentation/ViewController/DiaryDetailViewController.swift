@@ -44,6 +44,22 @@ final class DiaryDetailViewController: UIViewController {
         return label
     }()
     
+    private let tagScrollView: UIScrollView = {
+        let scrollView = UIScrollView()
+        scrollView.backgroundColor = .systemMint
+        return scrollView
+    }()
+    
+    private let tagStackView: UIStackView = {
+        let stackView = UIStackView()
+        stackView.axis = .horizontal
+        stackView.backgroundColor = .systemBrown
+        stackView.spacing = 20
+        return stackView
+    }()
+    
+    private var tagViews: [UIView] = []
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -54,8 +70,13 @@ final class DiaryDetailViewController: UIViewController {
     private func setupLayout() {
         view.addSubview(scrollView)
         scrollView.addSubview(stackView)
-        [datelabel, titleLabel].forEach {
+        [datelabel, titleLabel, tagScrollView].forEach {
             stackView.addArrangedSubview($0)
+        }
+        tagScrollView.addSubview(tagStackView)
+        
+        tagViews.forEach {
+            tagStackView.addArrangedSubview($0)
         }
         
         scrollView.snp.makeConstraints {
@@ -67,11 +88,26 @@ final class DiaryDetailViewController: UIViewController {
             $0.width.equalTo(scrollView.snp.width)
         }
         
+        tagScrollView.snp.makeConstraints {
+            $0.height.equalTo(30)
+        }
+        
+        tagStackView.snp.makeConstraints {
+            $0.edges.equalTo(tagScrollView)
+            $0.height.equalTo(tagScrollView.snp.height)
+        }
     }
     
     private func setTemporaryData() {
         datelabel.text = "11월 22일 14:54"
         titleLabel.text = "서현에서"
+        
+        let tagView1 = TagView(tagTitle: "음악")
+        let tagView2 = TagView(tagTitle: "휴식")
+        let tagView3 = TagView(tagTitle: "강릉 여행")
+        [tagView1, tagView2, tagView3].forEach {
+            tagViews.append($0)
+        }
     }
 }
 
