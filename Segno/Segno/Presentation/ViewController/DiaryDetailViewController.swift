@@ -12,7 +12,10 @@ import RxSwift
 import SnapKit
 
 final class DiaryDetailViewController: UIViewController {
-
+    private enum Metric {
+        static let textViewPlaceHolder: String = "내용을 입력하세요."
+    }
+    
     let disposeBag = DisposeBag()
 //    private let viewModel: DiaryDetailViewModel
     
@@ -66,6 +69,15 @@ final class DiaryDetailViewController: UIViewController {
         return imageView
     }()
     
+    private let textView: UITextView = {
+        let textView = UITextView()
+        textView.backgroundColor = .systemGray5
+        textView.text = Metric.textViewPlaceHolder
+        textView.textColor = .gray
+        textView.textContainerInset = UIEdgeInsets(top: 16, left: 16, bottom: 16, right: 16)
+        return textView
+    }()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -73,10 +85,14 @@ final class DiaryDetailViewController: UIViewController {
         setupLayout()
     }
     
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        self.view.endEditing(true)
+    }
+    
     private func setupLayout() {
         view.addSubview(scrollView)
         scrollView.addSubview(stackView)
-        [datelabel, titleLabel, tagScrollView, imageView].forEach {
+        [datelabel, titleLabel, tagScrollView, imageView, textView].forEach {
             stackView.addArrangedSubview($0)
         }
         tagScrollView.addSubview(tagStackView)
@@ -107,6 +123,12 @@ final class DiaryDetailViewController: UIViewController {
             $0.width.height.equalTo(view.snp.width)
             
         }
+        
+        textView.delegate = self
+        textView.snp.makeConstraints {
+            $0.width.equalTo(view.snp.width)
+            $0.height.equalTo(100)
+        }
     }
     
     private func setTemporaryData() {
@@ -118,6 +140,24 @@ final class DiaryDetailViewController: UIViewController {
         let tagView3 = TagView(tagTitle: "강릉 여행")
         [tagView1, tagView2, tagView3].forEach {
             tagViews.append($0)
+        }
+    }
+    
+    
+}
+
+extension DiaryDetailViewController: UITextViewDelegate {
+    func textViewDidBeginEditing(_ textView: UITextView) {
+        if textView.text == Metric.textViewPlaceHolder {
+            textView.text = nil
+            textView.textColor = .black
+        }
+    }
+    
+    func textViewDidEndEditing(_ textView: UITextView) {
+        if textView.text.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty {
+            textView.text = Metric.textViewPlaceHolder
+            textView.textColor = .gray
         }
     }
 }
