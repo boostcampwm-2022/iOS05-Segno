@@ -78,6 +78,12 @@ final class DiaryDetailViewController: UIViewController {
         return textView
     }()
     
+    private let musicContentView: MusicContentView = {
+        let musicContentView = MusicContentView()
+        musicContentView.backgroundColor = .systemGreen
+        return musicContentView
+    }()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -92,7 +98,7 @@ final class DiaryDetailViewController: UIViewController {
     private func setupLayout() {
         view.addSubview(scrollView)
         scrollView.addSubview(stackView)
-        [dateLabel, titleLabel, tagScrollView, imageView, textView].forEach {
+        [dateLabel, titleLabel, tagScrollView, imageView, textView, musicContentView].forEach {
             stackView.addArrangedSubview($0)
         }
         tagScrollView.addSubview(tagStackView)
@@ -129,6 +135,11 @@ final class DiaryDetailViewController: UIViewController {
             $0.width.equalTo(view.snp.width)
             $0.height.equalTo(100)
         }
+        
+        musicContentView.snp.makeConstraints {
+            $0.width.equalTo(view.snp.width)
+            $0.height.equalTo(50)
+        }
     }
     
     private func setTemporaryData() {
@@ -141,6 +152,7 @@ final class DiaryDetailViewController: UIViewController {
         [tagView1, tagView2, tagView3].forEach {
             tagViews.append($0)
         }
+        musicContentView.setMusic(title: "Gen Hoshino", artist: "Comedy")
     }
     
     
