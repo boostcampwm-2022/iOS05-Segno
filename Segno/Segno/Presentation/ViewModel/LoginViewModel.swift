@@ -58,8 +58,8 @@ final class LoginViewModel {
     
     func signIn(withApple email: String) {
         useCase.sendLoginRequest(withApple: email)
-                .subscribe(onSuccess: { [weak self] _ in
-                    self?.isLoginSucceeded.onNext(true)
+                .subscribe(onSuccess: { [weak self] result in
+                    self?.isLoginSucceeded.onNext(result)
                 }, onFailure: { [weak self] _ in
                     self?.isLoginSucceeded.onNext(false)
                 })
@@ -68,8 +68,8 @@ final class LoginViewModel {
     
     func signIn(withGoogle email: String) {
         useCase.sendLoginRequest(withGoogle: email)
-            .subscribe(onSuccess: { [weak self] _ in
-                self?.isLoginSucceeded.onNext(true)
+            .subscribe(onSuccess: { [weak self] result in
+                self?.isLoginSucceeded.onNext(result)
             }, onFailure: { [weak self] _ in
                 self?.isLoginSucceeded.onNext(false)
             })
