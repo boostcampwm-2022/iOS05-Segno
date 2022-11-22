@@ -43,6 +43,16 @@ final class DiaryCollectionViewController: UIViewController {
         return collectionView
     }()
     
+    lazy var appendButton = UIButton()
+    
+    lazy var appendButtonLabel: UILabel = {
+        let label = UILabel()
+        label.font = .appFont(.surroundAir, size: 80)
+        label.text = "+"
+        label.textColor = .appColor(.white)
+        return label
+    }()
+    
     init() {
         self.viewModel = DiaryCollectionViewModel()
         
@@ -67,25 +77,46 @@ final class DiaryCollectionViewController: UIViewController {
     private func setupView() {
         view.backgroundColor = .appColor(.background)
         diaryCollectionView.delegate = self
+        
+        appendButton.layer.cornerRadius = 40
+        appendButton.layer.masksToBounds = true
+        
+        appendButton.setBackgroundColor(.appColor(.color4) ?? .red, for: .normal)
     }
 
     private func setupLayout() {
         [searchBar, diaryCollectionView].forEach {
             view.addSubview($0)
-            
+
             $0.snp.makeConstraints { make in
                 make.width.equalToSuperview()
                 make.centerX.equalTo(view.snp.centerX)
             }
         }
-        
+
         searchBar.snp.makeConstraints { make in
             make.top.equalTo(view.safeAreaLayoutGuide)
         }
-        
+
         diaryCollectionView.snp.makeConstraints { make in
             make.top.equalTo(searchBar.snp.bottom)
             make.bottom.equalTo(view.safeAreaLayoutGuide)
+        }
+        
+        [appendButton, appendButtonLabel].forEach {
+            view.addSubview($0)
+        }
+        
+        appendButton.snp.makeConstraints { make in
+            make.width.equalTo(80)
+            make.height.equalTo(80)
+            make.bottom.equalTo(view.safeAreaLayoutGuide).offset(-20)
+            make.trailing.equalTo(view.safeAreaLayoutGuide).offset(-20)
+        }
+        
+        appendButtonLabel.snp.makeConstraints { make in
+            make.centerX.equalTo(appendButton)
+            make.centerY.equalTo(appendButton).offset(7)
         }
     }
     
