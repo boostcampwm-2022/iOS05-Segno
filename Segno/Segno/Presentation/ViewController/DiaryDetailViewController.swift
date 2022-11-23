@@ -15,6 +15,7 @@ final class DiaryDetailViewController: UIViewController {
     private enum Metric {
         static let textViewPlaceHolder: String = "내용을 입력하세요."
         static let stackViewSpacing: CGFloat = 10
+        static let stackViewInset: CGFloat = 16
         static let dateFontSize: CGFloat = 17
         static let titleFontSize: CGFloat = 20
         static let textViewFontSize: CGFloat = 16
@@ -113,8 +114,8 @@ final class DiaryDetailViewController: UIViewController {
         }
         
         stackView.snp.makeConstraints {
-            $0.edges.equalTo(scrollView)
-            $0.width.equalTo(scrollView.snp.width)
+            $0.edges.equalTo(scrollView).inset(Metric.stackViewInset)
+            $0.width.equalTo(scrollView.snp.width).inset(Metric.stackViewInset)
         }
         
         [dateLabel, titleLabel, tagScrollView, imageView, textView, musicContentView, locationContentView].forEach {
@@ -137,23 +138,23 @@ final class DiaryDetailViewController: UIViewController {
         }
         
         imageView.snp.makeConstraints {
-            $0.width.height.equalTo(view.snp.width)
+            $0.width.height.equalTo(stackView.snp.width)
             
         }
         
         textView.delegate = self
         textView.snp.makeConstraints {
-            $0.width.equalTo(view.snp.width)
+            $0.width.equalToSuperview()
             $0.height.equalTo(Metric.textViewHeight)
         }
         
         musicContentView.snp.makeConstraints {
-            $0.width.equalTo(view.snp.width)
+            $0.width.equalToSuperview()
             $0.height.equalTo(Metric.musicContentViewHeight)
         }
         
         locationContentView.snp.makeConstraints {
-            $0.width.equalTo(view.snp.width)
+            $0.width.equalToSuperview()
             $0.height.equalTo(Metric.locationContentViewHeight)
         }
     }
