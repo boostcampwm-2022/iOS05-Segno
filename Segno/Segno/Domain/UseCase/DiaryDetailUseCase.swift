@@ -5,10 +5,10 @@
 //  Created by TaehoYoo on 2022/11/23.
 //
 
-import Foundation
+import RxSwift
 
 protocol DiaryDetailUseCase {
-    func getDiaryList() -> Single<[DiaryDetail]>
+    func getDiary(id: String) -> Single<DiaryDetail>
 }
 
 final class DiaryDetailUseCaseImpl: DiaryDetailUseCase {
@@ -19,10 +19,9 @@ final class DiaryDetailUseCaseImpl: DiaryDetailUseCase {
         self.repository = repository
     }
     
-    func getDiary(id: String) -> Single<[DiaryDetail]> {
+    func getDiary(id: String) -> Single<DiaryDetail> {
         // MusicInfo, location은 추가 상의 필요
-        return repository.getDiary(id: id)
-            .map {
+        return repository.getDiary(id: id).map {
                 DiaryDetail(id: $0.id, title: $0.title, tags: $0.tags, imagePath: $0.imagePath, bodyText: $0.bodyText, musicInfo: nil, location: nil)
             }
     }

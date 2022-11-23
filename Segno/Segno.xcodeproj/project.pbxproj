@@ -51,6 +51,9 @@
 		791837FF292225DC00BC6992 /* UIColor+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 791837FD292225DC00BC6992 /* UIColor+.swift */; };
 		79183800292225DC00BC6992 /* UIFont+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 791837FE292225DC00BC6992 /* UIFont+.swift */; };
 		7918380829233F7100BC6992 /* UIButton+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7918380729233F7100BC6992 /* UIButton+.swift */; };
+		7940FB2F292E063100276EFC /* DiaryDetailDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7940FB2E292E063100276EFC /* DiaryDetailDTO.swift */; };
+		7940FB31292E065100276EFC /* DiaryDetailEndpoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7940FB30292E065100276EFC /* DiaryDetailEndpoint.swift */; };
+		7940FB33292E065F00276EFC /* DiaryDetailUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7940FB32292E065F00276EFC /* DiaryDetailUseCase.swift */; };
 		982A2A472924AE74006F6ACD /* UserDefaultsKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = 982A2A462924AE74006F6ACD /* UserDefaultsKey.swift */; };
 		982A3699292C905300FDC6CF /* DiaryDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 982A3698292C905300FDC6CF /* DiaryDetailViewController.swift */; };
 		9841D6172925FACC00318EA9 /* LoginUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9841D6162925FACC00318EA9 /* LoginUseCase.swift */; };
@@ -106,6 +109,9 @@
 		791837FD292225DC00BC6992 /* UIColor+.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIColor+.swift"; sourceTree = "<group>"; };
 		791837FE292225DC00BC6992 /* UIFont+.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIFont+.swift"; sourceTree = "<group>"; };
 		7918380729233F7100BC6992 /* UIButton+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIButton+.swift"; sourceTree = "<group>"; };
+		7940FB2E292E063100276EFC /* DiaryDetailDTO.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DiaryDetailDTO.swift; sourceTree = "<group>"; };
+		7940FB30292E065100276EFC /* DiaryDetailEndpoint.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DiaryDetailEndpoint.swift; sourceTree = "<group>"; };
+		7940FB32292E065F00276EFC /* DiaryDetailUseCase.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DiaryDetailUseCase.swift; sourceTree = "<group>"; };
 		982A2A462924AE74006F6ACD /* UserDefaultsKey.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDefaultsKey.swift; sourceTree = "<group>"; };
 		982A3698292C905300FDC6CF /* DiaryDetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DiaryDetailViewController.swift; sourceTree = "<group>"; };
 		9841D6162925FACC00318EA9 /* LoginUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginUseCase.swift; sourceTree = "<group>"; };
@@ -244,6 +250,7 @@
 			isa = PBXGroup;
 			children = (
 				9841D6162925FACC00318EA9 /* LoginUseCase.swift */,
+				7940FB32292E065F00276EFC /* DiaryDetailUseCase.swift */,
 				988414DA2923606B007C9132 /* DiaryListUseCase.swift */,
 			);
 			path = UseCase;
@@ -329,6 +336,7 @@
 			children = (
 				4FA324252923600C00DB04D5 /* DiaryListDTO.swift */,
 				4F4E0D73292521D0005ABA8F /* UserInfoDTO.swift */,
+				7940FB2E292E063100276EFC /* DiaryDetailDTO.swift */,
 				4F4E0D7A29252526005ABA8F /* TokenDTO.swift */,
 			);
 			path = DTO;
@@ -338,6 +346,7 @@
 			isa = PBXGroup;
 			children = (
 				4FA3242A2923646F00DB04D5 /* DiaryListItemEndpoint.swift */,
+				7940FB30292E065100276EFC /* DiaryDetailEndpoint.swift */,
 				4F4E0D7529252236005ABA8F /* LoginEndpoint.swift */,
 			);
 			path = Endpoints;
@@ -474,6 +483,7 @@
 				7918380829233F7100BC6992 /* UIButton+.swift in Sources */,
 				4F4E0D7B29252526005ABA8F /* TokenDTO.swift in Sources */,
 				666E6F81291CF49E00CECD4B /* LoginCoordinator.swift in Sources */,
+				7940FB31292E065100276EFC /* DiaryDetailEndpoint.swift in Sources */,
 				666E6F85291CF4AD00CECD4B /* MyPageCoordinator.swift in Sources */,
 				4F4E0D79292522B7005ABA8F /* BaseURL.swift in Sources */,
 				988414DB2923606B007C9132 /* DiaryListUseCase.swift in Sources */,
@@ -486,6 +496,7 @@
 				666E6F83291CF4A600CECD4B /* TabBarCoordinator.swift in Sources */,
 				4F9A001D29222B1B007D9057 /* Endpoint.swift in Sources */,
 				4F9A001F29222C97007D9057 /* NetworkError.swift in Sources */,
+				7940FB33292E065F00276EFC /* DiaryDetailUseCase.swift in Sources */,
 				666E6F8E291CFADD00CECD4B /* MyPageViewController.swift in Sources */,
 				4F6F74B1292C9BF3007E7AC1 /* UserInfo.swift in Sources */,
 				4FA3242B2923646F00DB04D5 /* DiaryListItemEndpoint.swift in Sources */,
@@ -494,6 +505,7 @@
 				9841D61B2926131200318EA9 /* LoginViewModel.swift in Sources */,
 				988414D72923304F007C9132 /* KeychainError.swift in Sources */,
 				98B5263E292CA46C00446413 /* TagView.swift in Sources */,
+				7940FB2F292E063100276EFC /* DiaryDetailDTO.swift in Sources */,
 				4F4E0D7629252236005ABA8F /* LoginEndpoint.swift in Sources */,
 				4FA324262923600C00DB04D5 /* DiaryListDTO.swift in Sources */,
 				666E6F87291CF4B400CECD4B /* DiaryCoordinator.swift in Sources */,
