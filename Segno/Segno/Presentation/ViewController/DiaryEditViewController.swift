@@ -40,7 +40,8 @@ final class DiaryEditViewController: UIViewController {
     
     private lazy var photoImageView: UIImageView = {
         let imageView = UIImageView()
-        imageView.image = UIImage(systemName: "popcorn")
+        imageView.contentMode = .scaleAspectFit
+        imageView.image = UIImage(systemName: "photo")
         imageView.backgroundColor = .systemMint // 테스트용 색상
         return imageView
     }()
@@ -51,7 +52,7 @@ final class DiaryEditViewController: UIViewController {
         return textView
     }()
     
-    // 태그 스택 뷰 - 태그의 관리를 어떻게 할 것인가? 
+    // 태그 스택 뷰 - 태그의 관리를 어떻게 할 것인가?
     private lazy var tagScrollView: UIScrollView = {
         let scrollView = UIScrollView()
         scrollView.backgroundColor = .systemTeal // 테스트용 색상
@@ -76,8 +77,51 @@ final class DiaryEditViewController: UIViewController {
         return button
     }()
     
-    // 음악 검색 버튼과 음악 제목 레이블
-    // 위치 검색 버튼과 위치 레이블
+    private lazy var musicStackView: UIStackView = {
+        let stackView = UIStackView()
+        stackView.axis = .horizontal
+        stackView.backgroundColor = .systemIndigo // 테스트용 색상
+        stackView.distribution = .equalSpacing
+        stackView.spacing = 16
+        return stackView
+    }()
+    
+    private lazy var addMusicButton: UIButton = {
+        let button = UIButton()
+        button.backgroundColor = .black // 테스트용 색상..?
+        button.layer.cornerRadius = 8
+        button.setImage(UIImage(systemName: "music.note"), for: .normal)
+        return button
+    }()
+    
+    private lazy var musicInfoLabel: UILabel = {
+        let label = UILabel()
+        label.text = "지금 이 음악은 뭘까요?"
+        return label
+    }()
+    
+    private lazy var locationStackView: UIStackView = {
+        let stackView = UIStackView()
+        stackView.axis = .horizontal
+        stackView.backgroundColor = .systemOrange
+        stackView.distribution = .equalSpacing
+        stackView.spacing = 16
+        return stackView
+    }()
+    
+    private lazy var addlocationButton: UIButton = {
+        let button = UIButton()
+        button.backgroundColor = .black // 테스트용 색상..?
+        button.layer.cornerRadius = 8
+        button.setImage(UIImage(systemName: "location.fill"), for: .normal)
+        return button
+    }()
+    
+    private lazy var locationInfoLabel: UILabel = {
+        let label = UILabel()
+        label.text = "여기는 어디인가요?"
+        return label
+    }()
     
     init(diary: DiaryDetail?) {
         super.init(nibName: nil, bundle: nil)
@@ -135,8 +179,19 @@ final class DiaryEditViewController: UIViewController {
         tagScrollView.snp.makeConstraints {
             $0.height.equalTo(30)
         }
-        
         setupTagScrollView()
+        
+        contentsStackView.addArrangedSubview(musicStackView)
+        musicStackView.snp.makeConstraints {
+            $0.height.equalTo(50)
+        }
+        setupMusicStackView()
+        
+        contentsStackView.addArrangedSubview(locationStackView)
+        locationStackView.snp.makeConstraints {
+            $0.height.equalTo(50)
+        }
+        setupLocationStackView()
     }
     
     private func setupTagScrollView() {
@@ -146,7 +201,23 @@ final class DiaryEditViewController: UIViewController {
             $0.height.equalTo(tagScrollView)
         }
         
-        
+        tagStackView.addArrangedSubview(addTagButton)
+    }
+    
+    private func setupMusicStackView() {
+        musicStackView.addArrangedSubview(addMusicButton)
+        addMusicButton.snp.makeConstraints {
+            $0.width.equalTo(50)
+        }
+        musicStackView.addArrangedSubview(musicInfoLabel)
+    }
+    
+    private func setupLocationStackView() {
+        locationStackView.addArrangedSubview(addlocationButton)
+        addlocationButton.snp.makeConstraints {
+            $0.width.equalTo(50)
+        }
+        locationStackView.addArrangedSubview(locationInfoLabel)
     }
 }
 
