@@ -8,6 +8,7 @@
 import Foundation
 
 struct DiaryDetailDTO: Decodable {
+    //TODO: MusicInfo, Location 추가 및 수정
     let id: String
     let title: String
     let tags: [String]
