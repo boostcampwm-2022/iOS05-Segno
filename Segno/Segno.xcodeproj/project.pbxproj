@@ -624,7 +624,7 @@
 				CODE_SIGN_ENTITLEMENTS = Segno/Segno.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = PN5JFN8NYT;
+				DEVELOPMENT_TEAM = H5UNW2D34P;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = Segno/Resource/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
@@ -637,7 +637,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.oldstar.Segno;
+				PRODUCT_BUNDLE_IDENTIFIER = com.oldstar.segnobydalsegno;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
@@ -653,7 +653,7 @@
 				CODE_SIGN_ENTITLEMENTS = Segno/Segno.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = PN5JFN8NYT;
+				DEVELOPMENT_TEAM = H5UNW2D34P;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = Segno/Resource/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
@@ -666,7 +666,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.oldstar.Segno;
+				PRODUCT_BUNDLE_IDENTIFIER = com.oldstar.segnobydalsegno;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
