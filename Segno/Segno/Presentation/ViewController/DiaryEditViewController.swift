@@ -14,7 +14,7 @@ import SnapKit
 final class DiaryEditViewController: UIViewController {
     var diaryID: String? = nil
     
-    // TODO: 뷰로부터 적당한 간격 주기
+    // TODO: 뷰로부터 적당한 간격 주기 (일종의 padding이 필요합니다.)
     private lazy var mainScrollView: UIScrollView = {
         let scrollView = UIScrollView()
         scrollView.backgroundColor = .systemPink // 테스트용 색상
@@ -123,6 +123,16 @@ final class DiaryEditViewController: UIViewController {
         return label
     }()
     
+//    private lazy var cancelButton: UIBarButtonItem = {
+//        let barButton = UIBarButtonItem(barButtonSystemItem: .cancel, target: self, action: nil)
+//        return barButton
+//    }()
+//
+//    private lazy var saveButton: UIBarButtonItem = {
+//        let barButton = UIBarButtonItem(barButtonSystemItem: .save, target: self, action: nil)
+//        return barButton
+//    }()
+    
     init(diary: DiaryDetail?) {
         super.init(nibName: nil, bundle: nil)
         
@@ -139,10 +149,16 @@ final class DiaryEditViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+//        setupNavigationBar()
         setupView()
     }
     
-    // 내비게이션 바 세팅
+    // TODO: 내비게이션 바 관련 요소는 코디네이터 작업 후 활성화할 계획입니다.
+//    private func setupNavigationBar() {
+//        navigationController?.title = "일기 작성"
+//        navigationItem.leftBarButtonItem = cancelButton
+//        navigationItem.rightBarButtonItem = saveButton
+//    }
     
     private func setupView() {
         view.addSubview(mainScrollView)
