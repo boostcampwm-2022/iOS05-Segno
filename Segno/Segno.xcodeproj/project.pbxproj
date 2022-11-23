@@ -60,6 +60,7 @@
 		988414DB2923606B007C9132 /* DiaryListUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 988414DA2923606B007C9132 /* DiaryListUseCase.swift */; };
 		98B5263E292CA46C00446413 /* TagView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98B5263D292CA46C00446413 /* TagView.swift */; };
 		98B52640292CB92900446413 /* MusicContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98B5263F292CB92900446413 /* MusicContentView.swift */; };
+		98F5AD2A292DDDEB00E53E25 /* LocationContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98F5AD29292DDDEB00E53E25 /* LocationContentView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -113,6 +114,7 @@
 		988414DA2923606B007C9132 /* DiaryListUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiaryListUseCase.swift; sourceTree = "<group>"; };
 		98B5263D292CA46C00446413 /* TagView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TagView.swift; sourceTree = "<group>"; };
 		98B5263F292CB92900446413 /* MusicContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MusicContentView.swift; sourceTree = "<group>"; };
+		98F5AD29292DDDEB00E53E25 /* LocationContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationContentView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -270,6 +272,7 @@
 				66F0D7ED2925FF8B0074872E /* DiaryCell.swift */,
 				98B5263D292CA46C00446413 /* TagView.swift */,
 				98B5263F292CB92900446413 /* MusicContentView.swift */,
+				98F5AD29292DDDEB00E53E25 /* LocationContentView.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -451,6 +454,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				98F5AD2A292DDDEB00E53E25 /* LocationContentView.swift in Sources */,
 				4F4E0D3E2924B925005ABA8F /* LoginRepository.swift in Sources */,
 				4F9A00212922338E007D9057 /* AppDelegate.swift in Sources */,
 				66F0D7EE2925FF8B0074872E /* DiaryCell.swift in Sources */,

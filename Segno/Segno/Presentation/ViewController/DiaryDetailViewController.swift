@@ -84,6 +84,12 @@ final class DiaryDetailViewController: UIViewController {
         return musicContentView
     }()
     
+    private let locationContentView: LocationContentView = {
+        let locationContentView = LocationContentView()
+        locationContentView.backgroundColor = .orange
+        return locationContentView
+    }()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -98,7 +104,7 @@ final class DiaryDetailViewController: UIViewController {
     private func setupLayout() {
         view.addSubview(scrollView)
         scrollView.addSubview(stackView)
-        [dateLabel, titleLabel, tagScrollView, imageView, textView, musicContentView].forEach {
+        [dateLabel, titleLabel, tagScrollView, imageView, textView, musicContentView, locationContentView].forEach {
             stackView.addArrangedSubview($0)
         }
         tagScrollView.addSubview(tagStackView)
@@ -133,10 +139,15 @@ final class DiaryDetailViewController: UIViewController {
         textView.delegate = self
         textView.snp.makeConstraints {
             $0.width.equalTo(view.snp.width)
-            $0.height.equalTo(100)
+            $0.height.equalTo(200)
         }
         
         musicContentView.snp.makeConstraints {
+            $0.width.equalTo(view.snp.width)
+            $0.height.equalTo(50)
+        }
+        
+        locationContentView.snp.makeConstraints {
             $0.width.equalTo(view.snp.width)
             $0.height.equalTo(50)
         }
@@ -153,6 +164,7 @@ final class DiaryDetailViewController: UIViewController {
             tagViews.append($0)
         }
         musicContentView.setMusic(title: "Comedy", artist: "Gen Hoshino")
+        locationContentView.setLocation(location: "경기도 성남시 분당구")
     }
     
     
