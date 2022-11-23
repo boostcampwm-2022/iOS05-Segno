@@ -152,7 +152,7 @@ final class DiaryDetailViewController: UIViewController {
         [tagView1, tagView2, tagView3].forEach {
             tagViews.append($0)
         }
-        musicContentView.setMusic(title: "Gen Hoshino", artist: "Comedy")
+        musicContentView.setMusic(title: "Comedy", artist: "Gen Hoshino")
     }
     
     

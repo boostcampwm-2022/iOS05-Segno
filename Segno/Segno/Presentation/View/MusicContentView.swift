@@ -28,6 +28,13 @@ final class MusicContentView: UIView {
         return label
     }()
     
+    private let playButton: UIButton = {
+        let button = UIButton()
+        button.setImage(UIImage(systemName: "play.fill"), for: .normal)
+        button.tintColor = .white
+        return button
+    }()
+    
     override init(frame: CGRect) {
         super.init(frame: frame)
         
@@ -39,7 +46,7 @@ final class MusicContentView: UIView {
     }
     
     private func setLayout() {
-        [albumArtImageView, titleLabel, artistLabel].forEach {
+        [albumArtImageView, titleLabel, artistLabel, playButton].forEach {
             addSubview($0)
         }
         
@@ -57,6 +64,12 @@ final class MusicContentView: UIView {
         artistLabel.snp.makeConstraints {
             $0.centerY.equalToSuperview()
             $0.leading.equalTo(titleLabel.snp.trailing).offset(10)
+        }
+        
+        playButton.snp.makeConstraints {
+            $0.centerY.equalToSuperview()
+            $0.width.height.equalTo(30)
+            $0.trailing.equalToSuperview().inset(10)
         }
     }
     
