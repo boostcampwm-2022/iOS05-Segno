@@ -10,6 +10,13 @@ import UIKit
 import SnapKit
 
 final class MusicContentView: UIView {
+    private enum Metric {
+        static let fontSize: CGFloat = 16
+        static let spacing: CGFloat = 10
+        static let albumArtImageViewSize: CGFloat = 30
+        static let playButtonSize: CGFloat = 30
+    }
+    
     private lazy var albumArtImageView: UIImageView = {
         let imageView = UIImageView()
         imageView.backgroundColor = .systemMint
@@ -18,13 +25,13 @@ final class MusicContentView: UIView {
     
     private lazy var titleLabel: UILabel = {
         let label = UILabel()
-        label.font = .systemFont(ofSize: 16, weight: .bold)
+        label.font = .appFont(.surround, size: Metric.fontSize)
         return label
     }()
     
     private lazy var artistLabel: UILabel = {
         let label = UILabel()
-        label.font = .systemFont(ofSize: 16)
+        label.font = .appFont(.surroundAir, size: Metric.fontSize)
         return label
     }()
     
@@ -51,25 +58,25 @@ final class MusicContentView: UIView {
         }
         
         albumArtImageView.snp.makeConstraints {
-            $0.width.height.equalTo(30)
+            $0.width.height.equalTo(Metric.albumArtImageViewSize)
             $0.centerY.equalToSuperview()
-            $0.leading.equalTo(16)
+            $0.leading.equalTo(Metric.spacing)
         }
         
         titleLabel.snp.makeConstraints {
             $0.centerY.equalToSuperview()
-            $0.leading.equalTo(albumArtImageView.snp.trailing).offset(10)
+            $0.leading.equalTo(albumArtImageView.snp.trailing).offset(Metric.spacing)
         }
         
         artistLabel.snp.makeConstraints {
             $0.centerY.equalToSuperview()
-            $0.leading.equalTo(titleLabel.snp.trailing).offset(10)
+            $0.leading.equalTo(titleLabel.snp.trailing).offset(Metric.spacing)
         }
         
         playButton.snp.makeConstraints {
             $0.centerY.equalToSuperview()
-            $0.width.height.equalTo(30)
-            $0.trailing.equalToSuperview().inset(10)
+            $0.width.height.equalTo(Metric.playButtonSize)
+            $0.trailing.equalToSuperview().inset(Metric.spacing)
         }
     }
     

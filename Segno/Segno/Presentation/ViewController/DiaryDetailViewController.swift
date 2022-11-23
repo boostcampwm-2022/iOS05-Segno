@@ -14,6 +14,15 @@ import SnapKit
 final class DiaryDetailViewController: UIViewController {
     private enum Metric {
         static let textViewPlaceHolder: String = "내용을 입력하세요."
+        static let stackViewSpacing: CGFloat = 10
+        static let dateFontSize: CGFloat = 17
+        static let titleFontSize: CGFloat = 20
+        static let textViewFontSize: CGFloat = 16
+        static let textViewHeight: CGFloat = 100
+        static let textViewInset: CGFloat = 16
+        static let tagScrollViewHeight: CGFloat = 30
+        static let musicContentViewHeight: CGFloat = 30
+        static let locationContentViewHeight: CGFloat = 30
     }
     
     let disposeBag = DisposeBag()
@@ -21,43 +30,37 @@ final class DiaryDetailViewController: UIViewController {
     
     private lazy var scrollView: UIScrollView = {
         let scrollView = UIScrollView()
-        scrollView.backgroundColor = .systemPink
         return scrollView
     }()
     
     private lazy var stackView: UIStackView = {
         let stackView = UIStackView()
         stackView.axis = .vertical
-        stackView.backgroundColor = .systemYellow
-        stackView.spacing = 10
+        stackView.spacing = Metric.stackViewSpacing
         return stackView
     }()
     
     private lazy var dateLabel: UILabel = {
         let label = UILabel()
-        label.font = .systemFont(ofSize: 20, weight: .light)
-        label.backgroundColor = #colorLiteral(red: 0.2745098174, green: 0.4862745106, blue: 0.1411764771, alpha: 1)
+        label.font = .appFont(.surroundAir, size: Metric.dateFontSize)
         return label
     }()
     
     private lazy var titleLabel: UILabel = {
         let label = UILabel()
-        label.font = .systemFont(ofSize: 30, weight: .bold)
-        label.backgroundColor = #colorLiteral(red: 0.3647058904, green: 0.06666667014, blue: 0.9686274529, alpha: 1)
+        label.font = .appFont(.surround, size: Metric.titleFontSize)
         return label
     }()
     
     private lazy var tagScrollView: UIScrollView = {
         let scrollView = UIScrollView()
-        scrollView.backgroundColor = .systemMint
         return scrollView
     }()
     
     private lazy var tagStackView: UIStackView = {
         let stackView = UIStackView()
         stackView.axis = .horizontal
-        stackView.backgroundColor = .systemBrown
-        stackView.spacing = 20
+        stackView.spacing = Metric.stackViewSpacing
         return stackView
     }()
     
@@ -71,22 +74,21 @@ final class DiaryDetailViewController: UIViewController {
     
     private lazy var textView: UITextView = {
         let textView = UITextView()
-        textView.backgroundColor = .systemGray5
+        textView.backgroundColor = .appColor(.grey1)
         textView.text = Metric.textViewPlaceHolder
-        textView.textColor = .gray
-        textView.textContainerInset = UIEdgeInsets(top: 16, left: 16, bottom: 16, right: 16)
+        textView.font = .appFont(.shiningStar, size: Metric.textViewFontSize)
+        textView.textColor = .appColor(.grey2)
+        textView.textContainerInset = UIEdgeInsets(top: Metric.textViewInset, left: Metric.textViewInset, bottom: Metric.textViewInset, right: Metric.textViewInset)
         return textView
     }()
     
     private lazy var musicContentView: MusicContentView = {
         let musicContentView = MusicContentView()
-        musicContentView.backgroundColor = .systemGreen
         return musicContentView
     }()
     
     private lazy var locationContentView: LocationContentView = {
         let locationContentView = LocationContentView()
-        locationContentView.backgroundColor = .orange
         return locationContentView
     }()
     
@@ -102,6 +104,7 @@ final class DiaryDetailViewController: UIViewController {
     }
     
     private func setupLayout() {
+        view.backgroundColor = .appColor(.background)
         view.addSubview(scrollView)
         scrollView.addSubview(stackView)
         [dateLabel, titleLabel, tagScrollView, imageView, textView, musicContentView, locationContentView].forEach {
@@ -123,7 +126,7 @@ final class DiaryDetailViewController: UIViewController {
         }
         
         tagScrollView.snp.makeConstraints {
-            $0.height.equalTo(30)
+            $0.height.equalTo(Metric.tagScrollViewHeight)
         }
         
         tagStackView.snp.makeConstraints {
@@ -139,17 +142,17 @@ final class DiaryDetailViewController: UIViewController {
         textView.delegate = self
         textView.snp.makeConstraints {
             $0.width.equalTo(view.snp.width)
-            $0.height.equalTo(100)
+            $0.height.equalTo(Metric.textViewHeight)
         }
         
         musicContentView.snp.makeConstraints {
             $0.width.equalTo(view.snp.width)
-            $0.height.equalTo(50)
+            $0.height.equalTo(Metric.musicContentViewHeight)
         }
         
         locationContentView.snp.makeConstraints {
             $0.width.equalTo(view.snp.width)
-            $0.height.equalTo(50)
+            $0.height.equalTo(Metric.locationContentViewHeight)
         }
     }
     
@@ -174,14 +177,14 @@ extension DiaryDetailViewController: UITextViewDelegate {
     func textViewDidBeginEditing(_ textView: UITextView) {
         if textView.text == Metric.textViewPlaceHolder {
             textView.text = nil
-            textView.textColor = .black
+            textView.textColor = .appColor(.black)
         }
     }
     
     func textViewDidEndEditing(_ textView: UITextView) {
         if textView.text.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty {
             textView.text = Metric.textViewPlaceHolder
-            textView.textColor = .gray
+            textView.textColor = .appColor(.grey2)
         }
     }
 }
