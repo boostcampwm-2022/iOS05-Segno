@@ -8,7 +8,6 @@
 import AuthenticationServices
 import UIKit
 
-import GoogleSignIn
 import RxCocoa
 import RxSwift
 import SnapKit
@@ -115,11 +114,13 @@ final class LoginViewController: UIViewController {
         setupView()
         setupLayout()
         setupRx()
+        
+        subscribeLoginResult()
     }
     
     // MARK: - Private
     
-    private func testSubscribe() {
+    private func subscribeLoginResult() {
         viewModel.isLoginSucceeded
             .subscribe(onNext: { [weak self] result in
                 DispatchQueue.main.async {
@@ -210,37 +211,16 @@ final class LoginViewController: UIViewController {
     
     // MARK: - Public
     private func googleButtonTapped() {
-        let signInConfig = GIDConfiguration.init(clientID: "880830660858-2niv4cb94c63omf91uej9f23o7j15n8r.apps.googleusercontent.com")
-        
-        GIDSignIn.sharedInstance.signIn(with: signInConfig, presenting: self) { user, error in
-            guard error == nil else { return }
-            guard let user = user else { return }
-            
-            if let userId = user.userID,                  // For client-side use only!
-               let idToken = user.authentication.idToken, // Safe to send to the server
-               let fullName = user.profile?.name,
-               let givenName = user.profile?.givenName,
-               let familyName = user.profile?.familyName,
-               let email = user.profile?.email {
-                print("Token : \(idToken)")
-                print("User ID : \(userId)")
-                print("User Email : \(email)")
-                print("User Name : \((fullName))")
-                self.viewModel.signIn(withGoogle: email)
-            } else {
-                print("Error : User Data Not Found")
-            }
-        }
+        viewModel.performGoogleLogin(on: self)
     }
     
     private func appleButtonTapped() {
-        viewModel.setPresentationContextProvider(self)
-        viewModel.performAppleLogin()
+        viewModel.performAppleLogin(on: self)
     }
 }
 
 extension LoginViewController: ASAuthorizationControllerPresentationContextProviding {
     func presentationAnchor(for controller: ASAuthorizationController) -> ASPresentationAnchor {
-        return self.view.window ?? UIWindow()
+        return view.window ?? UIWindow()
     }
 }

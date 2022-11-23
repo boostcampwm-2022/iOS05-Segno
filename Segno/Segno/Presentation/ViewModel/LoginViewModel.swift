@@ -19,29 +19,15 @@ final class LoginViewModel {
     init(useCase: LoginUseCase = LoginUseCaseImpl()) {
         self.useCase = useCase
         
-        bindAppleCredential()
+        bindLoginResult()
     }
     
-    func setPresentationContextProvider(_ object: ASAuthorizationControllerPresentationContextProviding) {
-        session.setPresentationContextProvider(object)
-    }
-    
-    func performAppleLogin() {
-        session.performAppleLogin()
-    }
-    
-    private func bindAppleCredential() {
+    private func bindLoginResult() {
         session.appleCredentialResult
             .subscribe(onNext: { result in
                 switch result {
                 case .success(let credential):
-                    print(credential.fullName?.givenName ?? "NO NAME")
-                    print(credential.email ?? "NO EMAIL")
-                    print(credential.user)
-                    
-                    guard let email = self.parseEmailFromJWT(credential.identityToken) else {
-                        return
-                    }
+                    guard let email = self.parseEmailFromJWT(credential.identityToken) else { return }
                     
                     self.signIn(withApple: email)
                 case .failure(let error):
@@ -49,23 +35,41 @@ final class LoginViewModel {
                 }
             })
             .disposed(by: disposeBag)
+        
+        session.googleLoginResult
+            .subscribe(onNext: { result in
+                switch result {
+                case .success(let email):
+                    self.signIn(withGoogle: email)
+                case .failure(let error):
+                    print(error.localizedDescription)
+                }
+            })
+            .disposed(by: disposeBag)
+    }
+    
+    func performAppleLogin(on presenter: ASAuthorizationControllerPresentationContextProviding) {
+        session.performAppleLogin(on: presenter)
+    }
+    
+    func performGoogleLogin(on presenter: UIViewController) {
+        session.performGoogleLogin(presenter)
     }
     
     func signIn(withApple email: String) {
         useCase.sendLoginRequest(withApple: email)
-                .subscribe(onSuccess: { [weak self] _ in
-                    self?.isLoginSucceeded.onNext(true)
+                .subscribe(onSuccess: { [weak self] result in
+                    self?.isLoginSucceeded.onNext(result)
                 }, onFailure: { [weak self] _ in
                     self?.isLoginSucceeded.onNext(false)
                 })
                 .disposed(by: disposeBag)
     }
     
-    // TODO: 서버 이슈 해결된 뒤, 구글 로그인과 애플 로그인 함수 합치기
     func signIn(withGoogle email: String) {
         useCase.sendLoginRequest(withGoogle: email)
-            .subscribe(onSuccess: { [weak self] _ in
-                self?.isLoginSucceeded.onNext(true)
+            .subscribe(onSuccess: { [weak self] result in
+                self?.isLoginSucceeded.onNext(result)
             }, onFailure: { [weak self] _ in
                 self?.isLoginSucceeded.onNext(false)
             })

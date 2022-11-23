@@ -8,8 +8,8 @@
 import RxSwift
 
 protocol LoginUseCase {
-    func sendLoginRequest(withApple email: String) -> Single<String>
-    func sendLoginRequest(withGoogle email: String) -> Single<String>
+    func sendLoginRequest(withApple email: String) -> Single<Bool>
+    func sendLoginRequest(withGoogle email: String) -> Single<Bool>
 }
 
 final class LoginUseCaseImpl: LoginUseCase {
@@ -28,21 +28,27 @@ final class LoginUseCaseImpl: LoginUseCase {
         self.localUtilityRepository = localUtilityRepository
     }
 
-    func sendLoginRequest(withApple email: String) -> Single<String> {
+    func sendLoginRequest(withApple email: String) -> Single<Bool> {
         return repository.sendLoginRequest(withApple: email)
             .map {
-                let tokenString = $0.token ?? "음슴"
+                guard let tokenString = $0.token else {
+                    return false
+                }
+                
                 print(tokenString)
-                return tokenString
+                return true
             }
     }
     
-    func sendLoginRequest(withGoogle email: String) -> Single<String> {
+    func sendLoginRequest(withGoogle email: String) -> Single<Bool> {
         return repository.sendLoginRequest(withGoogle: email)
             .map {
-                let tokenString = $0.token ?? "음슴"
+                guard let tokenString = $0.token else {
+                    return false
+                }
+                
                 print(tokenString)
-                return tokenString
+                return true
             }
     }
 }
