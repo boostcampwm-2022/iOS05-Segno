@@ -26,6 +26,7 @@
 		4F9A001F29222C97007D9057 /* NetworkError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F9A001E29222C97007D9057 /* NetworkError.swift */; };
 		4F9A00202922337F007D9057 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F317780291BE4710019BDFC /* LoginViewController.swift */; };
 		4F9A00212922338E007D9057 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F31777C291BE4710019BDFC /* AppDelegate.swift */; };
+		4FA05B97292DFCCC00AFB020 /* DiaryEditViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FA05B96292DFCCC00AFB020 /* DiaryEditViewController.swift */; };
 		4FA324262923600C00DB04D5 /* DiaryListDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FA324252923600C00DB04D5 /* DiaryListDTO.swift */; };
 		4FA32428292363AB00DB04D5 /* DiaryRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FA32427292363AA00DB04D5 /* DiaryRepository.swift */; };
 		4FA3242B2923646F00DB04D5 /* DiaryListItemEndpoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FA3242A2923646F00DB04D5 /* DiaryListItemEndpoint.swift */; };
@@ -81,6 +82,7 @@
 		4F9A001A292227D7007D9057 /* NetworkManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkManager.swift; sourceTree = "<group>"; };
 		4F9A001C29222B1B007D9057 /* Endpoint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Endpoint.swift; sourceTree = "<group>"; };
 		4F9A001E29222C97007D9057 /* NetworkError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkError.swift; sourceTree = "<group>"; };
+		4FA05B96292DFCCC00AFB020 /* DiaryEditViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiaryEditViewController.swift; sourceTree = "<group>"; };
 		4FA324252923600C00DB04D5 /* DiaryListDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiaryListDTO.swift; sourceTree = "<group>"; };
 		4FA32427292363AA00DB04D5 /* DiaryRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiaryRepository.swift; sourceTree = "<group>"; };
 		4FA3242A2923646F00DB04D5 /* DiaryListItemEndpoint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiaryListItemEndpoint.swift; sourceTree = "<group>"; };
@@ -264,6 +266,7 @@
 				4F317780291BE4710019BDFC /* LoginViewController.swift */,
 				666E6F8B291CFAC200CECD4B /* DiaryCollectionViewController.swift */,
 				982A3698292C905300FDC6CF /* DiaryDetailViewController.swift */,
+				4FA05B96292DFCCC00AFB020 /* DiaryEditViewController.swift */,
 				666E6F8D291CFADD00CECD4B /* MyPageViewController.swift */,
 			);
 			path = ViewController;
@@ -476,6 +479,7 @@
 				666E6F81291CF49E00CECD4B /* LoginCoordinator.swift in Sources */,
 				666E6F85291CF4AD00CECD4B /* MyPageCoordinator.swift in Sources */,
 				4F4E0D79292522B7005ABA8F /* BaseURL.swift in Sources */,
+				4FA05B97292DFCCC00AFB020 /* DiaryEditViewController.swift in Sources */,
 				988414DB2923606B007C9132 /* DiaryListUseCase.swift in Sources */,
 				4FCAC5C2292B5C9000BF9CDD /* LoginSession.swift in Sources */,
 				666E6F7D291CF45600CECD4B /* Coordinator.swift in Sources */,
