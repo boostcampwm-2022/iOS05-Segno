@@ -10,25 +10,25 @@ import UIKit
 import SnapKit
 
 final class MusicContentView: UIView {
-    private let albumArtImageView: UIImageView = {
+    private lazy var albumArtImageView: UIImageView = {
         let imageView = UIImageView()
         imageView.backgroundColor = .systemMint
         return imageView
     }()
     
-    private let titleLabel: UILabel = {
+    private lazy var titleLabel: UILabel = {
         let label = UILabel()
         label.font = .systemFont(ofSize: 16, weight: .bold)
         return label
     }()
     
-    private let artistLabel: UILabel = {
+    private lazy var artistLabel: UILabel = {
         let label = UILabel()
         label.font = .systemFont(ofSize: 16)
         return label
     }()
     
-    private let playButton: UIButton = {
+    private lazy var playButton: UIButton = {
         let button = UIButton()
         button.setImage(UIImage(systemName: "play.fill"), for: .normal)
         button.tintColor = .white

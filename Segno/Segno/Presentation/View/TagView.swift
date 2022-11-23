@@ -10,7 +10,7 @@ import SnapKit
 
 final class TagView: UIView {
 
-    private let tagLabel: UILabel = {
+    private lazy var tagLabel: UILabel = {
         let label = UILabel()
         label.font = .systemFont(ofSize: 16)
         return label

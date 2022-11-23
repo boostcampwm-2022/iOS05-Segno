@@ -11,20 +11,20 @@ import SnapKit
 
 final class LocationContentView: UIView {
     
-    private let titleLabel: UILabel = {
+    private lazy var titleLabel: UILabel = {
         let label = UILabel()
         label.font = .systemFont(ofSize: 16, weight: .bold)
         label.text = "위치"
         return label
     }()
     
-    private let locationLabel: UILabel = {
+    private lazy var locationLabel: UILabel = {
         let label = UILabel()
         label.font = .systemFont(ofSize: 16)
         return label
     }()
     
-    private let mapButton: UIButton = {
+    private lazy var mapButton: UIButton = {
         let button = UIButton()
         button.setImage(UIImage(systemName: "map.fill"), for: .normal)
         button.tintColor = .white
