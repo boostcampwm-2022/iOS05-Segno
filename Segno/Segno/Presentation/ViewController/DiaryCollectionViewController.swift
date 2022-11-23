@@ -11,6 +11,10 @@ import RxCocoa
 import RxSwift
 import SnapKit
 
+protocol DiaryCollectionViewDelegate: AnyObject {
+    func diaryCellSelected(id: String)
+}
+
 final class DiaryCollectionViewController: UIViewController {
     typealias DataSource = UICollectionViewDiffableDataSource<Section, DiaryListItem>
     typealias Snapshot = NSDiffableDataSourceSnapshot<Section, DiaryListItem>
@@ -34,6 +38,7 @@ final class DiaryCollectionViewController: UIViewController {
     private let viewModel: DiaryCollectionViewModel
     private var dataSource: DataSource?
     private var diaryCells: [DiaryListItem] = []
+    weak var delegate: DiaryCollectionViewDelegate?
     
     lazy var searchBar: UISearchBar = {
         let bar = UISearchBar()
@@ -179,6 +184,12 @@ extension DiaryCollectionViewController {
         snapshot.appendItems(models)
         
         dataSource?.apply(snapshot)
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        guard let id = dataSource?.itemIdentifier(for: indexPath)?.id else { return }
+        
+        delegate?.diaryCellSelected(id: id)
     }
 }
 

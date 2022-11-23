@@ -17,6 +17,16 @@ final class DiaryCoordinator: Coordinator {
     
     func start() {
         let vc = DiaryCollectionViewController()
+        vc.delegate = self
         self.navigationController.pushViewController(vc, animated: true)
+    }
+}
+
+extension DiaryCoordinator: DiaryCollectionViewDelegate {
+    func diaryCellSelected(id: String) {
+        // TODO: id 사용하여 DiaryDetailViewController에 전달하기
+        // ex) let vc = DiaryDetailViewController(viewModel: DiaryDetailViewModel(itemIdentifier: id))
+        let vc = DiaryDetailViewController()
+        navigationController.pushViewController(vc, animated: true)
     }
 }
