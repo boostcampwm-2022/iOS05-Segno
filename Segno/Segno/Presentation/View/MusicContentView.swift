@@ -14,12 +14,14 @@ final class MusicContentView: UIView {
         static let fontSize: CGFloat = 16
         static let spacing: CGFloat = 10
         static let albumArtImageViewSize: CGFloat = 30
+        static let albumArtCornerRadius: CGFloat = 5
         static let playButtonSize: CGFloat = 30
     }
     
     private lazy var albumArtImageView: UIImageView = {
         let imageView = UIImageView()
         imageView.backgroundColor = .systemMint
+        imageView.layer.cornerRadius = Metric.albumArtCornerRadius
         return imageView
     }()
     
