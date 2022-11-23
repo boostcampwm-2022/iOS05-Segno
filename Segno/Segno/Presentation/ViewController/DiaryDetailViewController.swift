@@ -26,8 +26,8 @@ final class DiaryDetailViewController: UIViewController {
         static let locationContentViewHeight: CGFloat = 30
     }
     
-    let disposeBag = DisposeBag()
-//    private let viewModel: DiaryDetailViewModel
+    private let disposeBag = DisposeBag()
+    private let viewModel: DiaryDetailViewModel
     
     private lazy var scrollView: UIScrollView = {
         let scrollView = UIScrollView()
@@ -93,11 +93,22 @@ final class DiaryDetailViewController: UIViewController {
         return locationContentView
     }()
     
+    init(viewModel: DiaryDetailViewModel) {
+        self.viewModel = viewModel
+        
+        super.init(nibName: nil, bundle: nil)
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        setTemporaryData()
+        
         setupLayout()
+        bindDiaryItem()
+        getDiary()
     }
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
@@ -108,7 +119,7 @@ final class DiaryDetailViewController: UIViewController {
         view.backgroundColor = .appColor(.background)
         view.addSubview(scrollView)
         scrollView.addSubview(stackView)
-
+        
         scrollView.snp.makeConstraints {
             $0.edges.equalToSuperview()
         }
@@ -126,7 +137,7 @@ final class DiaryDetailViewController: UIViewController {
         tagViews.forEach {
             tagStackView.addArrangedSubview($0)
         }
-                
+        
         
         tagScrollView.snp.makeConstraints {
             $0.height.equalTo(Metric.tagScrollViewHeight)
@@ -159,21 +170,57 @@ final class DiaryDetailViewController: UIViewController {
         }
     }
     
-    private func setTemporaryData() {
-        dateLabel.text = "11/22 14:54"
-        titleLabel.text = "서현에서"
+    private func bindDiaryItem() {
         
-        let tagView1 = TagView(tagTitle: "음악")
-        let tagView2 = TagView(tagTitle: "휴식")
-        let tagView3 = TagView(tagTitle: "코딩코딩")
-        [tagView1, tagView2, tagView3].forEach {
-            tagViews.append($0)
-        }
-        musicContentView.setMusic(title: "Comedy", artist: "Gen Hoshino")
-        locationContentView.setLocation(location: "경기도 성남시 분당구")
+        dateLabel.text = "11/22 14:54"
+        
+        viewModel.titleObservable
+            .observe(on: MainScheduler.instance)
+            .bind(to: titleLabel.rx.text)
+            .disposed(by: disposeBag)
+        
+        viewModel.tagsObservable
+            .observe(on: MainScheduler.instance)
+            .subscribe(onNext: { [weak self] tags in
+                tags.forEach { tagTitle in
+                    let tagView = TagView(tagTitle: tagTitle)
+                    self?.tagViews.append(tagView)
+                }
+            })
+            .disposed(by: disposeBag)
+        
+        viewModel.imagePathObservable
+            .observe(on: MainScheduler.instance)
+            .subscribe(onNext: { [weak self] imagePath in
+                self?.imageView.image = UIImage(named: imagePath)
+            })
+            .disposed(by: disposeBag)
+        
+        viewModel.bodyObservable
+            .observe(on: MainScheduler.instance)
+            .bind(to: textView.rx.text)
+            .disposed(by: disposeBag)
+        
+        viewModel.musicObservable
+            .compactMap { $0 }
+            .observe(on: MainScheduler.instance)
+            .subscribe(onNext: { [weak self] musicInfo in
+                self?.musicContentView.setMusic(title: musicInfo.title, artist: musicInfo.artist, imageURL: musicInfo.imageURL)
+            })
+            .disposed(by: disposeBag)
+        
+        viewModel.locationObservable
+            .compactMap { $0 }
+            .observe(on: MainScheduler.instance)
+            .subscribe(onNext: { [weak self] location in
+                self?.locationContentView.setLocation(location: location)
+            })
+            .disposed(by: disposeBag)
     }
     
-    
+    private func getDiary() {
+        viewModel.getDiary()
+    }
 }
 
 extension DiaryDetailViewController: UITextViewDelegate {
@@ -194,7 +241,7 @@ extension DiaryDetailViewController: UITextViewDelegate {
 
 enum DeviceType {
     case iPhone14Pro
-
+    
     func name() -> String {
         switch self {
         case .iPhone14Pro:
@@ -206,18 +253,18 @@ enum DeviceType {
 #if canImport(SwiftUI) && DEBUG
 import SwiftUI
 extension UIViewController {
-
+    
     private struct Preview: UIViewControllerRepresentable {
         let viewController: UIViewController
-
+        
         func makeUIViewController(context: Context) -> UIViewController {
             return viewController
         }
-
+        
         func updateUIViewController(_ uiViewController: UIViewController, context: Context) {
         }
     }
-
+    
     func showPreview(_ deviceType: DeviceType = .iPhone14Pro) -> some View {
         Preview(viewController: self).previewDevice(PreviewDevice(rawValue: deviceType.name()))
     }
@@ -229,7 +276,7 @@ import SwiftUI
 
 struct ViewController_Preview: PreviewProvider {
     static var previews: some View {
-        DiaryDetailViewController().showPreview(.iPhone14Pro)
+        DiaryDetailViewController(viewModel: DiaryDetailViewModel(itemIdentifier: "0")).showPreview(.iPhone14Pro)
     }
 }
 #endif

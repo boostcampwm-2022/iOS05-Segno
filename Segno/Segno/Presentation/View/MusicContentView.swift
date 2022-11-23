@@ -7,6 +7,7 @@
 
 import UIKit
 
+import Kingfisher
 import SnapKit
 
 final class MusicContentView: UIView {
@@ -82,9 +83,10 @@ final class MusicContentView: UIView {
         }
     }
     
-    func setMusic(title: String, artist: String) {
+    func setMusic(title: String, artist: String, imageURL: URL) {
         titleLabel.text = title
         artistLabel.text = artist
+        albumArtImageView.kf.setImage(with: imageURL)
     }
 }
 
