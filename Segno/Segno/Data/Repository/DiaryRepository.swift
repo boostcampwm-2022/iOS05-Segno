@@ -11,6 +11,7 @@ import RxSwift
 
 protocol DiaryRepository {
     func getDiaryListItem() -> Single<DiaryListDTO>
+    func getDiary(id: String) -> Single<DiaryDetailDTO>
 }
 
 final class DiaryRepositoryImpl: DiaryRepository {
@@ -30,5 +31,20 @@ final class DiaryRepositoryImpl: DiaryRepository {
             
             return Disposables.create()
         }
+    }
+    
+    func getDiary(id: String) -> Single<DiaryDetailDTO> {
+        let endpoint = DiaryDetailEndpoint.item(id)
+
+        return NetworkManager.shared.call(endpoint).map {
+            try JSONDecoder().decode(DiaryDetailDTO.self, from: $0)
+        }
+        
+//        // TODO: 추후에 NetworkManager로 변경
+//        return Single.create { observer -> Disposable in
+//            observer(.success(DiaryDetailDTO.example))
+//
+//            return Disposables.create()
+//        }
     }
 }
