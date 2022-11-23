@@ -10,7 +10,9 @@ import SnapKit
 
 final class TagView: UIView {
     private enum Metric {
-        static let tagFontSize: CGFloat = 16
+        static let tagFontSize: CGFloat = 12
+        static let tagInset: CGFloat = 9
+        static let cornerRadius: CGFloat = 15
     }
 
     private lazy var tagLabel: UILabel = {
@@ -33,10 +35,13 @@ final class TagView: UIView {
     private func setupLayout(tagTitle: String) {
         addSubview(tagLabel)
         backgroundColor = .appColor(.color3)
+        layer.cornerRadius = Metric.cornerRadius
+        
         tagLabel.text = tagTitle
         tagLabel.snp.makeConstraints {
-            $0.width.equalTo(self.snp.width)
+            $0.edges.equalToSuperview().inset(Metric.tagInset)
             $0.centerY.equalTo(self.snp.centerY)
         }
+        
     }
 }

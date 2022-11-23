@@ -18,7 +18,7 @@ final class DiaryDetailViewController: UIViewController {
         static let dateFontSize: CGFloat = 17
         static let titleFontSize: CGFloat = 20
         static let textViewFontSize: CGFloat = 16
-        static let textViewHeight: CGFloat = 100
+        static let textViewHeight: CGFloat = 200
         static let textViewInset: CGFloat = 16
         static let tagScrollViewHeight: CGFloat = 30
         static let musicContentViewHeight: CGFloat = 30
@@ -107,15 +107,7 @@ final class DiaryDetailViewController: UIViewController {
         view.backgroundColor = .appColor(.background)
         view.addSubview(scrollView)
         scrollView.addSubview(stackView)
-        [dateLabel, titleLabel, tagScrollView, imageView, textView, musicContentView, locationContentView].forEach {
-            stackView.addArrangedSubview($0)
-        }
-        tagScrollView.addSubview(tagStackView)
-        
-        tagViews.forEach {
-            tagStackView.addArrangedSubview($0)
-        }
-        
+
         scrollView.snp.makeConstraints {
             $0.edges.equalToSuperview()
         }
@@ -124,6 +116,16 @@ final class DiaryDetailViewController: UIViewController {
             $0.edges.equalTo(scrollView)
             $0.width.equalTo(scrollView.snp.width)
         }
+        
+        [dateLabel, titleLabel, tagScrollView, imageView, textView, musicContentView, locationContentView].forEach {
+            stackView.addArrangedSubview($0)
+        }
+        tagScrollView.addSubview(tagStackView)
+        
+        tagViews.forEach {
+            tagStackView.addArrangedSubview($0)
+        }
+                
         
         tagScrollView.snp.makeConstraints {
             $0.height.equalTo(Metric.tagScrollViewHeight)
@@ -157,12 +159,12 @@ final class DiaryDetailViewController: UIViewController {
     }
     
     private func setTemporaryData() {
-        dateLabel.text = "11월 22일 14:54"
+        dateLabel.text = "11/22 14:54"
         titleLabel.text = "서현에서"
         
         let tagView1 = TagView(tagTitle: "음악")
         let tagView2 = TagView(tagTitle: "휴식")
-        let tagView3 = TagView(tagTitle: "강릉 여행")
+        let tagView3 = TagView(tagTitle: "코딩코딩")
         [tagView1, tagView2, tagView3].forEach {
             tagViews.append($0)
         }
