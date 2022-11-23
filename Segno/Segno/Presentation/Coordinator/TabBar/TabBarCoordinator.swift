@@ -8,6 +8,10 @@
 import UIKit
 
 final class TabBarCoordinator: Coordinator {
+    private enum Metric {
+        static let tabBarItemFontSize: CGFloat = 15
+    }
+    
     var navigationController: UINavigationController
     var tabBarController: UITabBarController
     var childCoordinators: [Coordinator] = []
@@ -37,6 +41,9 @@ private extension TabBarCoordinator {
         let tabNavigationController = UINavigationController()
         tabNavigationController.setNavigationBarHidden(false, animated: false)
         tabNavigationController.tabBarItem = self.configureTabBarItem(page: page)
+        tabNavigationController.tabBarItem.setTitleTextAttributes(
+            [NSAttributedString.Key.font: UIFont.appFont(.shiningStar, size: Metric.tabBarItemFontSize)],
+            for: .normal)
         connectTabCoordinator(page: page, to: tabNavigationController)
         return tabNavigationController
     }

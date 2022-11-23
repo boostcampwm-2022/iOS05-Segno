@@ -20,7 +20,14 @@ final class DiaryCollectionViewController: UIViewController {
     }
     
     private enum Metric {
+        static let buttonFontSize: CGFloat = 80
+        static let buttonLabelOffset: CGFloat = 7
+        static let buttonOffset: CGFloat = -20
+        static let buttonRadius: CGFloat = 40
+        static let buttonText: String = "+"
+        static let buttonWidthAndHeight: CGFloat = 80
         static let inset: CGFloat = 20
+        static let navigationTitleSize: CGFloat = 20
     }
     
     let disposeBag = DisposeBag()
@@ -31,6 +38,7 @@ final class DiaryCollectionViewController: UIViewController {
     lazy var searchBar: UISearchBar = {
         let bar = UISearchBar()
         bar.placeholder = "Search Bar Test!"
+        bar.searchTextField.font = .appFont(.shiningStar, size: 20)
         bar.setImage(UIImage(named: "search_back"), for: .search, state: .normal)
         bar.setImage(UIImage(named: "search_cancel"), for: .clear, state: .normal)
         return bar
@@ -41,6 +49,16 @@ final class DiaryCollectionViewController: UIViewController {
         let collectionView = UICollectionView(frame: .zero, collectionViewLayout: layout)
         collectionView.backgroundColor = .appColor(.color1)
         return collectionView
+    }()
+    
+    lazy var appendButton = UIButton()
+    
+    lazy var appendButtonLabel: UILabel = {
+        let label = UILabel()
+        label.font = .appFont(.surroundAir, size: Metric.buttonFontSize)
+        label.text = Metric.buttonText
+        label.textColor = .appColor(.white)
+        return label
     }()
     
     init() {
@@ -66,26 +84,53 @@ final class DiaryCollectionViewController: UIViewController {
     
     private func setupView() {
         view.backgroundColor = .appColor(.background)
+        
+        title = "일기 리스트"
+        navigationController?.navigationBar.titleTextAttributes = [
+            NSAttributedString.Key.font: UIFont.appFont(.surround, size: Metric.navigationTitleSize),
+            NSAttributedString.Key.foregroundColor: UIColor.appColor(.color4) ?? .red]
+        
         diaryCollectionView.delegate = self
+        
+        appendButton.layer.cornerRadius = Metric.buttonRadius
+        appendButton.layer.masksToBounds = true
+        
+        appendButton.setBackgroundColor(.appColor(.color4) ?? .red, for: .normal)
     }
 
     private func setupLayout() {
         [searchBar, diaryCollectionView].forEach {
             view.addSubview($0)
-            
+
             $0.snp.makeConstraints { make in
                 make.width.equalToSuperview()
                 make.centerX.equalTo(view.snp.centerX)
             }
         }
-        
+
         searchBar.snp.makeConstraints { make in
             make.top.equalTo(view.safeAreaLayoutGuide)
         }
-        
+
         diaryCollectionView.snp.makeConstraints { make in
             make.top.equalTo(searchBar.snp.bottom)
             make.bottom.equalTo(view.safeAreaLayoutGuide)
+        }
+        
+        [appendButton, appendButtonLabel].forEach {
+            view.addSubview($0)
+        }
+        
+        appendButton.snp.makeConstraints { make in
+            make.width.equalTo(Metric.buttonWidthAndHeight)
+            make.height.equalTo(Metric.buttonWidthAndHeight)
+            make.bottom.equalTo(view.safeAreaLayoutGuide).offset(Metric.buttonOffset)
+            make.trailing.equalTo(view.safeAreaLayoutGuide).offset(Metric.buttonOffset)
+        }
+        
+        appendButtonLabel.snp.makeConstraints { make in
+            make.centerX.equalTo(appendButton)
+            make.centerY.equalTo(appendButton).offset(Metric.buttonLabelOffset)
         }
     }
     

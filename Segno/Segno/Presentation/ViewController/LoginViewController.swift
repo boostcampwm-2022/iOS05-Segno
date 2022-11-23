@@ -33,85 +33,66 @@ final class LoginViewController: UIViewController {
         static let subTitleText = "다시 이곳의 추억에서부터"
         static let footerText = "D.S."
         
-        static let spacingBetweenButtons: CGFloat = 20
-        static let inset: CGFloat = 20
-        
-        static let titleHeight: CGFloat = 100
-        static let titleOffset: CGFloat = 200
-        static let subTitleHeight: CGFloat = 50
+        static let buttonFontSize: CGFloat = 24
         static let buttonHeight: CGFloat = 50
         static let buttonRadius: CGFloat = 20
+        static let footerBottomOffset: CGFloat = -100
+        static let inset: CGFloat = 20
+        static let subTitleFontSize: CGFloat = 30
+        static let subTitleHeight: CGFloat = 50
+        static let titleFontSize: CGFloat = 80
+        static let titleHeight: CGFloat = 100
+        static let titleOffset: CGFloat = 200
     }
     
     // MARK: - View
     
     private lazy var titleLabel: UILabel = {
         let label = UILabel()
-        
         label.text = Metric.titleText
-        
-        // TODO: Apply color, font
-        label.font = .boldSystemFont(ofSize: 30)
-        label.textColor = .black
-        
+        label.font = .appFont(.shiningStar, size: Metric.titleFontSize)
+        label.textColor = .appColor(.black)
         return label
     }()
     
     private lazy var subTitleLabel: UILabel = {
         let label = UILabel()
-        
         label.text = Metric.subTitleText
-        
-        // TODO: Apply color, font
-        label.font = .systemFont(ofSize: 15)
-        label.textColor = .systemGray
-        
+        label.font = .appFont(.shiningStar, size: Metric.subTitleFontSize)
+        label.textColor = .appColor(.grey2)
         return label
     }()
     
     private lazy var googleButton: UIButton = {
         let button = UIButton()
-        
         button.setTitle(Metric.googleTitle, for: .normal)
-        
-        // TODO: Apply color, font
-        button.setTitleColor(.black, for: .normal)
-        button.backgroundColor = .systemGray5
-        
+        button.setTitleColor(.appColor(.white), for: .normal)
+        button.titleLabel?.font = .appFont(.surround, size: Metric.buttonFontSize)
         return button
     }()
     
     private lazy var appleButton: UIButton = {
         let button = UIButton()
-        
         button.setTitle(Metric.appleTitle, for: .normal)
-        
-        // TODO: Apply color, font
-        button.setTitleColor(.black, for: .normal)
-        button.backgroundColor = .systemGray5
-        
+        button.setTitleColor(.appColor(.white), for: .normal)
+        button.titleLabel?.font = .appFont(.surround, size: Metric.buttonFontSize)
         return button
     }()
     
     private lazy var buttonStack = {
         let stackView = UIStackView()
-        
         stackView.alignment = .center
         stackView.axis = .vertical
         stackView.distribution = .equalSpacing
         stackView.spacing = Metric.inset
-        
         return stackView
     }()
     
     private lazy var footerLabel: UILabel = {
         let label = UILabel()
-        
-        // TODO: Apply color, font
         label.text = Metric.footerText
         label.textAlignment = .right
-        label.textColor = .systemGray4
-        
+        label.textColor = .appColor(.grey2)
         return label
     }()
     
@@ -161,7 +142,7 @@ final class LoginViewController: UIViewController {
         googleButton.rx.tap
             .withUnretained(self)
             .bind { _ in
-                print("google")
+                print("google") // MARK: Test용
                 self.googleButtonTapped()
             }
             .disposed(by: disposeBag)
@@ -169,14 +150,14 @@ final class LoginViewController: UIViewController {
         appleButton.rx.tap
             .withUnretained(self)
             .bind { _ in
-                print("apple")
+                print("apple")  // MARK: Test용
                 self.appleButtonTapped()
             }
             .disposed(by: disposeBag)
     }
     
     private func setupView() {
-        view.backgroundColor = UIColor(red: 0.93, green: 0.93, blue: 0.93, alpha: 1)
+        view.backgroundColor = .appColor(.background)
         
         googleButton.layer.cornerRadius = Metric.buttonRadius
         googleButton.layer.masksToBounds = true
@@ -184,13 +165,8 @@ final class LoginViewController: UIViewController {
         appleButton.layer.cornerRadius = Metric.buttonRadius
         appleButton.layer.masksToBounds = true
         
-        googleButton.setBackgroundColor(.systemGray5, for: .normal)
-        googleButton.setBackgroundColor(.systemGray4, for: .selected)
-        googleButton.setBackgroundColor(.systemGray4, for: .disabled)
-        
-        appleButton.setBackgroundColor(.systemGray5, for: .normal)
-        appleButton.setBackgroundColor(.systemGray4, for: .selected)
-        appleButton.setBackgroundColor(.systemGray4, for: .disabled)
+        googleButton.setBackgroundColor(.appColor(.color4) ?? .red, for: .normal)
+        appleButton.setBackgroundColor(.appColor(.color4) ?? .red, for: .normal)
     }
     
     private func setupLayout() {
@@ -218,7 +194,7 @@ final class LoginViewController: UIViewController {
         }
         
         footerLabel.snp.makeConstraints { make in
-            make.bottom.equalToSuperview().offset(-100)
+            make.bottom.equalToSuperview().offset(Metric.footerBottomOffset)
         }
         
         buttonStack.snp.makeConstraints { make in
