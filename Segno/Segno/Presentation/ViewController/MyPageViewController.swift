@@ -7,7 +7,19 @@
 
 import UIKit
 
+import RxCocoa
+import RxSwift
+import SnapKit
+
+protocol MyPageViewDelegate: AnyObject {
+    func settingButtonTapped()
+}
+
 final class MyPageViewController: UIViewController {
+    private let disposeBag = DisposeBag()
+    
+    weak var delegate: MyPageViewDelegate?
+    
     private enum Metric {
         static let titleText: String = "안녕하세요,\nboostcamp님!"
         
@@ -67,6 +79,7 @@ final class MyPageViewController: UIViewController {
         
         setupView()
         setupLayout()
+        setupRx()
     }
 
     private func setupView() {
@@ -98,6 +111,19 @@ final class MyPageViewController: UIViewController {
         settingsStackView.snp.makeConstraints { make in
             make.top.equalTo(titleLabel.snp.bottom).offset(Metric.settingsOffset)
         }
+    }
+    
+    private func setupRx() {
+        settingButton.rx.tap
+            .withUnretained(self)
+            .bind { _ in
+                self.settingButtonTapped()
+            }
+            .disposed(by: disposeBag)
+    }
+    
+    private func settingButtonTapped() {
+        delegate?.settingButtonTapped()
     }
 }
 
