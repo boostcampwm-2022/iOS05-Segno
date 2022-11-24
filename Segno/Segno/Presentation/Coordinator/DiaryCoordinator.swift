@@ -34,7 +34,7 @@ extension DiaryCoordinator: DiaryCollectionViewDelegate {
 
 extension DiaryCoordinator: DiaryDetailViewDelegate {
     func mapButtonTapped(viewController: UIViewController, location: Location) {
-        let mapKitViewController = MapKitViewController()
+        let mapKitViewController = MapKitViewController(location: location)
         viewController.present(mapKitViewController, animated: true)
     }
 }

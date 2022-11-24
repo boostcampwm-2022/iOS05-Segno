@@ -5,13 +5,27 @@
 //  Created by YOONJONG on 2022/11/24.
 //
 
+import MapKit
 import UIKit
+
+import SnapKit
 
 class MapKitViewController: UIViewController {
 
-    init() {
+    private enum Metric {
+        static let space = 20
+    }
+    
+    private lazy var mapView: MKMapView = {
+        let mapView = MKMapView()
+        mapView.backgroundColor = .yellow
+        return mapView
+    }()
+    
+    init(location: Location) {
         super.init(nibName: nil, bundle: nil)
         view.backgroundColor = .systemMint
+        setupMapView(location: location)
     }
     
     required init?(coder: NSCoder) {
@@ -22,18 +36,30 @@ class MapKitViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        // Do any additional setup after loading the view.
+        setupLayout()
     }
     
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
+    private func setupMapView(location: Location) {
+        
     }
-    */
-
+    
+    private func setupLayout() {
+        view.addSubview(mapView)
+        
+        mapView.snp.makeConstraints {
+            $0.leading.trailing.top.equalTo(view).inset(20)
+            $0.height.equalTo(500)
+        }
+    }
 }
+
+#if canImport(SwiftUI) && DEBUG
+import SwiftUI
+
+struct MapKitViewController_Preview: PreviewProvider {
+    static var previews: some View {
+        MapKitViewController(location: Location(latitude: "37.248128", longitude: "127.076597"))
+            .showPreview(.iPhone14Pro)
+    }
+}
+#endif
