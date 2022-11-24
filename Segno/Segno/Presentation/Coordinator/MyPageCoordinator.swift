@@ -17,6 +17,14 @@ final class MyPageCoordinator: Coordinator {
     
     func start() {
         let vc = MyPageViewController()
+        vc.delegate = self
         self.navigationController.pushViewController(vc, animated: true)
+    }
+}
+
+extension MyPageCoordinator: MyPageViewDelegate {
+    func settingButtonTapped() {
+        let vc = SettingsViewController()
+        navigationController.pushViewController(vc, animated: true)
     }
 }
