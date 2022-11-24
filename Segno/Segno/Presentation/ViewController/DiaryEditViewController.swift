@@ -23,7 +23,7 @@ final class DiaryEditViewController: UIViewController {
         static let tagButtonCornerRadius = CGFloat(tagHeight / 2)
     }
     
-    var diaryID: String?
+//    let viewModel: DiaryEditViewModel
     
     private lazy var mainScrollView: UIScrollView = {
         let scrollView = UIScrollView()
@@ -143,11 +143,17 @@ final class DiaryEditViewController: UIViewController {
 //        return barButton
 //    }()
     
-    init(diary: DiaryDetail?) {
+//    // 뷰 모델이 작성되었을 경우, 위의 뷰 모델 프로퍼티 주석 해제와 함께 사용하면 됩니다.
+//    init(viewModel: DiaryEditViewModel
+//         = DiaryEditViewModel()) {
+//        self.viewModel = viewModel
+//
+//        super.init(nibName: nil, bundle: nil)
+//    }
+    
+    // 뷰 모델이 작성되기 전 임시로 사용하는 이니셜라이저입니다.
+    init() {
         super.init(nibName: nil, bundle: nil)
-        
-        diaryID = diary?.identifier
-        titleTextField.text = diary?.title
     }
     
     required init?(coder: NSCoder) {
@@ -250,7 +256,7 @@ import SwiftUI
 
 struct DiaryEditViewController_Preview: PreviewProvider {
     static var previews: some View {
-        DiaryEditViewController(diary: nil).showPreview(.iPhone14Pro)
+        DiaryEditViewController().showPreview(.iPhone14Pro)
     }
 }
 #endif
