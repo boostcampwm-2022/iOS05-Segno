@@ -189,6 +189,8 @@ final class DiaryEditViewController: UIViewController {
     }
     
     private func setupView() {
+        view.backgroundColor = .appColor(.white)
+        
         view.addSubview(mainScrollView)
         mainScrollView.snp.makeConstraints {
             $0.edges.equalToSuperview()
