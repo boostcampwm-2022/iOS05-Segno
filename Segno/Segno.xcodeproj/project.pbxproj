@@ -69,6 +69,7 @@
 		98F5AD2A292DDDEB00E53E25 /* LocationContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98F5AD29292DDDEB00E53E25 /* LocationContentView.swift */; };
 		98FDF8A1292F56580083FA05 /* Location.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98FDF8A0292F56580083FA05 /* Location.swift */; };
 		98FDF8A3292F5CCA0083FA05 /* MapKitViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98FDF8A2292F5CCA0083FA05 /* MapKitViewController.swift */; };
+		98FDF8A5292F7A350083FA05 /* UIView+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98FDF8A4292F7A350083FA05 /* UIView+.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -131,6 +132,7 @@
 		98F5AD29292DDDEB00E53E25 /* LocationContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationContentView.swift; sourceTree = "<group>"; };
 		98FDF8A0292F56580083FA05 /* Location.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Location.swift; sourceTree = "<group>"; };
 		98FDF8A2292F5CCA0083FA05 /* MapKitViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapKitViewController.swift; sourceTree = "<group>"; };
+		98FDF8A4292F7A350083FA05 /* UIView+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -248,6 +250,7 @@
 			isa = PBXGroup;
 			children = (
 				791837FD292225DC00BC6992 /* UIColor+.swift */,
+				98FDF8A4292F7A350083FA05 /* UIView+.swift */,
 				791837FE292225DC00BC6992 /* UIFont+.swift */,
 				4FEBFAB0291CFB5500E78139 /* SHMediaItem+.swift */,
 				7918380729233F7100BC6992 /* UIButton+.swift */,
@@ -514,6 +517,7 @@
 				7940FB33292E065F00276EFC /* DiaryDetailUseCase.swift in Sources */,
 				666E6F8E291CFADD00CECD4B /* MyPageViewController.swift in Sources */,
 				4F6F74B1292C9BF3007E7AC1 /* UserInfo.swift in Sources */,
+				98FDF8A5292F7A350083FA05 /* UIView+.swift in Sources */,
 				98FDF8A3292F5CCA0083FA05 /* MapKitViewController.swift in Sources */,
 				4FA3242B2923646F00DB04D5 /* DiaryListItemEndpoint.swift in Sources */,
 				791837FF292225DC00BC6992 /* UIColor+.swift in Sources */,
