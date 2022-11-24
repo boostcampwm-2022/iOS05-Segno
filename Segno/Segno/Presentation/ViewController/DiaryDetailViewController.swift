@@ -287,7 +287,7 @@ extension UIViewController {
 #if canImport(SwiftUI) && DEBUG
 import SwiftUI
 
-struct ViewController_Preview: PreviewProvider {
+struct DiaryDetailViewController_Preview: PreviewProvider {
     static var previews: some View {
         DiaryDetailViewController(viewModel: DiaryDetailViewModel(itemIdentifier: "0")).showPreview(.iPhone14Pro)
     }
