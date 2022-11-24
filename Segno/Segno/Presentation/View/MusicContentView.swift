@@ -41,7 +41,7 @@ final class MusicContentView: UIView {
     private lazy var playButton: UIButton = {
         let button = UIButton()
         button.setImage(UIImage(systemName: "play.fill"), for: .normal)
-        button.tintColor = .white
+        button.tintColor = .appColor(.black)
         return button
     }()
     

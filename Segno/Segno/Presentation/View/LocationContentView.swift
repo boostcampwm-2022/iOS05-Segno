@@ -32,7 +32,7 @@ final class LocationContentView: UIView {
     private lazy var mapButton: UIButton = {
         let button = UIButton()
         button.setImage(UIImage(systemName: "map.fill"), for: .normal)
-        button.tintColor = .white
+        button.tintColor = .appColor(.black)
         return button
     }()
     
