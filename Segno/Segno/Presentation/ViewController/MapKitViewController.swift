@@ -65,7 +65,17 @@ class MapKitViewController: UIViewController {
     }
     
     private func setupMapView(location: Location) {
+        guard let latitude = Double(location.latitude),
+              let longitude = Double(location.longitude) else { return }
+        let locationCoordinate = CLLocationCoordinate2D(latitude: latitude, longitude: longitude)
+        let span = MKCoordinateSpan(latitudeDelta: 0.01, longitudeDelta: 0.01)
+        let region = MKCoordinateRegion(center: locationCoordinate, span: span)
         
+        let annotation = MKPointAnnotation()
+        annotation.title = "여기지롱"
+        annotation.coordinate = locationCoordinate
+        mapView.setRegion(region, animated: true)
+        mapView.addAnnotation(annotation)
     }
     
     private func setupLayout() {
