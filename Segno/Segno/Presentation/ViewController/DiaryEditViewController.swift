@@ -12,21 +12,32 @@ import RxSwift
 import SnapKit
 
 final class DiaryEditViewController: UIViewController {
-    var diaryID: String? = nil
+    private enum Metric {
+        static let standardSpacing: CGFloat = 8
+        static let doubleSpacing: CGFloat = 16
+        static let majorComponentHeight = 400
+        static let minorComponentHeight = 60
+        static let tagHeight = 30
+        
+        static let buttonCornerRadius = CGFloat(minorComponentHeight / 2)
+        static let tagButtonCornerRadius = CGFloat(tagHeight / 2)
+    }
     
-    // TODO: 뷰로부터 적당한 간격 주기 (일종의 padding이 필요합니다.)
+    var diaryID: String?
+    
     private lazy var mainScrollView: UIScrollView = {
         let scrollView = UIScrollView()
         scrollView.backgroundColor = .systemPink // 테스트용 색상
         return scrollView
     }()
     
+    // TODO: 뷰로부터 적당한 간격 주기 (일종의 padding이 필요합니다.)
     private lazy var contentsStackView: UIStackView = {
         let stackView = UIStackView()
         stackView.axis = .vertical
         stackView.backgroundColor = .systemGreen // 테스트용 색상
         stackView.distribution = .equalSpacing
-        stackView.spacing = 8
+        stackView.spacing = Metric.standardSpacing
         return stackView
     }()
     
@@ -65,14 +76,14 @@ final class DiaryEditViewController: UIViewController {
         stackView.axis = .horizontal
         stackView.backgroundColor = .systemBrown // 테스트용 색상
         stackView.distribution = .equalSpacing
-        stackView.spacing = 8
+        stackView.spacing = Metric.standardSpacing
         return stackView
     }()
     
     private lazy var addTagButton: UIButton = {
         let button = UIButton()
         button.backgroundColor = .black // 테스트용 색상..?
-        button.layer.cornerRadius = 8
+        button.layer.cornerRadius = Metric.tagButtonCornerRadius
         button.setTitle("+", for: .normal)
         return button
     }()
@@ -82,14 +93,14 @@ final class DiaryEditViewController: UIViewController {
         stackView.axis = .horizontal
         stackView.backgroundColor = .systemIndigo // 테스트용 색상
         stackView.distribution = .equalSpacing
-        stackView.spacing = 16
+        stackView.spacing = Metric.doubleSpacing
         return stackView
     }()
     
     private lazy var addMusicButton: UIButton = {
         let button = UIButton()
         button.backgroundColor = .black // 테스트용 색상..?
-        button.layer.cornerRadius = 8
+        button.layer.cornerRadius = Metric.buttonCornerRadius
         button.setImage(UIImage(systemName: "music.note"), for: .normal)
         return button
     }()
@@ -105,14 +116,14 @@ final class DiaryEditViewController: UIViewController {
         stackView.axis = .horizontal
         stackView.backgroundColor = .systemOrange
         stackView.distribution = .equalSpacing
-        stackView.spacing = 16
+        stackView.spacing = Metric.doubleSpacing
         return stackView
     }()
     
     private lazy var addlocationButton: UIButton = {
         let button = UIButton()
         button.backgroundColor = .black // 테스트용 색상..?
-        button.layer.cornerRadius = 8
+        button.layer.cornerRadius = Metric.buttonCornerRadius
         button.setImage(UIImage(systemName: "location.fill"), for: .normal)
         return button
     }()
@@ -178,34 +189,34 @@ final class DiaryEditViewController: UIViewController {
     private func setupContentsStackView() {
         contentsStackView.addArrangedSubview(titleTextField)
         titleTextField.snp.makeConstraints {
-            $0.height.equalTo(60)
+            $0.height.equalTo(Metric.minorComponentHeight)
         }
         
         contentsStackView.addArrangedSubview(photoImageView)
         photoImageView.snp.makeConstraints {
-            $0.height.equalTo(400)
+            $0.height.equalTo(Metric.majorComponentHeight)
         }
         
         contentsStackView.addArrangedSubview(bodyTextView)
         bodyTextView.snp.makeConstraints {
-            $0.height.equalTo(400)
+            $0.height.equalTo(Metric.majorComponentHeight)
         }
         
         contentsStackView.addArrangedSubview(tagScrollView)
         tagScrollView.snp.makeConstraints {
-            $0.height.equalTo(30)
+            $0.height.equalTo(Metric.tagHeight)
         }
         setupTagScrollView()
         
         contentsStackView.addArrangedSubview(musicStackView)
         musicStackView.snp.makeConstraints {
-            $0.height.equalTo(50)
+            $0.height.equalTo(Metric.minorComponentHeight)
         }
         setupMusicStackView()
         
         contentsStackView.addArrangedSubview(locationStackView)
         locationStackView.snp.makeConstraints {
-            $0.height.equalTo(50)
+            $0.height.equalTo(Metric.minorComponentHeight)
         }
         setupLocationStackView()
     }
@@ -223,7 +234,7 @@ final class DiaryEditViewController: UIViewController {
     private func setupMusicStackView() {
         musicStackView.addArrangedSubview(addMusicButton)
         addMusicButton.snp.makeConstraints {
-            $0.width.equalTo(50)
+            $0.width.equalTo(Metric.minorComponentHeight)
         }
         musicStackView.addArrangedSubview(musicInfoLabel)
     }
@@ -231,7 +242,7 @@ final class DiaryEditViewController: UIViewController {
     private func setupLocationStackView() {
         locationStackView.addArrangedSubview(addlocationButton)
         addlocationButton.snp.makeConstraints {
-            $0.width.equalTo(50)
+            $0.width.equalTo(Metric.minorComponentHeight)
         }
         locationStackView.addArrangedSubview(locationInfoLabel)
     }
