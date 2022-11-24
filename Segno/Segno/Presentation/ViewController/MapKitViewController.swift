@@ -65,8 +65,8 @@ class MapKitViewController: UIViewController {
     }
     
     private func setupMapView(location: Location) {
-        guard let latitude = Double(location.latitude),
-              let longitude = Double(location.longitude) else { return }
+        let latitude = location.latitude
+        let longitude = location.longitude
         let locationCoordinate = CLLocationCoordinate2D(latitude: latitude, longitude: longitude)
         let span = MKCoordinateSpan(latitudeDelta: 0.01, longitudeDelta: 0.01)
         let region = MKCoordinateRegion(center: locationCoordinate, span: span)
@@ -105,7 +105,7 @@ import SwiftUI
 
 struct MapKitViewController_Preview: PreviewProvider {
     static var previews: some View {
-        MapKitViewController(location: Location(latitude: "37.248128", longitude: "127.076597"))
+        MapKitViewController(location: Location(latitude: 37.248128, longitude: 127.076597))
             .showPreview(.iPhone14Pro)
     }
 }
