@@ -13,6 +13,7 @@ import SnapKit
 
 protocol DiaryCollectionViewDelegate: AnyObject {
     func diaryCellSelected(id: String)
+    func diaryAppendButtonSelected()
 }
 
 final class DiaryCollectionViewController: UIViewController {
@@ -81,6 +82,7 @@ final class DiaryCollectionViewController: UIViewController {
         
         setupView()
         setupLayout()
+        setupRx()
         
         dataSource = makeDataSource()
         bindDataSource()
@@ -139,6 +141,15 @@ final class DiaryCollectionViewController: UIViewController {
         }
     }
     
+    private func setupRx() {
+        appendButton.rx.tap
+            .withUnretained(self)
+            .bind { _ in
+                self.appendButtonTapped()
+            }
+            .disposed(by: disposeBag)
+    }
+    
     private func makeDataSource() -> DataSource {
         let cellRegistration = UICollectionView.CellRegistration<DiaryCell, DiaryListItem> { (cell, _, item) in
             cell.configure(with: item)
@@ -163,6 +174,10 @@ final class DiaryCollectionViewController: UIViewController {
     
     private func getDatasource() {
         viewModel.getDiaryList()
+    }
+    
+    private func appendButtonTapped() {
+        delegate?.diaryAppendButtonSelected()
     }
 }
 
