@@ -117,6 +117,7 @@ final class DiaryDetailViewController: UIViewController {
     
     private func setupLayout() {
         view.backgroundColor = .appColor(.background)
+        
         view.addSubview(scrollView)
         scrollView.addSubview(stackView)
         
