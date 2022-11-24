@@ -63,7 +63,6 @@ final class DiaryEditViewController: UIViewController {
         return textView
     }()
     
-    // 태그 스택 뷰 - 태그의 관리를 어떻게 할 것인가?
     private lazy var tagScrollView: UIScrollView = {
         let scrollView = UIScrollView()
         scrollView.backgroundColor = .systemTeal // 테스트용 색상
@@ -147,10 +146,8 @@ final class DiaryEditViewController: UIViewController {
     init(diary: DiaryDetail?) {
         super.init(nibName: nil, bundle: nil)
         
-        if let diary {
-            diaryID = diary.id
-            titleTextField.text = diary.title
-        }
+        diaryID = diary?.identifier
+        titleTextField.text = diary?.title
     }
     
     required init?(coder: NSCoder) {

@@ -9,7 +9,7 @@
 import CoreLocation
 
 struct DiaryDetail {
-    let id: String
+    let identifier: String
     let title: String
     let tags: [String]
     let imagePath: String
