@@ -83,10 +83,10 @@ final class MusicContentView: UIView {
         }
     }
     
-    func setMusic(title: String, artist: String, imageURL: URL) {
-        titleLabel.text = title
-        artistLabel.text = artist
-        albumArtImageView.kf.setImage(with: imageURL)
+    func setMusic(info: MusicInfo) {
+        titleLabel.text = info.title
+        artistLabel.text = info.artist
+        albumArtImageView.kf.setImage(with: info.imageURL)
     }
 }
 

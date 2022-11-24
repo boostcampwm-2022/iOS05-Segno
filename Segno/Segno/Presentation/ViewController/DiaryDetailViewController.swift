@@ -205,7 +205,7 @@ final class DiaryDetailViewController: UIViewController {
             .compactMap { $0 }
             .observe(on: MainScheduler.instance)
             .subscribe(onNext: { [weak self] musicInfo in
-                self?.musicContentView.setMusic(title: musicInfo.title, artist: musicInfo.artist, imageURL: musicInfo.imageURL)
+                self?.musicContentView.setMusic(info: musicInfo)
             })
             .disposed(by: disposeBag)
         
