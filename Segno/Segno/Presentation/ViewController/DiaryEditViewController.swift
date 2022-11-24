@@ -39,6 +39,7 @@ final class DiaryEditViewController: UIViewController {
     }
     
 //    let viewModel: DiaryEditViewModel
+    private var disposeBag = DisposeBag()
     
     private lazy var mainScrollView: UIScrollView = {
         let scrollView = UIScrollView()
@@ -161,6 +162,8 @@ final class DiaryEditViewController: UIViewController {
         return button
     }()
     
+    private lazy var tapGesture = UITapGestureRecognizer()
+    
 //    // 뷰 모델이 작성되었을 경우, 위의 뷰 모델 프로퍼티 주석 해제와 함께 사용하면 됩니다.
 //    init(viewModel: DiaryEditViewModel
 //         = DiaryEditViewModel()) {
@@ -182,6 +185,7 @@ final class DiaryEditViewController: UIViewController {
         super.viewDidLoad()
         
         setupView()
+        bindImageView()
     }
     
     private func setupView() {
@@ -208,6 +212,7 @@ final class DiaryEditViewController: UIViewController {
         }
         
         contentsStackView.addArrangedSubview(photoImageView)
+        photoImageView.addGestureRecognizer(tapGesture)
         photoImageView.snp.makeConstraints {
             $0.height.equalTo(Metric.majorContentHeight)
         }
@@ -262,6 +267,14 @@ final class DiaryEditViewController: UIViewController {
             $0.width.equalTo(Metric.minorContentHeight)
         }
         locationStackView.addArrangedSubview(locationInfoLabel)
+    }
+    
+    private func bindImageView() {
+        tapGesture.rx.event
+            .bind(onNext: { recognizer in
+                print("gestures: \(recognizer.numberOfTouches)")
+            })
+            .disposed(by: disposeBag)
     }
 }
 
