@@ -37,7 +37,7 @@ final class MyPageViewController: UIViewController {
     
     lazy var diaryCountButton: UIButton = {
         let button = UIButton()
-        button.setTitle("작성한 일기 수", for: .normal)
+        button.setTitle("작성한 일기 수 : 123,456,789개", for: .normal)
         button.setTitleColor(.appColor(.black), for: .normal)
         button.titleLabel?.font = .appFont(.surroundAir, size: Metric.buttonFontSize)
         button.setBackgroundColor(.appColor(.color1) ?? .red, for: .normal)
@@ -70,7 +70,7 @@ final class MyPageViewController: UIViewController {
     }
 
     private func setupView() {
-        view.backgroundColor = .white
+        view.backgroundColor = .appColor(.background)
     }
     
     private func setupLayout() {
