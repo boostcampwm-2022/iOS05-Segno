@@ -13,7 +13,7 @@ import SnapKit
 
 protocol DiaryCollectionViewDelegate: AnyObject {
     func diaryCellSelected(id: String)
-    func diaryAppendButtonSelected()
+    func diaryAppendButtonTapped()
 }
 
 final class DiaryCollectionViewController: UIViewController {
@@ -177,11 +177,11 @@ final class DiaryCollectionViewController: UIViewController {
     }
     
     private func appendButtonTapped() {
-        delegate?.diaryAppendButtonSelected()
+        delegate?.diaryAppendButtonTapped()
     }
 }
 
-extension DiaryCollectionViewController {
+extension DiaryCollectionViewController: UICollectionViewDelegate {
     func makeCollectionViewLayout() -> UICollectionViewFlowLayout {
         let layout = UICollectionViewFlowLayout()
         let cellWidth: CGFloat = UIScreen.main.bounds.width / 2 - 1
@@ -206,8 +206,4 @@ extension DiaryCollectionViewController {
         
         delegate?.diaryCellSelected(id: id)
     }
-}
-
-extension DiaryCollectionViewController: UICollectionViewDelegate {
-    
 }

@@ -28,7 +28,7 @@ extension DiaryCoordinator: DiaryCollectionViewDelegate {
         navigationController.pushViewController(vc, animated: true)
     }
     
-    func diaryAppendButtonSelected() {
+    func diaryAppendButtonTapped() {
         let vc = DiaryEditViewController()
         navigationController.pushViewController(vc, animated: true)
     }
