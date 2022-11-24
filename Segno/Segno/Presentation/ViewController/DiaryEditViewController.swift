@@ -41,14 +41,12 @@ final class DiaryEditViewController: UIViewController {
     
     private lazy var mainScrollView: UIScrollView = {
         let scrollView = UIScrollView()
-        scrollView.backgroundColor = .systemPink // 테스트용 색상
         return scrollView
     }()
     
     private lazy var contentsStackView: UIStackView = {
         let stackView = UIStackView()
         stackView.axis = .vertical
-        stackView.backgroundColor = .systemGreen // 테스트용 색상
         stackView.distribution = .equalSpacing
         stackView.spacing = Metric.standardSpacing
         return stackView
@@ -57,7 +55,6 @@ final class DiaryEditViewController: UIViewController {
     // TODO: 이미지 뷰를 버튼처럼 활용할 수 있도록 액션 연결
     private lazy var titleTextField: UITextField = {
         let textField = UITextField()
-        textField.backgroundColor = .systemGray // 테스트용 색상
         textField.font = .appFont(.surroundAir, size: Metric.mediumFontSize)
         textField.placeholder = Metric.titlePlaceholder
         return textField
@@ -74,15 +71,16 @@ final class DiaryEditViewController: UIViewController {
     
     private lazy var bodyTextView: UITextView = {
         let textView = UITextView()
-        textView.backgroundColor = .systemCyan // 테스트용 색상
+        textView.backgroundColor = .appColor(.color2)
         textView.font = .appFont(.shiningStar, size: Metric.mediumFontSize)
+        textView.layer.borderColor = UIColor.appColor(.color4)?.cgColor
+        textView.layer.borderWidth = 1
         textView.layer.cornerRadius = Metric.standardCornerRadius
         return textView
     }()
     
     private lazy var tagScrollView: UIScrollView = {
         let scrollView = UIScrollView()
-        scrollView.backgroundColor = .systemTeal // 테스트용 색상
         return scrollView
     }()
     
@@ -90,7 +88,6 @@ final class DiaryEditViewController: UIViewController {
         let stackView = UIStackView()
         stackView.alignment = .center
         stackView.axis = .horizontal
-        stackView.backgroundColor = .systemBrown // 테스트용 색상
         stackView.distribution = .equalSpacing
         stackView.spacing = Metric.standardSpacing
         return stackView
@@ -107,15 +104,16 @@ final class DiaryEditViewController: UIViewController {
     private lazy var musicStackView: UIStackView = {
         let stackView = UIStackView()
         stackView.axis = .horizontal
-        stackView.backgroundColor = .systemIndigo // 테스트용 색상
+        stackView.backgroundColor = .appColor(.color1)
         stackView.distribution = .equalSpacing
+        stackView.layer.cornerRadius = Metric.standardCornerRadius
         stackView.spacing = Metric.doubleSpacing
         return stackView
     }()
     
     private lazy var addMusicButton: UIButton = {
         let button = UIButton()
-        button.backgroundColor = .black // 테스트용 색상..?
+        button.backgroundColor = .appColor(.color3)
         button.layer.cornerRadius = Metric.buttonCornerRadius
         button.setImage(Metric.musicButtonImage, for: .normal)
         return button
@@ -131,15 +129,16 @@ final class DiaryEditViewController: UIViewController {
     private lazy var locationStackView: UIStackView = {
         let stackView = UIStackView()
         stackView.axis = .horizontal
-        stackView.backgroundColor = .systemOrange
+        stackView.backgroundColor = .appColor(.color1)
         stackView.distribution = .equalSpacing
+        stackView.layer.cornerRadius = Metric.standardCornerRadius
         stackView.spacing = Metric.doubleSpacing
         return stackView
     }()
     
     private lazy var addlocationButton: UIButton = {
         let button = UIButton()
-        button.backgroundColor = .black // 테스트용 색상..?
+        button.backgroundColor = .appColor(.color3) // 테스트용 색상..?
         button.layer.cornerRadius = Metric.buttonCornerRadius
         button.setImage(Metric.locationButtonImage, for: .normal)
         return button
@@ -152,15 +151,14 @@ final class DiaryEditViewController: UIViewController {
         return label
     }()
     
-//    private lazy var cancelButton: UIBarButtonItem = {
-//        let barButton = UIBarButtonItem(barButtonSystemItem: .cancel, target: self, action: nil)
-//        return barButton
-//    }()
-//
-//    private lazy var saveButton: UIBarButtonItem = {
-//        let barButton = UIBarButtonItem(barButtonSystemItem: .save, target: self, action: nil)
-//        return barButton
-//    }()
+    private lazy var saveButton: UIButton = {
+        let button = UIButton()
+        button.setTitle("저장", for: .normal)
+        button.layer.cornerRadius = Metric.standardCornerRadius
+        button.titleLabel?.font = .appFont(.surroundAir, size: Metric.smallFontSize)
+        button.backgroundColor = .appColor(.color4)
+        return button
+    }()
     
 //    // 뷰 모델이 작성되었을 경우, 위의 뷰 모델 프로퍼티 주석 해제와 함께 사용하면 됩니다.
 //    init(viewModel: DiaryEditViewModel
@@ -182,16 +180,8 @@ final class DiaryEditViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-//        setupNavigationBar()
         setupView()
     }
-    
-    // TODO: 내비게이션 바 관련 요소는 코디네이터 작업 후 활성화할 계획입니다.
-//    private func setupNavigationBar() {
-//        navigationController?.title = "일기 작성"
-//        navigationItem.leftBarButtonItem = cancelButton
-//        navigationItem.rightBarButtonItem = saveButton
-//    }
     
     private func setupView() {
         view.addSubview(mainScrollView)
@@ -243,6 +233,8 @@ final class DiaryEditViewController: UIViewController {
             $0.height.equalTo(Metric.minorContentHeight)
         }
         setupLocationStackView()
+        
+        contentsStackView.addArrangedSubview(saveButton)
     }
     
     private func setupTagScrollView() {
