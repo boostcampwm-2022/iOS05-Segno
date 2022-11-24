@@ -27,6 +27,14 @@ extension DiaryCoordinator: DiaryCollectionViewDelegate {
         // TODO: id 사용하여 DiaryDetailViewController에 전달하기
         // ex) let vc = DiaryDetailViewController(viewModel: DiaryDetailViewModel(itemIdentifier: id))
         let vc = DiaryDetailViewController(viewModel: DiaryDetailViewModel(itemIdentifier: id))
+        vc.delegate = self
         navigationController.pushViewController(vc, animated: true)
+    }
+}
+
+extension DiaryCoordinator: DiaryDetailViewDelegate {
+    func mapButtonTapped(viewController: UIViewController, location: Location) {
+        let mapKitViewController = MapKitViewController()
+        viewController.present(mapKitViewController, animated: true)
     }
 }

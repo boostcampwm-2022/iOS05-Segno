@@ -11,6 +11,10 @@ import RxCocoa
 import RxSwift
 import SnapKit
 
+protocol DiaryDetailViewDelegate: AnyObject {
+    func mapButtonTapped(viewController: UIViewController, location: Location)
+}
+
 final class DiaryDetailViewController: UIViewController {
     private enum Metric {
         static let textViewPlaceHolder: String = "내용을 입력하세요."
@@ -28,6 +32,7 @@ final class DiaryDetailViewController: UIViewController {
     
     private let disposeBag = DisposeBag()
     private let viewModel: DiaryDetailViewModel
+    weak var delegate: DiaryDetailViewDelegate?
     
     private lazy var scrollView: UIScrollView = {
         let scrollView = UIScrollView()
@@ -90,6 +95,7 @@ final class DiaryDetailViewController: UIViewController {
     
     private lazy var locationContentView: LocationContentView = {
         let locationContentView = LocationContentView()
+        locationContentView.delegate = self
         return locationContentView
     }()
     
@@ -237,6 +243,12 @@ extension DiaryDetailViewController: UITextViewDelegate {
             textView.text = Metric.textViewPlaceHolder
             textView.textColor = .appColor(.grey2)
         }
+    }
+}
+
+extension DiaryDetailViewController: LocationContentViewDelegate {
+    func mapButtonTapped(location: Location) {
+        delegate?.mapButtonTapped(viewController: self, location: location)
     }
 }
 

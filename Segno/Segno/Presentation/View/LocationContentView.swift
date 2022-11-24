@@ -5,9 +5,15 @@
 //  Created by YOONJONG on 2022/11/23.
 //
 
+import CoreLocation
 import UIKit
 
+import RxCocoa
 import SnapKit
+
+protocol LocationContentViewDelegate: AnyObject {
+    func mapButtonTapped(location: Location)
+}
 
 final class LocationContentView: UIView {
     private enum Metric {
@@ -15,6 +21,9 @@ final class LocationContentView: UIView {
         static let spacing: CGFloat = 10
         static let mapButtonSize: CGFloat = 30
     }
+    
+    private var location: CLLocation?
+    weak var delegate: LocationContentViewDelegate?
     
     private lazy var titleLabel: UILabel = {
         let label = UILabel()
@@ -33,8 +42,15 @@ final class LocationContentView: UIView {
         let button = UIButton()
         button.setImage(UIImage(systemName: "map.fill"), for: .normal)
         button.tintColor = .appColor(.black)
+        button.rx.tap
+            .bind { [weak self] in
+                // TODO: CLLocation 변수 location을 Location으로 변환하는 로직 필요. 지금은 임시 데이터 부여
+                let customLocation = Location(latitude: "37.248128", longitude: "127.076597")
+                self?.delegate?.mapButtonTapped(location: customLocation)
+            }
         return button
     }()
+    
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -68,8 +84,10 @@ final class LocationContentView: UIView {
         }
     }
     
-    func setLocation(location: String) {
-        locationLabel.text = location
+    func setLocation(location: CLLocation) {
+        // TODO: titleLabel에 표시하기 위해 CLLocation을 주소 String으로 변환하는 로직 필요
+        
+        self.location = location
     }
 }
 
