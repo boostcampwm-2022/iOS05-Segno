@@ -23,7 +23,7 @@ final class DiaryListUseCaseImpl: DiaryListUseCase {
         return repository.getDiaryListItem()
             .map {
                 $0.data.map { diaryData in
-                    DiaryListItem(id: diaryData.id, title: diaryData.title, thumbnailPath: diaryData.thumbnailPath)
+                    DiaryListItem(identifier: diaryData.identifier, title: diaryData.title, thumbnailPath: diaryData.thumbnailPath)
                 }
             }
     }

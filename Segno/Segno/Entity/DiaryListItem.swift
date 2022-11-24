@@ -6,7 +6,7 @@
 //
 
 struct DiaryListItem: Hashable {
-    let id: String
+    let identifier: String
     let title: String
     let thumbnailPath: String
 }
