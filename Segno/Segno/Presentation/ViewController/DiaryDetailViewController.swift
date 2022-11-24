@@ -11,14 +11,18 @@ import RxCocoa
 import RxSwift
 import SnapKit
 
+protocol DiaryDetailViewDelegate: AnyObject {
+    func mapButtonTapped(viewController: UIViewController, location: Location)
+}
+
 final class DiaryDetailViewController: UIViewController {
     private enum Metric {
-        static let textViewPlaceHolder: String = "내용을 입력하세요."
+        static let textViewPlaceHolder: String = "내용이 없네요"
         static let stackViewSpacing: CGFloat = 10
         static let stackViewInset: CGFloat = 16
         static let dateFontSize: CGFloat = 17
         static let titleFontSize: CGFloat = 20
-        static let textViewFontSize: CGFloat = 16
+        static let textViewFontSize: CGFloat = 20
         static let textViewHeight: CGFloat = 200
         static let textViewInset: CGFloat = 16
         static let tagScrollViewHeight: CGFloat = 30
@@ -28,6 +32,7 @@ final class DiaryDetailViewController: UIViewController {
     
     private let disposeBag = DisposeBag()
     private let viewModel: DiaryDetailViewModel
+    weak var delegate: DiaryDetailViewDelegate?
     
     private lazy var scrollView: UIScrollView = {
         let scrollView = UIScrollView()
@@ -78,7 +83,8 @@ final class DiaryDetailViewController: UIViewController {
         textView.backgroundColor = .appColor(.grey1)
         textView.text = Metric.textViewPlaceHolder
         textView.font = .appFont(.shiningStar, size: Metric.textViewFontSize)
-        textView.textColor = .appColor(.grey2)
+        textView.textColor = .appColor(.black)
+        textView.isEditable = false
         textView.textContainerInset = UIEdgeInsets(top: Metric.textViewInset, left: Metric.textViewInset, bottom: Metric.textViewInset, right: Metric.textViewInset)
         return textView
     }()
@@ -90,6 +96,7 @@ final class DiaryDetailViewController: UIViewController {
     
     private lazy var locationContentView: LocationContentView = {
         let locationContentView = LocationContentView()
+        locationContentView.delegate = self
         return locationContentView
     }()
     
@@ -117,6 +124,7 @@ final class DiaryDetailViewController: UIViewController {
     
     private func setupLayout() {
         view.backgroundColor = .appColor(.background)
+        
         view.addSubview(scrollView)
         scrollView.addSubview(stackView)
         
@@ -153,7 +161,6 @@ final class DiaryDetailViewController: UIViewController {
             
         }
         
-        textView.delegate = self
         textView.snp.makeConstraints {
             $0.width.equalToSuperview()
             $0.height.equalTo(Metric.textViewHeight)
@@ -223,19 +230,9 @@ final class DiaryDetailViewController: UIViewController {
     }
 }
 
-extension DiaryDetailViewController: UITextViewDelegate {
-    func textViewDidBeginEditing(_ textView: UITextView) {
-        if textView.text == Metric.textViewPlaceHolder {
-            textView.text = nil
-            textView.textColor = .appColor(.black)
-        }
-    }
-    
-    func textViewDidEndEditing(_ textView: UITextView) {
-        if textView.text.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty {
-            textView.text = Metric.textViewPlaceHolder
-            textView.textColor = .appColor(.grey2)
-        }
+extension DiaryDetailViewController: LocationContentViewDelegate {
+    func mapButtonTapped(location: Location) {
+        delegate?.mapButtonTapped(viewController: self, location: location)
     }
 }
 
@@ -274,7 +271,7 @@ extension UIViewController {
 #if canImport(SwiftUI) && DEBUG
 import SwiftUI
 
-struct ViewController_Preview: PreviewProvider {
+struct DiaryDetailViewController_Preview: PreviewProvider {
     static var previews: some View {
         DiaryDetailViewController(viewModel: DiaryDetailViewModel(itemIdentifier: "0")).showPreview(.iPhone14Pro)
     }

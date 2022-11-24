@@ -25,11 +25,19 @@ final class DiaryCoordinator: Coordinator {
 extension DiaryCoordinator: DiaryCollectionViewDelegate {
     func diaryCellSelected(id: String) {
         let vc = DiaryDetailViewController(viewModel: DiaryDetailViewModel(itemIdentifier: id))
+        vc.delegate = self
         navigationController.pushViewController(vc, animated: true)
     }
     
     func diaryAppendButtonTapped() {
         let vc = DiaryEditViewController()
         navigationController.pushViewController(vc, animated: true)
+    }
+}
+
+extension DiaryCoordinator: DiaryDetailViewDelegate {
+    func mapButtonTapped(viewController: UIViewController, location: Location) {
+        let mapKitViewController = MapKitViewController()
+        viewController.present(mapKitViewController, animated: true)
     }
 }

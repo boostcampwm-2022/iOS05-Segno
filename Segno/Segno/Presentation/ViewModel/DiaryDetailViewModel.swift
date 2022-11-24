@@ -21,11 +21,8 @@ final class DiaryDetailViewModel {
     lazy var imagePathObservable = diaryItem.map { $0.imagePath }
     lazy var bodyObservable = diaryItem.map { $0.bodyText }
     lazy var musicObservable = diaryItem.map { $0.musicInfo }
-    lazy var locationObservable = diaryItem.map { diaryDetail in
-        // TODO: CLLocation을 API를 이용하여 주소로 반환하는 로직 작성
-//        $0.location
-        return "경기도 수원시 영통구 반달로"
-    }
+    lazy var locationObservable = diaryItem.map { $0.location }
+        
     private let disposeBag = DisposeBag()
     
     init(itemIdentifier: String, useCase: DiaryDetailUseCase = DiaryDetailUseCaseImpl()) {

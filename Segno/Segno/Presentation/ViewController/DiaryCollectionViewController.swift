@@ -33,6 +33,7 @@ final class DiaryCollectionViewController: UIViewController {
         static let buttonWidthAndHeight: CGFloat = 80
         static let inset: CGFloat = 20
         static let navigationTitleSize: CGFloat = 20
+        static let navigationBackButtonTitleSize: CGFloat = 16
     }
     
     let disposeBag = DisposeBag()
@@ -96,6 +97,12 @@ final class DiaryCollectionViewController: UIViewController {
         navigationController?.navigationBar.titleTextAttributes = [
             NSAttributedString.Key.font: UIFont.appFont(.surround, size: Metric.navigationTitleSize),
             NSAttributedString.Key.foregroundColor: UIColor.appColor(.color4) ?? .red]
+        
+        let backBarButtonItem = UIBarButtonItem(title: "리스트", style: .plain, target: self, action: nil)
+        backBarButtonItem.tintColor = UIColor.appColor(.color4)
+        backBarButtonItem.setTitleTextAttributes([
+            NSAttributedString.Key.font: UIFont.appFont(.surroundAir, size: Metric.navigationBackButtonTitleSize)], for: .normal)
+        navigationItem.backBarButtonItem = backBarButtonItem
         
         diaryCollectionView.delegate = self
         
