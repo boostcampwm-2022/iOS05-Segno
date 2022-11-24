@@ -13,26 +13,27 @@ import SnapKit
 
 final class DiaryEditViewController: UIViewController {
     private enum Metric {
+        // 스택 뷰 관련 설정
         static let standardSpacing: CGFloat = 8
         static let doubleSpacing: CGFloat = 16
+        static let stackViewInset: CGFloat = 16
         
+        // 스택 뷰 안에 들어가는 컨텐츠 설정
         static let majorContentHeight: CGFloat = 400
         static let minorContentHeight: CGFloat = 60
         static let halfMinorContentHeight: CGFloat = 30
-        
-        static let stackViewInset: CGFloat = 16
         static let standardCornerRadius: CGFloat = 8
         static let mediumFontSize: CGFloat = 24
         static let smallFontSize: CGFloat = 16
-        
         static let titlePlaceholder = "제목을 입력하세요."
         static let musicPlaceholder = "지금 이 음악은 뭘까요?"
         static let locationPlaceholder = "여기는 어디인가요?"
-        
         static let imageViewStockImage = UIImage(systemName: "photo")
+        
+        // 스택 뷰 안에 들어가는 버튼 설정
         static let musicButtonImage = UIImage(systemName: "music.note")
         static let locationButtonImage = UIImage(systemName: "location.fill")
-        
+        static let saveButtonTitle = "저장"
         static let buttonCornerRadius = CGFloat(minorContentHeight / 2)
         static let tagButtonCornerRadius = CGFloat(halfMinorContentHeight / 2)
     }
@@ -153,10 +154,10 @@ final class DiaryEditViewController: UIViewController {
     
     private lazy var saveButton: UIButton = {
         let button = UIButton()
-        button.setTitle("저장", for: .normal)
-        button.layer.cornerRadius = Metric.standardCornerRadius
-        button.titleLabel?.font = .appFont(.surroundAir, size: Metric.smallFontSize)
         button.backgroundColor = .appColor(.color4)
+        button.layer.cornerRadius = Metric.standardCornerRadius
+        button.setTitle(Metric.saveButtonTitle, for: .normal)
+        button.titleLabel?.font = .appFont(.surroundAir, size: Metric.smallFontSize)
         return button
     }()
     
