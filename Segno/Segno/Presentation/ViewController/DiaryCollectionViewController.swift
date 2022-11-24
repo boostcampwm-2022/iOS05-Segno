@@ -187,7 +187,7 @@ extension DiaryCollectionViewController {
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        guard let id = dataSource?.itemIdentifier(for: indexPath)?.id else { return }
+        guard let id = dataSource?.itemIdentifier(for: indexPath)?.identifier else { return }
         
         delegate?.diaryCellSelected(id: id)
     }
