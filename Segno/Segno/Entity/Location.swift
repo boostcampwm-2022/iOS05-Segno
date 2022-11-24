@@ -8,6 +8,6 @@
 import Foundation
 
 struct Location {
-    let latitude: String
-    let longitude: String
+    let latitude: Double
+    let longitude: Double
 }
