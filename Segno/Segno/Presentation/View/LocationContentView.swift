@@ -9,6 +9,7 @@ import CoreLocation
 import UIKit
 
 import RxCocoa
+import RxSwift
 import SnapKit
 
 protocol LocationContentViewDelegate: AnyObject {
@@ -23,6 +24,7 @@ final class LocationContentView: UIView {
     }
     
     private var location: CLLocation?
+    private let disposeBag = DisposeBag()
     weak var delegate: LocationContentViewDelegate?
     
     private lazy var titleLabel: UILabel = {
@@ -45,9 +47,10 @@ final class LocationContentView: UIView {
         button.rx.tap
             .bind { [weak self] in
                 // TODO: CLLocation 변수 location을 Location으로 변환하는 로직 필요. 지금은 임시 데이터 부여
-                let customLocation = Location(latitude: "37.248128", longitude: "127.076597")
+                let customLocation = Location(latitude: 37.248128, longitude: 127.076597)
                 self?.delegate?.mapButtonTapped(location: customLocation)
             }
+            .disposed(by: disposeBag)
         return button
     }()
     
