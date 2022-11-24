@@ -57,6 +57,7 @@
 		7940FB33292E065F00276EFC /* DiaryDetailUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7940FB32292E065F00276EFC /* DiaryDetailUseCase.swift */; };
 		982A2A472924AE74006F6ACD /* UserDefaultsKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = 982A2A462924AE74006F6ACD /* UserDefaultsKey.swift */; };
 		982A3699292C905300FDC6CF /* DiaryDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 982A3698292C905300FDC6CF /* DiaryDetailViewController.swift */; };
+		982B3B7F292E68FB0077A44B /* DiaryDetailViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 982B3B7E292E68FB0077A44B /* DiaryDetailViewModel.swift */; };
 		9841D6172925FACC00318EA9 /* LoginUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9841D6162925FACC00318EA9 /* LoginUseCase.swift */; };
 		9841D61B2926131200318EA9 /* LoginViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9841D61A2926131200318EA9 /* LoginViewModel.swift */; };
 		988414AE2922235B007C9132 /* LocalUtilityRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 988414AD2922235B007C9132 /* LocalUtilityRepository.swift */; };
@@ -116,6 +117,7 @@
 		7940FB32292E065F00276EFC /* DiaryDetailUseCase.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DiaryDetailUseCase.swift; sourceTree = "<group>"; };
 		982A2A462924AE74006F6ACD /* UserDefaultsKey.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDefaultsKey.swift; sourceTree = "<group>"; };
 		982A3698292C905300FDC6CF /* DiaryDetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DiaryDetailViewController.swift; sourceTree = "<group>"; };
+		982B3B7E292E68FB0077A44B /* DiaryDetailViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DiaryDetailViewModel.swift; sourceTree = "<group>"; };
 		9841D6162925FACC00318EA9 /* LoginUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginUseCase.swift; sourceTree = "<group>"; };
 		9841D61A2926131200318EA9 /* LoginViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewModel.swift; sourceTree = "<group>"; };
 		988414AD2922235B007C9132 /* LocalUtilityRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalUtilityRepository.swift; sourceTree = "<group>"; };
@@ -262,6 +264,7 @@
 			isa = PBXGroup;
 			children = (
 				9841D61A2926131200318EA9 /* LoginViewModel.swift */,
+				982B3B7E292E68FB0077A44B /* DiaryDetailViewModel.swift */,
 				988414D829235345007C9132 /* DiaryCollectionViewModel.swift */,
 			);
 			path = ViewModel;
@@ -491,6 +494,7 @@
 				4F4E0D79292522B7005ABA8F /* BaseURL.swift in Sources */,
 				4FA05B97292DFCCC00AFB020 /* DiaryEditViewController.swift in Sources */,
 				988414DB2923606B007C9132 /* DiaryListUseCase.swift in Sources */,
+				982B3B7F292E68FB0077A44B /* DiaryDetailViewModel.swift in Sources */,
 				4FCAC5C2292B5C9000BF9CDD /* LoginSession.swift in Sources */,
 				666E6F7D291CF45600CECD4B /* Coordinator.swift in Sources */,
 				982A3699292C905300FDC6CF /* DiaryDetailViewController.swift in Sources */,
