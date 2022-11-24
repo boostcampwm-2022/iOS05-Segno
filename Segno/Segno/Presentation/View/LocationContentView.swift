@@ -10,17 +10,22 @@ import UIKit
 import SnapKit
 
 final class LocationContentView: UIView {
+    private enum Metric {
+        static let fontSize: CGFloat = 16
+        static let spacing: CGFloat = 10
+        static let mapButtonSize: CGFloat = 30
+    }
     
     private lazy var titleLabel: UILabel = {
         let label = UILabel()
-        label.font = .systemFont(ofSize: 16, weight: .bold)
+        label.font = .appFont(.surround, size: Metric.fontSize)
         label.text = "위치"
         return label
     }()
     
     private lazy var locationLabel: UILabel = {
         let label = UILabel()
-        label.font = .systemFont(ofSize: 16)
+        label.font = .appFont(.surroundAir, size: Metric.fontSize)
         return label
     }()
     
@@ -48,18 +53,18 @@ final class LocationContentView: UIView {
         
         titleLabel.snp.makeConstraints {
             $0.centerY.equalToSuperview()
-            $0.leading.equalToSuperview().offset(10)
+            $0.leading.equalToSuperview().offset(Metric.spacing)
         }
         
         locationLabel.snp.makeConstraints {
             $0.centerY.equalToSuperview()
-            $0.leading.equalTo(titleLabel.snp.trailing).offset(10)
+            $0.leading.equalTo(titleLabel.snp.trailing).offset(Metric.spacing)
         }
         
         mapButton.snp.makeConstraints {
             $0.centerY.equalToSuperview()
-            $0.width.height.equalTo(30)
-            $0.trailing.equalToSuperview().inset(10)
+            $0.width.height.equalTo(Metric.mapButtonSize)
+            $0.trailing.equalToSuperview().inset(Metric.spacing)
         }
     }
     
