@@ -18,6 +18,7 @@ class MapKitViewController: UIViewController {
         static let mapViewHeight: CGFloat = 500
         static let titleSize: CGFloat = 40
         static let buttonSize: CGFloat = 20
+        static let addressSize: CGFloat = 16
     }
     
     private lazy var titleLabel: UILabel = {
@@ -48,6 +49,12 @@ class MapKitViewController: UIViewController {
         return mapView
     }()
     
+    private lazy var addressLabel: UILabel = {
+        let addressLabel = UILabel()
+        addressLabel.font = .appFont(.surroundAir, size: Metric.addressSize)
+        return addressLabel
+    }()
+    
     init(location: Location) {
         super.init(nibName: nil, bundle: nil)
         setupMapView(location: location)
@@ -76,10 +83,12 @@ class MapKitViewController: UIViewController {
         annotation.coordinate = locationCoordinate
         mapView.setRegion(region, animated: true)
         mapView.addAnnotation(annotation)
+        
+        bindLocationItem(location: location)
     }
     
     private func setupLayout() {
-        view.addSubviews([titleLabel, closeButton, mapView])
+        view.addSubviews([titleLabel, closeButton, mapView, addressLabel])
         view.backgroundColor = .appColor(.background)
         
         titleLabel.snp.makeConstraints {
@@ -97,6 +106,16 @@ class MapKitViewController: UIViewController {
             $0.leading.trailing.equalToSuperview().inset(Metric.edgeSpace)
             $0.height.equalTo(Metric.mapViewHeight)
         }
+        
+        addressLabel.snp.makeConstraints {
+            $0.top.equalTo(mapView.snp.bottom).offset(Metric.edgeSpace)
+            $0.leading.equalToSuperview().inset(Metric.edgeSpace)
+        }
+    }
+    
+    private func bindLocationItem(location: Location) {
+        // TODO: Location to Address 변환 작업
+        addressLabel.text = "경기도 수원시 영통구 덕영대로 1732"
     }
 }
 
@@ -105,7 +124,9 @@ import SwiftUI
 
 struct MapKitViewController_Preview: PreviewProvider {
     static var previews: some View {
-        MapKitViewController(location: Location(latitude: 37.248128, longitude: 127.076597))
+        MapKitViewController(
+            location: Location(latitude: 37.248128, longitude: 127.076597)
+        )
             .showPreview(.iPhone14Pro)
     }
 }
