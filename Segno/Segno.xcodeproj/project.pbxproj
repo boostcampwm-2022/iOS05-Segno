@@ -59,6 +59,9 @@
 		982A2A472924AE74006F6ACD /* UserDefaultsKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = 982A2A462924AE74006F6ACD /* UserDefaultsKey.swift */; };
 		982A3699292C905300FDC6CF /* DiaryDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 982A3698292C905300FDC6CF /* DiaryDetailViewController.swift */; };
 		982B3B7F292E68FB0077A44B /* DiaryDetailViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 982B3B7E292E68FB0077A44B /* DiaryDetailViewModel.swift */; };
+		983AE9D22934F041006547BD /* NicknameCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 983AE9D12934F041006547BD /* NicknameCell.swift */; };
+		983AE9D4293513AD006547BD /* SettingsCellModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 983AE9D3293513AD006547BD /* SettingsCellModel.swift */; };
+		983AE9D6293514E8006547BD /* SettingsActionSheetCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 983AE9D5293514E8006547BD /* SettingsActionSheetCell.swift */; };
 		9841D6172925FACC00318EA9 /* LoginUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9841D6162925FACC00318EA9 /* LoginUseCase.swift */; };
 		9841D61B2926131200318EA9 /* LoginViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9841D61A2926131200318EA9 /* LoginViewModel.swift */; };
 		988414AE2922235B007C9132 /* LocalUtilityRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 988414AD2922235B007C9132 /* LocalUtilityRepository.swift */; };
@@ -67,6 +70,7 @@
 		988414DB2923606B007C9132 /* DiaryListUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 988414DA2923606B007C9132 /* DiaryListUseCase.swift */; };
 		98B5263E292CA46C00446413 /* TagView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98B5263D292CA46C00446413 /* TagView.swift */; };
 		98B52640292CB92900446413 /* MusicContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98B5263F292CB92900446413 /* MusicContentView.swift */; };
+		98BEE3702934A19800B20143 /* SettingsSwitchCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98BEE36F2934A19800B20143 /* SettingsSwitchCell.swift */; };
 		98F5AD2A292DDDEB00E53E25 /* LocationContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98F5AD29292DDDEB00E53E25 /* LocationContentView.swift */; };
 		98FDF8A1292F56580083FA05 /* Location.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98FDF8A0292F56580083FA05 /* Location.swift */; };
 		98FDF8A3292F5CCA0083FA05 /* MapKitViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98FDF8A2292F5CCA0083FA05 /* MapKitViewController.swift */; };
@@ -123,6 +127,9 @@
 		982A2A462924AE74006F6ACD /* UserDefaultsKey.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDefaultsKey.swift; sourceTree = "<group>"; };
 		982A3698292C905300FDC6CF /* DiaryDetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DiaryDetailViewController.swift; sourceTree = "<group>"; };
 		982B3B7E292E68FB0077A44B /* DiaryDetailViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DiaryDetailViewModel.swift; sourceTree = "<group>"; };
+		983AE9D12934F041006547BD /* NicknameCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NicknameCell.swift; sourceTree = "<group>"; };
+		983AE9D3293513AD006547BD /* SettingsCellModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsCellModel.swift; sourceTree = "<group>"; };
+		983AE9D5293514E8006547BD /* SettingsActionSheetCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsActionSheetCell.swift; sourceTree = "<group>"; };
 		9841D6162925FACC00318EA9 /* LoginUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginUseCase.swift; sourceTree = "<group>"; };
 		9841D61A2926131200318EA9 /* LoginViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewModel.swift; sourceTree = "<group>"; };
 		988414AD2922235B007C9132 /* LocalUtilityRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalUtilityRepository.swift; sourceTree = "<group>"; };
@@ -131,6 +138,7 @@
 		988414DA2923606B007C9132 /* DiaryListUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiaryListUseCase.swift; sourceTree = "<group>"; };
 		98B5263D292CA46C00446413 /* TagView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TagView.swift; sourceTree = "<group>"; };
 		98B5263F292CB92900446413 /* MusicContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MusicContentView.swift; sourceTree = "<group>"; };
+		98BEE36F2934A19800B20143 /* SettingsSwitchCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsSwitchCell.swift; sourceTree = "<group>"; };
 		98F5AD29292DDDEB00E53E25 /* LocationContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationContentView.swift; sourceTree = "<group>"; };
 		98FDF8A0292F56580083FA05 /* Location.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Location.swift; sourceTree = "<group>"; };
 		98FDF8A2292F5CCA0083FA05 /* MapKitViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapKitViewController.swift; sourceTree = "<group>"; };
@@ -298,6 +306,10 @@
 			isa = PBXGroup;
 			children = (
 				66F0D7ED2925FF8B0074872E /* DiaryCell.swift */,
+				983AE9D12934F041006547BD /* NicknameCell.swift */,
+				98BEE36F2934A19800B20143 /* SettingsSwitchCell.swift */,
+				983AE9D5293514E8006547BD /* SettingsActionSheetCell.swift */,
+				983AE9D3293513AD006547BD /* SettingsCellModel.swift */,
 				98B5263D292CA46C00446413 /* TagView.swift */,
 				98B5263F292CB92900446413 /* MusicContentView.swift */,
 				98F5AD29292DDDEB00E53E25 /* LocationContentView.swift */,
@@ -503,7 +515,10 @@
 				666E6F81291CF49E00CECD4B /* LoginCoordinator.swift in Sources */,
 				7940FB31292E065100276EFC /* DiaryDetailEndpoint.swift in Sources */,
 				666E6F85291CF4AD00CECD4B /* MyPageCoordinator.swift in Sources */,
+				983AE9D22934F041006547BD /* NicknameCell.swift in Sources */,
+				983AE9D4293513AD006547BD /* SettingsCellModel.swift in Sources */,
 				4F4E0D79292522B7005ABA8F /* BaseURL.swift in Sources */,
+				98BEE3702934A19800B20143 /* SettingsSwitchCell.swift in Sources */,
 				4FA05B97292DFCCC00AFB020 /* DiaryEditViewController.swift in Sources */,
 				988414DB2923606B007C9132 /* DiaryListUseCase.swift in Sources */,
 				982B3B7F292E68FB0077A44B /* DiaryDetailViewModel.swift in Sources */,
@@ -523,6 +538,7 @@
 				4F6F74B1292C9BF3007E7AC1 /* UserInfo.swift in Sources */,
 				98FDF8A5292F7A350083FA05 /* UIView+.swift in Sources */,
 				98FDF8A3292F5CCA0083FA05 /* MapKitViewController.swift in Sources */,
+				983AE9D6293514E8006547BD /* SettingsActionSheetCell.swift in Sources */,
 				4FA3242B2923646F00DB04D5 /* DiaryListItemEndpoint.swift in Sources */,
 				791837FF292225DC00BC6992 /* UIColor+.swift in Sources */,
 				666E6F7F291CF46800CECD4B /* AppCoordinator.swift in Sources */,
