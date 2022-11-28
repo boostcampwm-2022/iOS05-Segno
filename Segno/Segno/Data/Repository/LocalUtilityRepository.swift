@@ -8,21 +8,22 @@
 import Foundation
 
 protocol LocalUtilityRepository {
-    func createToken(key: Any, token: Any) -> Bool
-    func getToken(key: Any) -> Any?
-    func updateToken(key: Any, token: Any) -> Bool
-    func deleteToken(key: Any) -> Bool
+    func createToken(token: Any) -> Bool
+    func getToken() -> Any?
+    func updateToken(token: Any) -> Bool
+    func deleteToken() -> Bool
     func setUserDefaults(_ value: Any, forKey defaultsKey: UserDefaultsKey)
     func getUserDefaultsObject(forKey defaultsKey: UserDefaultsKey) -> Any?
 }
 
 final class LocalUtilityRepositoryImpl: LocalUtilityRepository {
-    func createToken(key: Any, token: Any) -> Bool {
-        let token = (token as AnyObject).data(using: String.Encoding.utf8.rawValue) as Any
+    private let keyName: String = "userToken"
+    
+    func createToken(token: Any) -> Bool {
         let addQuery: [CFString: Any] = [
             kSecClass: kSecClassGenericPassword,
-            kSecAttrAccount: key,
-            kSecValueData: token
+            kSecAttrAccount: keyName,
+            kSecValueData: (token as AnyObject).data(using: String.Encoding.utf8.rawValue) as Any
         ]
         
         let status = SecItemAdd(addQuery as CFDictionary, nil)
@@ -30,19 +31,19 @@ final class LocalUtilityRepositoryImpl: LocalUtilityRepository {
         else if status == errSecDuplicateItem {
             // MARK: 기존에는 Error만 return 해주었지만, Error 출력 후 자체적으로 update까지 진행
             print(KeychainError.duplicatedKey)
-            return updateToken(key: key, token: token)
+            return updateToken(token: token)
         }
         
         print(KeychainError.unhandledError(status: status))
         return false
     }
     
-    func getToken(key: Any) -> Any? {
-        let getQuery: [String: Any] = [
-            kSecClass as String: kSecClassGenericPassword,
-            kSecAttrAccount as String: key,
-            kSecReturnAttributes as String: true,
-            kSecReturnData as String: true
+    func getToken() -> Any? {
+        let getQuery: [CFString: Any] = [
+            kSecClass: kSecClassGenericPassword,
+            kSecAttrAccount: keyName,
+            kSecReturnAttributes: true,
+            kSecReturnData: true
         ]
         
         var item: CFTypeRef?
@@ -59,14 +60,12 @@ final class LocalUtilityRepositoryImpl: LocalUtilityRepository {
         return nil
     }
     
-    func updateToken(key: Any, token: Any) -> Bool {
-        let prevQuery: [String: Any] = [
-            kSecClass as String: kSecClassGenericPassword,
-            kSecAttrAccount as String: key
+    func updateToken(token: Any) -> Bool {
+        let prevQuery: [CFString: Any] = [
+            kSecClass: kSecClassGenericPassword,
+            kSecAttrAccount: keyName
         ]
-        
-        let token = (token as AnyObject).data(using: String.Encoding.utf8.rawValue)!
-        let updateQuery: [String: Any] = [ kSecValueData as String: token as Any ]
+        let updateQuery: [CFString: Any] = [ kSecValueData: (token as AnyObject).data(using: String.Encoding.utf8.rawValue) as Any ]
         
         let status = SecItemUpdate(prevQuery as CFDictionary, updateQuery as CFDictionary)
         if status == errSecSuccess { return true }
@@ -75,10 +74,10 @@ final class LocalUtilityRepositoryImpl: LocalUtilityRepository {
         return false
     }
     
-    func deleteToken(key: Any) -> Bool {
-        let query: [String: Any] = [
-            kSecClass as String: kSecClassGenericPassword,
-            kSecAttrAccount as String: key
+    func deleteToken() -> Bool {
+        let query: [CFString: Any] = [
+            kSecClass: kSecClassGenericPassword,
+            kSecAttrAccount: keyName
         ]
         
         let status = SecItemDelete(query as CFDictionary)
