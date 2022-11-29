@@ -51,15 +51,16 @@ final class SettingsSwitchCell: UITableViewCell {
         }
     }
     
-    func configure(title: String, isOn: Bool, row: Int) {
+    func configure(title: String, isOn: Bool, action: CellActions) {
         titleLabel.text = title
         switchButton.isOn = isOn
-        switchButton.tag = row
+        switchButton.tag = action.toRow
     }
     
     @objc private func switchButtonTapped() {
-        switch switchButton.tag {
-        case 1:
+        let action = CellActions(rawValue: switchButton.tag)
+        switch action {
+        case .autoplay:
             debugPrint("\(switchButton.isOn) / autoPlay 관련 액션을 실행합니다.")
         default:
             break

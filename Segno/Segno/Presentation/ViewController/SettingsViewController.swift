@@ -10,9 +10,19 @@ import UIKit
 import RxCocoa
 import RxSwift
 
+enum CellActions: Int {
+    case nickname
+    case autoplay
+    case darkmode
+    
+    var toRow: Int {
+        return self.rawValue
+    }
+}
+
 final class SettingsViewController: UIViewController {
     private let disposeBag = DisposeBag()
-    
+    private let viewModel: SettingsViewModel
     private lazy var tableView: UITableView = {
         let tableView = UITableView()
         tableView.register(NicknameCell.self, forCellReuseIdentifier: "NicknameCell")
@@ -20,6 +30,15 @@ final class SettingsViewController: UIViewController {
         tableView.register(SettingsActionSheetCell.self, forCellReuseIdentifier: "SettingsActionSheetCell")
         return tableView
     }()
+    
+    init(viewModel: SettingsViewModel = SettingsViewModel()) {
+        self.viewModel = viewModel
+        super.init(nibName: nil, bundle: nil)
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -44,21 +63,16 @@ final class SettingsViewController: UIViewController {
 
 extension SettingsViewController {
     private func bindTableView() {
-        let dataSource = Observable<[SettingsCellModel]>.just([
-            .nickname,
-            .settingsSwitch(title: "음악 자동 재생", isOn: true), // TODO: isOn은 로컬 디비로부터 불러와야 합니다.
-            .settingsActionSheet(title: "다크 모드")
-        ])
-        
-        dataSource
+        viewModel.dataSource
             .bind(to: tableView.rx.items) { (tableView, row, element) in
                 switch element {
                 case .nickname:
                     guard let cell = tableView.dequeueReusableCell(withIdentifier: "NicknameCell") as? NicknameCell else { return UITableViewCell() }
                     return cell
                 case .settingsSwitch(let title, let isOn):
-                    guard let cell = tableView.dequeueReusableCell(withIdentifier: "SettingsSwitchCell") as? SettingsSwitchCell else { return UITableViewCell() }
-                    cell.configure(title: title, isOn: isOn, row: row)
+                    guard let cell = tableView.dequeueReusableCell(withIdentifier: "SettingsSwitchCell") as? SettingsSwitchCell,
+                          let action = CellActions(rawValue: row) else { return UITableViewCell() }
+                    cell.configure(title: title, isOn: isOn, action: action)
                     return cell
                 case .settingsActionSheet(let title):
                     guard let cell = tableView.dequeueReusableCell(withIdentifier: "SettingsActionSheetCell") as? SettingsActionSheetCell else { return UITableViewCell() }
@@ -71,8 +85,9 @@ extension SettingsViewController {
         tableView.rx.itemSelected
             .subscribe(onNext: { [weak self] indexPath in
                 self?.tableView.deselectRow(at: indexPath, animated: true)
-                switch indexPath.row {
-                case 2: // 다크 모드 설정
+                guard let action = CellActions(rawValue: indexPath.row) else { return }
+                switch action {
+                case .darkmode: // 다크 모드 설정
                     guard let cell = self?.tableView.cellForRow(at: indexPath) as? SettingsActionSheetCell else { return }
                     cell.tapped(mode: .darkmode)
                 default:
