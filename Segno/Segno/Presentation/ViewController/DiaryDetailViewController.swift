@@ -218,6 +218,7 @@ final class DiaryDetailViewController: UIViewController {
         
         viewModel.locationObservable
             .compactMap { $0 }
+            .map { $0.createCLLocation() }
             .observe(on: MainScheduler.instance)
             .subscribe(onNext: { [weak self] location in
                 self?.locationContentView.setLocation(location: location)
