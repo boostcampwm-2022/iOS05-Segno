@@ -67,6 +67,7 @@
 		988414DB2923606B007C9132 /* DiaryListUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 988414DA2923606B007C9132 /* DiaryListUseCase.swift */; };
 		98B5263E292CA46C00446413 /* TagView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98B5263D292CA46C00446413 /* TagView.swift */; };
 		98B52640292CB92900446413 /* MusicContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98B5263F292CB92900446413 /* MusicContentView.swift */; };
+		98BEE36E2934907700B20143 /* LoginError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98BEE36D2934907700B20143 /* LoginError.swift */; };
 		98F5AD2A292DDDEB00E53E25 /* LocationContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98F5AD29292DDDEB00E53E25 /* LocationContentView.swift */; };
 		98FDF8A1292F56580083FA05 /* Location.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98FDF8A0292F56580083FA05 /* Location.swift */; };
 		98FDF8A3292F5CCA0083FA05 /* MapKitViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98FDF8A2292F5CCA0083FA05 /* MapKitViewController.swift */; };
@@ -131,6 +132,7 @@
 		988414DA2923606B007C9132 /* DiaryListUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiaryListUseCase.swift; sourceTree = "<group>"; };
 		98B5263D292CA46C00446413 /* TagView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TagView.swift; sourceTree = "<group>"; };
 		98B5263F292CB92900446413 /* MusicContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MusicContentView.swift; sourceTree = "<group>"; };
+		98BEE36D2934907700B20143 /* LoginError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginError.swift; sourceTree = "<group>"; };
 		98F5AD29292DDDEB00E53E25 /* LocationContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationContentView.swift; sourceTree = "<group>"; };
 		98FDF8A0292F56580083FA05 /* Location.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Location.swift; sourceTree = "<group>"; };
 		98FDF8A2292F5CCA0083FA05 /* MapKitViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapKitViewController.swift; sourceTree = "<group>"; };
@@ -203,6 +205,7 @@
 				4F3177A0291BF1810019BDFC /* Repository */,
 				4F31779F291BF1780019BDFC /* Network */,
 				988414D62923304F007C9132 /* KeychainError.swift */,
+				98BEE36D2934907700B20143 /* LoginError.swift */,
 			);
 			path = Data;
 			sourceTree = "<group>";
@@ -528,6 +531,7 @@
 				666E6F7F291CF46800CECD4B /* AppCoordinator.swift in Sources */,
 				9841D61B2926131200318EA9 /* LoginViewModel.swift in Sources */,
 				988414D72923304F007C9132 /* KeychainError.swift in Sources */,
+				98BEE36E2934907700B20143 /* LoginError.swift in Sources */,
 				98B5263E292CA46C00446413 /* TagView.swift in Sources */,
 				7940FB2F292E063100276EFC /* DiaryDetailDTO.swift in Sources */,
 				4F4E0D7629252236005ABA8F /* LoginEndpoint.swift in Sources */,
