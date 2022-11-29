@@ -19,28 +19,17 @@ final class LoginViewModel {
     init(useCase: LoginUseCase = LoginUseCaseImpl()) {
         self.useCase = useCase
         
-        bindLoginResult()
+        bindAppleLoginResult()
     }
     
-    private func bindLoginResult() {
+    private func bindAppleLoginResult() {
         session.appleCredentialResult
             .subscribe(onNext: { result in
                 switch result {
                 case .success(let credential):
                     guard let email = self.parseEmailFromJWT(credential.identityToken) else { return }
-                    
+
                     self.signIn(withApple: email)
-                case .failure(let error):
-                    print(error.localizedDescription)
-                }
-            })
-            .disposed(by: disposeBag)
-        
-        session.googleLoginResult
-            .subscribe(onNext: { result in
-                switch result {
-                case .success(let email):
-                    self.signIn(withGoogle: email)
                 case .failure(let error):
                     print(error.localizedDescription)
                 }
@@ -54,6 +43,10 @@ final class LoginViewModel {
     
     func performGoogleLogin(on presenter: UIViewController) {
         session.performGoogleLogin(presenter)
+            .subscribe(onNext: { email in
+                self.signIn(withGoogle: email)
+            })
+            .disposed(by: disposeBag)
     }
     
     func signIn(withApple email: String) {
