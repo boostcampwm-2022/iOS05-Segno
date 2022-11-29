@@ -34,7 +34,12 @@ final class SettingsSwitchCell: UITableViewCell {
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
 
+        setupView()
         setupLayout()
+    }
+    
+    private func setupView() {
+        self.backgroundColor = .appColor(.background)
     }
     
     private func setupLayout() {
