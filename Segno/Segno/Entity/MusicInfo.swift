@@ -8,7 +8,7 @@
 import Foundation
 import ShazamKit
 
-struct MusicInfo {
+struct MusicInfo: Encodable {
     let title: String
     let artist: String
     let album: String
