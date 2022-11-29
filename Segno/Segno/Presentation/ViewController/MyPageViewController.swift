@@ -21,23 +21,25 @@ enum CellActions: Int {
     }
 }
 
+enum MyPageCellModel {
+    case writtenDiary(title: String, subtitle: String)
+    case settings(title: String)
+    case logout(title: String, color: UIColor)
+}
+
 protocol MyPageViewDelegate: AnyObject {
     func settingButtonTapped()
 }
 
 final class MyPageViewController: UIViewController {
     private let disposeBag = DisposeBag()
-    private let viewModel: MyPageViewModel
     
     weak var delegate: MyPageViewDelegate?
     
     private enum Metric {
         static let titleText: String = "안녕하세요,\nboostcamp님!"
         
-        static let buttonFontSize: CGFloat = 15
-        static let buttonHeight: CGFloat = 50
         static let settingsOffset: CGFloat = 100
-        static let stackViewSpacing: CGFloat = 1
         static let titleFontSize: CGFloat = 32
         static let titleOffset: CGFloat = 30
     }
@@ -58,16 +60,6 @@ final class MyPageViewController: UIViewController {
         tableView.register(SettingsActionSheetCell.self, forCellReuseIdentifier: "logout")
         return tableView
     }()
-    
-    init(viewModel: MyPageViewModel = MyPageViewModel()) {
-        self.viewModel = viewModel
-
-        super.init(nibName: nil, bundle: nil)
-    }
-    
-    required init?(coder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
-    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -102,7 +94,13 @@ final class MyPageViewController: UIViewController {
     }
     
     private func bindTableView() {
-        viewModel.dataSource
+        let dataSource = Observable<[MyPageCellModel]>.just([
+            .writtenDiary(title: "작성한 일기 수", subtitle: "123,456,789개"), // TODO: subtitle 불러오기
+            .settings(title: "설정"),
+            .logout(title: "logout", color: .red)
+        ])
+        
+        dataSource
             .bind(to: tableView.rx.items) { (tableView, row, element) in
                 switch element {
                 case .writtenDiary(let title, let subtitle):
