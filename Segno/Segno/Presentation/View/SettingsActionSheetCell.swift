@@ -20,7 +20,19 @@ final class SettingsActionSheetCell: UITableViewCell {
         static let edgeSpacing: CGFloat = 20
     }
     
-    lazy var titleLabel: UILabel = {
+    private lazy var leftLabel: UILabel = {
+        let label = UILabel()
+        label.font = .appFont(.shiningStar, size: Metric.labelFontSize)
+        return label
+    }()
+    
+    lazy var centerLabel: UILabel = {
+        let label = UILabel()
+        label.font = .appFont(.shiningStar, size: Metric.labelFontSize)
+        return label
+    }()
+    
+    lazy var rightLabel: UILabel = {
         let label = UILabel()
         label.font = .appFont(.shiningStar, size: Metric.labelFontSize)
         return label
@@ -37,16 +49,28 @@ final class SettingsActionSheetCell: UITableViewCell {
     }
     
     private func setupLayout() {
-        contentView.addSubviews([titleLabel])
+        contentView.addSubviews([leftLabel, centerLabel, rightLabel])
         
-        titleLabel.snp.makeConstraints {
+        leftLabel.snp.makeConstraints {
             $0.centerY.equalToSuperview()
             $0.leading.equalToSuperview().inset(Metric.edgeSpacing)
         }
+        
+        centerLabel.snp.makeConstraints {
+            $0.centerY.equalToSuperview()
+            $0.centerX.equalToSuperview()
+        }
+        
+        rightLabel.snp.makeConstraints {
+            $0.centerY.equalToSuperview()
+            $0.trailing.equalToSuperview().inset(Metric.edgeSpacing)
+        }
     }
     
-    func configure(title: String) {
-        titleLabel.text = title
+    func configure(left: String? = nil, center: String? = nil, right: String? = nil) {
+        if let left = left { leftLabel.text = left }
+        if let center = center { centerLabel.text = center }
+        if let right = right { rightLabel.text = right }
     }
     
     func tapped(mode: SettingsActionSheetMode) {

@@ -62,7 +62,7 @@ extension SettingsViewController {
                     return cell
                 case .settingsActionSheet(let title):
                     guard let cell = tableView.dequeueReusableCell(withIdentifier: "SettingsActionSheetCell") as? SettingsActionSheetCell else { return UITableViewCell() }
-                    cell.configure(title: title)
+                    cell.configure(left: title)
                     return cell
                 }
             }
