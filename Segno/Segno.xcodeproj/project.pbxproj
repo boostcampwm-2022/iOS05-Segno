@@ -45,6 +45,7 @@
 		666E6F8C291CFAC200CECD4B /* DiaryCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 666E6F8B291CFAC200CECD4B /* DiaryCollectionViewController.swift */; };
 		666E6F8E291CFADD00CECD4B /* MyPageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 666E6F8D291CFADD00CECD4B /* MyPageViewController.swift */; };
 		6692A9EF292F605E00DDA835 /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6692A9EE292F605E00DDA835 /* SettingsViewController.swift */; };
+		66A8CF612935F44100C17F84 /* MyPageViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66A8CF602935F44100C17F84 /* MyPageViewModel.swift */; };
 		66F0D7EE2925FF8B0074872E /* DiaryCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66F0D7ED2925FF8B0074872E /* DiaryCell.swift */; };
 		66F0D7F729260BA20074872E /* GoogleSignIn in Frameworks */ = {isa = PBXBuildFile; productRef = 66F0D7F629260BA20074872E /* GoogleSignIn */; };
 		791837FA292225C600BC6992 /* Cafe24Shiningstar.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 791837F7292225BF00BC6992 /* Cafe24Shiningstar.ttf */; };
@@ -70,8 +71,8 @@
 		988414DB2923606B007C9132 /* DiaryListUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 988414DA2923606B007C9132 /* DiaryListUseCase.swift */; };
 		98B5263E292CA46C00446413 /* TagView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98B5263D292CA46C00446413 /* TagView.swift */; };
 		98B52640292CB92900446413 /* MusicContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98B5263F292CB92900446413 /* MusicContentView.swift */; };
-		98BEE3702934A19800B20143 /* SettingsSwitchCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98BEE36F2934A19800B20143 /* SettingsSwitchCell.swift */; };
 		98BEE36E2934907700B20143 /* LoginError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98BEE36D2934907700B20143 /* LoginError.swift */; };
+		98BEE3702934A19800B20143 /* SettingsSwitchCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98BEE36F2934A19800B20143 /* SettingsSwitchCell.swift */; };
 		98F5AD2A292DDDEB00E53E25 /* LocationContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98F5AD29292DDDEB00E53E25 /* LocationContentView.swift */; };
 		98FDF8A1292F56580083FA05 /* Location.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98FDF8A0292F56580083FA05 /* Location.swift */; };
 		98FDF8A3292F5CCA0083FA05 /* MapKitViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98FDF8A2292F5CCA0083FA05 /* MapKitViewController.swift */; };
@@ -114,6 +115,7 @@
 		666E6F8B291CFAC200CECD4B /* DiaryCollectionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiaryCollectionViewController.swift; sourceTree = "<group>"; };
 		666E6F8D291CFADD00CECD4B /* MyPageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyPageViewController.swift; sourceTree = "<group>"; };
 		6692A9EE292F605E00DDA835 /* SettingsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
+		66A8CF602935F44100C17F84 /* MyPageViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyPageViewModel.swift; sourceTree = "<group>"; };
 		66F0D7ED2925FF8B0074872E /* DiaryCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DiaryCell.swift; sourceTree = "<group>"; };
 		66F0D7EF292605AE0074872E /* Segno.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Segno.entitlements; sourceTree = "<group>"; };
 		791837F7292225BF00BC6992 /* Cafe24Shiningstar.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = Cafe24Shiningstar.ttf; sourceTree = "<group>"; };
@@ -139,8 +141,8 @@
 		988414DA2923606B007C9132 /* DiaryListUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiaryListUseCase.swift; sourceTree = "<group>"; };
 		98B5263D292CA46C00446413 /* TagView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TagView.swift; sourceTree = "<group>"; };
 		98B5263F292CB92900446413 /* MusicContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MusicContentView.swift; sourceTree = "<group>"; };
-		98BEE36F2934A19800B20143 /* SettingsSwitchCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsSwitchCell.swift; sourceTree = "<group>"; };
 		98BEE36D2934907700B20143 /* LoginError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginError.swift; sourceTree = "<group>"; };
+		98BEE36F2934A19800B20143 /* SettingsSwitchCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsSwitchCell.swift; sourceTree = "<group>"; };
 		98F5AD29292DDDEB00E53E25 /* LocationContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationContentView.swift; sourceTree = "<group>"; };
 		98FDF8A0292F56580083FA05 /* Location.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Location.swift; sourceTree = "<group>"; };
 		98FDF8A2292F5CCA0083FA05 /* MapKitViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapKitViewController.swift; sourceTree = "<group>"; };
@@ -287,6 +289,7 @@
 				9841D61A2926131200318EA9 /* LoginViewModel.swift */,
 				982B3B7E292E68FB0077A44B /* DiaryDetailViewModel.swift */,
 				988414D829235345007C9132 /* DiaryCollectionViewModel.swift */,
+				66A8CF602935F44100C17F84 /* MyPageViewModel.swift */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";
@@ -510,6 +513,7 @@
 				4FEBFAAD291CF62E00E78139 /* DiaryDetail.swift in Sources */,
 				4FEBFAB1291CFB5500E78139 /* SHMediaItem+.swift in Sources */,
 				988414AE2922235B007C9132 /* LocalUtilityRepository.swift in Sources */,
+				66A8CF612935F44100C17F84 /* MyPageViewModel.swift in Sources */,
 				988414D929235345007C9132 /* DiaryCollectionViewModel.swift in Sources */,
 				4FEBFAAF291CF9F300E78139 /* MusicInfo.swift in Sources */,
 				4FEBFAAB291CF30E00E78139 /* DiaryListItem.swift in Sources */,

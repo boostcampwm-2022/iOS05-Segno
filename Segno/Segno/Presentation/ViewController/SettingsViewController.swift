@@ -15,6 +15,7 @@ final class SettingsViewController: UIViewController {
     
     private lazy var tableView: UITableView = {
         let tableView = UITableView()
+        tableView.backgroundColor = .appColor(.background)
         tableView.register(NicknameCell.self, forCellReuseIdentifier: "NicknameCell")
         tableView.register(SettingsSwitchCell.self, forCellReuseIdentifier: "SettingsSwitchCell")
         tableView.register(SettingsActionSheetCell.self, forCellReuseIdentifier: "SettingsActionSheetCell")

@@ -45,7 +45,12 @@ final class SettingsActionSheetCell: UITableViewCell {
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
 
+        setupView()
         setupLayout()
+    }
+    
+    private func setupView() {
+        self.backgroundColor = .appColor(.background)
     }
     
     private func setupLayout() {
@@ -67,10 +72,15 @@ final class SettingsActionSheetCell: UITableViewCell {
         }
     }
     
-    func configure(left: String? = nil, center: String? = nil, right: String? = nil) {
+    func configure(left: String? = nil, center: String? = nil, right: String? = nil, color: UIColor? = nil) {
         if let left = left { leftLabel.text = left }
         if let center = center { centerLabel.text = center }
         if let right = right { rightLabel.text = right }
+        if let color = color {
+            leftLabel.textColor = color
+            centerLabel.textColor = color
+            rightLabel.textColor = color
+        }
     }
     
     func tapped(mode: SettingsActionSheetMode) {
