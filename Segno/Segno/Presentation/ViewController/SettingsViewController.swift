@@ -11,7 +11,6 @@ import RxCocoa
 import RxSwift
 
 final class SettingsViewController: UIViewController {
-    
     private let disposeBag = DisposeBag()
     
     private lazy var tableView: UITableView = {
@@ -41,13 +40,10 @@ final class SettingsViewController: UIViewController {
             $0.edges.equalTo(view.safeAreaLayoutGuide)
         }
     }
-    
-    
 }
 
 extension SettingsViewController {
     private func bindTableView() {
-        
         let dataSource = Observable<[SettingsCellModel]>.just([
             .nickname,
             .settingsSwitch(title: "음악 자동 재생", isOn: true), // TODO: isOn은 로컬 디비로부터 불러와야 합니다.

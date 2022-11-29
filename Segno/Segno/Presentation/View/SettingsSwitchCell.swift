@@ -10,8 +10,8 @@ import UIKit
 import SnapKit
 
 final class SettingsSwitchCell: UITableViewCell {
-
     private enum Metric {
+        static let edgeSpacing: CGFloat = 20
         static let labelFontSize: CGFloat = 20
     }
     
@@ -42,12 +42,12 @@ final class SettingsSwitchCell: UITableViewCell {
         
         titleLabel.snp.makeConstraints {
             $0.centerY.equalToSuperview()
-            $0.leading.equalToSuperview().inset(20)
+            $0.leading.equalToSuperview().inset(Metric.edgeSpacing)
         }
         
         switchButton.snp.makeConstraints {
             $0.centerY.equalToSuperview()
-            $0.trailing.equalToSuperview().inset(20)
+            $0.trailing.equalToSuperview().inset(Metric.edgeSpacing)
         }
     }
     
@@ -56,7 +56,6 @@ final class SettingsSwitchCell: UITableViewCell {
         switchButton.isOn = isOn
         switchButton.tag = row
     }
-    
     
     @objc private func switchButtonTapped() {
         switch switchButton.tag {

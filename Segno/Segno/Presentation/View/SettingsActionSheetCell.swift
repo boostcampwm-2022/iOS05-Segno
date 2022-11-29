@@ -15,9 +15,9 @@ enum SettingsActionSheetMode {
 }
 
 final class SettingsActionSheetCell: UITableViewCell {
-
     private enum Metric {
         static let labelFontSize: CGFloat = 20
+        static let edgeSpacing: CGFloat = 20
     }
     
     lazy var titleLabel: UILabel = {
@@ -41,7 +41,7 @@ final class SettingsActionSheetCell: UITableViewCell {
         
         titleLabel.snp.makeConstraints {
             $0.centerY.equalToSuperview()
-            $0.leading.equalToSuperview().inset(20)
+            $0.leading.equalToSuperview().inset(Metric.edgeSpacing)
         }
     }
     

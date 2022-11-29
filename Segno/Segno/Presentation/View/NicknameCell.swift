@@ -9,10 +9,16 @@ import UIKit
 
 final class NicknameCell: UITableViewCell {
     private enum Metric {
+        static let nicknameLabelText: String = "닉네임 변경"
+        static let textfieldPlaceholder: String = "사용할 닉네임을 입력해주세요"
+        static let buttonText: String = "확인"
         static let edgeSpacing: CGFloat = 16
         static let cornerRadius: CGFloat = 8
         static let textHeight: CGFloat = 40
         static let textSize: CGFloat = 14
+        static let leftViewSpacing: CGFloat = 16
+        static let nicknameViewHeight: CGFloat = 100
+        static let buttonWidth: CGFloat = 70
     }
     
     private lazy var nicknameView: UIView = {
@@ -22,7 +28,7 @@ final class NicknameCell: UITableViewCell {
     
     private lazy var nicknameLabel: UILabel = {
         let label = UILabel()
-        label.text = "닉네임 변경"
+        label.text = Metric.nicknameLabelText
         label.font = .appFont(.surroundAir, size: Metric.textSize)
         label.textColor = .appColor(.grey2)
         return label
@@ -30,9 +36,9 @@ final class NicknameCell: UITableViewCell {
     
     lazy var nicknameTextField: UITextField = {
         let textfield = UITextField()
-        textfield.placeholder = "사용할 닉네임을 입력해주세요"
+        textfield.placeholder = Metric.textfieldPlaceholder
         textfield.backgroundColor = .appColor(.grey1)
-        textfield.leftView = UIView(frame: CGRect(x: 0, y: 0, width: 16, height: 0))
+        textfield.leftView = UIView(frame: CGRect(x: 0, y: 0, width: Metric.leftViewSpacing, height: 0))
         textfield.leftViewMode = .always
         textfield.layer.cornerRadius = Metric.cornerRadius
         return textfield
@@ -40,7 +46,7 @@ final class NicknameCell: UITableViewCell {
     
     lazy var okButton: UIButton = {
         let button = UIButton()
-        button.setTitle("확인", for: .normal)
+        button.setTitle(Metric.buttonText, for: .normal)
         button.backgroundColor = .appColor(.color4)
         button.setTitleColor(.appColor(.white), for: .normal)
         button.layer.cornerRadius = Metric.cornerRadius
@@ -63,7 +69,7 @@ final class NicknameCell: UITableViewCell {
         
         nicknameView.snp.makeConstraints {
             $0.edges.equalToSuperview()
-            $0.height.equalTo(100)
+            $0.height.equalTo(Metric.nicknameViewHeight)
         }
         
         nicknameLabel.snp.makeConstraints {
@@ -78,7 +84,7 @@ final class NicknameCell: UITableViewCell {
         }
         
         okButton.snp.makeConstraints {
-            $0.width.equalTo(70)
+            $0.width.equalTo(Metric.buttonWidth)
             $0.top.equalTo(nicknameLabel.snp.bottom).offset(Metric.edgeSpacing)
             $0.trailing.equalTo(nicknameView).inset(Metric.edgeSpacing)
             $0.height.equalTo(Metric.textHeight)
