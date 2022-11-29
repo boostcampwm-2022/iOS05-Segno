@@ -7,6 +7,8 @@
 
 import UIKit
 
+import RxSwift
+
 final class NicknameCell: UITableViewCell {
     private enum Metric {
         static let nicknameLabelText: String = "닉네임 변경"
@@ -20,6 +22,10 @@ final class NicknameCell: UITableViewCell {
         static let nicknameViewHeight: CGFloat = 100
         static let buttonWidth: CGFloat = 70
     }
+    
+    private var viewModel: SettingsViewModel?
+    private let disposeBag = DisposeBag()
+    var nicknameChangeSucceeded = PublishSubject<Bool>()
     
     private lazy var nicknameView: UIView = {
         let view = UIView()
@@ -91,7 +97,18 @@ final class NicknameCell: UITableViewCell {
         }
     }
     
+    func configure(viewModel: SettingsViewModel) {
+        self.viewModel = viewModel
+    }
+    
     @objc private func okButtonTapped() {
         debugPrint("\(nicknameTextField.text!) - 확인 버튼을 누름")
+        guard let newNickname = nicknameTextField.text,
+        let viewModel = viewModel else { return }
+        viewModel.changeNickname(to: newNickname)
+            .subscribe(onNext: { [weak self] result in
+                self?.nicknameChangeSucceeded.onNext(result)
+            })
+            .disposed(by: disposeBag)
     }
 }

@@ -20,6 +20,8 @@ final class SettingsActionSheetCell: UITableViewCell {
         static let edgeSpacing: CGFloat = 20
     }
     
+    private var viewModel: SettingsViewModel?
+    
     lazy var titleLabel: UILabel = {
         let label = UILabel()
         label.font = .appFont(.shiningStar, size: Metric.labelFontSize)
@@ -45,14 +47,16 @@ final class SettingsActionSheetCell: UITableViewCell {
         }
     }
     
-    func configure(title: String) {
+    func configure(title: String, viewModel: SettingsViewModel) {
         titleLabel.text = title
+        self.viewModel = viewModel
     }
     
     func tapped(mode: SettingsActionSheetMode) {
         switch mode {
         case .darkmode:
             debugPrint("darkmode 관련 액션을 실행합니다.")
+            viewModel?.changeAutoPlayMode()
         }
     }
 }

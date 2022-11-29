@@ -46,6 +46,7 @@ final class SettingsViewController: UIViewController {
         setupView()
         setupLayout()
         bindTableView()
+        bind()
     }
     
     private func setupView() {
@@ -59,24 +60,32 @@ final class SettingsViewController: UIViewController {
             $0.edges.equalTo(view.safeAreaLayoutGuide)
         }
     }
-}
 
-extension SettingsViewController {
     private func bindTableView() {
         viewModel.dataSource
-            .bind(to: tableView.rx.items) { (tableView, row, element) in
+            .bind(to: tableView.rx.items) { [weak self] (tableView, row, element) in
                 switch element {
                 case .nickname:
-                    guard let cell = tableView.dequeueReusableCell(withIdentifier: "NicknameCell") as? NicknameCell else { return UITableViewCell() }
+                    guard let cell = tableView.dequeueReusableCell(withIdentifier: "NicknameCell") as? NicknameCell,
+                          let self = self else { return UITableViewCell() }
+                    cell.configure(viewModel: self.viewModel)
+                    cell.nicknameChangeSucceeded
+                        .subscribe(onNext: { result in
+                            // TODO: result에 맞는 Alert 띄우기
+                            print("도착한 result : \(result)")
+                        })
+                        .disposed(by: self.disposeBag)
                     return cell
                 case .settingsSwitch(let title, let isOn):
                     guard let cell = tableView.dequeueReusableCell(withIdentifier: "SettingsSwitchCell") as? SettingsSwitchCell,
-                          let action = CellActions(rawValue: row) else { return UITableViewCell() }
-                    cell.configure(title: title, isOn: isOn, action: action)
+                          let action = CellActions(rawValue: row),
+                          let self = self else { return UITableViewCell() }
+                    cell.configure(title: title, isOn: isOn, action: action, viewModel: self.viewModel)
                     return cell
                 case .settingsActionSheet(let title):
-                    guard let cell = tableView.dequeueReusableCell(withIdentifier: "SettingsActionSheetCell") as? SettingsActionSheetCell else { return UITableViewCell() }
-                    cell.configure(title: title)
+                    guard let cell = tableView.dequeueReusableCell(withIdentifier: "SettingsActionSheetCell") as? SettingsActionSheetCell,
+                          let self = self else { return UITableViewCell() }
+                    cell.configure(title: title, viewModel: self.viewModel)
                     return cell
                 }
             }
@@ -95,6 +104,10 @@ extension SettingsViewController {
                 }
             })
             .disposed(by: disposeBag)
+    }
+    
+    private func bind() {
+        
     }
 }
 

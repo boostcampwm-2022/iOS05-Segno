@@ -15,6 +15,8 @@ final class SettingsSwitchCell: UITableViewCell {
         static let labelFontSize: CGFloat = 20
     }
     
+    private var viewModel: SettingsViewModel?
+    
     lazy var titleLabel: UILabel = {
         let label = UILabel()
         label.font = .appFont(.shiningStar, size: Metric.labelFontSize)
@@ -51,10 +53,11 @@ final class SettingsSwitchCell: UITableViewCell {
         }
     }
     
-    func configure(title: String, isOn: Bool, action: CellActions) {
+    func configure(title: String, isOn: Bool, action: CellActions, viewModel: SettingsViewModel) {
         titleLabel.text = title
         switchButton.isOn = isOn
         switchButton.tag = action.toRow
+        self.viewModel = viewModel
     }
     
     @objc private func switchButtonTapped() {
@@ -62,6 +65,8 @@ final class SettingsSwitchCell: UITableViewCell {
         switch action {
         case .autoplay:
             debugPrint("\(switchButton.isOn) / autoPlay 관련 액션을 실행합니다.")
+            guard let viewModel = viewModel else { return }
+            viewModel.changeAutoPlayMode(to: switchButton.isOn)
         default:
             break
         }
