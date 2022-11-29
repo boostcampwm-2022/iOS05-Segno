@@ -23,9 +23,8 @@ final class NicknameCell: UITableViewCell {
         static let buttonWidth: CGFloat = 70
     }
     
-    private var viewModel: SettingsViewModel?
     private let disposeBag = DisposeBag()
-    var nicknameChangeSucceeded = PublishSubject<Bool>()
+    var nicknameChangeButtonTapped = PublishSubject<String>()
     
     private lazy var nicknameView: UIView = {
         let view = UIView()
@@ -66,6 +65,7 @@ final class NicknameCell: UITableViewCell {
     
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
+        
         setupLayout()
     }
     
@@ -97,18 +97,10 @@ final class NicknameCell: UITableViewCell {
         }
     }
     
-    func configure(viewModel: SettingsViewModel) {
-        self.viewModel = viewModel
-    }
-    
     @objc private func okButtonTapped() {
         debugPrint("\(nicknameTextField.text!) - 확인 버튼을 누름")
-        guard let newNickname = nicknameTextField.text,
-        let viewModel = viewModel else { return }
-        viewModel.changeNickname(to: newNickname)
-            .subscribe(onNext: { [weak self] result in
-                self?.nicknameChangeSucceeded.onNext(result)
-            })
-            .disposed(by: disposeBag)
+        guard let newNickname = nicknameTextField.text else { return }
+        nicknameChangeButtonTapped
+            .onNext(newNickname)
     }
 }

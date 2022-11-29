@@ -7,6 +7,7 @@
 
 import UIKit
 
+import RxSwift
 import SnapKit
 
 final class SettingsSwitchCell: UITableViewCell {
@@ -15,7 +16,7 @@ final class SettingsSwitchCell: UITableViewCell {
         static let labelFontSize: CGFloat = 20
     }
     
-    private var viewModel: SettingsViewModel?
+    var settingsSwitchTapped = PublishSubject<(CellActions, Any?)>()
     
     lazy var titleLabel: UILabel = {
         let label = UILabel()
@@ -53,20 +54,19 @@ final class SettingsSwitchCell: UITableViewCell {
         }
     }
     
-    func configure(title: String, isOn: Bool, action: CellActions, viewModel: SettingsViewModel) {
+    func configure(title: String, isOn: Bool, action: CellActions) {
         titleLabel.text = title
         switchButton.isOn = isOn
         switchButton.tag = action.toRow
-        self.viewModel = viewModel
     }
     
     @objc private func switchButtonTapped() {
-        let action = CellActions(rawValue: switchButton.tag)
+        guard let action = CellActions(rawValue: switchButton.tag) else { return }
+        let switchStatus = switchButton.isOn
         switch action {
         case .autoplay:
-            debugPrint("\(switchButton.isOn) / autoPlay 관련 액션을 실행합니다.")
-            guard let viewModel = viewModel else { return }
-            viewModel.changeAutoPlayMode(to: switchButton.isOn)
+            settingsSwitchTapped
+                .onNext((action, switchStatus))
         default:
             break
         }

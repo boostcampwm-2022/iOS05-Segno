@@ -68,11 +68,14 @@ final class SettingsViewController: UIViewController {
                 case .nickname:
                     guard let cell = tableView.dequeueReusableCell(withIdentifier: "NicknameCell") as? NicknameCell,
                           let self = self else { return UITableViewCell() }
-                    cell.configure(viewModel: self.viewModel)
-                    cell.nicknameChangeSucceeded
+                    
+                    cell.nicknameChangeButtonTapped
+                        .flatMap { nickname in
+                            self.viewModel.changeNickname(to: nickname)
+                        }
                         .subscribe(onNext: { result in
-                            // TODO: result에 맞는 Alert 띄우기
-                            print("도착한 result : \(result)")
+                            // TODO: result 결과에 따른 Alert 작성
+                            debugPrint("viewModel 메서드 실행 결과 : ", result)
                         })
                         .disposed(by: self.disposeBag)
                     return cell
@@ -80,12 +83,36 @@ final class SettingsViewController: UIViewController {
                     guard let cell = tableView.dequeueReusableCell(withIdentifier: "SettingsSwitchCell") as? SettingsSwitchCell,
                           let action = CellActions(rawValue: row),
                           let self = self else { return UITableViewCell() }
-                    cell.configure(title: title, isOn: isOn, action: action, viewModel: self.viewModel)
+                    
+                    cell.settingsSwitchTapped
+                        .subscribe(onNext: { (cellActions, value) in
+                            switch cellActions {
+                            case .autoplay:
+                                guard let value = value as? Bool else { return }
+                                return self.viewModel.changeAutoPlayMode(to: value)
+                            default:
+                                break
+                            }
+                        })
+                        .disposed(by: self.disposeBag)
+                    
+                    cell.configure(title: title, isOn: isOn, action: action)
                     return cell
                 case .settingsActionSheet(let title):
                     guard let cell = tableView.dequeueReusableCell(withIdentifier: "SettingsActionSheetCell") as? SettingsActionSheetCell,
                           let self = self else { return UITableViewCell() }
-                    cell.configure(title: title, viewModel: self.viewModel)
+                    
+                    cell.settingsActionSheetTapped
+                        .subscribe(onNext: { (actionSheetMode, value) in
+                            switch actionSheetMode {
+                            case .darkmode:
+                                guard let status = value as? Int else { return }
+                                self.viewModel.changeDarkMode(to: status)
+                            }
+                        })
+                        .disposed(by: self.disposeBag)
+                    
+                    cell.configure(title: title)
                     return cell
                 }
             }
@@ -98,7 +125,9 @@ final class SettingsViewController: UIViewController {
                 switch action {
                 case .darkmode: // 다크 모드 설정
                     guard let cell = self?.tableView.cellForRow(at: indexPath) as? SettingsActionSheetCell else { return }
-                    cell.tapped(mode: .darkmode)
+                    cell.tapped(mode: .darkmode) { alertController in
+                        self?.present(alertController, animated: true)
+                    }
                 default:
                     break
                 }

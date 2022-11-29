@@ -35,23 +35,24 @@ final class SettingsViewModel {
     func getAutoPlayMode() -> Bool {
         // return useCase.getAutoPlayMode()
         
-        // 임시 값입니다.
         return true
     }
     
     func changeAutoPlayMode(to mode: Bool) {
 //        useCase.changeAutoPlayMode(to: mode)
+        
+        debugPrint("changeAutoPlayMode에서 \(mode)로 변경합니다")
     }
     
     // TODO: 다크모드 설정 불러오기 / 액션 시트 선택 시 반영하기
     func getDarkMode() -> Int {
         // return useCase.getDarkMode()
         
-        // 임시 값입니다.
         return 0
     }
     
-    func changeAutoPlayMode() {
+    func changeDarkMode(to mode: Int) {
         // TODO: 액션 시트를 띄워야 합니다.
+        debugPrint("changeDarkMode에서 \(mode)로 변경합니다")
     }
 }

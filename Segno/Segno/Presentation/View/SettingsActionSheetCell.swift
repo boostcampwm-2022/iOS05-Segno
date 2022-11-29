@@ -8,6 +8,7 @@
 
 import UIKit
 
+import RxSwift
 import SnapKit
 
 enum SettingsActionSheetMode {
@@ -20,7 +21,7 @@ final class SettingsActionSheetCell: UITableViewCell {
         static let edgeSpacing: CGFloat = 20
     }
     
-    private var viewModel: SettingsViewModel?
+    var settingsActionSheetTapped = PublishSubject<(SettingsActionSheetMode, Any?)>()
     
     lazy var titleLabel: UILabel = {
         let label = UILabel()
@@ -47,16 +48,24 @@ final class SettingsActionSheetCell: UITableViewCell {
         }
     }
     
-    func configure(title: String, viewModel: SettingsViewModel) {
+    func configure(title: String) {
         titleLabel.text = title
-        self.viewModel = viewModel
     }
     
-    func tapped(mode: SettingsActionSheetMode) {
+    func tapped(mode: SettingsActionSheetMode, _ completionHandler: @escaping (UIAlertController) -> Void) {
         switch mode {
         case .darkmode:
-            debugPrint("darkmode 관련 액션을 실행합니다.")
-            viewModel?.changeAutoPlayMode()
+            let actionSheet = UIAlertController(title: "다크 모드 설정", message: nil, preferredStyle: .actionSheet)
+            actionSheet.addAction(UIAlertAction(title: "시스템 설정", style: .default, handler: { _ in
+                self.settingsActionSheetTapped.onNext((.darkmode, 0))
+            }))
+            actionSheet.addAction(UIAlertAction(title: "항상 밝게", style: .default, handler: { _ in
+                self.settingsActionSheetTapped.onNext((.darkmode, 1))
+            }))
+            actionSheet.addAction(UIAlertAction(title: "항상 어둡게", style: .default, handler: { _ in
+                self.settingsActionSheetTapped.onNext((.darkmode, 2))
+            }))
+            completionHandler(actionSheet)
         }
     }
 }
