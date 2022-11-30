@@ -42,7 +42,7 @@ final class DiaryCollectionViewController: UIViewController {
     private var diaryCells: [DiaryListItem] = []
     weak var delegate: DiaryCollectionViewDelegate?
     
-    lazy var searchBar: UISearchBar = {
+    private lazy var searchBar: UISearchBar = {
         let bar = UISearchBar()
         bar.placeholder = "Search Bar Test!"
         bar.searchTextField.font = .appFont(.shiningStar, size: 20)
@@ -51,16 +51,16 @@ final class DiaryCollectionViewController: UIViewController {
         return bar
     }()
     
-    lazy var diaryCollectionView: UICollectionView = {
+    private lazy var diaryCollectionView: UICollectionView = {
         let layout = makeCollectionViewLayout()
         let collectionView = UICollectionView(frame: .zero, collectionViewLayout: layout)
         collectionView.backgroundColor = .appColor(.color1)
         return collectionView
     }()
     
-    lazy var appendButton = UIButton()
+    private lazy var appendButton = UIButton()
     
-    lazy var appendButtonLabel: UILabel = {
+    private lazy var appendButtonLabel: UILabel = {
         let label = UILabel()
         label.font = .appFont(.surroundAir, size: Metric.buttonFontSize)
         label.text = Metric.buttonText

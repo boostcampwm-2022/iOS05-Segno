@@ -11,6 +11,22 @@ import RxCocoa
 import RxSwift
 import SnapKit
 
+enum CellActions: Int {
+    case diary
+    case setting
+    case logout
+    
+    var toRow: Int {
+        return self.rawValue
+    }
+}
+
+enum MyPageCellModel {
+    case writtenDiary(title: String, subtitle: String)
+    case settings(title: String)
+    case logout(title: String, color: UIColor)
+}
+
 protocol MyPageViewDelegate: AnyObject {
     func settingButtonTapped()
 }
@@ -23,15 +39,12 @@ final class MyPageViewController: UIViewController {
     private enum Metric {
         static let titleText: String = "안녕하세요,\nboostcamp님!"
         
-        static let buttonFontSize: CGFloat = 15
-        static let buttonHeight: CGFloat = 50
         static let settingsOffset: CGFloat = 100
-        static let stackViewSpacing: CGFloat = 1
         static let titleFontSize: CGFloat = 32
         static let titleOffset: CGFloat = 30
     }
     
-    lazy var titleLabel: UILabel = {
+    private lazy var titleLabel: UILabel = {
         let label = UILabel()
         label.font = .appFont(.surround, size: Metric.titleFontSize)
         label.numberOfLines = 0
@@ -39,39 +52,13 @@ final class MyPageViewController: UIViewController {
         return label
     }()
     
-    lazy var settingsStackView: UIStackView = {
-        let stackView = UIStackView()
-        stackView.axis = .vertical
-        stackView.spacing = Metric.stackViewSpacing
-        stackView.distribution = .fillEqually
-        return stackView
-    }()
-    
-    lazy var diaryCountButton: UIButton = {
-        let button = UIButton()
-        button.setTitle("작성한 일기 수 : 123,456,789개", for: .normal)
-        button.setTitleColor(.appColor(.black), for: .normal)
-        button.titleLabel?.font = .appFont(.surroundAir, size: Metric.buttonFontSize)
-        button.setBackgroundColor(.appColor(.color1) ?? .red, for: .normal)
-        return button
-    }()
-    
-    lazy var settingButton: UIButton = {
-        let button = UIButton()
-        button.setTitle("설정", for: .normal)
-        button.setTitleColor(.appColor(.black), for: .normal)
-        button.titleLabel?.font = .appFont(.surroundAir, size: Metric.buttonFontSize)
-        button.setBackgroundColor(.appColor(.color1) ?? .red, for: .normal)
-        return button
-    }()
-    
-    lazy var logoutButton: UIButton = {
-        let button = UIButton()
-        button.setTitle("logout", for: .normal)
-        button.setTitleColor(.red, for: .normal)
-        button.titleLabel?.font = .appFont(.surroundAir, size: Metric.buttonFontSize)
-        button.setBackgroundColor(.appColor(.color1) ?? .red, for: .normal)
-        return button
+    private lazy var tableView: UITableView = {
+        let tableView = UITableView()
+        tableView.backgroundColor = .appColor(.background)
+        tableView.register(SettingsActionSheetCell.self, forCellReuseIdentifier: "writtenDiary")
+        tableView.register(SettingsActionSheetCell.self, forCellReuseIdentifier: "settings")
+        tableView.register(SettingsActionSheetCell.self, forCellReuseIdentifier: "logout")
+        return tableView
     }()
     
     override func viewDidLoad() {
@@ -79,7 +66,7 @@ final class MyPageViewController: UIViewController {
         
         setupView()
         setupLayout()
-        setupRx()
+        bindTableView()
     }
 
     private func setupView() {
@@ -87,7 +74,7 @@ final class MyPageViewController: UIViewController {
     }
     
     private func setupLayout() {
-        [titleLabel, settingsStackView].forEach {
+        [titleLabel, tableView].forEach {
             view.addSubview($0)
 
             $0.snp.makeConstraints { make in
@@ -96,29 +83,53 @@ final class MyPageViewController: UIViewController {
             }
         }
         
-        [diaryCountButton, settingButton, logoutButton].forEach {
-            settingsStackView.addArrangedSubview($0)
-            
-            $0.snp.makeConstraints { make in
-                make.height.equalTo(Metric.buttonHeight)
-            }
-        }
-        
         titleLabel.snp.makeConstraints { make in
             make.top.leading.equalTo(view.safeAreaLayoutGuide).offset(Metric.titleOffset)
         }
         
-        settingsStackView.snp.makeConstraints { make in
+        tableView.snp.makeConstraints { make in
             make.top.equalTo(titleLabel.snp.bottom).offset(Metric.settingsOffset)
+            make.bottom.leading.trailing.equalTo(view.safeAreaLayoutGuide)
         }
     }
     
-    private func setupRx() {
-        settingButton.rx.tap
-            .withUnretained(self)
-            .bind { _ in
-                self.settingButtonTapped()
+    private func bindTableView() {
+        let dataSource = Observable<[MyPageCellModel]>.just([
+            .writtenDiary(title: "작성한 일기 수", subtitle: "123,456,789개"), // TODO: subtitle 불러오기
+            .settings(title: "설정"),
+            .logout(title: "logout", color: .red)
+        ])
+        
+        dataSource
+            .bind(to: tableView.rx.items) { (tableView, row, element) in
+                switch element {
+                case .writtenDiary(let title, let subtitle):
+                    guard let cell = tableView.dequeueReusableCell(withIdentifier: "writtenDiary") as? SettingsActionSheetCell else { return UITableViewCell() }
+                    cell.configure(left: title, right: subtitle)
+                    return cell
+                case .settings(let title):
+                    guard let cell = tableView.dequeueReusableCell(withIdentifier: "settings") as? SettingsActionSheetCell else { return UITableViewCell() }
+                    cell.configure(center: title)
+                    return cell
+                case .logout(let title, let color):
+                    guard let cell = tableView.dequeueReusableCell(withIdentifier: "logout") as? SettingsActionSheetCell else { return UITableViewCell() }
+                    cell.configure(center: title, color: color)
+                    return cell
+                }
             }
+            .disposed(by: disposeBag)
+        
+        tableView.rx.itemSelected
+            .subscribe(onNext: { [weak self] indexPath in
+                self?.tableView.deselectRow(at: indexPath, animated: true)
+                guard let action = CellActions(rawValue: indexPath.row) else { return }
+                switch action {
+                case .setting:
+                    self?.settingButtonTapped()
+                default:
+                    break
+                }
+            })
             .disposed(by: disposeBag)
     }
     

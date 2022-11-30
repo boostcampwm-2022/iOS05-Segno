@@ -25,6 +25,7 @@ final class SettingsViewController: UIViewController {
     private let viewModel: SettingsViewModel
     private lazy var tableView: UITableView = {
         let tableView = UITableView()
+        tableView.backgroundColor = .appColor(.background)
         tableView.register(NicknameCell.self, forCellReuseIdentifier: "NicknameCell")
         tableView.register(SettingsSwitchCell.self, forCellReuseIdentifier: "SettingsSwitchCell")
         tableView.register(SettingsActionSheetCell.self, forCellReuseIdentifier: "SettingsActionSheetCell")
@@ -102,11 +103,8 @@ final class SettingsViewController: UIViewController {
                     cell.configure(title: title, isOn: isOn, action: action)
                     return cell
                 case .settingsActionSheet(let title):
-                    guard let cell = tableView.dequeueReusableCell(withIdentifier: "SettingsActionSheetCell") as? SettingsActionSheetCell else {
-                        return UITableViewCell()
-                    }
-                    
-                    cell.configure(title: title)
+                    guard let cell = tableView.dequeueReusableCell(withIdentifier: "SettingsActionSheetCell") as? SettingsActionSheetCell else { return UITableViewCell() }
+                    cell.configure(left: title)
                     return cell
                 }
             }
