@@ -8,11 +8,8 @@
 
 import UIKit
 
+import RxSwift
 import SnapKit
-
-enum SettingsActionSheetMode {
-    case darkmode
-}
 
 final class SettingsActionSheetCell: UITableViewCell {
     private enum Metric {
@@ -80,13 +77,6 @@ final class SettingsActionSheetCell: UITableViewCell {
             leftLabel.textColor = color
             centerLabel.textColor = color
             rightLabel.textColor = color
-        }
-    }
-    
-    func tapped(mode: SettingsActionSheetMode) {
-        switch mode {
-        case .darkmode:
-            debugPrint("darkmode 관련 액션을 실행합니다.")
         }
     }
 }

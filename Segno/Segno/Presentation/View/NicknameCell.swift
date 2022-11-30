@@ -7,6 +7,8 @@
 
 import UIKit
 
+import RxSwift
+
 final class NicknameCell: UITableViewCell {
     private enum Metric {
         static let nicknameLabelText: String = "닉네임 변경"
@@ -21,6 +23,8 @@ final class NicknameCell: UITableViewCell {
         static let buttonWidth: CGFloat = 70
     }
     
+    private let disposeBag = DisposeBag()
+
     private lazy var nicknameView: UIView = {
         let view = UIView()
         return view
@@ -50,7 +54,6 @@ final class NicknameCell: UITableViewCell {
         button.backgroundColor = .appColor(.color4)
         button.setTitleColor(.appColor(.white), for: .normal)
         button.layer.cornerRadius = Metric.cornerRadius
-        button.addTarget(self, action: #selector(okButtonTapped), for: .touchUpInside)
         return button
     }()
     
@@ -60,7 +63,7 @@ final class NicknameCell: UITableViewCell {
     
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
-
+        
         setupView()
         setupLayout()
     }
@@ -95,9 +98,5 @@ final class NicknameCell: UITableViewCell {
             $0.trailing.equalTo(nicknameView).inset(Metric.edgeSpacing)
             $0.height.equalTo(Metric.textHeight)
         }
-    }
-    
-    @objc private func okButtonTapped() {
-        debugPrint("\(nicknameTextField.text!) - 확인 버튼을 누름")
     }
 }

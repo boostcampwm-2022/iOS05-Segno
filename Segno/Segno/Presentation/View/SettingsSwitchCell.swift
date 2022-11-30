@@ -7,6 +7,7 @@
 
 import UIKit
 
+import RxSwift
 import SnapKit
 
 final class SettingsSwitchCell: UITableViewCell {
@@ -23,7 +24,6 @@ final class SettingsSwitchCell: UITableViewCell {
     
     private lazy var switchButton: UISwitch = {
         let switchButton = UISwitch()
-        switchButton.addTarget(self, action: #selector(switchButtonTapped), for: .touchUpInside)
         return switchButton
     }()
     
@@ -56,18 +56,9 @@ final class SettingsSwitchCell: UITableViewCell {
         }
     }
     
-    func configure(title: String, isOn: Bool, row: Int) {
+    func configure(title: String, isOn: Bool, action: CellActions) {
         titleLabel.text = title
         switchButton.isOn = isOn
-        switchButton.tag = row
-    }
-    
-    @objc private func switchButtonTapped() {
-        switch switchButton.tag {
-        case 1:
-            debugPrint("\(switchButton.isOn) / autoPlay 관련 액션을 실행합니다.")
-        default:
-            break
-        }
+        switchButton.tag = action.toRow
     }
 }
