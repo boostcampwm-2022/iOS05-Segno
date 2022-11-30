@@ -24,8 +24,7 @@ final class NicknameCell: UITableViewCell {
     }
     
     private let disposeBag = DisposeBag()
-    var nicknameChangeButtonTapped = PublishSubject<String>()
-    
+
     private lazy var nicknameView: UIView = {
         let view = UIView()
         return view
@@ -55,7 +54,6 @@ final class NicknameCell: UITableViewCell {
         button.backgroundColor = .appColor(.color4)
         button.setTitleColor(.appColor(.white), for: .normal)
         button.layer.cornerRadius = Metric.cornerRadius
-        button.addTarget(self, action: #selector(okButtonTapped), for: .touchUpInside)
         return button
     }()
     
@@ -95,12 +93,5 @@ final class NicknameCell: UITableViewCell {
             $0.trailing.equalTo(nicknameView).inset(Metric.edgeSpacing)
             $0.height.equalTo(Metric.textHeight)
         }
-    }
-    
-    @objc private func okButtonTapped() {
-        debugPrint("\(nicknameTextField.text!) - 확인 버튼을 누름")
-        guard let newNickname = nicknameTextField.text else { return }
-        nicknameChangeButtonTapped
-            .onNext(newNickname)
     }
 }

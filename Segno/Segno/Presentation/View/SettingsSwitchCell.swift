@@ -16,9 +16,7 @@ final class SettingsSwitchCell: UITableViewCell {
         static let labelFontSize: CGFloat = 20
     }
     
-    var settingsSwitchTapped = PublishSubject<(CellActions, Any?)>()
-    
-    lazy var titleLabel: UILabel = {
+    private lazy var titleLabel: UILabel = {
         let label = UILabel()
         label.font = .appFont(.shiningStar, size: Metric.labelFontSize)
         return label
@@ -26,7 +24,6 @@ final class SettingsSwitchCell: UITableViewCell {
     
     lazy var switchButton: UISwitch = {
         let switchButton = UISwitch()
-        switchButton.addTarget(self, action: #selector(switchButtonTapped), for: .touchUpInside)
         return switchButton
     }()
     
@@ -58,17 +55,5 @@ final class SettingsSwitchCell: UITableViewCell {
         titleLabel.text = title
         switchButton.isOn = isOn
         switchButton.tag = action.toRow
-    }
-    
-    @objc private func switchButtonTapped() {
-        guard let action = CellActions(rawValue: switchButton.tag) else { return }
-        let switchStatus = switchButton.isOn
-        switch action {
-        case .autoplay:
-            settingsSwitchTapped
-                .onNext((action, switchStatus))
-        default:
-            break
-        }
     }
 }
