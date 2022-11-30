@@ -15,13 +15,13 @@ final class SettingsSwitchCell: UITableViewCell {
         static let labelFontSize: CGFloat = 20
     }
     
-    lazy var titleLabel: UILabel = {
+    private lazy var titleLabel: UILabel = {
         let label = UILabel()
         label.font = .appFont(.shiningStar, size: Metric.labelFontSize)
         return label
     }()
     
-    lazy var switchButton: UISwitch = {
+    private lazy var switchButton: UISwitch = {
         let switchButton = UISwitch()
         switchButton.addTarget(self, action: #selector(switchButtonTapped), for: .touchUpInside)
         return switchButton
@@ -34,7 +34,12 @@ final class SettingsSwitchCell: UITableViewCell {
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
 
+        setupView()
         setupLayout()
+    }
+    
+    private func setupView() {
+        self.backgroundColor = .appColor(.background)
     }
     
     private func setupLayout() {
