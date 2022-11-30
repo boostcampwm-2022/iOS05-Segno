@@ -11,7 +11,7 @@ import RxCocoa
 import RxSwift
 import SnapKit
 
-enum CellActions: Int {
+enum MyPageCellActions: Int {
     case diary
     case setting
     case logout
@@ -122,7 +122,7 @@ final class MyPageViewController: UIViewController {
         tableView.rx.itemSelected
             .subscribe(onNext: { [weak self] indexPath in
                 self?.tableView.deselectRow(at: indexPath, animated: true)
-                guard let action = CellActions(rawValue: indexPath.row) else { return }
+                guard let action = MyPageCellActions(rawValue: indexPath.row) else { return }
                 switch action {
                 case .setting:
                     self?.settingButtonTapped()

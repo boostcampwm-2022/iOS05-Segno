@@ -22,7 +22,7 @@ final class SettingsSwitchCell: UITableViewCell {
         return label
     }()
     
-    private lazy var switchButton: UISwitch = {
+    lazy var switchButton: UISwitch = {
         let switchButton = UISwitch()
         return switchButton
     }()
@@ -56,7 +56,7 @@ final class SettingsSwitchCell: UITableViewCell {
         }
     }
     
-    func configure(title: String, isOn: Bool, action: CellActions) {
+    func configure(title: String, isOn: Bool, action: SettingsCellActions) {
         titleLabel.text = title
         switchButton.isOn = isOn
         switchButton.tag = action.toRow

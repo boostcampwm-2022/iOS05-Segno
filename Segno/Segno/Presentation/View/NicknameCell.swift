@@ -38,7 +38,7 @@ final class NicknameCell: UITableViewCell {
         return label
     }()
     
-    private lazy var nicknameTextField: UITextField = {
+    lazy var nicknameTextField: UITextField = {
         let textfield = UITextField()
         textfield.placeholder = Metric.textfieldPlaceholder
         textfield.backgroundColor = .appColor(.grey1)
@@ -48,7 +48,7 @@ final class NicknameCell: UITableViewCell {
         return textfield
     }()
     
-    private lazy var okButton: UIButton = {
+    lazy var okButton: UIButton = {
         let button = UIButton()
         button.setTitle(Metric.buttonText, for: .normal)
         button.backgroundColor = .appColor(.color4)

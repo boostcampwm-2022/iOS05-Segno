@@ -10,7 +10,7 @@ import UIKit
 import RxCocoa
 import RxSwift
 
-enum CellActions: Int {
+enum SettingsCellActions: Int {
     case nickname
     case autoplay
     case darkmode
@@ -85,7 +85,7 @@ final class SettingsViewController: UIViewController {
                     return cell
                 case .settingsSwitch(let title, let isOn):
                     guard let cell = tableView.dequeueReusableCell(withIdentifier: "SettingsSwitchCell") as? SettingsSwitchCell,
-                          let action = CellActions(rawValue: row),
+                          let action = SettingsCellActions(rawValue: row),
                           let self = self else { return UITableViewCell() }
                     
                     cell.switchButton.rx.controlEvent(.touchUpInside)
@@ -113,7 +113,7 @@ final class SettingsViewController: UIViewController {
         tableView.rx.itemSelected
             .subscribe(onNext: { [weak self] indexPath in
                 self?.tableView.deselectRow(at: indexPath, animated: true)
-                guard let action = CellActions(rawValue: indexPath.row) else { return }
+                guard let action = SettingsCellActions(rawValue: indexPath.row) else { return }
                 switch action {
                 case .darkmode: // 다크 모드 설정
                     let actionSheet = UIAlertController(title: "다크 모드 설정", message: nil, preferredStyle: .actionSheet)
