@@ -26,13 +26,13 @@ final class SettingsActionSheetCell: UITableViewCell {
         return label
     }()
     
-    lazy var centerLabel: UILabel = {
+    private lazy var centerLabel: UILabel = {
         let label = UILabel()
         label.font = .appFont(.shiningStar, size: Metric.labelFontSize)
         return label
     }()
     
-    lazy var rightLabel: UILabel = {
+    private lazy var rightLabel: UILabel = {
         let label = UILabel()
         label.font = .appFont(.shiningStar, size: Metric.labelFontSize)
         return label
