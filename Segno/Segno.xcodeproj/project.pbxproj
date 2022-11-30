@@ -70,6 +70,7 @@
 		988414D72923304F007C9132 /* KeychainError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 988414D62923304F007C9132 /* KeychainError.swift */; };
 		988414D929235345007C9132 /* DiaryCollectionViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 988414D829235345007C9132 /* DiaryCollectionViewModel.swift */; };
 		988414DB2923606B007C9132 /* DiaryListUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 988414DA2923606B007C9132 /* DiaryListUseCase.swift */; };
+		9894EAF529373385005F2B15 /* SettingsUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9894EAF429373385005F2B15 /* SettingsUseCase.swift */; };
 		98B5263E292CA46C00446413 /* TagView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98B5263D292CA46C00446413 /* TagView.swift */; };
 		98B52640292CB92900446413 /* MusicContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98B5263F292CB92900446413 /* MusicContentView.swift */; };
 		98BEE36E2934907700B20143 /* LoginError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98BEE36D2934907700B20143 /* LoginError.swift */; };
@@ -141,6 +142,7 @@
 		988414D62923304F007C9132 /* KeychainError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeychainError.swift; sourceTree = "<group>"; };
 		988414D829235345007C9132 /* DiaryCollectionViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiaryCollectionViewModel.swift; sourceTree = "<group>"; };
 		988414DA2923606B007C9132 /* DiaryListUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiaryListUseCase.swift; sourceTree = "<group>"; };
+		9894EAF429373385005F2B15 /* SettingsUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsUseCase.swift; sourceTree = "<group>"; };
 		98B5263D292CA46C00446413 /* TagView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TagView.swift; sourceTree = "<group>"; };
 		98B5263F292CB92900446413 /* MusicContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MusicContentView.swift; sourceTree = "<group>"; };
 		98BEE36D2934907700B20143 /* LoginError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginError.swift; sourceTree = "<group>"; };
@@ -281,6 +283,7 @@
 				9841D6162925FACC00318EA9 /* LoginUseCase.swift */,
 				7940FB32292E065F00276EFC /* DiaryDetailUseCase.swift */,
 				988414DA2923606B007C9132 /* DiaryListUseCase.swift */,
+				9894EAF429373385005F2B15 /* SettingsUseCase.swift */,
 			);
 			path = UseCase;
 			sourceTree = "<group>";
@@ -513,6 +516,7 @@
 				4F9A00202922337F007D9057 /* LoginViewController.swift in Sources */,
 				982A2A472924AE74006F6ACD /* UserDefaultsKey.swift in Sources */,
 				4F9A001B292227D7007D9057 /* NetworkManager.swift in Sources */,
+				9894EAF529373385005F2B15 /* SettingsUseCase.swift in Sources */,
 				9841D6172925FACC00318EA9 /* LoginUseCase.swift in Sources */,
 				4FEBFAAD291CF62E00E78139 /* DiaryDetail.swift in Sources */,
 				4FEBFAB1291CFB5500E78139 /* SHMediaItem+.swift in Sources */,

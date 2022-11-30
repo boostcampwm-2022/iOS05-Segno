@@ -16,43 +16,33 @@ final class SettingsViewModel {
         .settingsActionSheet(title: "다크 모드")
     ])
     
-    init() {
-        
+    private let useCase: SettingsUseCase
+    
+    init(useCase: SettingsUseCase = SettingsUseCaseImpl()) {
+        self.useCase = useCase
     }
     
-    // TODO: 닉네임 변경 로직
     func changeNickname(to nickname: String) -> Observable<Bool> {
-//        return useCase.requestChangeNickname(to: nickname)
-        
-        // 임시 처리입니다.
         return Observable.create { emitter in
-            emitter.onNext(true)
+            let result = self.useCase.requestChangeNickname(to: nickname)
+            emitter.onNext(result)
             return Disposables.create()
         }
     }
     
-    // TODO: 음악 자동 재생 여부 불러오기 / 클릭 시 반영하기
     func getAutoPlayMode() -> Bool {
-        // return useCase.getAutoPlayMode()
-        
-        return true
+         return useCase.getAutoPlayMode()
     }
     
     func changeAutoPlayMode(to mode: Bool) {
-//        useCase.changeAutoPlayMode(to: mode)
-        
-        debugPrint("changeAutoPlayMode에서 \(mode)로 변경합니다")
+        useCase.changeAutoPlayMode(to: mode)
     }
     
-    // TODO: 다크모드 설정 불러오기 / 액션 시트 선택 시 반영하기
     func getDarkMode() -> Int {
-        // return useCase.getDarkMode()
-        
-        return 0
+        return useCase.getDarkMode()
     }
     
     func changeDarkMode(to mode: Int) {
-        // TODO: 액션 시트를 띄워야 합니다.
-        debugPrint("changeDarkMode에서 \(mode)로 변경합니다")
+        useCase.changeDarkMode(to: mode)
     }
 }

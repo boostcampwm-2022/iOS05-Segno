@@ -104,6 +104,7 @@ final class SettingsViewController: UIViewController {
                     return cell
                 case .settingsActionSheet(let title):
                     guard let cell = tableView.dequeueReusableCell(withIdentifier: "SettingsActionSheetCell") as? SettingsActionSheetCell else { return UITableViewCell() }
+                    
                     cell.configure(left: title)
                     return cell
                 }
