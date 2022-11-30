@@ -8,7 +8,6 @@
 import RxSwift
 
 protocol SettingsUseCase {
-    func requestChangeNickname(to nickname: String) -> Bool
     func getAutoPlayMode() -> Bool
     func changeAutoPlayMode(to mode: Bool)
     func getDarkMode() -> Int
@@ -21,12 +20,6 @@ final class SettingsUseCaseImpl: SettingsUseCase {
     
     init(repository: LocalUtilityRepository = LocalUtilityRepositoryImpl()) {
         self.repository = repository
-    }
-    
-    func requestChangeNickname(to nickname: String) -> Bool {
-        // 임시 처리입니다.
-        debugPrint("SettingsUseCase - requestChangeNickname : \(nickname)으로 변경")
-        return true
     }
     
     func getAutoPlayMode() -> Bool {

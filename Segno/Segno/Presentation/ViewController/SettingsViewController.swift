@@ -74,11 +74,10 @@ final class SettingsViewController: UIViewController {
                             guard let newNickname = cell.nicknameTextField.text else {
                                 return Observable<Bool>.empty()
                             }
-                            debugPrint("입력된 아이디 : ", newNickname)
                             return self.viewModel.changeNickname(to: newNickname)
                         }
                         .subscribe(onNext: { result in
-                            debugPrint("viewModel 메서드 실행 결과 : ", result)
+                            debugPrint("여기에서 \(result)에 대한 피드백 Alert 띄웁니다.")
                         })
                         .disposed(by: self.disposeBag)
                     

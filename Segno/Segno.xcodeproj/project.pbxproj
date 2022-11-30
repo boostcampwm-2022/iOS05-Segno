@@ -57,6 +57,8 @@
 		7940FB2F292E063100276EFC /* DiaryDetailDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7940FB2E292E063100276EFC /* DiaryDetailDTO.swift */; };
 		7940FB31292E065100276EFC /* DiaryDetailEndpoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7940FB30292E065100276EFC /* DiaryDetailEndpoint.swift */; };
 		7940FB33292E065F00276EFC /* DiaryDetailUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7940FB32292E065F00276EFC /* DiaryDetailUseCase.swift */; };
+		9825F41B29377875005F2163 /* ChangeUserNameUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9825F41A29377875005F2163 /* ChangeUserNameUseCase.swift */; };
+		9825F41D29377ACF005F2163 /* SettingsRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9825F41C29377ACF005F2163 /* SettingsRepository.swift */; };
 		982A2A472924AE74006F6ACD /* UserDefaultsKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = 982A2A462924AE74006F6ACD /* UserDefaultsKey.swift */; };
 		982A3699292C905300FDC6CF /* DiaryDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 982A3698292C905300FDC6CF /* DiaryDetailViewController.swift */; };
 		982B3B7F292E68FB0077A44B /* DiaryDetailViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 982B3B7E292E68FB0077A44B /* DiaryDetailViewModel.swift */; };
@@ -130,6 +132,8 @@
 		7940FB2E292E063100276EFC /* DiaryDetailDTO.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DiaryDetailDTO.swift; sourceTree = "<group>"; };
 		7940FB30292E065100276EFC /* DiaryDetailEndpoint.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DiaryDetailEndpoint.swift; sourceTree = "<group>"; };
 		7940FB32292E065F00276EFC /* DiaryDetailUseCase.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DiaryDetailUseCase.swift; sourceTree = "<group>"; };
+		9825F41A29377875005F2163 /* ChangeUserNameUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChangeUserNameUseCase.swift; sourceTree = "<group>"; };
+		9825F41C29377ACF005F2163 /* SettingsRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsRepository.swift; sourceTree = "<group>"; };
 		982A2A462924AE74006F6ACD /* UserDefaultsKey.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDefaultsKey.swift; sourceTree = "<group>"; };
 		982A3698292C905300FDC6CF /* DiaryDetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DiaryDetailViewController.swift; sourceTree = "<group>"; };
 		982B3B7E292E68FB0077A44B /* DiaryDetailViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DiaryDetailViewModel.swift; sourceTree = "<group>"; };
@@ -287,6 +291,7 @@
 				7940FB32292E065F00276EFC /* DiaryDetailUseCase.swift */,
 				988414DA2923606B007C9132 /* DiaryListUseCase.swift */,
 				9894EAF429373385005F2B15 /* SettingsUseCase.swift */,
+				9825F41A29377875005F2163 /* ChangeUserNameUseCase.swift */,
 			);
 			path = UseCase;
 			sourceTree = "<group>";
@@ -364,6 +369,7 @@
 				4FA32427292363AA00DB04D5 /* DiaryRepository.swift */,
 				982A2A462924AE74006F6ACD /* UserDefaultsKey.swift */,
 				4F4E0D3D2924B925005ABA8F /* LoginRepository.swift */,
+				9825F41C29377ACF005F2163 /* SettingsRepository.swift */,
 			);
 			path = Repository;
 			sourceTree = "<group>";
@@ -523,6 +529,7 @@
 				4F4E0D3E2924B925005ABA8F /* LoginRepository.swift in Sources */,
 				4F9A00212922338E007D9057 /* AppDelegate.swift in Sources */,
 				983AE9D82935CEE2006547BD /* SettingsViewModel.swift in Sources */,
+				9825F41D29377ACF005F2163 /* SettingsRepository.swift in Sources */,
 				66F0D7EE2925FF8B0074872E /* DiaryCell.swift in Sources */,
 				4F9A00202922337F007D9057 /* LoginViewController.swift in Sources */,
 				982A2A472924AE74006F6ACD /* UserDefaultsKey.swift in Sources */,
@@ -552,6 +559,7 @@
 				4FCAC5C2292B5C9000BF9CDD /* LoginSession.swift in Sources */,
 				666E6F7D291CF45600CECD4B /* Coordinator.swift in Sources */,
 				982A3699292C905300FDC6CF /* DiaryDetailViewController.swift in Sources */,
+				9825F41B29377875005F2163 /* ChangeUserNameUseCase.swift in Sources */,
 				666E6F8C291CFAC200CECD4B /* DiaryCollectionViewController.swift in Sources */,
 				666E6F8A291CF82700CECD4B /* TabBarPageCase.swift in Sources */,
 				79183800292225DC00BC6992 /* UIFont+.swift in Sources */,

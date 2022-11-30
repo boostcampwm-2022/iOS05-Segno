@@ -12,37 +12,41 @@ import RxSwift
 final class SettingsViewModel {
     lazy var dataSource = Observable<[SettingsCellModel]>.just([
         .nickname,
-        .settingsSwitch(title: "음악 자동 재생", isOn: useCase.getAutoPlayMode()),
-        .settingsActionSheet(title: "다크 모드", mode: useCase.getDarkMode())
+        .settingsSwitch(title: "음악 자동 재생", isOn: settingsUseCase.getAutoPlayMode()),
+        .settingsActionSheet(title: "다크 모드", mode: settingsUseCase.getDarkMode())
     ])
     
-    private let useCase: SettingsUseCase
+    private let settingsUseCase: SettingsUseCase
+    private let changeUserNameUseCase: ChangeUserNameUseCase
     
-    init(useCase: SettingsUseCase = SettingsUseCaseImpl()) {
-        self.useCase = useCase
+    init(settingsUseCase: SettingsUseCase = SettingsUseCaseImpl(),
+         changeUserNameUseCase: ChangeUserNameUseCase = ChangeUserNameUseCaseImpl()
+    ) {
+        self.settingsUseCase = settingsUseCase
+        self.changeUserNameUseCase = changeUserNameUseCase
     }
     
     func changeNickname(to nickname: String) -> Observable<Bool> {
         return Observable.create { emitter in
-            let result = self.useCase.requestChangeNickname(to: nickname)
+            let result = self.changeUserNameUseCase.requestChangeNickname(to: nickname)
             emitter.onNext(result)
             return Disposables.create()
         }
     }
     
     func getAutoPlayMode() -> Bool {
-         return useCase.getAutoPlayMode()
+         return settingsUseCase.getAutoPlayMode()
     }
     
     func changeAutoPlayMode(to mode: Bool) {
-        useCase.changeAutoPlayMode(to: mode)
+        settingsUseCase.changeAutoPlayMode(to: mode)
     }
     
     func getDarkMode() -> Int {
-        return useCase.getDarkMode()
+        return settingsUseCase.getDarkMode()
     }
     
     func changeDarkMode(to mode: Int) {
-        useCase.changeDarkMode(to: mode)
+        settingsUseCase.changeDarkMode(to: mode)
     }
 }
