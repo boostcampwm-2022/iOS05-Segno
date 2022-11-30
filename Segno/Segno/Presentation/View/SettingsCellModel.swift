@@ -8,5 +8,5 @@
 enum SettingsCellModel {
     case nickname
     case settingsSwitch(title: String, isOn: Bool)
-    case settingsActionSheet(title: String)
+    case settingsActionSheet(title: String, mode: Int)
 }

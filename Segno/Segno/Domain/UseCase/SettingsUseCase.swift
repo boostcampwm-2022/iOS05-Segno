@@ -50,14 +50,14 @@ final class SettingsUseCaseImpl: SettingsUseCase {
             debugPrint("SettingsUseCase - getDarkMode : 키가 있습니다 - \(mode)")
             return mode
         } else {
-            repository.setUserDefaults(0, forKey: .isAutoPlayEnabled)
-            debugPrint("SettingsUseCase - getDarkMode : 키가 없어 0 로 설정합니다.")
-            return 0
+            repository.setUserDefaults(DarkMode.system.rawValue, forKey: .darkmode)
+            debugPrint("SettingsUseCase - getDarkMode : 키가 없어 \(DarkMode.system.rawValue) 로 설정합니다.")
+            return DarkMode.system.rawValue
         }
     }
     
     func changeDarkMode(to mode: Int) {
-        repository.setUserDefaults(mode, forKey: .isAutoPlayEnabled)
+        repository.setUserDefaults(mode, forKey: .darkmode)
         debugPrint("SettingsUseCase - changeDarkMode : \(mode)로 설정")
     }
 }

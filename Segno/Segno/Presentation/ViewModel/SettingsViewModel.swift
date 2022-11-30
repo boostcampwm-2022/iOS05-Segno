@@ -12,8 +12,8 @@ import RxSwift
 final class SettingsViewModel {
     lazy var dataSource = Observable<[SettingsCellModel]>.just([
         .nickname,
-        .settingsSwitch(title: "음악 자동 재생", isOn: useCase.getAutoPlayMode()), // TODO: isOn은 로컬 디비로부터 불러와야 합니다.
-        .settingsActionSheet(title: "다크 모드")
+        .settingsSwitch(title: "음악 자동 재생", isOn: useCase.getAutoPlayMode()),
+        .settingsActionSheet(title: "다크 모드", mode: useCase.getDarkMode())
     ])
     
     private let useCase: SettingsUseCase
