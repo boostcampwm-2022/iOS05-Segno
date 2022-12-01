@@ -30,17 +30,6 @@ final class ShazamSession: NSObject {
         bindRecord()
     }
     
-    func toggleSearch() {
-        guard let currentState = try? isSearching.value() else { return }
-        
-        switch currentState {
-        case true:
-            isSearching.onNext(false)
-        case false:
-            isSearching.onNext(true)
-        }
-    }
-    
     func bindRecord() {
         isSearching
             .subscribe(onNext: {
@@ -52,6 +41,17 @@ final class ShazamSession: NSObject {
                 }
             })
             .disposed(by: disposeBag)
+    }
+    
+    func toggleSearch() {
+        guard let currentState = try? isSearching.value() else { return }
+        
+        switch currentState {
+        case true:
+            isSearching.onNext(false)
+        case false:
+            isSearching.onNext(true)
+        }
     }
     
     func start() {
@@ -114,11 +114,11 @@ extension ShazamSession: SHSessionDelegate {
     }
 }
 
-struct ShazamSong: Equatable {
-    let isrc: String?
-    let title: String?
-    let artist: String?
-    let album: String?
+struct ShazamSong {
+    let isrc: String
+    let title: String
+    let artist: String
+    let album: String
     let imageURL: URL?
     
     init?(mediaItem: SHMatchedMediaItem) {

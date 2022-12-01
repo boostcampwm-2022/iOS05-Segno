@@ -8,7 +8,6 @@
 import MusicKit
 
 final class MusicSession {
-    private var songInfo: SongInfo?
     private var song: Song?
     
     private lazy var player = ApplicationMusicPlayer.shared
@@ -18,13 +17,7 @@ final class MusicSession {
         return playerState.playbackStatus == .playing
     }
     
-    private let request: MusicCatalogSearchRequest = {
-        var request = MusicCatalogSearchRequest(term: "Happy", types: [Song.self])
-        request.limit = 1
-        return request
-    }()
-    
-    func fetchMusic(term: SongInfo?) {
+    func fetchMusic(term: MusicInfo?) {
         guard let term else { return }
         
         Task {
@@ -36,10 +29,8 @@ final class MusicSession {
                     let response = try await request.response()
                     if let item = response.items.first {
                         song = item
-                        songInfo = SongInfo(isrc: item.isrc!, title: item.title, artist: item.artistName, album: item.albumTitle)
                     }
                     
-                    print(songInfo ?? "NO SONG")
                 } catch (let error) {
                     print(error.localizedDescription)
                 }
@@ -69,11 +60,4 @@ final class MusicSession {
         // 뷰 컨트롤러를 나갈 때 큐를 비워 준다.
         // 뮤직세션, 샤잠세션은 싱글턴 인스턴스로 만들어 주는 것이 좋겠다.
     }
-}
-
-struct SongInfo {
-    let isrc: String
-    let title: String
-    let artist: String
-    let album: String?
 }

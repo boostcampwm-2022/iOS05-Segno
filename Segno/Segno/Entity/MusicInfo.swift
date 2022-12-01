@@ -9,20 +9,22 @@ import Foundation
 import ShazamKit
 
 struct MusicInfo: Encodable {
+    let isrc: String
     let title: String
     let artist: String
     let album: String
-    let imageURL: URL
+    let imageURL: URL?
     
     init?(mediaItem: SHMatchedMediaItem) {
-        guard let title = mediaItem.title,
+        guard let isrc = mediaItem.isrc,
+              let title = mediaItem.title,
               let artist = mediaItem.artist,
-              let album = mediaItem.album,
-              let imageURL = mediaItem.artworkURL else { return nil }
+              let album = mediaItem.album else { return nil }
         
+        self.isrc = isrc
         self.title = title
         self.artist = artist
         self.album = album
-        self.imageURL = imageURL
+        self.imageURL = mediaItem.artworkURL
     }
 }
