@@ -23,13 +23,17 @@ struct NetworkManager {
                 return Disposables.create()
             }
         }
-        
-        return call(request)
+        switch endpoint.parameters {
+        case .data(let data):
+            return call(request, type: .uploadTask, data: buildDataBody(data))
+        default:
+            return call(request)
+        }
     }
     
-    private func call(_ request: URLRequest) -> Single<Data> {
-        return Single.create { observer -> Disposable in
-            let task = URLSession.shared.dataTask(with: request) { data, response, error in
+    private func call(_ request: URLRequest, type: SessionType = .dataTask, data: Data? = nil) -> Single<Data> {
+        Single.create { observer -> Disposable in
+            let completeHandler: (Data?, URLResponse?, Error?) -> Void = { data, response, error in
                 if error != nil {
                     observer(.failure(NetworkError.unknownNetworkError))
                     return
@@ -53,8 +57,37 @@ struct NetworkManager {
                 }
             }
             
+            let task = {
+                switch type {
+                case .dataTask:
+                    return URLSession.shared.dataTask(with: request, completionHandler: completeHandler)
+                case .uploadTask:
+                    return URLSession.shared.uploadTask(with: request, from: data, completionHandler: completeHandler)
+                }
+            }()
+            
             task.resume()
             return Disposables.create()
         }
+    }
+    
+    func buildDataBody(_ data: Data) -> Data? {
+        let boundary = "SEGNO"
+        let headerLines = [
+          "--\(boundary)",
+          "Content-Disposition: form-data; name=\"image\"; filename=\"testImage\"",
+          "Content-Type: image/png",
+          "\r\n"
+        ]
+        var body = headerLines.joined(separator: "\r\n").data(using: .utf8)!
+        body.append(contentsOf: data)
+        body.append(contentsOf: "\r\n--\(boundary)--".data(using: .utf8)!)
+        
+        return body
+    }
+    
+    enum SessionType {
+        case dataTask
+        case uploadTask
     }
 }

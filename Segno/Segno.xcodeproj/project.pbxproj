@@ -48,6 +48,10 @@
 		66A8CF612935F44100C17F84 /* MyPageViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66A8CF602935F44100C17F84 /* MyPageViewModel.swift */; };
 		66F0D7EE2925FF8B0074872E /* DiaryCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66F0D7ED2925FF8B0074872E /* DiaryCell.swift */; };
 		66F0D7F729260BA20074872E /* GoogleSignIn in Frameworks */ = {isa = PBXBuildFile; productRef = 66F0D7F629260BA20074872E /* GoogleSignIn */; };
+		791529D82932F364005A8DDB /* DiaryEditUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 791529D72932F364005A8DDB /* DiaryEditUseCase.swift */; };
+		791529DC29332CF2005A8DDB /* ImageDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 791529DB29332CF2005A8DDB /* ImageDTO.swift */; };
+		791529DE29333D40005A8DDB /* ImageEndpoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 791529DD29333D40005A8DDB /* ImageEndpoint.swift */; };
+		791529E0293344E9005A8DDB /* DiaryPostEndpoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 791529DF293344E8005A8DDB /* DiaryPostEndpoint.swift */; };
 		791837FA292225C600BC6992 /* Cafe24Shiningstar.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 791837F7292225BF00BC6992 /* Cafe24Shiningstar.ttf */; };
 		791837FB292225C800BC6992 /* Cafe24Ssurround.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 791837F9292225BF00BC6992 /* Cafe24Ssurround.ttf */; };
 		791837FC292225CB00BC6992 /* Cafe24SsurroundAir.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 791837F8292225BF00BC6992 /* Cafe24SsurroundAir.ttf */; };
@@ -123,6 +127,10 @@
 		66A8CF602935F44100C17F84 /* MyPageViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyPageViewModel.swift; sourceTree = "<group>"; };
 		66F0D7ED2925FF8B0074872E /* DiaryCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DiaryCell.swift; sourceTree = "<group>"; };
 		66F0D7EF292605AE0074872E /* Segno.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Segno.entitlements; sourceTree = "<group>"; };
+		791529D72932F364005A8DDB /* DiaryEditUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiaryEditUseCase.swift; sourceTree = "<group>"; };
+		791529DB29332CF2005A8DDB /* ImageDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageDTO.swift; sourceTree = "<group>"; };
+		791529DD29333D40005A8DDB /* ImageEndpoint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageEndpoint.swift; sourceTree = "<group>"; };
+		791529DF293344E8005A8DDB /* DiaryPostEndpoint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiaryPostEndpoint.swift; sourceTree = "<group>"; };
 		791837F7292225BF00BC6992 /* Cafe24Shiningstar.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = Cafe24Shiningstar.ttf; sourceTree = "<group>"; };
 		791837F8292225BF00BC6992 /* Cafe24SsurroundAir.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = Cafe24SsurroundAir.ttf; sourceTree = "<group>"; };
 		791837F9292225BF00BC6992 /* Cafe24Ssurround.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = Cafe24Ssurround.ttf; sourceTree = "<group>"; };
@@ -290,6 +298,7 @@
 				9841D6162925FACC00318EA9 /* LoginUseCase.swift */,
 				7940FB32292E065F00276EFC /* DiaryDetailUseCase.swift */,
 				988414DA2923606B007C9132 /* DiaryListUseCase.swift */,
+				791529D72932F364005A8DDB /* DiaryEditUseCase.swift */,
 				9894EAF429373385005F2B15 /* SettingsUseCase.swift */,
 				9825F41A29377875005F2163 /* ChangeUserNameUseCase.swift */,
 			);
@@ -389,6 +398,7 @@
 				4F4E0D73292521D0005ABA8F /* UserInfoDTO.swift */,
 				7940FB2E292E063100276EFC /* DiaryDetailDTO.swift */,
 				4F4E0D7A29252526005ABA8F /* TokenDTO.swift */,
+				791529DB29332CF2005A8DDB /* ImageDTO.swift */,
 			);
 			path = DTO;
 			sourceTree = "<group>";
@@ -398,7 +408,9 @@
 			children = (
 				4FA3242A2923646F00DB04D5 /* DiaryListItemEndpoint.swift */,
 				7940FB30292E065100276EFC /* DiaryDetailEndpoint.swift */,
+				791529DF293344E8005A8DDB /* DiaryPostEndpoint.swift */,
 				4F4E0D7529252236005ABA8F /* LoginEndpoint.swift */,
+				791529DD29333D40005A8DDB /* ImageEndpoint.swift */,
 			);
 			path = Endpoints;
 			sourceTree = "<group>";
@@ -526,6 +538,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				98F5AD2A292DDDEB00E53E25 /* LocationContentView.swift in Sources */,
+				791529DE29333D40005A8DDB /* ImageEndpoint.swift in Sources */,
 				4F4E0D3E2924B925005ABA8F /* LoginRepository.swift in Sources */,
 				4F9A00212922338E007D9057 /* AppDelegate.swift in Sources */,
 				983AE9D82935CEE2006547BD /* SettingsViewModel.swift in Sources */,
@@ -564,6 +577,7 @@
 				666E6F8A291CF82700CECD4B /* TabBarPageCase.swift in Sources */,
 				79183800292225DC00BC6992 /* UIFont+.swift in Sources */,
 				666E6F83291CF4A600CECD4B /* TabBarCoordinator.swift in Sources */,
+				791529E0293344E9005A8DDB /* DiaryPostEndpoint.swift in Sources */,
 				4F9A001D29222B1B007D9057 /* Endpoint.swift in Sources */,
 				4F9A001F29222C97007D9057 /* NetworkError.swift in Sources */,
 				98FDF8A1292F56580083FA05 /* Location.swift in Sources */,
@@ -577,12 +591,14 @@
 				4FA3242B2923646F00DB04D5 /* DiaryListItemEndpoint.swift in Sources */,
 				791837FF292225DC00BC6992 /* UIColor+.swift in Sources */,
 				666E6F7F291CF46800CECD4B /* AppCoordinator.swift in Sources */,
+				791529DC29332CF2005A8DDB /* ImageDTO.swift in Sources */,
 				9841D61B2926131200318EA9 /* LoginViewModel.swift in Sources */,
 				988414D72923304F007C9132 /* KeychainError.swift in Sources */,
 				98BEE36E2934907700B20143 /* LoginError.swift in Sources */,
 				98B5263E292CA46C00446413 /* TagView.swift in Sources */,
 				7940FB2F292E063100276EFC /* DiaryDetailDTO.swift in Sources */,
 				4F4E0D7629252236005ABA8F /* LoginEndpoint.swift in Sources */,
+				791529D82932F364005A8DDB /* DiaryEditUseCase.swift in Sources */,
 				4FA324262923600C00DB04D5 /* DiaryListDTO.swift in Sources */,
 				666E6F87291CF4B400CECD4B /* DiaryCoordinator.swift in Sources */,
 				4F31777F291BE4710019BDFC /* SceneDelegate.swift in Sources */,
