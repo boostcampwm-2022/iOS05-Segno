@@ -8,7 +8,7 @@
 import Foundation
 
 enum ChangeNicknameEndpoint: Endpoint {
-    case item(String, String)
+    case item(token: String, nickname: String)
     
     var baseURL: URL? {
         return URL(string: BaseURL.urlString)
