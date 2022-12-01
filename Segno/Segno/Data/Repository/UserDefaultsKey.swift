@@ -8,4 +8,6 @@
 enum UserDefaultsKey: String {
     case isFirstEntryApp
     case isAutoLogin
+    case isAutoPlayEnabled
+    case darkmode
 }

@@ -45,6 +45,7 @@
 		666E6F8C291CFAC200CECD4B /* DiaryCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 666E6F8B291CFAC200CECD4B /* DiaryCollectionViewController.swift */; };
 		666E6F8E291CFADD00CECD4B /* MyPageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 666E6F8D291CFADD00CECD4B /* MyPageViewController.swift */; };
 		6692A9EF292F605E00DDA835 /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6692A9EE292F605E00DDA835 /* SettingsViewController.swift */; };
+		66A8CF612935F44100C17F84 /* MyPageViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66A8CF602935F44100C17F84 /* MyPageViewModel.swift */; };
 		66F0D7EE2925FF8B0074872E /* DiaryCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66F0D7ED2925FF8B0074872E /* DiaryCell.swift */; };
 		66F0D7F729260BA20074872E /* GoogleSignIn in Frameworks */ = {isa = PBXBuildFile; productRef = 66F0D7F629260BA20074872E /* GoogleSignIn */; };
 		791529D82932F364005A8DDB /* DiaryEditUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 791529D72932F364005A8DDB /* DiaryEditUseCase.swift */; };
@@ -60,17 +61,27 @@
 		7940FB2F292E063100276EFC /* DiaryDetailDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7940FB2E292E063100276EFC /* DiaryDetailDTO.swift */; };
 		7940FB31292E065100276EFC /* DiaryDetailEndpoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7940FB30292E065100276EFC /* DiaryDetailEndpoint.swift */; };
 		7940FB33292E065F00276EFC /* DiaryDetailUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7940FB32292E065F00276EFC /* DiaryDetailUseCase.swift */; };
+		9825F41B29377875005F2163 /* ChangeUserNameUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9825F41A29377875005F2163 /* ChangeUserNameUseCase.swift */; };
+		9825F41D29377ACF005F2163 /* SettingsRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9825F41C29377ACF005F2163 /* SettingsRepository.swift */; };
 		982A2A472924AE74006F6ACD /* UserDefaultsKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = 982A2A462924AE74006F6ACD /* UserDefaultsKey.swift */; };
 		982A3699292C905300FDC6CF /* DiaryDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 982A3698292C905300FDC6CF /* DiaryDetailViewController.swift */; };
 		982B3B7F292E68FB0077A44B /* DiaryDetailViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 982B3B7E292E68FB0077A44B /* DiaryDetailViewModel.swift */; };
+		983AE9D22934F041006547BD /* NicknameCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 983AE9D12934F041006547BD /* NicknameCell.swift */; };
+		983AE9D4293513AD006547BD /* SettingsCellModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 983AE9D3293513AD006547BD /* SettingsCellModel.swift */; };
+		983AE9D6293514E8006547BD /* SettingsActionSheetCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 983AE9D5293514E8006547BD /* SettingsActionSheetCell.swift */; };
+		983AE9D82935CEE2006547BD /* SettingsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 983AE9D72935CEE2006547BD /* SettingsViewModel.swift */; };
 		9841D6172925FACC00318EA9 /* LoginUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9841D6162925FACC00318EA9 /* LoginUseCase.swift */; };
 		9841D61B2926131200318EA9 /* LoginViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9841D61A2926131200318EA9 /* LoginViewModel.swift */; };
 		988414AE2922235B007C9132 /* LocalUtilityRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 988414AD2922235B007C9132 /* LocalUtilityRepository.swift */; };
 		988414D72923304F007C9132 /* KeychainError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 988414D62923304F007C9132 /* KeychainError.swift */; };
 		988414D929235345007C9132 /* DiaryCollectionViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 988414D829235345007C9132 /* DiaryCollectionViewModel.swift */; };
 		988414DB2923606B007C9132 /* DiaryListUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 988414DA2923606B007C9132 /* DiaryListUseCase.swift */; };
+		9894EAF529373385005F2B15 /* SettingsUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9894EAF429373385005F2B15 /* SettingsUseCase.swift */; };
+		9894EAF829375281005F2B15 /* DarkMode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9894EAF729375281005F2B15 /* DarkMode.swift */; };
 		98B5263E292CA46C00446413 /* TagView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98B5263D292CA46C00446413 /* TagView.swift */; };
 		98B52640292CB92900446413 /* MusicContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98B5263F292CB92900446413 /* MusicContentView.swift */; };
+		98BEE36E2934907700B20143 /* LoginError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98BEE36D2934907700B20143 /* LoginError.swift */; };
+		98BEE3702934A19800B20143 /* SettingsSwitchCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98BEE36F2934A19800B20143 /* SettingsSwitchCell.swift */; };
 		98F5AD2A292DDDEB00E53E25 /* LocationContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98F5AD29292DDDEB00E53E25 /* LocationContentView.swift */; };
 		98FDF8A1292F56580083FA05 /* Location.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98FDF8A0292F56580083FA05 /* Location.swift */; };
 		98FDF8A3292F5CCA0083FA05 /* MapKitViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98FDF8A2292F5CCA0083FA05 /* MapKitViewController.swift */; };
@@ -113,6 +124,7 @@
 		666E6F8B291CFAC200CECD4B /* DiaryCollectionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiaryCollectionViewController.swift; sourceTree = "<group>"; };
 		666E6F8D291CFADD00CECD4B /* MyPageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyPageViewController.swift; sourceTree = "<group>"; };
 		6692A9EE292F605E00DDA835 /* SettingsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
+		66A8CF602935F44100C17F84 /* MyPageViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyPageViewModel.swift; sourceTree = "<group>"; };
 		66F0D7ED2925FF8B0074872E /* DiaryCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DiaryCell.swift; sourceTree = "<group>"; };
 		66F0D7EF292605AE0074872E /* Segno.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Segno.entitlements; sourceTree = "<group>"; };
 		791529D72932F364005A8DDB /* DiaryEditUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiaryEditUseCase.swift; sourceTree = "<group>"; };
@@ -128,17 +140,27 @@
 		7940FB2E292E063100276EFC /* DiaryDetailDTO.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DiaryDetailDTO.swift; sourceTree = "<group>"; };
 		7940FB30292E065100276EFC /* DiaryDetailEndpoint.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DiaryDetailEndpoint.swift; sourceTree = "<group>"; };
 		7940FB32292E065F00276EFC /* DiaryDetailUseCase.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DiaryDetailUseCase.swift; sourceTree = "<group>"; };
+		9825F41A29377875005F2163 /* ChangeUserNameUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChangeUserNameUseCase.swift; sourceTree = "<group>"; };
+		9825F41C29377ACF005F2163 /* SettingsRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsRepository.swift; sourceTree = "<group>"; };
 		982A2A462924AE74006F6ACD /* UserDefaultsKey.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDefaultsKey.swift; sourceTree = "<group>"; };
 		982A3698292C905300FDC6CF /* DiaryDetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DiaryDetailViewController.swift; sourceTree = "<group>"; };
 		982B3B7E292E68FB0077A44B /* DiaryDetailViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DiaryDetailViewModel.swift; sourceTree = "<group>"; };
+		983AE9D12934F041006547BD /* NicknameCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NicknameCell.swift; sourceTree = "<group>"; };
+		983AE9D3293513AD006547BD /* SettingsCellModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsCellModel.swift; sourceTree = "<group>"; };
+		983AE9D5293514E8006547BD /* SettingsActionSheetCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsActionSheetCell.swift; sourceTree = "<group>"; };
+		983AE9D72935CEE2006547BD /* SettingsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsViewModel.swift; sourceTree = "<group>"; };
 		9841D6162925FACC00318EA9 /* LoginUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginUseCase.swift; sourceTree = "<group>"; };
 		9841D61A2926131200318EA9 /* LoginViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewModel.swift; sourceTree = "<group>"; };
 		988414AD2922235B007C9132 /* LocalUtilityRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalUtilityRepository.swift; sourceTree = "<group>"; };
 		988414D62923304F007C9132 /* KeychainError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeychainError.swift; sourceTree = "<group>"; };
 		988414D829235345007C9132 /* DiaryCollectionViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiaryCollectionViewModel.swift; sourceTree = "<group>"; };
 		988414DA2923606B007C9132 /* DiaryListUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiaryListUseCase.swift; sourceTree = "<group>"; };
+		9894EAF429373385005F2B15 /* SettingsUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsUseCase.swift; sourceTree = "<group>"; };
+		9894EAF729375281005F2B15 /* DarkMode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DarkMode.swift; sourceTree = "<group>"; };
 		98B5263D292CA46C00446413 /* TagView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TagView.swift; sourceTree = "<group>"; };
 		98B5263F292CB92900446413 /* MusicContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MusicContentView.swift; sourceTree = "<group>"; };
+		98BEE36D2934907700B20143 /* LoginError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginError.swift; sourceTree = "<group>"; };
+		98BEE36F2934A19800B20143 /* SettingsSwitchCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsSwitchCell.swift; sourceTree = "<group>"; };
 		98F5AD29292DDDEB00E53E25 /* LocationContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationContentView.swift; sourceTree = "<group>"; };
 		98FDF8A0292F56580083FA05 /* Location.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Location.swift; sourceTree = "<group>"; };
 		98FDF8A2292F5CCA0083FA05 /* MapKitViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapKitViewController.swift; sourceTree = "<group>"; };
@@ -211,6 +233,7 @@
 				4F3177A0291BF1810019BDFC /* Repository */,
 				4F31779F291BF1780019BDFC /* Network */,
 				988414D62923304F007C9132 /* KeychainError.swift */,
+				98BEE36D2934907700B20143 /* LoginError.swift */,
 			);
 			path = Data;
 			sourceTree = "<group>";
@@ -218,6 +241,7 @@
 		4F317792291BEB5E0019BDFC /* Presentation */ = {
 			isa = PBXGroup;
 			children = (
+				9894EAF629375272005F2B15 /* Utility */,
 				4F31779C291BEE900019BDFC /* Coordinator */,
 				4F31779B291BEE890019BDFC /* View */,
 				4F31779A291BEE810019BDFC /* ViewController */,
@@ -275,6 +299,8 @@
 				7940FB32292E065F00276EFC /* DiaryDetailUseCase.swift */,
 				988414DA2923606B007C9132 /* DiaryListUseCase.swift */,
 				791529D72932F364005A8DDB /* DiaryEditUseCase.swift */,
+				9894EAF429373385005F2B15 /* SettingsUseCase.swift */,
+				9825F41A29377875005F2163 /* ChangeUserNameUseCase.swift */,
 			);
 			path = UseCase;
 			sourceTree = "<group>";
@@ -285,6 +311,8 @@
 				9841D61A2926131200318EA9 /* LoginViewModel.swift */,
 				982B3B7E292E68FB0077A44B /* DiaryDetailViewModel.swift */,
 				988414D829235345007C9132 /* DiaryCollectionViewModel.swift */,
+				983AE9D72935CEE2006547BD /* SettingsViewModel.swift */,
+				66A8CF602935F44100C17F84 /* MyPageViewModel.swift */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";
@@ -307,6 +335,10 @@
 			isa = PBXGroup;
 			children = (
 				66F0D7ED2925FF8B0074872E /* DiaryCell.swift */,
+				983AE9D12934F041006547BD /* NicknameCell.swift */,
+				98BEE36F2934A19800B20143 /* SettingsSwitchCell.swift */,
+				983AE9D5293514E8006547BD /* SettingsActionSheetCell.swift */,
+				983AE9D3293513AD006547BD /* SettingsCellModel.swift */,
 				98B5263D292CA46C00446413 /* TagView.swift */,
 				98B5263F292CB92900446413 /* MusicContentView.swift */,
 				98F5AD29292DDDEB00E53E25 /* LocationContentView.swift */,
@@ -346,6 +378,7 @@
 				4FA32427292363AA00DB04D5 /* DiaryRepository.swift */,
 				982A2A462924AE74006F6ACD /* UserDefaultsKey.swift */,
 				4F4E0D3D2924B925005ABA8F /* LoginRepository.swift */,
+				9825F41C29377ACF005F2163 /* SettingsRepository.swift */,
 			);
 			path = Repository;
 			sourceTree = "<group>";
@@ -407,6 +440,14 @@
 				791837F8292225BF00BC6992 /* Cafe24SsurroundAir.ttf */,
 			);
 			path = Font;
+			sourceTree = "<group>";
+		};
+		9894EAF629375272005F2B15 /* Utility */ = {
+			isa = PBXGroup;
+			children = (
+				9894EAF729375281005F2B15 /* DarkMode.swift */,
+			);
+			path = Utility;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -500,14 +541,18 @@
 				791529DE29333D40005A8DDB /* ImageEndpoint.swift in Sources */,
 				4F4E0D3E2924B925005ABA8F /* LoginRepository.swift in Sources */,
 				4F9A00212922338E007D9057 /* AppDelegate.swift in Sources */,
+				983AE9D82935CEE2006547BD /* SettingsViewModel.swift in Sources */,
+				9825F41D29377ACF005F2163 /* SettingsRepository.swift in Sources */,
 				66F0D7EE2925FF8B0074872E /* DiaryCell.swift in Sources */,
 				4F9A00202922337F007D9057 /* LoginViewController.swift in Sources */,
 				982A2A472924AE74006F6ACD /* UserDefaultsKey.swift in Sources */,
 				4F9A001B292227D7007D9057 /* NetworkManager.swift in Sources */,
+				9894EAF529373385005F2B15 /* SettingsUseCase.swift in Sources */,
 				9841D6172925FACC00318EA9 /* LoginUseCase.swift in Sources */,
 				4FEBFAAD291CF62E00E78139 /* DiaryDetail.swift in Sources */,
 				4FEBFAB1291CFB5500E78139 /* SHMediaItem+.swift in Sources */,
 				988414AE2922235B007C9132 /* LocalUtilityRepository.swift in Sources */,
+				66A8CF612935F44100C17F84 /* MyPageViewModel.swift in Sources */,
 				988414D929235345007C9132 /* DiaryCollectionViewModel.swift in Sources */,
 				4FEBFAAF291CF9F300E78139 /* MusicInfo.swift in Sources */,
 				4FEBFAAB291CF30E00E78139 /* DiaryListItem.swift in Sources */,
@@ -516,13 +561,18 @@
 				666E6F81291CF49E00CECD4B /* LoginCoordinator.swift in Sources */,
 				7940FB31292E065100276EFC /* DiaryDetailEndpoint.swift in Sources */,
 				666E6F85291CF4AD00CECD4B /* MyPageCoordinator.swift in Sources */,
+				9894EAF829375281005F2B15 /* DarkMode.swift in Sources */,
+				983AE9D22934F041006547BD /* NicknameCell.swift in Sources */,
+				983AE9D4293513AD006547BD /* SettingsCellModel.swift in Sources */,
 				4F4E0D79292522B7005ABA8F /* BaseURL.swift in Sources */,
+				98BEE3702934A19800B20143 /* SettingsSwitchCell.swift in Sources */,
 				4FA05B97292DFCCC00AFB020 /* DiaryEditViewController.swift in Sources */,
 				988414DB2923606B007C9132 /* DiaryListUseCase.swift in Sources */,
 				982B3B7F292E68FB0077A44B /* DiaryDetailViewModel.swift in Sources */,
 				4FCAC5C2292B5C9000BF9CDD /* LoginSession.swift in Sources */,
 				666E6F7D291CF45600CECD4B /* Coordinator.swift in Sources */,
 				982A3699292C905300FDC6CF /* DiaryDetailViewController.swift in Sources */,
+				9825F41B29377875005F2163 /* ChangeUserNameUseCase.swift in Sources */,
 				666E6F8C291CFAC200CECD4B /* DiaryCollectionViewController.swift in Sources */,
 				666E6F8A291CF82700CECD4B /* TabBarPageCase.swift in Sources */,
 				79183800292225DC00BC6992 /* UIFont+.swift in Sources */,
@@ -537,12 +587,14 @@
 				4F6F74B1292C9BF3007E7AC1 /* UserInfo.swift in Sources */,
 				98FDF8A5292F7A350083FA05 /* UIView+.swift in Sources */,
 				98FDF8A3292F5CCA0083FA05 /* MapKitViewController.swift in Sources */,
+				983AE9D6293514E8006547BD /* SettingsActionSheetCell.swift in Sources */,
 				4FA3242B2923646F00DB04D5 /* DiaryListItemEndpoint.swift in Sources */,
 				791837FF292225DC00BC6992 /* UIColor+.swift in Sources */,
 				666E6F7F291CF46800CECD4B /* AppCoordinator.swift in Sources */,
 				791529DC29332CF2005A8DDB /* ImageDTO.swift in Sources */,
 				9841D61B2926131200318EA9 /* LoginViewModel.swift in Sources */,
 				988414D72923304F007C9132 /* KeychainError.swift in Sources */,
+				98BEE36E2934907700B20143 /* LoginError.swift in Sources */,
 				98B5263E292CA46C00446413 /* TagView.swift in Sources */,
 				7940FB2F292E063100276EFC /* DiaryDetailDTO.swift in Sources */,
 				4F4E0D7629252236005ABA8F /* LoginEndpoint.swift in Sources */,
@@ -692,7 +744,7 @@
 				CODE_SIGN_ENTITLEMENTS = Segno/Segno.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = H5UNW2D34P;
+				DEVELOPMENT_TEAM = 4QG3GC35LA;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = Segno/Resource/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
@@ -705,7 +757,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.oldstar.segnobydalsegno;
+				PRODUCT_BUNDLE_IDENTIFIER = com.codershigh.boostcamp.Segno;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
@@ -721,7 +773,7 @@
 				CODE_SIGN_ENTITLEMENTS = Segno/Segno.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = H5UNW2D34P;
+				DEVELOPMENT_TEAM = 4QG3GC35LA;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = Segno/Resource/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
@@ -734,7 +786,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.oldstar.segnobydalsegno;
+				PRODUCT_BUNDLE_IDENTIFIER = com.codershigh.boostcamp.Segno;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;

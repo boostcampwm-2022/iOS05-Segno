@@ -23,6 +23,7 @@ final class LoginViewController: UIViewController {
     private let viewModel: LoginViewModel
     private let disposeBag = DisposeBag()
     
+    private var session: LoginSession?
     weak var delegate: LoginViewControllerDelegate?
     
     private enum Metric {
@@ -111,29 +112,19 @@ final class LoginViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
         setupView()
         setupLayout()
         setupRx()
-        
+        session = LoginSession(presenter: self)
         subscribeLoginResult()
     }
     
     // MARK: - Private
-    
-    private func subscribeLoginResult() {
-        viewModel.isLoginSucceeded
-            .subscribe(onNext: { [weak self] result in
-                DispatchQueue.main.async {
-                    switch result {
-                    case true:
-                        self?.titleLabel.backgroundColor = .blue
-                        // TODO: 유저 정보를 넣어 줍시다.
-                        self?.delegate?.loginDidSucceed()
-                    case false:
-                        self?.titleLabel.backgroundColor = .orange
-                        self?.delegate?.loginDidFail()
-                    }
-                }
+    private func bindAppleLoginResult() {
+        session?.appleEmail
+            .subscribe(onNext: { email in
+                self.viewModel.signIn(withApple: email)
             })
             .disposed(by: disposeBag)
     }
@@ -209,13 +200,34 @@ final class LoginViewController: UIViewController {
         }
     }
     
+    private func subscribeLoginResult() {
+        viewModel.isLoginSucceeded
+            .subscribe(onNext: { [weak self] result in
+                DispatchQueue.main.async {
+                    switch result {
+                    case true:
+                        self?.titleLabel.backgroundColor = .blue // 테스트용 색상
+                        self?.delegate?.loginDidSucceed()
+                    case false:
+                        self?.titleLabel.backgroundColor = .orange // 테스트용 색상
+                        self?.delegate?.loginDidFail()
+                    }
+                }
+            })
+            .disposed(by: disposeBag)
+    }
+    
     // MARK: - Public
     private func googleButtonTapped() {
-        viewModel.performGoogleLogin(on: self)
+        session?.performGoogleLogin()
+            .subscribe(onNext: { email in
+                self.viewModel.signIn(withGoogle: email)
+            })
+            .disposed(by: disposeBag)
     }
     
     private func appleButtonTapped() {
-        viewModel.performAppleLogin(on: self)
+        session?.performAppleLogin()
     }
 }
 
