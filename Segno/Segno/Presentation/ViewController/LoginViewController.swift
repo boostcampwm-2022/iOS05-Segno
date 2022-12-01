@@ -117,6 +117,7 @@ final class LoginViewController: UIViewController {
         setupLayout()
         setupRx()
         session = LoginSession(presenter: self)
+        bindAppleLoginResult()
         subscribeLoginResult()
     }
     
