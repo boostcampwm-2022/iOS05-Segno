@@ -9,6 +9,8 @@
 /* Begin PBXBuildFile section */
 		4F307A4629387C1100FA36A0 /* ShazamSession.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F307A4529387C1100FA36A0 /* ShazamSession.swift */; };
 		4F307A482938832900FA36A0 /* MusicSession.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F307A472938832900FA36A0 /* MusicSession.swift */; };
+		4F307A4A293889C200FA36A0 /* SearchMusicUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F307A49293889C200FA36A0 /* SearchMusicUseCase.swift */; };
+		4F307A4C29388D4600FA36A0 /* MusicRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F307A4B29388D4600FA36A0 /* MusicRepository.swift */; };
 		4F31777F291BE4710019BDFC /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F31777E291BE4710019BDFC /* SceneDelegate.swift */; };
 		4F317786291BE4720019BDFC /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 4F317785291BE4720019BDFC /* Assets.xcassets */; };
 		4F317789291BE4720019BDFC /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4F317787291BE4720019BDFC /* LaunchScreen.storyboard */; };
@@ -98,6 +100,8 @@
 /* Begin PBXFileReference section */
 		4F307A4529387C1100FA36A0 /* ShazamSession.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShazamSession.swift; sourceTree = "<group>"; };
 		4F307A472938832900FA36A0 /* MusicSession.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MusicSession.swift; sourceTree = "<group>"; };
+		4F307A49293889C200FA36A0 /* SearchMusicUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchMusicUseCase.swift; sourceTree = "<group>"; };
+		4F307A4B29388D4600FA36A0 /* MusicRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MusicRepository.swift; sourceTree = "<group>"; };
 		4F317779291BE4710019BDFC /* Segno.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Segno.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		4F31777C291BE4710019BDFC /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		4F31777E291BE4710019BDFC /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -317,6 +321,7 @@
 				791529D72932F364005A8DDB /* DiaryEditUseCase.swift */,
 				9894EAF429373385005F2B15 /* SettingsUseCase.swift */,
 				9825F41A29377875005F2163 /* ChangeUserNameUseCase.swift */,
+				4F307A49293889C200FA36A0 /* SearchMusicUseCase.swift */,
 			);
 			path = UseCase;
 			sourceTree = "<group>";
@@ -396,6 +401,7 @@
 				4F4E0D3D2924B925005ABA8F /* LoginRepository.swift */,
 				66A8CF642937934A00C17F84 /* MyPageRepository.swift */,
 				9825F41C29377ACF005F2163 /* SettingsRepository.swift */,
+				4F307A4B29388D4600FA36A0 /* MusicRepository.swift */,
 			);
 			path = Repository;
 			sourceTree = "<group>";
@@ -617,12 +623,14 @@
 				983AE9D6293514E8006547BD /* SettingsActionSheetCell.swift in Sources */,
 				4FA3242B2923646F00DB04D5 /* DiaryListItemEndpoint.swift in Sources */,
 				791837FF292225DC00BC6992 /* UIColor+.swift in Sources */,
+				4F307A4A293889C200FA36A0 /* SearchMusicUseCase.swift in Sources */,
 				666E6F7F291CF46800CECD4B /* AppCoordinator.swift in Sources */,
 				791529DC29332CF2005A8DDB /* ImageDTO.swift in Sources */,
 				9841D61B2926131200318EA9 /* LoginViewModel.swift in Sources */,
 				988414D72923304F007C9132 /* KeychainError.swift in Sources */,
 				98BEE36E2934907700B20143 /* LoginError.swift in Sources */,
 				98B5263E292CA46C00446413 /* TagView.swift in Sources */,
+				4F307A4C29388D4600FA36A0 /* MusicRepository.swift in Sources */,
 				7940FB2F292E063100276EFC /* DiaryDetailDTO.swift in Sources */,
 				4F4E0D7629252236005ABA8F /* LoginEndpoint.swift in Sources */,
 				791529D82932F364005A8DDB /* DiaryEditUseCase.swift in Sources */,
