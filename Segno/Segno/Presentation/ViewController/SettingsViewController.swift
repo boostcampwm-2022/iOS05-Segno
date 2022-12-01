@@ -70,17 +70,19 @@ final class SettingsViewController: UIViewController {
                           let self = self else { return UITableViewCell() }
                     
                     cell.okButton.rx.tap
-                        .flatMap { a in
+                        .flatMap { _ in
                             guard let newNickname = cell.nicknameTextField.text else {
                                 return Observable<Bool>.empty()
                             }
+                            
                             return self.viewModel.changeNickname(to: newNickname)
+                                .asObservable()
                         }
                         .subscribe(onNext: { result in
-                            debugPrint("여기에서 \(result)에 대한 피드백 Alert 띄웁니다.")
+                            debugPrint("닉네임 변경 결과 : \(result)")
+                            // TODO: 성공/실패 알럿띄우기
                         })
                         .disposed(by: self.disposeBag)
-                    
                     return cell
                 case .settingsSwitch(let title, let isOn):
                     guard let cell = tableView.dequeueReusableCell(withIdentifier: "SettingsSwitchCell") as? SettingsSwitchCell,

@@ -8,7 +8,7 @@
 import RxSwift
 
 protocol ChangeUserNameUseCase {
-    func requestChangeNickname(to nickname: String) -> Bool
+    func requestChangeNickname(to nickname: String) -> Single<Bool>
 }
 
 final class ChangeUserNameUseCaseImpl: ChangeUserNameUseCase {
@@ -19,9 +19,7 @@ final class ChangeUserNameUseCaseImpl: ChangeUserNameUseCase {
         self.repository = repository
     }
     
-    func requestChangeNickname(to nickname: String) -> Bool {
-        // 임시 처리입니다.
-        debugPrint("SettingsUseCase - requestChangeNickname : \(nickname)으로 변경")
-        return true
+    func requestChangeNickname(to nickname: String) -> Single<Bool> {
+        return repository.changeNickname(to: nickname)
     }
 }

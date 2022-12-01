@@ -26,12 +26,8 @@ final class SettingsViewModel {
         self.changeUserNameUseCase = changeUserNameUseCase
     }
     
-    func changeNickname(to nickname: String) -> Observable<Bool> {
-        return Observable.create { emitter in
-            let result = self.changeUserNameUseCase.requestChangeNickname(to: nickname)
-            emitter.onNext(result)
-            return Disposables.create()
-        }
+    func changeNickname(to nickname: String) -> Single<Bool> {
+        return self.changeUserNameUseCase.requestChangeNickname(to: nickname)
     }
     
     func getAutoPlayMode() -> Bool {
