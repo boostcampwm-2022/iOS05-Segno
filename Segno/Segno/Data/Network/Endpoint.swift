@@ -20,6 +20,7 @@ enum HTTPMethod: String {
 enum HTTPRequestParameter {
     case queries(Queries)
     case body(Body)
+    case data(Data)
 }
 
 // MARK: Endpoint 본체
@@ -35,7 +36,12 @@ protocol Endpoint {
 
 extension Endpoint {
     var headers: Headers {
-        return ["Content-Type": "application/json"]
+        switch self.parameters {
+        case .data(_):
+            return ["Content-Type": "multipart/form-data; boundary=SEGNO"]
+        default:
+            return ["Content-Type": "application/json"]
+        }
     }
     
     func toURLRequest() throws -> URLRequest {
