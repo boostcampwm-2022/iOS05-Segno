@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		4F307A4629387C1100FA36A0 /* ShazamSession.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F307A4529387C1100FA36A0 /* ShazamSession.swift */; };
 		4F31777F291BE4710019BDFC /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F31777E291BE4710019BDFC /* SceneDelegate.swift */; };
 		4F317786291BE4720019BDFC /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 4F317785291BE4720019BDFC /* Assets.xcassets */; };
 		4F317789291BE4720019BDFC /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4F317787291BE4720019BDFC /* LaunchScreen.storyboard */; };
@@ -94,6 +95,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		4F307A4529387C1100FA36A0 /* ShazamSession.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShazamSession.swift; sourceTree = "<group>"; };
 		4F317779291BE4710019BDFC /* Segno.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Segno.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		4F31777C291BE4710019BDFC /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		4F31777E291BE4710019BDFC /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -434,6 +436,7 @@
 			isa = PBXGroup;
 			children = (
 				4FCAC5C1292B5C9000BF9CDD /* LoginSession.swift */,
+				4F307A4529387C1100FA36A0 /* ShazamSession.swift */,
 			);
 			path = Session;
 			sourceTree = "<group>";
@@ -622,6 +625,7 @@
 				4FA324262923600C00DB04D5 /* DiaryListDTO.swift in Sources */,
 				666E6F87291CF4B400CECD4B /* DiaryCoordinator.swift in Sources */,
 				4F31777F291BE4710019BDFC /* SceneDelegate.swift in Sources */,
+				4F307A4629387C1100FA36A0 /* ShazamSession.swift in Sources */,
 				4F4E0D74292521D0005ABA8F /* UserInfoDTO.swift in Sources */,
 				98B52640292CB92900446413 /* MusicContentView.swift in Sources */,
 				4FA32428292363AB00DB04D5 /* DiaryRepository.swift in Sources */,
