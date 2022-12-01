@@ -32,9 +32,11 @@ final class MusicSession {
                     }
                     
                 } catch (let error) {
+                    // TODO: 에러 처리
                     print(error.localizedDescription)
                 }
             default:
+                // TODO: 에러 처리
                 debugPrint("no")
             }
         }
@@ -50,6 +52,7 @@ final class MusicSession {
                 do {
                     try await player.play()
                 } catch let error {
+                    // TODO: 에러 처리
                     print(error.localizedDescription)
                 }
             }

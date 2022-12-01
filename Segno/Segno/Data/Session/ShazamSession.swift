@@ -114,6 +114,7 @@ extension ShazamSession: SHSessionDelegate {
     }
 }
 
+// TODO: DTO가 될지 안 될지 판단해서, 파일로 따로 빼 주기
 struct ShazamSong {
     let isrc: String
     let title: String
@@ -136,6 +137,7 @@ struct ShazamSong {
     }
 }
 
+// TODO: 파일로 빼 주기
 enum ShazamError: Error, LocalizedError {
     case recordDenied
     case unknown
