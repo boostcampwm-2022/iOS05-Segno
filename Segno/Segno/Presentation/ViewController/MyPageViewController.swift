@@ -33,7 +33,7 @@ protocol MyPageViewDelegate: AnyObject {
 
 final class MyPageViewController: UIViewController {
     private let disposeBag = DisposeBag()
-    
+    private let viewModel: MyPageViewModel
     weak var delegate: MyPageViewDelegate?
     
     private enum Metric {
@@ -61,12 +61,23 @@ final class MyPageViewController: UIViewController {
         return tableView
     }()
     
+    init(viewModel: MyPageViewModel = MyPageViewModel()) {
+        self.viewModel = MyPageViewModel()
+        
+        super.init(nibName: nil, bundle: nil)
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
         setupView()
         setupLayout()
         bindTableView()
+        getUserDetail()
     }
 
     private func setupView() {
@@ -94,29 +105,43 @@ final class MyPageViewController: UIViewController {
     }
     
     private func bindTableView() {
-        let dataSource = Observable<[MyPageCellModel]>.just([
-            .writtenDiary(title: "작성한 일기 수", subtitle: "123,456,789개"), // TODO: subtitle 불러오기
-            .settings(title: "설정"),
-            .logout(title: "logout", color: .red)
-        ])
+        viewModel.nicknameObservable
+            .observe(on: MainScheduler.instance)
+            .map { return "안녕하세요,\n"+$0+"님!" }
+            .bind(to: titleLabel.rx.text)
+            .disposed(by: disposeBag)
         
-        dataSource
-            .bind(to: tableView.rx.items) { (tableView, row, element) in
-                switch element {
-                case .writtenDiary(let title, let subtitle):
-                    guard let cell = tableView.dequeueReusableCell(withIdentifier: "writtenDiary") as? SettingsActionSheetCell else { return UITableViewCell() }
-                    cell.configure(left: title, right: subtitle)
-                    return cell
-                case .settings(let title):
-                    guard let cell = tableView.dequeueReusableCell(withIdentifier: "settings") as? SettingsActionSheetCell else { return UITableViewCell() }
-                    cell.configure(center: title)
-                    return cell
-                case .logout(let title, let color):
-                    guard let cell = tableView.dequeueReusableCell(withIdentifier: "logout") as? SettingsActionSheetCell else { return UITableViewCell() }
-                    cell.configure(center: title, color: color)
-                    return cell
-                }
-            }
+        viewModel.writtenDiaryObservable
+            .observe(on: MainScheduler.instance)
+            .subscribe(onNext: { [weak self] writtenDiary in
+                let numberFormatter = NumberFormatter()
+                numberFormatter.numberStyle = .decimal
+                
+                let price = Double(writtenDiary)
+                let result = numberFormatter.string(from: NSNumber(value:price!))! + "개"
+                
+                let dataSource = Observable<[MyPageCellModel]>.just([
+                    .writtenDiary(title: "작성한 일기 수", subtitle: result),
+                    .settings(title: "설정"),
+                    .logout(title: "logout", color: .red)
+                ])
+                    .bind(to: (self?.tableView.rx.items)!) { (tableView, row, element) in
+                        switch element {
+                        case .writtenDiary(let title, let subtitle):
+                            guard let cell = tableView.dequeueReusableCell(withIdentifier: "writtenDiary") as? SettingsActionSheetCell else { return UITableViewCell() }
+                            cell.configure(left: title, right: subtitle)
+                            return cell
+                        case .settings(let title):
+                            guard let cell = tableView.dequeueReusableCell(withIdentifier: "settings") as? SettingsActionSheetCell else { return UITableViewCell() }
+                            cell.configure(center: title)
+                            return cell
+                        case .logout(let title, let color):
+                            guard let cell = tableView.dequeueReusableCell(withIdentifier: "logout") as? SettingsActionSheetCell else { return UITableViewCell() }
+                            cell.configure(center: title, color: color)
+                            return cell
+                        }
+                    }
+            })
             .disposed(by: disposeBag)
         
         tableView.rx.itemSelected
@@ -131,6 +156,10 @@ final class MyPageViewController: UIViewController {
                 }
             })
             .disposed(by: disposeBag)
+    }
+    
+    private func getUserDetail() {
+        viewModel.getUserDetail()
     }
     
     private func settingButtonTapped() {
