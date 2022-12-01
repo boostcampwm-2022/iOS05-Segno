@@ -6,7 +6,6 @@
 //
 
 import Foundation
-import ShazamKit
 
 struct MusicInfo: Encodable {
     let isrc: String
@@ -15,16 +14,11 @@ struct MusicInfo: Encodable {
     let album: String
     let imageURL: URL?
     
-    init?(mediaItem: SHMatchedMediaItem) {
-        guard let isrc = mediaItem.isrc,
-              let title = mediaItem.title,
-              let artist = mediaItem.artist,
-              let album = mediaItem.album else { return nil }
-        
-        self.isrc = isrc
-        self.title = title
-        self.artist = artist
-        self.album = album
-        self.imageURL = mediaItem.artworkURL
+    init(shazamSong: ShazamSong) {
+        self.isrc = shazamSong.isrc
+        self.title = shazamSong.title
+        self.artist = shazamSong.artist
+        self.album = shazamSong.album
+        self.imageURL = shazamSong.imageURL
     }
 }

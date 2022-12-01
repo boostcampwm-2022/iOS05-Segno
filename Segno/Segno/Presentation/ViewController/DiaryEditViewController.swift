@@ -39,6 +39,7 @@ final class DiaryEditViewController: UIViewController {
     }
     
 //    let viewModel: DiaryEditViewModel
+    private let shazamSession = ShazamSession() // 임시로 연동 - 추후 분리 예정
     private var disposeBag = DisposeBag()
     
     private lazy var mainScrollView: UIScrollView = {
@@ -186,6 +187,11 @@ final class DiaryEditViewController: UIViewController {
         
         setupView()
         bindImageView()
+        
+        // 샤잠킷 연동 메서드입니다. 향후 조정 예정입니다.
+        bindLabel()
+        bindButtonAction()
+        bindSearchResult()
     }
     
     private func setupView() {
@@ -277,6 +283,58 @@ final class DiaryEditViewController: UIViewController {
                 print("gestures: \(recognizer.numberOfTouches)")
             })
             .disposed(by: disposeBag)
+    }
+}
+
+// 샤잠킷 로직 부분 - 추후 뜯어서 옮길 계획입니다.
+extension DiaryEditViewController {
+    private func bindLabel() {
+        shazamSession.isSearching
+            .observe(on: MainScheduler.instance)
+            .subscribe(onNext: { searchState in
+                switch searchState {
+                case true:
+                    self.musicInfoLabel.text = "검색 중입니다..."
+                case false:
+                    self.musicInfoLabel.text = "지금 이 음악은 뭘까요?"
+                }
+            })
+            .disposed(by: disposeBag)
+    }
+    
+    private func bindButtonAction() {
+        addMusicButton.rx.tap
+            .withUnretained(self)
+            .bind { _ in
+                self.searchTapped()
+            }
+            .disposed(by: disposeBag)
+    }
+    
+    private func bindSearchResult() {
+        shazamSession.result
+            .subscribe(onNext: { result in
+                switch result {
+                case .success(let song):
+                    let title = song.title
+                    let artist = song.artist
+                    
+                    let musicInfo = MusicInfo(shazamSong: song) // 뷰모델에서 이 작업을 할 때, 향후 사용될 엔티티
+                    
+                    DispatchQueue.main.async {
+                        self.musicInfoLabel.text = "\(artist) - \(title)"
+                    }
+                case .failure(_):
+                    DispatchQueue.main.async {
+                        self.musicInfoLabel.text = "음악을 찾지 못했어요."
+                    }
+                }
+            })
+            .disposed(by: disposeBag)
+    }
+    
+    private func searchTapped() {
+        shazamSession.toggleSearch()
     }
 }
 
