@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		4F307A4629387C1100FA36A0 /* ShazamSession.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F307A4529387C1100FA36A0 /* ShazamSession.swift */; };
+		4F307A482938832900FA36A0 /* MusicSession.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F307A472938832900FA36A0 /* MusicSession.swift */; };
 		4F31777F291BE4710019BDFC /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F31777E291BE4710019BDFC /* SceneDelegate.swift */; };
 		4F317786291BE4720019BDFC /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 4F317785291BE4720019BDFC /* Assets.xcassets */; };
 		4F317789291BE4720019BDFC /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4F317787291BE4720019BDFC /* LaunchScreen.storyboard */; };
@@ -96,6 +97,7 @@
 
 /* Begin PBXFileReference section */
 		4F307A4529387C1100FA36A0 /* ShazamSession.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShazamSession.swift; sourceTree = "<group>"; };
+		4F307A472938832900FA36A0 /* MusicSession.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MusicSession.swift; sourceTree = "<group>"; };
 		4F317779291BE4710019BDFC /* Segno.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Segno.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		4F31777C291BE4710019BDFC /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		4F31777E291BE4710019BDFC /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -437,6 +439,7 @@
 			children = (
 				4FCAC5C1292B5C9000BF9CDD /* LoginSession.swift */,
 				4F307A4529387C1100FA36A0 /* ShazamSession.swift */,
+				4F307A472938832900FA36A0 /* MusicSession.swift */,
 			);
 			path = Session;
 			sourceTree = "<group>";
@@ -562,6 +565,7 @@
 				983AE9D82935CEE2006547BD /* SettingsViewModel.swift in Sources */,
 				9825F41D29377ACF005F2163 /* SettingsRepository.swift in Sources */,
 				66F0D7EE2925FF8B0074872E /* DiaryCell.swift in Sources */,
+				4F307A482938832900FA36A0 /* MusicSession.swift in Sources */,
 				4F9A00202922337F007D9057 /* LoginViewController.swift in Sources */,
 				982A2A472924AE74006F6ACD /* UserDefaultsKey.swift in Sources */,
 				66A8CF6B2937947A00C17F84 /* UserDetailDTO.swift in Sources */,
