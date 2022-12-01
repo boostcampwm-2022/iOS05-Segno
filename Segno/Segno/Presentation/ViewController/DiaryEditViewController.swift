@@ -322,7 +322,7 @@ extension DiaryEditViewController {
                     let artist = song.artist
                     
                     let musicInfo = MusicInfo(shazamSong: song) // 뷰모델에서 이 작업을 할 때, 향후 사용될 엔티티
-                    debugPrint(musicInfo.isrc)
+                    debugPrint(musicInfo)
                     
                     DispatchQueue.main.async {
                         self.musicInfoLabel.text = "\(artist) - \(title)"
