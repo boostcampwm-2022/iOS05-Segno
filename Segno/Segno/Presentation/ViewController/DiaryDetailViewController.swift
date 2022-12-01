@@ -123,12 +123,12 @@ final class DiaryDetailViewController: UIViewController {
         musicSession.fetchMusic(term: MusicInfo.yokohama)
     }
     
-    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
-        self.view.endEditing(true)
+    override func viewWillDisappear(_ animated: Bool) {
+        musicSession.stopMusic()
     }
     
-    private func bindPlayButton() {
-        musicContentView
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        self.view.endEditing(true)
     }
     
     private func setupLayout() {
@@ -242,7 +242,7 @@ final class DiaryDetailViewController: UIViewController {
 
 extension DiaryDetailViewController: MusicContentViewDelegate {
     func playButtonTapped() {
-        musicSession.playMusic()
+        musicSession.togglePlayer()
     }
 }
 

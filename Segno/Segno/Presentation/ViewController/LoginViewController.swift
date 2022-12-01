@@ -190,7 +190,7 @@ final class LoginViewController: UIViewController {
         }
         
         buttonStack.snp.makeConstraints { make in
-            make.centerY.equalToSuperview()
+            make.top.equalTo(subTitleLabel.snp.bottom)
         }
         
         buttonStack.arrangedSubviews.forEach {

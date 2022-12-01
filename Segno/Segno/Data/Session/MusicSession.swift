@@ -43,24 +43,32 @@ final class MusicSession {
     }
     
     // 음악을 재생하는 함수
-    func playMusic() {
+    func togglePlayer() {
         guard let song else { return }
         if !isPlaying {
-            player.queue = [song]
-            
-            Task {
-                do {
-                    try await player.play()
-                } catch let error {
-                    // TODO: 에러 처리
-                    print(error.localizedDescription)
-                }
-            }
+            playMusic(song: song)
         } else {
             player.pause()
         }
         
         // 뷰 컨트롤러를 나갈 때 큐를 비워 준다.
         // 뮤직세션, 샤잠세션은 싱글턴 인스턴스로 만들어 주는 것이 좋겠다.
+    }
+    
+    private func playMusic(song: Song) {
+        player.queue = [song]
+        
+        Task {
+            do {
+                try await player.play()
+            } catch let error {
+                // TODO: 에러 처리
+                print(error.localizedDescription)
+            }
+        }
+    }
+    
+    func stopMusic() {
+        player.stop()
     }
 }
