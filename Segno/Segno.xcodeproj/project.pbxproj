@@ -11,6 +11,7 @@
 		4F307A482938832900FA36A0 /* MusicSession.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F307A472938832900FA36A0 /* MusicSession.swift */; };
 		4F307A4A293889C200FA36A0 /* SearchMusicUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F307A49293889C200FA36A0 /* SearchMusicUseCase.swift */; };
 		4F307A4C29388D4600FA36A0 /* MusicRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F307A4B29388D4600FA36A0 /* MusicRepository.swift */; };
+		4F307A512939031A00FA36A0 /* MarqueeLabel in Frameworks */ = {isa = PBXBuildFile; productRef = 4F307A502939031A00FA36A0 /* MarqueeLabel */; };
 		4F31777F291BE4710019BDFC /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F31777E291BE4710019BDFC /* SceneDelegate.swift */; };
 		4F317786291BE4720019BDFC /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 4F317785291BE4720019BDFC /* Assets.xcassets */; };
 		4F317789291BE4720019BDFC /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4F317787291BE4720019BDFC /* LaunchScreen.storyboard */; };
@@ -193,6 +194,7 @@
 				4F3177A7291BF70B0019BDFC /* RxRelay in Frameworks */,
 				4F3177AB291BF70B0019BDFC /* RxSwift in Frameworks */,
 				4F3177B5291BF7BC0019BDFC /* Kingfisher in Frameworks */,
+				4F307A512939031A00FA36A0 /* MarqueeLabel in Frameworks */,
 				4F3177B0291BF7950019BDFC /* SnapKit in Frameworks */,
 				4F3177A3291BF70B0019BDFC /* RxCocoa in Frameworks */,
 				66F0D7F729260BA20074872E /* GoogleSignIn in Frameworks */,
@@ -500,6 +502,7 @@
 				4F3177AF291BF7950019BDFC /* SnapKit */,
 				4F3177B4291BF7BC0019BDFC /* Kingfisher */,
 				66F0D7F629260BA20074872E /* GoogleSignIn */,
+				4F307A502939031A00FA36A0 /* MarqueeLabel */,
 			);
 			productName = Segno;
 			productReference = 4F317779291BE4710019BDFC /* Segno.app */;
@@ -534,6 +537,7 @@
 				4F3177AE291BF7950019BDFC /* XCRemoteSwiftPackageReference "SnapKit" */,
 				4F3177B3291BF7BC0019BDFC /* XCRemoteSwiftPackageReference "Kingfisher" */,
 				66F0D7F529260BA20074872E /* XCRemoteSwiftPackageReference "GoogleSignIn-iOS" */,
+				4F307A4F2939031A00FA36A0 /* XCRemoteSwiftPackageReference "MarqueeLabel" */,
 			);
 			productRefGroup = 4F31777A291BE4710019BDFC /* Products */;
 			projectDirPath = "";
@@ -856,6 +860,14 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
+		4F307A4F2939031A00FA36A0 /* XCRemoteSwiftPackageReference "MarqueeLabel" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/cbpowell/MarqueeLabel";
+			requirement = {
+				branch = master;
+				kind = branch;
+			};
+		};
 		4F3177A1291BF70B0019BDFC /* XCRemoteSwiftPackageReference "RxSwift" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/ReactiveX/RxSwift";
@@ -891,6 +903,11 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
+		4F307A502939031A00FA36A0 /* MarqueeLabel */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 4F307A4F2939031A00FA36A0 /* XCRemoteSwiftPackageReference "MarqueeLabel" */;
+			productName = MarqueeLabel;
+		};
 		4F3177A2291BF70B0019BDFC /* RxCocoa */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = 4F3177A1291BF70B0019BDFC /* XCRemoteSwiftPackageReference "RxSwift" */;

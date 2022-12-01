@@ -7,6 +7,7 @@
 
 import UIKit
 
+import MarqueeLabel
 import RxCocoa
 import RxSwift
 import SnapKit
@@ -122,10 +123,11 @@ final class DiaryEditViewController: UIViewController {
         return button
     }()
     
-    private lazy var musicInfoLabel: UILabel = {
-        let label = UILabel()
+    private lazy var musicInfoLabel: MarqueeLabel = {
+        let label = MarqueeLabel(frame: .zero, rate: 32, fadeLength: 32.0)
         label.font = .appFont(.surroundAir, size: Metric.smallFontSize)
         label.text = Metric.musicPlaceholder
+        label.trailingBuffer = 16.0
         return label
     }()
     
@@ -320,6 +322,7 @@ extension DiaryEditViewController {
                     let artist = song.artist
                     
                     let musicInfo = MusicInfo(shazamSong: song) // 뷰모델에서 이 작업을 할 때, 향후 사용될 엔티티
+                    debugPrint(musicInfo.isrc)
                     
                     DispatchQueue.main.async {
                         self.musicInfoLabel.text = "\(artist) - \(title)"
