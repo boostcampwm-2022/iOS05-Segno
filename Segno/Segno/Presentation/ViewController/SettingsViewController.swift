@@ -74,11 +74,10 @@ final class SettingsViewController: UIViewController {
                             guard let newNickname = cell.nicknameTextField.text else {
                                 return Observable<Bool>.empty()
                             }
-                            debugPrint("입력된 아이디 : ", newNickname)
                             return self.viewModel.changeNickname(to: newNickname)
                         }
                         .subscribe(onNext: { result in
-                            debugPrint("viewModel 메서드 실행 결과 : ", result)
+                            debugPrint("여기에서 \(result)에 대한 피드백 Alert 띄웁니다.")
                         })
                         .disposed(by: self.disposeBag)
                     
@@ -102,9 +101,10 @@ final class SettingsViewController: UIViewController {
                     
                     cell.configure(title: title, isOn: isOn, action: action)
                     return cell
-                case .settingsActionSheet(let title):
+                case .settingsActionSheet(let title, let mode):
                     guard let cell = tableView.dequeueReusableCell(withIdentifier: "SettingsActionSheetCell") as? SettingsActionSheetCell else { return UITableViewCell() }
-                    cell.configure(left: title)
+                    let darkModeTitle = DarkMode.allCases[mode].title
+                    cell.configure(left: title, right: darkModeTitle)
                     return cell
                 }
             }
@@ -116,15 +116,19 @@ final class SettingsViewController: UIViewController {
                 guard let action = SettingsCellActions(rawValue: indexPath.row) else { return }
                 switch action {
                 case .darkmode: // 다크 모드 설정
+                    guard let cell = self?.tableView.cellForRow(at: indexPath) as? SettingsActionSheetCell else { return }
                     let actionSheet = UIAlertController(title: "다크 모드 설정", message: nil, preferredStyle: .actionSheet)
-                    actionSheet.addAction(UIAlertAction(title: "시스템 설정", style: .default, handler: { _ in
-                        self?.viewModel.changeDarkMode(to: 0)
+                    actionSheet.addAction(UIAlertAction(title: DarkMode.system.title, style: .default, handler: { _ in
+                        self?.viewModel.changeDarkMode(to: DarkMode.system.rawValue)
+                        cell.configure(right: DarkMode.system.title)
                     }))
-                    actionSheet.addAction(UIAlertAction(title: "항상 밝게", style: .default, handler: { _ in
-                        self?.viewModel.changeDarkMode(to: 1)
+                    actionSheet.addAction(UIAlertAction(title: DarkMode.light.title, style: .default, handler: { _ in
+                        self?.viewModel.changeDarkMode(to: DarkMode.light.rawValue)
+                        cell.configure(right: DarkMode.light.title)
                     }))
-                    actionSheet.addAction(UIAlertAction(title: "항상 어둡게", style: .default, handler: { _ in
-                        self?.viewModel.changeDarkMode(to: 2)
+                    actionSheet.addAction(UIAlertAction(title: DarkMode.dark.title, style: .default, handler: { _ in
+                        self?.viewModel.changeDarkMode(to: DarkMode.dark.rawValue)
+                        cell.configure(right: DarkMode.dark.title)
                     }))
                     self?.present(actionSheet, animated: true)
                 default:

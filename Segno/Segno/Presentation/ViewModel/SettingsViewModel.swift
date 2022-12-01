@@ -10,49 +10,43 @@ import Foundation
 import RxSwift
 
 final class SettingsViewModel {
-    let dataSource = Observable<[SettingsCellModel]>.just([
+    lazy var dataSource = Observable<[SettingsCellModel]>.just([
         .nickname,
-        .settingsSwitch(title: "음악 자동 재생", isOn: true), // TODO: isOn은 로컬 디비로부터 불러와야 합니다.
-        .settingsActionSheet(title: "다크 모드")
+        .settingsSwitch(title: "음악 자동 재생", isOn: settingsUseCase.getAutoPlayMode()),
+        .settingsActionSheet(title: "다크 모드", mode: settingsUseCase.getDarkMode())
     ])
     
-    init() {
-        
+    private let settingsUseCase: SettingsUseCase
+    private let changeUserNameUseCase: ChangeUserNameUseCase
+    
+    init(settingsUseCase: SettingsUseCase = SettingsUseCaseImpl(),
+         changeUserNameUseCase: ChangeUserNameUseCase = ChangeUserNameUseCaseImpl()
+    ) {
+        self.settingsUseCase = settingsUseCase
+        self.changeUserNameUseCase = changeUserNameUseCase
     }
     
-    // TODO: 닉네임 변경 로직
     func changeNickname(to nickname: String) -> Observable<Bool> {
-//        return useCase.requestChangeNickname(to: nickname)
-        
-        // 임시 처리입니다.
         return Observable.create { emitter in
-            emitter.onNext(true)
+            let result = self.changeUserNameUseCase.requestChangeNickname(to: nickname)
+            emitter.onNext(result)
             return Disposables.create()
         }
     }
     
-    // TODO: 음악 자동 재생 여부 불러오기 / 클릭 시 반영하기
     func getAutoPlayMode() -> Bool {
-        // return useCase.getAutoPlayMode()
-        
-        return true
+         return settingsUseCase.getAutoPlayMode()
     }
     
     func changeAutoPlayMode(to mode: Bool) {
-//        useCase.changeAutoPlayMode(to: mode)
-        
-        debugPrint("changeAutoPlayMode에서 \(mode)로 변경합니다")
+        settingsUseCase.changeAutoPlayMode(to: mode)
     }
     
-    // TODO: 다크모드 설정 불러오기 / 액션 시트 선택 시 반영하기
     func getDarkMode() -> Int {
-        // return useCase.getDarkMode()
-        
-        return 0
+        return settingsUseCase.getDarkMode()
     }
     
     func changeDarkMode(to mode: Int) {
-        // TODO: 액션 시트를 띄워야 합니다.
-        debugPrint("changeDarkMode에서 \(mode)로 변경합니다")
+        settingsUseCase.changeDarkMode(to: mode)
     }
 }
