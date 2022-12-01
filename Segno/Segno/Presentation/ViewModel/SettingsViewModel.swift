@@ -17,17 +17,17 @@ final class SettingsViewModel {
     ])
     
     private let settingsUseCase: SettingsUseCase
-    private let changeUserNameUseCase: ChangeUserNameUseCase
+    private let changeNicknameUseCase: ChangeNicknameUseCase
     
     init(settingsUseCase: SettingsUseCase = SettingsUseCaseImpl(),
-         changeUserNameUseCase: ChangeUserNameUseCase = ChangeUserNameUseCaseImpl()
+         changeNicknameUseCase: ChangeNicknameUseCase = ChangeNicknameUseCaseImpl()
     ) {
         self.settingsUseCase = settingsUseCase
-        self.changeUserNameUseCase = changeUserNameUseCase
+        self.changeNicknameUseCase = changeNicknameUseCase
     }
     
     func changeNickname(to nickname: String) -> Single<Bool> {
-        return self.changeUserNameUseCase.requestChangeNickname(to: nickname)
+        return self.changeNicknameUseCase.requestChangeNickname(to: nickname)
     }
     
     func getAutoPlayMode() -> Bool {
