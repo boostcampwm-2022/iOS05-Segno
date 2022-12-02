@@ -13,7 +13,7 @@ typealias Body = Encodable
 
 // MARK: HTTP 요청 메서드
 enum HTTPMethod: String {
-    case GET, POST, PUT, DELETE
+    case GET, POST, PUT, DELETE, PATCH
 }
 
 // MARK: 요청 파라미터
