@@ -20,7 +20,6 @@ final class DiaryDetailUseCaseImpl: DiaryDetailUseCase {
     }
     
     func getDiary(id: String) -> Single<DiaryDetail> {
-        // MusicInfo, location은 추가 상의 필요
         return repository.getDiary(id: id).map {
             DiaryDetail(identifier: $0.id, title: $0.title, tags: $0.tags, imagePath: $0.imagePath, bodyText: $0.bodyText, musicInfo: nil, location: nil)
             }
