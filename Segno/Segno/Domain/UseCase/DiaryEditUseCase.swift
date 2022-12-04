@@ -28,9 +28,8 @@ final class DiaryEditUseCaseImpl: DiaryEditUseCase {
                 tags: dto.tags,
                 imagePath: dto.imagePath,
                 bodyText: dto.bodyText,
-                // TODO: MusicInfo, location 업데이트
-                musicInfo: nil,
-                location: nil
+                musicInfo: dto.musicInfo,
+                location: dto.location
             )
         }
     }
