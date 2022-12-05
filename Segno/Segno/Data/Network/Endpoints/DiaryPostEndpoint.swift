@@ -15,7 +15,7 @@ enum DiaryPostEndpoint: Endpoint {
     }
     
     var httpMethod: HTTPMethod {
-        return .GET
+        return .POST
     }
     
     var path: String {
