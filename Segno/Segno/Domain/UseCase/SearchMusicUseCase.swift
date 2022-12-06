@@ -42,8 +42,8 @@ extension SearchMusicUseCaseImpl {
         musicRepository.shazamSearchResult
             .subscribe(onNext: {
                 switch $0 {
-                case .success(let shazamSong):
-                    let musicInfo = MusicInfo(shazamSong: shazamSong)
+                case .success(let shazamSongDTO):
+                    let musicInfo = MusicInfo(shazamSong: shazamSongDTO)
                     self.musicInfoResult.onNext(.success(musicInfo))
                 case .failure(let error):
                     self.musicInfoResult.onNext(.failure(error))
