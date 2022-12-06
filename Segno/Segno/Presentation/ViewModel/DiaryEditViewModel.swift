@@ -25,6 +25,7 @@ final class DiaryEditViewModel {
         self.searchMusicUseCase = searchMusicUseCase
         
         subscribeSearchingStatus()
+        subscribeSearchResult()
     }
     
     func addTags() {
@@ -58,6 +59,7 @@ final class DiaryEditViewModel {
     func subscribeSearchResult() {
         searchMusicUseCase.musicInfoResult
             .subscribe(onNext: {
+                self.toggleSearchMusic()
                 self.musicInfo.onNext($0)
             })
             .disposed(by: disposeBag)

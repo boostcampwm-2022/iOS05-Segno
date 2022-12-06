@@ -24,6 +24,8 @@ final class SearchMusicUseCaseImpl: SearchMusicUseCase {
     
     init(musicRepository: MusicRepository = MusicRepositoryImpl()) {
         self.musicRepository = musicRepository
+        
+        subscribeShazamResult()
     }
     
     func startSearching() {

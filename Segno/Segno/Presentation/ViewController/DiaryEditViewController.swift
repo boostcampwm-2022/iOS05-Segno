@@ -281,10 +281,10 @@ final class DiaryEditViewController: UIViewController {
     }
 }
 
-// 샤잠킷 로직 부분 - 추후 뜯어서 옮길 계획입니다.
+// 샤잠킷 로직 부분
 extension DiaryEditViewController {
     private func bindLabel() {
-        shazamSession.isSearching
+        viewModel.isSearching
             .observe(on: MainScheduler.instance)
             .subscribe(onNext: { searchState in
                 switch searchState {
@@ -307,30 +307,26 @@ extension DiaryEditViewController {
     }
     
     private func bindSearchResult() {
-        shazamSession.result
+        viewModel.musicInfo
+            .observe(on: MainScheduler.instance)
             .subscribe(onNext: { result in
                 switch result {
                 case .success(let song):
                     let title = song.title
                     let artist = song.artist
                     
-                    let musicInfo = MusicInfo(shazamSong: song) // 뷰모델에서 이 작업을 할 때, 향후 사용될 엔티티
-                    debugPrint(musicInfo)
+                    debugPrint(song)
                     
-                    DispatchQueue.main.async {
-                        self.musicInfoLabel.text = "\(artist) - \(title)"
-                    }
+                    self.musicInfoLabel.text = "\(artist) - \(title)"
                 case .failure(_):
-                    DispatchQueue.main.async {
-                        self.musicInfoLabel.text = "음악을 찾지 못했어요."
-                    }
+                    self.musicInfoLabel.text = "음악을 찾지 못했어요."
                 }
             })
             .disposed(by: disposeBag)
     }
     
     private func searchTapped() {
-        shazamSession.toggleSearch() // 지워질 예정
+        viewModel.toggleSearchMusic()
     }
 }
 
