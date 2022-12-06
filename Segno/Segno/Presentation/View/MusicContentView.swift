@@ -8,7 +8,12 @@
 import UIKit
 
 import Kingfisher
+import RxSwift
 import SnapKit
+
+protocol MusicContentViewDelegate: AnyObject {
+    func playButtonTapped()
+}
 
 final class MusicContentView: UIView {
     private enum Metric {
@@ -18,6 +23,9 @@ final class MusicContentView: UIView {
         static let albumArtCornerRadius: CGFloat = 5
         static let playButtonSize: CGFloat = 30
     }
+    
+    private let disposeBag = DisposeBag()
+    weak var delegate: MusicContentViewDelegate?
     
     private lazy var albumArtImageView: UIImageView = {
         let imageView = UIImageView()
@@ -42,6 +50,11 @@ final class MusicContentView: UIView {
         let button = UIButton()
         button.setImage(UIImage(systemName: "play.fill"), for: .normal)
         button.tintColor = .appColor(.black)
+        button.rx.tap
+            .bind { [weak self] in
+                self?.delegate?.playButtonTapped()
+            }
+            .disposed(by: disposeBag)
         return button
     }()
     
@@ -49,6 +62,8 @@ final class MusicContentView: UIView {
         super.init(frame: frame)
         
         setLayout()
+        // 임시로 정해진 데이터를 넣었습니다.
+        setMusic(info: MusicInfo.yokohama)
     }
     
     required init?(coder: NSCoder) {
