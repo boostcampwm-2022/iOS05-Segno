@@ -42,7 +42,7 @@ final class SettingsViewModel {
         return settingsUseCase.getDarkMode()
     }
     
-    func changeDarkMode(to mode: Int) -> Single<Int> {
-        return settingsUseCase.changeDarkMode(to: mode)
+    func changeDarkMode(to mode: Int) {
+        settingsUseCase.changeDarkMode(to: mode)
     }
 }

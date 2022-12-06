@@ -11,7 +11,7 @@ protocol SettingsUseCase {
     func getAutoPlayMode() -> Bool
     func changeAutoPlayMode(to mode: Bool)
     func getDarkMode() -> Int
-    func changeDarkMode(to mode: Int) -> Single<Int>
+    func changeDarkMode(to mode: Int)
 }
 
 final class SettingsUseCaseImpl: SettingsUseCase {
@@ -39,22 +39,10 @@ final class SettingsUseCaseImpl: SettingsUseCase {
     }
     
     func getDarkMode() -> Int {
-        if let mode = repository.getUserDefaultsObject(forKey: .darkmode) as? Int {
-            debugPrint("SettingsUseCase - getDarkMode : 키가 있습니다 - \(mode)")
-            return mode
-        } else {
-            repository.setUserDefaults(DarkMode.system.rawValue, forKey: .darkmode)
-            debugPrint("SettingsUseCase - getDarkMode : 키가 없어 \(DarkMode.system.rawValue) 로 설정합니다.")
-            return DarkMode.system.rawValue
-        }
+        return DarkModeManager.shared.getDarkMode()
     }
     
-    func changeDarkMode(to mode: Int) -> Single<Int> {
-        repository.setUserDefaults(mode, forKey: .darkmode)
-        debugPrint("SettingsUseCase - changeDarkMode : \(mode)로 설정")
-        return Single.create { observer in
-            observer(.success(mode))
-            return Disposables.create()
-        }
+    func changeDarkMode(to mode: Int) {
+        DarkModeManager.shared.changeDarkMode(to: mode)
     }
 }
