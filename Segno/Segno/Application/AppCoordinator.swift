@@ -18,9 +18,9 @@ final class AppCoordinator: Coordinator {
     
     func start() {
         // TODO: login이 안되어있으면 LoginCoordinator 실행
-//        startLoginCoordinator()
+        startLoginCoordinator()
         // TODO: login이 되어있으면 TabBarCoordinator 실행
-        startTabBarCoordinator()
+//        startTabBarCoordinator()
     }
     
     func startLoginCoordinator() {
