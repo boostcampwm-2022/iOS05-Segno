@@ -39,7 +39,7 @@ final class DiaryEditViewController: UIViewController {
         static let tagButtonCornerRadius = CGFloat(halfMinorContentHeight / 2)
     }
     
-//    let viewModel: DiaryEditViewModel
+    let viewModel: DiaryEditViewModel
     private let shazamSession = ShazamSession() // 임시로 연동 - 추후 분리 예정
     private var disposeBag = DisposeBag()
     
@@ -167,16 +167,9 @@ final class DiaryEditViewController: UIViewController {
     
     private lazy var tapGesture = UITapGestureRecognizer()
     
-//    // 뷰 모델이 작성되었을 경우, 위의 뷰 모델 프로퍼티 주석 해제와 함께 사용하면 됩니다.
-//    init(viewModel: DiaryEditViewModel
-//         = DiaryEditViewModel()) {
-//        self.viewModel = viewModel
-//
-//        super.init(nibName: nil, bundle: nil)
-//    }
-    
-    // 뷰 모델이 작성되기 전 임시로 사용하는 이니셜라이저입니다.
-    init() {
+    init(viewModel: DiaryEditViewModel = DiaryEditViewModel()) {
+        self.viewModel = viewModel
+
         super.init(nibName: nil, bundle: nil)
     }
     
