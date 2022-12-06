@@ -14,7 +14,18 @@ struct DiaryDetailDTO: Decodable {
     let tags: [String]
     let imagePath: String
     let bodyText: String?
-    let musicInfo: String?
+    let musicInfo: MusicInfo?
+    let location: Location?
+    
+    init(id: String, title: String, tags: [String], imagePath: String, bodyText: String?, musicInfo: MusicInfo? = nil, location: Location? = nil) {
+        self.id = id
+        self.title = title
+        self.tags = tags
+        self.imagePath = imagePath
+        self.bodyText = bodyText
+        self.musicInfo = musicInfo
+        self.location = location
+    }
     
     #if DEBUG
     static let example = DiaryDetailDTO(
@@ -22,8 +33,7 @@ struct DiaryDetailDTO: Decodable {
         title: "title",
         tags: ["tag1", "tag2"],
         imagePath: "test.png",
-        bodyText: "bodyText",
-        musicInfo: "music"
+        bodyText: "bodyText"
     )
     #endif
 }

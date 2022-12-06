@@ -8,7 +8,7 @@
 import Foundation
 import CoreLocation
 
-struct Location: Encodable {
+struct Location: Codable {
     let latitude: Double
     let longitude: Double
     

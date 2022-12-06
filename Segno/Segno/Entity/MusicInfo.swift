@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct MusicInfo: Encodable {
+struct MusicInfo: Codable {
     let isrc: String
     let title: String
     let artist: String
