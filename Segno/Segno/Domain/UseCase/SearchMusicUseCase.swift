@@ -8,15 +8,26 @@
 import RxSwift
 
 protocol SearchMusicUseCase {
-    func searchMusic() -> Single<MusicInfo>
+    func startSearching() -> Single<MusicInfo>
+    func stopSearching()
 }
 
 final class SearchMusicUseCaseImpl: SearchMusicUseCase {
-    func searchMusic() -> Single<MusicInfo> {
+    let musicRepository: MusicRepository
+    
+    init(musicRepository: MusicRepository = MusicRepositoryImpl()) {
+        self.musicRepository = musicRepository
+    }
+    
+    func startSearching() -> Single<MusicInfo> {
         // 음악을 검색해줄 것을 레포지토리에 요청
         
         return Single.create { _ in
             return Disposables.create()
         }
+    }
+    
+    func stopSearching() {
+        musicRepository.stopSearchingMusic()
     }
 }
