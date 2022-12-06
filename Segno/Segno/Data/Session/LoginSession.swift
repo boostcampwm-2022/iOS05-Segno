@@ -82,34 +82,51 @@ extension LoginSession: ASAuthorizationControllerDelegate {
 extension LoginSession {
     // MARK: - jwt 해석 메서드
     func parseEmailFromJWT(_ jwtData: Data?) -> String? {
+        
         var email: String?
         guard let jwtData = jwtData,
               let jwt = String(data: jwtData, encoding: .ascii) else { return nil }
         
-        // parse body from jwt
-        let jwtElement = jwt.split(separator: ".").map {
-            String($0)
-        }.compactMap {
-            Data(base64Encoded: $0)
+        do {
+            let payload = try decode(jwtToken: jwt)
+            email = payload["email"] as? String
+        } catch(let err) {
+            print(err)
+            return nil
         }
-        
-        guard jwtElement.count != 0 else { return nil }
-        
-        let data = parseBodyFromJWTData(jwtElement)
-        
-        if let json = try? JSONSerialization.jsonObject(with: data, options: []) as? [String : Any],
-           let emailFromJson = json["email"] as? String {
-            email = emailFromJson
-        }
+        print(email)
         
         return email
     }
     
-    private func parseBodyFromJWTData(_ jwtData: [Data]) -> Data {
-        if jwtData.count > 1 {
-            return jwtData[1]
-        } else {
-            return jwtData[0]
+    private func decode(jwtToken jwt: String) throws -> [String: Any] {
+
+        enum DecodeErrors: Error {
+            case badToken
+            case other
         }
+
+        func base64Decode(_ base64: String) throws -> Data {
+            let base64 = base64
+                .replacingOccurrences(of: "-", with: "+")
+                .replacingOccurrences(of: "_", with: "/")
+            let padded = base64.padding(toLength: ((base64.count + 3) / 4) * 4, withPad: "=", startingAt: 0)
+            guard let decoded = Data(base64Encoded: padded) else {
+                throw DecodeErrors.badToken
+            }
+            return decoded
+        }
+
+        func decodeJWTPart(_ value: String) throws -> [String: Any] {
+            let bodyData = try base64Decode(value)
+            let json = try JSONSerialization.jsonObject(with: bodyData, options: [])
+            guard let payload = json as? [String: Any] else {
+                throw DecodeErrors.other
+            }
+            return payload
+        }
+
+        let segments = jwt.components(separatedBy: ".")
+        return try decodeJWTPart(segments[1])
     }
 }

@@ -31,6 +31,7 @@ final class DiaryDetailViewController: UIViewController {
     }
     
     private let disposeBag = DisposeBag()
+    private let musicSession = MusicSession() // 임시로 여기에 놓습니다
     private let viewModel: DiaryDetailViewModel
     weak var delegate: DiaryDetailViewDelegate?
     
@@ -91,6 +92,7 @@ final class DiaryDetailViewController: UIViewController {
     
     private lazy var musicContentView: MusicContentView = {
         let musicContentView = MusicContentView()
+        musicContentView.delegate = self
         return musicContentView
     }()
     
@@ -116,6 +118,13 @@ final class DiaryDetailViewController: UIViewController {
         setupLayout()
         bindDiaryItem()
         getDiary()
+        
+        // 뮤직세션 테스트용으로, 임시로 정해진 데이터를 넣어 두었습니다.
+        musicSession.fetchMusic(term: MusicInfo.yokohama)
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        musicSession.stopMusic()
     }
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
@@ -228,6 +237,12 @@ final class DiaryDetailViewController: UIViewController {
     
     private func getDiary() {
         viewModel.getDiary()
+    }
+}
+
+extension DiaryDetailViewController: MusicContentViewDelegate {
+    func playButtonTapped() {
+        musicSession.togglePlayer()
     }
 }
 
