@@ -331,14 +331,6 @@ extension DiaryEditViewController {
     
     private func searchTapped() {
         shazamSession.toggleSearch() // 지워질 예정
-        viewModel.startSearchingMusic()
-            .observe(on: MainScheduler.instance)
-            .subscribe(onSuccess: { info in
-                self.musicInfoLabel.text = "\(info.artist) - \(info.title)"
-            }, onFailure: { _ in
-                self.musicInfoLabel.text = "음악을 찾지 못했어요."
-            })
-            .disposed(by: disposeBag)
     }
 }
 

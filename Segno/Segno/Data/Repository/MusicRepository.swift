@@ -8,8 +8,7 @@
 import RxSwift
 
 protocol MusicRepository {
-    func startSearchingMusic()
-    func stopSearchingMusic()
+    func toggleSearchingMusic()
     func playMusic()
 }
 
@@ -17,12 +16,8 @@ final class MusicRepositoryImpl: MusicRepository {
     private let shazamSession = ShazamSession()
     private let musicSession = MusicSession()
     
-    func startSearchingMusic() {
+    func toggleSearchingMusic() {
         
-    }
-    
-    func stopSearchingMusic() {
-        shazamSession.stop()
     }
     
     func playMusic() {

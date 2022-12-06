@@ -25,12 +25,8 @@ final class DiaryEditViewModel {
         
     }
     
-    func startSearchingMusic() -> Single<MusicInfo> {
-        return searchMusicUseCase.startSearching()
-    }
-    
-    func stopSearchingMusic() {
-        searchMusicUseCase.stopSearching()
+    func toggleSearchMusic() {
+        
     }
     
     func setLocation() {

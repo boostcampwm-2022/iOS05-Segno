@@ -8,8 +8,7 @@
 import RxSwift
 
 protocol SearchMusicUseCase {
-    func startSearching() -> Single<MusicInfo>
-    func stopSearching()
+    func toggleSearching()
 }
 
 final class SearchMusicUseCaseImpl: SearchMusicUseCase {
@@ -19,15 +18,7 @@ final class SearchMusicUseCaseImpl: SearchMusicUseCase {
         self.musicRepository = musicRepository
     }
     
-    func startSearching() -> Single<MusicInfo> {
-        // 음악을 검색해줄 것을 레포지토리에 요청
+    func toggleSearching() {
         
-        return Single.create { _ in
-            return Disposables.create()
-        }
-    }
-    
-    func stopSearching() {
-        musicRepository.stopSearchingMusic()
     }
 }
