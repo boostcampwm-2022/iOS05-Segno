@@ -165,7 +165,8 @@ final class DiaryEditViewController: UIViewController {
         return button
     }()
     
-    private lazy var tapGesture = UITapGestureRecognizer()
+    
+    private lazy var photoImageViewTapGesture = UITapGestureRecognizer()
     
 //    // 뷰 모델이 작성되었을 경우, 위의 뷰 모델 프로퍼티 주석 해제와 함께 사용하면 됩니다.
 //    init(viewModel: DiaryEditViewModel
@@ -189,7 +190,7 @@ final class DiaryEditViewController: UIViewController {
         
         setupView()
         bindImageView()
-        
+        setRecognizer()
         // 샤잠킷 연동 메서드입니다. 향후 조정 예정입니다.
         bindLabel()
         bindButtonAction()
@@ -222,7 +223,7 @@ final class DiaryEditViewController: UIViewController {
         }
         
         contentsStackView.addArrangedSubview(photoImageView)
-        photoImageView.addGestureRecognizer(tapGesture)
+        
         photoImageView.snp.makeConstraints {
             $0.height.equalTo(Metric.majorContentHeight)
         }
@@ -259,7 +260,6 @@ final class DiaryEditViewController: UIViewController {
             $0.edges.equalTo(tagScrollView)
             $0.height.equalTo(tagScrollView)
         }
-        
         tagStackView.addArrangedSubview(addTagButton)
     }
     
@@ -280,11 +280,23 @@ final class DiaryEditViewController: UIViewController {
     }
     
     private func bindImageView() {
-        tapGesture.rx.event
+        photoImageView.isUserInteractionEnabled = true
+        photoImageView.addGestureRecognizer(photoImageViewTapGesture)
+        photoImageViewTapGesture.rx.event
             .bind(onNext: { recognizer in
+                self.view.endEditing(true)
                 print("gestures: \(recognizer.numberOfTouches)")
             })
             .disposed(by: disposeBag)
+    }
+    
+    private func setRecognizer() {
+        let singleTapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(singleTapMethod))
+        mainScrollView.addGestureRecognizer(singleTapGestureRecognizer)
+    }
+    
+    @objc func singleTapMethod(sender: UITapGestureRecognizer) {
+        self.view.endEditing(true)
     }
 }
 
