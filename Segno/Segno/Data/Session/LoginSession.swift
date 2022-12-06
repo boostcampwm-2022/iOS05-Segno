@@ -129,12 +129,4 @@ extension LoginSession {
         let segments = jwt.components(separatedBy: ".")
         return try decodeJWTPart(segments[1])
     }
-    
-    private func parseBodyFromJWTData(_ jwtData: [Data]) -> Data {
-        if jwtData.count > 1 {
-            return jwtData[1]
-        } else {
-            return jwtData[0]
-        }
-    }
 }
