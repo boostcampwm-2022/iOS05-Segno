@@ -1,21 +1,21 @@
 //
-//  DiaryPostEndpoint.swift
+//  DiaryDeleteEndpoint.swift
 //  Segno
 //
-//  Created by TaehoYoo on 2022/11/27.
+//  Created by TaehoYoo on 2022/12/05.
 //
 
 import Foundation
 
-enum DiaryPostEndpoint: Endpoint {
-    case item(DiaryDetail)
+enum DiaryDeleteEndpoint: Endpoint {
+    case item(token: String, diaryId: String)
     
     var baseURL: URL? {
         return URL(string: BaseURL.urlString)
     }
     
     var httpMethod: HTTPMethod {
-        return .POST
+        return .DELETE
     }
     
     var path: String {
@@ -24,8 +24,8 @@ enum DiaryPostEndpoint: Endpoint {
     
     var parameters: HTTPRequestParameter? {
         switch self {
-        case .item(let diary):
-            return HTTPRequestParameter.body(diary)
+        case .item(let token, let diaryId):
+            return HTTPRequestParameter.body(["token": token, "diaryId": diaryId])
         }
     }
 }

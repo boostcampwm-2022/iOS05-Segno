@@ -13,6 +13,7 @@ protocol DiaryRepository {
     func getDiaryListItem() -> Single<DiaryListDTO>
     func getDiary(id: String) -> Single<DiaryDetailDTO>
     func postDiary(_ diary: DiaryDetail, image: Data) -> Single<DiaryDetailDTO>
+    func deleteDiary(id: String) -> Single<Bool>
 }
 
 final class DiaryRepositoryImpl: DiaryRepository {
@@ -76,6 +77,20 @@ final class DiaryRepositoryImpl: DiaryRepository {
             }
             .asObservable()
             .asSingle()
+        
+        return single
+    }
+    
+    func deleteDiary(id: String) -> RxSwift.Single<Bool> {
+        //TODO: - Token 받아오기
+        let token = "0KjV78s0YPKbrlVP3QeAwUJcjohs2h2ysdWDLWg"
+        
+        let diaryDeleteEndpoint = DiaryDeleteEndpoint.item(token: token, diaryId: id)
+        
+        let single = NetworkManager.shared.call(diaryDeleteEndpoint)
+            .map { _ in
+                return true
+            }
         
         return single
     }
