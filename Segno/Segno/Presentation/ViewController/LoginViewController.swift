@@ -38,6 +38,7 @@ final class LoginViewController: UIViewController {
         static let buttonHeight: CGFloat = 50
         static let buttonRadius: CGFloat = 20
         static let footerBottomOffset: CGFloat = -100
+        static let footerHeight: CGFloat = 50
         static let inset: CGFloat = 20
         static let subTitleFontSize: CGFloat = 30
         static let subTitleHeight: CGFloat = 50
@@ -82,9 +83,9 @@ final class LoginViewController: UIViewController {
     
     private lazy var buttonStack = {
         let stackView = UIStackView()
-        stackView.alignment = .center
+        stackView.alignment = .bottom
         stackView.axis = .vertical
-        stackView.distribution = .equalSpacing
+        stackView.distribution = .equalCentering
         stackView.spacing = Metric.inset
         return stackView
     }()
@@ -95,6 +96,14 @@ final class LoginViewController: UIViewController {
         label.textAlignment = .right
         label.textColor = .appColor(.grey2)
         return label
+    }()
+    
+    private lazy var buttonStackHolder: UIView = {
+        let view = UIView()
+        
+        view.backgroundColor = .clear
+        
+        return view
     }()
     
     // MARK: - initializer
@@ -117,6 +126,7 @@ final class LoginViewController: UIViewController {
         setupLayout()
         setupRx()
         session = LoginSession(presenter: self)
+        bindAppleLoginResult()
         subscribeLoginResult()
     }
     
@@ -165,7 +175,7 @@ final class LoginViewController: UIViewController {
             buttonStack.addArrangedSubview($0)
         }
         
-        [titleLabel, subTitleLabel, buttonStack, footerLabel].forEach {
+        [titleLabel, subTitleLabel, buttonStack, footerLabel, buttonStackHolder].forEach {
             view.addSubview($0)
             
             $0.snp.makeConstraints { make in
@@ -185,11 +195,17 @@ final class LoginViewController: UIViewController {
         }
         
         footerLabel.snp.makeConstraints { make in
+            make.height.equalTo(Metric.footerHeight)
             make.bottom.equalToSuperview().offset(Metric.footerBottomOffset)
         }
         
+        buttonStackHolder.snp.makeConstraints { make in
+            make.top.equalTo(subTitleLabel.snp.bottom)
+            make.bottom.equalTo(footerLabel.snp.top)
+        }
+        
         buttonStack.snp.makeConstraints { make in
-            make.centerY.equalToSuperview()
+            make.centerY.equalTo(buttonStackHolder.snp.centerY)
         }
         
         buttonStack.arrangedSubviews.forEach {
