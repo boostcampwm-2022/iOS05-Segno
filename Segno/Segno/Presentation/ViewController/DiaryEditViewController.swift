@@ -45,6 +45,7 @@ final class DiaryEditViewController: UIViewController {
     
     private lazy var mainScrollView: UIScrollView = {
         let scrollView = UIScrollView()
+        scrollView.keyboardDismissMode = .onDrag
         return scrollView
     }()
     
