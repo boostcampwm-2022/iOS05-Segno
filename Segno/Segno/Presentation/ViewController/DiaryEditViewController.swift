@@ -28,6 +28,8 @@ final class DiaryEditViewController: UIViewController {
         static let smallFontSize: CGFloat = 16
         static let titlePlaceholder = "제목을 입력하세요."
         static let musicPlaceholder = "지금 이 음악은 뭘까요?"
+        static let searching = "검색 중입니다..."
+        static let musicNotFound = "음악을 찾지 못했어요."
         static let locationPlaceholder = "여기는 어디인가요?"
         static let imageViewStockImage = UIImage(systemName: "photo")
         
@@ -40,7 +42,6 @@ final class DiaryEditViewController: UIViewController {
     }
     
     let viewModel: DiaryEditViewModel
-    private let shazamSession = ShazamSession() // 임시로 연동 - 추후 분리 예정
     private var disposeBag = DisposeBag()
     
     private lazy var mainScrollView: UIScrollView = {
@@ -183,10 +184,9 @@ final class DiaryEditViewController: UIViewController {
         setupView()
         bindImageView()
         
-        // 샤잠킷 연동 메서드입니다. 향후 조정 예정입니다.
-        bindLabel()
         bindButtonAction()
-        bindSearchResult()
+        subscribeSearchingStatus()
+        sunscribeSearchResult()
     }
     
     private func setupView() {
@@ -283,15 +283,15 @@ final class DiaryEditViewController: UIViewController {
 
 // 샤잠킷 로직 부분
 extension DiaryEditViewController {
-    private func bindLabel() {
+    private func subscribeSearchingStatus() {
         viewModel.isSearching
             .observe(on: MainScheduler.instance)
             .subscribe(onNext: { searchState in
                 switch searchState {
                 case true:
-                    self.musicInfoLabel.text = "검색 중입니다..."
+                    self.musicInfoLabel.text = Metric.searching
                 case false:
-                    self.musicInfoLabel.text = "지금 이 음악은 뭘까요?"
+                    self.musicInfoLabel.text = Metric.musicPlaceholder
                 }
             })
             .disposed(by: disposeBag)
@@ -306,7 +306,7 @@ extension DiaryEditViewController {
             .disposed(by: disposeBag)
     }
     
-    private func bindSearchResult() {
+    private func sunscribeSearchResult() {
         viewModel.musicInfo
             .observe(on: MainScheduler.instance)
             .subscribe(onNext: { result in
@@ -319,7 +319,7 @@ extension DiaryEditViewController {
                     
                     self.musicInfoLabel.text = "\(artist) - \(title)"
                 case .failure(_):
-                    self.musicInfoLabel.text = "음악을 찾지 못했어요."
+                    self.musicInfoLabel.text = Metric.musicNotFound
                 }
             })
             .disposed(by: disposeBag)
