@@ -198,6 +198,17 @@ final class DiaryEditViewController: UIViewController {
         bindSearchResult()
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        registerForKeyboardNotification()
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        
+        removeRegisterForKeyboardNotification()
+    }
     private func setupView() {
         view.backgroundColor = .appColor(.white)
         
@@ -296,8 +307,40 @@ final class DiaryEditViewController: UIViewController {
         mainScrollView.addGestureRecognizer(singleTapGestureRecognizer)
     }
     
-    @objc func singleTapMethod(sender: UITapGestureRecognizer) {
+    private func registerForKeyboardNotification() {
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardShow), name: UIResponder.keyboardWillShowNotification, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardHide), name: UIResponder.keyboardWillHideNotification, object: nil)
+    }
+    
+    private func removeRegisterForKeyboardNotification() {
+        NotificationCenter.default.removeObserver(self, name: UIResponder.keyboardWillShowNotification, object: nil)
+        NotificationCenter.default.removeObserver(self, name: UIResponder.keyboardWillHideNotification, object: nil)
+    }
+    
+    private func keyboardAnimate(keyboardRectangle: CGRect ,textView: UITextView) {
+        let boundary = textView.frame.minY - mainScrollView.contentOffset.y - keyboardRectangle.height
+        if boundary > 0 {
+            mainScrollView.contentOffset = CGPoint(x: mainScrollView.contentOffset.x, y: boundary)
+        }
+    }
+    
+    @objc private func singleTapMethod(sender: UITapGestureRecognizer) {
         self.view.endEditing(true)
+    }
+    
+    
+    @objc private func keyboardHide(_ notification: Notification) {
+        self.view.transform = .identity
+    }
+    
+    @objc private func keyboardShow(notification: NSNotification) {
+        let userInfo: NSDictionary = notification.userInfo! as NSDictionary
+        let keyboardFrame: NSValue = userInfo.value(forKey: UIResponder.keyboardFrameEndUserInfoKey) as! NSValue
+        let keyboardRectangle = keyboardFrame.cgRectValue
+
+        if bodyTextView.isFirstResponder {
+            keyboardAnimate(keyboardRectangle: keyboardRectangle, textView: bodyTextView)
+        }
     }
 }
 
