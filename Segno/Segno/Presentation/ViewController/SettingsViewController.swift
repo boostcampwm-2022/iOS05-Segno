@@ -129,27 +129,15 @@ final class SettingsViewController: UIViewController {
                     let actionSheet = UIAlertController(title: Metric.darkModeSettingString, message: nil, preferredStyle: .actionSheet)
                     actionSheet.addAction(UIAlertAction(title: DarkMode.system.title, style: .default, handler: { _ in
                         self.viewModel.changeDarkMode(to: DarkMode.system.rawValue)
-                            .subscribe(onSuccess: { mode in
-                                self.view.window?.overrideUserInterfaceStyle = UIUserInterfaceStyle(rawValue: mode) ?? .unspecified
-                                cell.configure(right: DarkMode.system.title)
-                            })
-                            .disposed(by: self.disposeBag)
+                        cell.configure(right: DarkMode.system.title)
                     }))
                     actionSheet.addAction(UIAlertAction(title: DarkMode.light.title, style: .default, handler: { _ in
                         self.viewModel.changeDarkMode(to: DarkMode.light.rawValue)
-                            .subscribe(onSuccess: { mode in
-                                self.view.window?.overrideUserInterfaceStyle = UIUserInterfaceStyle(rawValue: mode) ?? .unspecified
-                                cell.configure(right: DarkMode.light.title)
-                            })
-                            .disposed(by: self.disposeBag)
+                        cell.configure(right: DarkMode.light.title)
                     }))
                     actionSheet.addAction(UIAlertAction(title: DarkMode.dark.title, style: .default, handler: { _ in
                         self.viewModel.changeDarkMode(to: DarkMode.dark.rawValue)
-                            .subscribe(onSuccess: { mode in
-                                self.view.window?.overrideUserInterfaceStyle = UIUserInterfaceStyle(rawValue: mode) ?? .unspecified
-                                cell.configure(right: DarkMode.dark.title)
-                            })
-                            .disposed(by: self.disposeBag)
+                        cell.configure(right: DarkMode.dark.title)
                     }))
                     actionSheet.addAction(UIAlertAction(title: Metric.cancelMessage
                                                         , style: .cancel, handler: { _ in
