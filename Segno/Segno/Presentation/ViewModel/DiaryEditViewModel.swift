@@ -15,6 +15,8 @@ final class DiaryEditViewModel {
     let searchMusicUseCase: SearchMusicUseCase
     // 위치 검색 유즈케이스
     
+    var isSearching = BehaviorSubject(value: false)
+    
     init(diaryDetailUseCase: DiaryDetailUseCase = DiaryDetailUseCaseImpl(),
          searchMusicUseCase: SearchMusicUseCase = SearchMusicUseCaseImpl()) {
         self.diaryDetailUseCase = diaryDetailUseCase

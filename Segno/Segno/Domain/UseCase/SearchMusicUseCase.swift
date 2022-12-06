@@ -7,18 +7,28 @@
 
 import RxSwift
 
+typealias MusicInfoResult = Result<MusicInfo, Error>
+
 protocol SearchMusicUseCase {
-    func toggleSearching()
+    var musicInfoResult: PublishSubject<MusicInfoResult> { get set }
+    
+    func startSearching()
+    func stopSearching()
 }
 
 final class SearchMusicUseCaseImpl: SearchMusicUseCase {
     let musicRepository: MusicRepository
+    var musicInfoResult = PublishSubject<MusicInfoResult>()
     
     init(musicRepository: MusicRepository = MusicRepositoryImpl()) {
         self.musicRepository = musicRepository
     }
     
-    func toggleSearching() {
+    func startSearching() {
+        
+    }
+    
+    func stopSearching() {
         
     }
 }
