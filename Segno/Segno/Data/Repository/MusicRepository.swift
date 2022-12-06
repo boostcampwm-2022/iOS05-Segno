@@ -16,20 +16,39 @@ protocol MusicRepository {
 }
 
 final class MusicRepositoryImpl: MusicRepository {
-    private let shazamSession = ShazamSession()
-    private let musicSession = MusicSession()
+    private let shazamSession: ShazamSession
+    private let musicSession: MusicSession
+    private let disposeBag = DisposeBag()
     
     var shazamSearchResult = PublishSubject<ShazamSearchResult>()
     
-    func startSearchingMusic() {
+    init(shazamSession: ShazamSession = ShazamSession(),
+         musicSession: MusicSession = MusicSession()) {
+        self.shazamSession = shazamSession
+        self.musicSession = musicSession
         
+        subscribeSearchresult()
+    }
+    
+    func startSearchingMusic() {
+        shazamSession.start()
     }
     
     func stopSearchingMusic() {
-        
+        shazamSession.stop()
     }
     
     func playMusic() {
         
+    }
+}
+
+extension MusicRepositoryImpl {
+    private func subscribeSearchresult() {
+        shazamSession.result
+            .subscribe(onNext: {
+                self.shazamSearchResult.onNext($0)
+            })
+            .disposed(by: disposeBag)
     }
 }

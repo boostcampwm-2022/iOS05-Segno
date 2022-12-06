@@ -17,6 +17,8 @@ protocol SearchMusicUseCase {
 }
 
 final class SearchMusicUseCaseImpl: SearchMusicUseCase {
+    private let disposeBag = DisposeBag()
+    
     let musicRepository: MusicRepository
     var musicInfoResult = PublishSubject<MusicInfoResult>()
     
@@ -25,10 +27,26 @@ final class SearchMusicUseCaseImpl: SearchMusicUseCase {
     }
     
     func startSearching() {
-        
+        musicRepository.startSearchingMusic()
     }
     
     func stopSearching() {
-        
+        musicRepository.stopSearchingMusic()
+    }
+}
+
+extension SearchMusicUseCaseImpl {
+    private func subscribeShazamResult() {
+        musicRepository.shazamSearchResult
+            .subscribe(onNext: {
+                switch $0 {
+                case .success(let shazamSong):
+                    let musicInfo = MusicInfo(shazamSong: shazamSong)
+                    self.musicInfoResult.onNext(.success(musicInfo))
+                case .failure(let error):
+                    self.musicInfoResult.onNext(.failure(error))
+                }
+            })
+            .disposed(by: disposeBag)
     }
 }
