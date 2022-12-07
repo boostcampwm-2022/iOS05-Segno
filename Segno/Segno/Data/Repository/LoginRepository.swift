@@ -11,7 +11,6 @@ import RxSwift
 
 protocol LoginRepository {
     func sendLoginRequest(withApple email: String) -> Single<TokenDTO>
-    func sendLoginRequest(withGoogle email: String) -> Single<TokenDTO>
     func sendLogoutRequest()
 }
 
@@ -26,17 +25,7 @@ final class LoginRepositoryImpl: LoginRepository {
             }
     }
     
-    func sendLoginRequest(withGoogle email: String) -> Single<TokenDTO> {
-        let endpoint = LoginEndpoint.google(email)
-        return NetworkManager.shared.call(endpoint)
-            .map {
-                let tokenDTO = try JSONDecoder().decode(TokenDTO.self, from: $0)
-                print(tokenDTO)
-                return tokenDTO
-            }
-    }
-    
     func sendLogoutRequest() {
-        
+        // TODO: Logout
     }
 }

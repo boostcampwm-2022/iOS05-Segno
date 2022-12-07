@@ -27,7 +27,6 @@ final class LoginViewController: UIViewController {
     weak var delegate: LoginViewControllerDelegate?
     
     private enum Metric {
-        static let googleTitle = "구글 로그인"
         static let appleTitle = "애플 로그인"
         
         static let titleText = "Segno"
@@ -63,14 +62,6 @@ final class LoginViewController: UIViewController {
         label.font = .appFont(.shiningStar, size: Metric.subTitleFontSize)
         label.textColor = .appColor(.grey2)
         return label
-    }()
-    
-    private lazy var googleButton: UIButton = {
-        let button = UIButton()
-        button.setTitle(Metric.googleTitle, for: .normal)
-        button.setTitleColor(.appColor(.white), for: .normal)
-        button.titleLabel?.font = .appFont(.surround, size: Metric.buttonFontSize)
-        return button
     }()
     
     private lazy var appleButton: UIButton = {
@@ -140,14 +131,6 @@ final class LoginViewController: UIViewController {
     }
     
     private func setupRx() {
-        googleButton.rx.tap
-            .withUnretained(self)
-            .bind { _ in
-                print("google") // MARK: Test용
-                self.googleButtonTapped()
-            }
-            .disposed(by: disposeBag)
-        
         appleButton.rx.tap
             .withUnretained(self)
             .bind { _ in
@@ -160,20 +143,14 @@ final class LoginViewController: UIViewController {
     private func setupView() {
         view.backgroundColor = .appColor(.background)
         
-        googleButton.layer.cornerRadius = Metric.buttonRadius
-        googleButton.layer.masksToBounds = true
-        
         appleButton.layer.cornerRadius = Metric.buttonRadius
         appleButton.layer.masksToBounds = true
         
-        googleButton.setBackgroundColor(.appColor(.color4) ?? .red, for: .normal)
         appleButton.setBackgroundColor(.appColor(.color4) ?? .red, for: .normal)
     }
     
     private func setupLayout() {
-        [googleButton, appleButton].forEach {
-            buttonStack.addArrangedSubview($0)
-        }
+        buttonStack.addArrangedSubview(appleButton)
         
         [titleLabel, subTitleLabel, buttonStack, footerLabel, buttonStackHolder].forEach {
             view.addSubview($0)
@@ -208,11 +185,9 @@ final class LoginViewController: UIViewController {
             make.centerY.equalTo(buttonStackHolder.snp.centerY)
         }
         
-        buttonStack.arrangedSubviews.forEach {
-            $0.snp.makeConstraints { make in
-                make.width.equalToSuperview()
-                make.height.equalTo(Metric.buttonHeight)
-            }
+        appleButton.snp.makeConstraints { make in
+            make.width.equalToSuperview()
+            make.height.equalTo(Metric.buttonHeight)
         }
     }
     
@@ -234,14 +209,6 @@ final class LoginViewController: UIViewController {
     }
     
     // MARK: - Public
-    private func googleButtonTapped() {
-        session?.performGoogleLogin()
-            .subscribe(onNext: { email in
-                self.viewModel.signIn(withGoogle: email)
-            })
-            .disposed(by: disposeBag)
-    }
-    
     private func appleButtonTapped() {
         session?.performAppleLogin()
     }
