@@ -62,8 +62,6 @@ final class MusicContentView: UIView {
         super.init(frame: frame)
         
         setLayout()
-        // 임시로 정해진 데이터를 넣었습니다.
-        setMusic(info: MusicInfo.yokohama)
     }
     
     required init?(coder: NSCoder) {

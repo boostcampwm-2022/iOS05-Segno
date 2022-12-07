@@ -219,7 +219,6 @@ final class DiaryDetailViewController: UIViewController {
             .observe(on: MainScheduler.instance)
             .subscribe(onNext: { [weak self] musicInfo in
                 self?.musicContentView.setMusic(info: musicInfo)
-                self?.viewModel.setupMusicPlayer(musicInfo)
             })
             .disposed(by: disposeBag)
         
@@ -241,6 +240,7 @@ final class DiaryDetailViewController: UIViewController {
 extension DiaryDetailViewController: MusicContentViewDelegate {
     func playButtonTapped() {
         musicSession.togglePlayer()
+//        viewModel.toggleMusicPlayer()
     }
 }
 

@@ -8,7 +8,6 @@
 import Foundation
 
 struct DiaryDetailDTO: Decodable {
-    //TODO: MusicInfo, Location 추가 및 수정
     let id: String
     let title: String
     let tags: [String]
@@ -17,7 +16,13 @@ struct DiaryDetailDTO: Decodable {
     let musicInfo: MusicInfo?
     let location: Location?
     
-    init(id: String, title: String, tags: [String], imagePath: String, bodyText: String?, musicInfo: MusicInfo? = nil, location: Location? = nil) {
+    init(id: String,
+         title: String,
+         tags: [String],
+         imagePath: String,
+         bodyText: String? = nil,
+         musicInfo: MusicInfo? = nil,
+         location: Location? = nil) {
         self.id = id
         self.title = title
         self.tags = tags
@@ -25,6 +30,11 @@ struct DiaryDetailDTO: Decodable {
         self.bodyText = bodyText
         self.musicInfo = musicInfo
         self.location = location
+    }
+    
+    enum CodingKeys: String, CodingKey {
+        case id = "_id"
+        case title, tags, imagePath, bodyText, musicInfo, location
     }
     
     #if DEBUG

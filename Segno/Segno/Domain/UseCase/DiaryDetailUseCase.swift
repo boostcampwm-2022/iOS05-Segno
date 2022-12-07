@@ -21,7 +21,14 @@ final class DiaryDetailUseCaseImpl: DiaryDetailUseCase {
     
     func getDiary(id: String) -> Single<DiaryDetail> {
         return repository.getDiary(id: id).map {
-            DiaryDetail(identifier: $0.id, title: $0.title, tags: $0.tags, imagePath: $0.imagePath, bodyText: $0.bodyText, musicInfo: nil, location: nil)
+            debugPrint("usecase: \($0)")
+            return DiaryDetail(identifier: $0.id,
+                               title: $0.title,
+                               tags: $0.tags,
+                               imagePath: $0.imagePath,
+                               bodyText: $0.bodyText,
+                               musicInfo: $0.musicInfo,
+                               location: $0.location)
             }
     }
 }

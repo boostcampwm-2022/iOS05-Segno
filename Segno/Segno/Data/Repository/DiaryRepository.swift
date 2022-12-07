@@ -39,7 +39,8 @@ final class DiaryRepositoryImpl: DiaryRepository {
         let endpoint = DiaryDetailEndpoint.item(id)
 
         return NetworkManager.shared.call(endpoint).map {
-            try JSONDecoder().decode(DiaryDetailDTO.self, from: $0)
+            debugPrint("repository: \($0)")
+            return try JSONDecoder().decode(DiaryDetailDTO.self, from: $0)
         }
         
 //        // TODO: 추후에 NetworkManager로 변경

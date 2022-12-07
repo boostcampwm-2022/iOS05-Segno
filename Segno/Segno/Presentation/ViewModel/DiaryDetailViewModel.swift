@@ -32,6 +32,13 @@ final class DiaryDetailViewModel {
         self.itemIdentifier = itemIdentifier
         self.getDetailUseCase = getDetailUseCase
         self.playMusicUseCase = playMusicUseCase
+        
+        setupMusicPlayer()
+        testDataInsert()
+    }
+    
+    func testDataInsert() {
+        diaryItem.onNext(DiaryDetail.dummy)
     }
     
     func getDiary() {
@@ -43,8 +50,12 @@ final class DiaryDetailViewModel {
             }).disposed(by: disposeBag)
     }
     
-    func setupMusicPlayer(_ song: MusicInfo?) {
-        playMusicUseCase.setupPlayer(song)
+    func setupMusicPlayer() {
+        musicObservable
+            .subscribe(onNext: {
+                self.playMusicUseCase.setupPlayer($0)
+            })
+            .disposed(by: disposeBag)
     }
     
     func toggleMusicPlayer() {
