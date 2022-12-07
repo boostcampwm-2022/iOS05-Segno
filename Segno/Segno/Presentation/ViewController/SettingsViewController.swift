@@ -25,6 +25,8 @@ final class SettingsViewController: UIViewController {
         static let settingString: String = "설정"
         static let darkModeSettingString: String = "다크 모드 설정"
         static let cancelMessage: String = "취소"
+        
+        static let separatorInset: CGFloat = 15
     }
     
     private let disposeBag = DisposeBag()
@@ -35,6 +37,7 @@ final class SettingsViewController: UIViewController {
         tableView.register(NicknameCell.self, forCellReuseIdentifier: "NicknameCell")
         tableView.register(SettingsSwitchCell.self, forCellReuseIdentifier: "SettingsSwitchCell")
         tableView.register(SettingsActionSheetCell.self, forCellReuseIdentifier: "SettingsActionSheetCell")
+        tableView.separatorInset = UIEdgeInsets(top: 0, left:  Metric.separatorInset, bottom: 0, right:  Metric.separatorInset)
         return tableView
     }()
     

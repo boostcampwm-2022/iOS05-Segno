@@ -42,6 +42,7 @@ final class MyPageViewController: UIViewController {
         static let settingsOffset: CGFloat = 100
         static let titleFontSize: CGFloat = 32
         static let titleOffset: CGFloat = 30
+        static let separatorInset: CGFloat = 15
     }
     
     private lazy var titleLabel: UILabel = {
@@ -58,6 +59,7 @@ final class MyPageViewController: UIViewController {
         tableView.register(SettingsActionSheetCell.self, forCellReuseIdentifier: "writtenDiary")
         tableView.register(SettingsActionSheetCell.self, forCellReuseIdentifier: "settings")
         tableView.register(SettingsActionSheetCell.self, forCellReuseIdentifier: "logout")
+        tableView.separatorInset = UIEdgeInsets(top: 0, left: Metric.separatorInset, bottom: 0, right: Metric.separatorInset)
         return tableView
     }()
     
