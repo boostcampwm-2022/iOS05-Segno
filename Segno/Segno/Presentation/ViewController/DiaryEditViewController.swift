@@ -45,6 +45,7 @@ final class DiaryEditViewController: UIViewController {
     
     private lazy var mainScrollView: UIScrollView = {
         let scrollView = UIScrollView()
+        scrollView.keyboardDismissMode = .onDrag
         return scrollView
     }()
     
@@ -165,7 +166,8 @@ final class DiaryEditViewController: UIViewController {
         return button
     }()
     
-    private lazy var tapGesture = UITapGestureRecognizer()
+    
+    private lazy var photoImageViewTapGesture = UITapGestureRecognizer()
     
 //    // 뷰 모델이 작성되었을 경우, 위의 뷰 모델 프로퍼티 주석 해제와 함께 사용하면 됩니다.
 //    init(viewModel: DiaryEditViewModel
@@ -189,13 +191,24 @@ final class DiaryEditViewController: UIViewController {
         
         setupView()
         bindImageView()
-        
+        setRecognizer()
         // 샤잠킷 연동 메서드입니다. 향후 조정 예정입니다.
         bindLabel()
         bindButtonAction()
         bindSearchResult()
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        registerForKeyboardNotification()
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        
+        removeRegisterForKeyboardNotification()
+    }
     private func setupView() {
         view.backgroundColor = .appColor(.white)
         
@@ -222,7 +235,7 @@ final class DiaryEditViewController: UIViewController {
         }
         
         contentsStackView.addArrangedSubview(photoImageView)
-        photoImageView.addGestureRecognizer(tapGesture)
+        
         photoImageView.snp.makeConstraints {
             $0.height.equalTo(Metric.majorContentHeight)
         }
@@ -259,7 +272,6 @@ final class DiaryEditViewController: UIViewController {
             $0.edges.equalTo(tagScrollView)
             $0.height.equalTo(tagScrollView)
         }
-        
         tagStackView.addArrangedSubview(addTagButton)
     }
     
@@ -280,11 +292,55 @@ final class DiaryEditViewController: UIViewController {
     }
     
     private func bindImageView() {
-        tapGesture.rx.event
+        photoImageView.isUserInteractionEnabled = true
+        photoImageView.addGestureRecognizer(photoImageViewTapGesture)
+        photoImageViewTapGesture.rx.event
             .bind(onNext: { recognizer in
+                self.view.endEditing(true)
                 print("gestures: \(recognizer.numberOfTouches)")
             })
             .disposed(by: disposeBag)
+    }
+    
+    private func setRecognizer() {
+        let singleTapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(singleTapMethod))
+        mainScrollView.addGestureRecognizer(singleTapGestureRecognizer)
+    }
+    
+    private func registerForKeyboardNotification() {
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardShow), name: UIResponder.keyboardWillShowNotification, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardHide), name: UIResponder.keyboardWillHideNotification, object: nil)
+    }
+    
+    private func removeRegisterForKeyboardNotification() {
+        NotificationCenter.default.removeObserver(self, name: UIResponder.keyboardWillShowNotification, object: nil)
+        NotificationCenter.default.removeObserver(self, name: UIResponder.keyboardWillHideNotification, object: nil)
+    }
+    
+    private func keyboardAnimate(keyboardRectangle: CGRect ,textView: UITextView) {
+        let boundary = textView.frame.minY - mainScrollView.contentOffset.y - keyboardRectangle.height
+        if boundary > 0 {
+            mainScrollView.contentOffset = CGPoint(x: mainScrollView.contentOffset.x, y: boundary)
+        }
+    }
+    
+    @objc private func singleTapMethod(sender: UITapGestureRecognizer) {
+        self.view.endEditing(true)
+    }
+    
+    
+    @objc private func keyboardHide(_ notification: Notification) {
+        self.view.transform = .identity
+    }
+    
+    @objc private func keyboardShow(notification: NSNotification) {
+        let userInfo: NSDictionary = notification.userInfo! as NSDictionary
+        let keyboardFrame: NSValue = userInfo.value(forKey: UIResponder.keyboardFrameEndUserInfoKey) as! NSValue
+        let keyboardRectangle = keyboardFrame.cgRectValue
+
+        if bodyTextView.isFirstResponder {
+            keyboardAnimate(keyboardRectangle: keyboardRectangle, textView: bodyTextView)
+        }
     }
 }
 
