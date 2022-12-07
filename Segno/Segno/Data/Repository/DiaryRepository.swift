@@ -18,21 +18,21 @@ protocol DiaryRepository {
 
 final class DiaryRepositoryImpl: DiaryRepository {
     func getDiaryListItem() -> Single<DiaryListDTO> {
-//        let endpoint = DiaryListItemEndpoint.item
+        let endpoint = DiaryListItemEndpoint.item
+
+        return NetworkManager.shared.call(endpoint)
+            .map {
+                let diaryListItemDTO = try JSONDecoder().decode(DiaryListDTO.self, from: $0)
+                return diaryListItemDTO
+            }
 //
-//        return NetworkManager.shared.call(endpoint)
-//            .map {
-//                let diaryListItemDTO = try JSONDecoder().decode(DiaryListDTO.self, from: $0)
-//                return diaryListItemDTO
-//            }
-        
-        // TODO: 추후에 NetworkManager로 변경
-        return Single.create { observer -> Disposable in
-            let dto = DiaryListDTO.example
-            observer(.success(dto))
-            
-            return Disposables.create()
-        }
+//        // TODO: 추후에 NetworkManager로 변경
+//        return Single.create { observer -> Disposable in
+//            let dto = DiaryListDTO.example
+//            observer(.success(dto))
+//
+//            return Disposables.create()
+//        }
     }
     
     func getDiary(id: String) -> Single<DiaryDetailDTO> {
