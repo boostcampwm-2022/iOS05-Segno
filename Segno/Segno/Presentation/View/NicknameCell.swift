@@ -34,7 +34,7 @@ final class NicknameCell: UITableViewCell {
         let label = UILabel()
         label.text = Metric.nicknameLabelText
         label.font = .appFont(.surroundAir, size: Metric.textSize)
-        label.textColor = .appColor(.grey2)
+        label.textColor = .appColor(.grey3)
         return label
     }()
     

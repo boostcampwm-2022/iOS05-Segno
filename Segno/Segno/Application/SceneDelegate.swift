@@ -19,6 +19,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         let navigationController = UINavigationController()
         coordinator = AppCoordinator(navigationController)
         coordinator?.start()
+        setDarkMode()
         
         window?.rootViewController = navigationController
         window?.makeKeyAndVisible()
@@ -29,5 +30,10 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     func sceneWillResignActive(_ scene: UIScene) { }
     func sceneWillEnterForeground(_ scene: UIScene) { }
     func sceneDidEnterBackground(_ scene: UIScene) { }
+    
+    private func setDarkMode() {
+        let mode = DarkModeManager.shared.getDarkMode()
+        DarkModeManager.shared.changeDarkMode(to: mode)
+    }
 }
 
