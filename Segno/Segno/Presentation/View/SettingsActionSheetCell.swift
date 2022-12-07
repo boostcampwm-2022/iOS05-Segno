@@ -15,7 +15,14 @@ final class SettingsActionSheetCell: UITableViewCell {
     private enum Metric {
         static let labelFontSize: CGFloat = 20
         static let edgeSpacing: CGFloat = 20
+        static let cellWidth: CGFloat = UIScreen.main.bounds.width
+        static let cellHeight: CGFloat = 44
     }
+    
+    private lazy var labelView: UIView = {
+        let view = UIView(frame: CGRect(x: 0, y: 0, width: Metric.cellWidth, height: Metric.cellHeight))
+        return view
+    }()
     
     private lazy var leftLabel: UILabel = {
         let label = UILabel()
@@ -51,21 +58,23 @@ final class SettingsActionSheetCell: UITableViewCell {
     }
     
     private func setupLayout() {
-        contentView.addSubviews([leftLabel, centerLabel, rightLabel])
+        contentView.addSubview(labelView)
+        
+        labelView.addSubviews([leftLabel, centerLabel, rightLabel])
         
         leftLabel.snp.makeConstraints {
-            $0.centerY.equalToSuperview()
-            $0.leading.equalToSuperview().inset(Metric.edgeSpacing)
+            $0.top.bottom.equalTo(labelView)
+            $0.leading.equalTo(labelView).inset(Metric.edgeSpacing)
         }
         
         centerLabel.snp.makeConstraints {
-            $0.centerY.equalToSuperview()
-            $0.centerX.equalToSuperview()
+            $0.top.bottom.equalTo(labelView)
+            $0.centerX.equalTo(labelView)
         }
         
         rightLabel.snp.makeConstraints {
-            $0.centerY.equalToSuperview()
-            $0.trailing.equalToSuperview().inset(Metric.edgeSpacing)
+            $0.top.bottom.equalTo(labelView)
+            $0.trailing.equalTo(labelView).inset(Metric.edgeSpacing)
         }
     }
     

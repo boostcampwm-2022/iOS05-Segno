@@ -85,14 +85,7 @@ final class MyPageViewController: UIViewController {
     }
     
     private func setupLayout() {
-        [titleLabel, tableView].forEach {
-            view.addSubview($0)
-
-            $0.snp.makeConstraints { make in
-                make.width.equalToSuperview()
-                make.centerX.equalTo(view.snp.centerX)
-            }
-        }
+        view.addSubviews([titleLabel, tableView])
         
         titleLabel.snp.makeConstraints { make in
             make.top.leading.equalTo(view.safeAreaLayoutGuide).offset(Metric.titleOffset)
@@ -120,7 +113,7 @@ final class MyPageViewController: UIViewController {
                 let price = Double(writtenDiary)
                 let result = numberFormatter.string(from: NSNumber(value:price!))! + "개"
                 
-                let dataSource = Observable<[MyPageCellModel]>.just([
+                _ = Observable<[MyPageCellModel]>.just([
                     .writtenDiary(title: "작성한 일기 수", subtitle: result),
                     .settings(title: "설정"),
                     .logout(title: "logout", color: .red)
