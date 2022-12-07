@@ -26,6 +26,8 @@ final class SettingsViewController: UIViewController {
         static let darkModeSettingString: String = "다크 모드 설정"
         static let cancelMessage: String = "취소"
         
+        static let nicknameCellHeight: CGFloat = 100
+        static let otherCellsHeight: CGFloat = 44
         static let separatorInset: CGFloat = 15
     }
     
@@ -34,6 +36,7 @@ final class SettingsViewController: UIViewController {
     private lazy var tableView: UITableView = {
         let tableView = UITableView()
         tableView.backgroundColor = .appColor(.background)
+        tableView.rowHeight = UITableView.automaticDimension
         tableView.register(NicknameCell.self, forCellReuseIdentifier: "NicknameCell")
         tableView.register(SettingsSwitchCell.self, forCellReuseIdentifier: "SettingsSwitchCell")
         tableView.register(SettingsActionSheetCell.self, forCellReuseIdentifier: "SettingsActionSheetCell")
@@ -61,10 +64,13 @@ final class SettingsViewController: UIViewController {
     private func setupView() {
         title = Metric.settingString
         view.backgroundColor = .appColor(.background)
+        
+        tableView.delegate = self
     }
     
     private func setupLayout() {
         view.addSubview(tableView)
+        
         tableView.snp.makeConstraints {
             $0.edges.equalTo(view.safeAreaLayoutGuide)
         }
@@ -152,6 +158,16 @@ final class SettingsViewController: UIViewController {
                 }
             })
             .disposed(by: disposeBag)
+    }
+}
+
+extension SettingsViewController: UITableViewDelegate {
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        if indexPath.row == 0 {
+            return Metric.nicknameCellHeight
+        }
+        
+        return Metric.otherCellsHeight
     }
 }
 

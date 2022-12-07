@@ -14,19 +14,21 @@ final class NicknameCell: UITableViewCell {
         static let nicknameLabelText: String = "닉네임 변경"
         static let textfieldPlaceholder: String = "사용할 닉네임을 입력해주세요"
         static let buttonText: String = "확인"
-        static let edgeSpacing: CGFloat = 16
+        
+        static let buttonWidth: CGFloat = 70
         static let cornerRadius: CGFloat = 8
-        static let textHeight: CGFloat = 40
-        static let textSize: CGFloat = 14
+        static let edgeSpacing: CGFloat = 16
         static let leftViewSpacing: CGFloat = 16
         static let nicknameViewHeight: CGFloat = 100
-        static let buttonWidth: CGFloat = 70
+        static let nicknameViewWidth: CGFloat = UIScreen.main.bounds.width
+        static let textHeight: CGFloat = 40
+        static let textSize: CGFloat = 14
     }
     
     private let disposeBag = DisposeBag()
 
     private lazy var nicknameView: UIView = {
-        let view = UIView()
+        let view = UIView(frame: CGRect(x: 0, y: 0, width: Metric.nicknameViewWidth, height: Metric.nicknameViewHeight))
         return view
     }()
     
@@ -75,11 +77,6 @@ final class NicknameCell: UITableViewCell {
     private func setupLayout() {
         contentView.addSubview(nicknameView)
         nicknameView.addSubviews([nicknameLabel, nicknameTextField, okButton])
-        
-        nicknameView.snp.makeConstraints {
-            $0.edges.equalToSuperview()
-            $0.height.equalTo(Metric.nicknameViewHeight)
-        }
         
         nicknameLabel.snp.makeConstraints {
             $0.leading.top.equalTo(nicknameView).inset(Metric.edgeSpacing)
