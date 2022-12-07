@@ -22,7 +22,7 @@ final class DiaryEditViewController: UIViewController {
         // 스택 뷰 안에 들어가는 컨텐츠 설정
         static let majorContentHeight: CGFloat = 400
         static let minorContentHeight: CGFloat = 60
-        static let tagTextFieldHeight: CGFloat = 40
+        static let semiMinorContentHeight: CGFloat = 40
         static let halfMinorContentHeight: CGFloat = 30
         static let standardCornerRadius: CGFloat = 8
         static let mediumFontSize: CGFloat = 24
@@ -43,12 +43,15 @@ final class DiaryEditViewController: UIViewController {
         static let locationButtonImage = UIImage(systemName: "location.fill")
         static let saveButtonTitle = "저장"
         static let buttonCornerRadius = CGFloat(minorContentHeight / 2)
-        static let tagButtonCornerRadius = CGFloat(halfMinorContentHeight / 2)
+        static let halfMinorCornerRadius = CGFloat(halfMinorContentHeight / 2)
+        static let semiMinorCornerRadius = CGFloat(semiMinorContentHeight / 2)
     }
     
-    let viewModel: DiaryEditViewModel
+    private let viewModel: DiaryEditViewModel
     private var disposeBag = DisposeBag()
     private var tags: [String] = []
+    private var location: Location?
+    private var address = Metric.locationPlaceholder
     
     private lazy var mainScrollView: UIScrollView = {
         let scrollView = UIScrollView()
@@ -177,13 +180,14 @@ final class DiaryEditViewController: UIViewController {
         let label = UILabel()
         label.font = .appFont(.surroundAir, size: Metric.smallFontSize)
         label.text = Metric.locationPlaceholder
+        label.adjustsFontSizeToFitWidth = true
         return label
     }()
     
     private lazy var saveButton: UIButton = {
         let button = UIButton()
         button.backgroundColor = .appColor(.color4)
-        button.layer.cornerRadius = Metric.standardCornerRadius
+        button.layer.cornerRadius = Metric.semiMinorCornerRadius
         button.setTitle(Metric.saveButtonTitle, for: .normal)
         button.titleLabel?.font = .appFont(.surroundAir, size: Metric.smallFontSize)
         return button
@@ -195,7 +199,7 @@ final class DiaryEditViewController: UIViewController {
     
     init(viewModel: DiaryEditViewModel = DiaryEditViewModel()) {
         self.viewModel = viewModel
-
+        
         super.init(nibName: nil, bundle: nil)
     }
     
@@ -213,6 +217,7 @@ final class DiaryEditViewController: UIViewController {
         bindButtonAction()
         subscribeSearchingStatus()
         sunscribeSearchResult()
+        subscribeLocationResult()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -265,7 +270,7 @@ final class DiaryEditViewController: UIViewController {
         
         contentsStackView.addArrangedSubview(tagTextField)
         tagTextField.snp.makeConstraints {
-            $0.height.equalTo(Metric.tagTextFieldHeight)
+            $0.height.equalTo(Metric.semiMinorContentHeight)
         }
         
         contentsStackView.addArrangedSubview(tagScrollView)
@@ -287,6 +292,9 @@ final class DiaryEditViewController: UIViewController {
         setupLocationStackView()
         
         contentsStackView.addArrangedSubview(saveButton)
+        saveButton.snp.makeConstraints {
+            $0.height.equalTo(Metric.semiMinorContentHeight)
+        }
     }
     
     private func setupTagScrollView() {
@@ -404,14 +412,20 @@ extension DiaryEditViewController {
             }
             .disposed(by: disposeBag)
         
+        addlocationButton.rx.tap
+            .withUnretained(self)
+            .bind { _ in
+                self.locationButtonTapped()
+            }
+            .disposed(by: disposeBag)
+        
         saveButton.rx.tap
             .withUnretained(self)
             .bind { _ in
                 if self.photoImageView.image == nil {
                     debugPrint("이미지를 넣지 않으면 저장할 수 없습니다!")
                 } else {
-                    // TODO: 저장
-                    self.viewModel.saveDiary()
+                    self.saveDiary()
                 }
             }
             .disposed(by: disposeBag)
@@ -439,8 +453,55 @@ extension DiaryEditViewController {
     private func searchTapped() {
         viewModel.toggleSearchMusic()
     }
+    
+    private func locationButtonTapped() {
+        viewModel.toggleLocation()
+    }
+    
+    private func saveDiary() {
+        // TODO: 제목 없으면 날짜로 제목 만들기
+        debugPrint("title : ", titleTextField.text)
+        debugPrint("tags : ",  tags)
+        // TODO: 이미지 업로드 해야
+        debugPrint("bodyText : ", bodyTextView.text)
+        // TODO: MusicInfo엔 어떤 정보가 string으로?
+        debugPrint("location : ", location)
+        
+        // TODO: 저장
+        self.viewModel.saveDiary()
+    }
 }
 
+
+extension DiaryEditViewController {
+    private func subscribeLocationResult() {
+        viewModel.isReceivingLocation
+            .withUnretained(self)
+            .subscribe(onNext: { _, searchState in
+                switch searchState {
+                case true:
+                    self.locationInfoLabel.text = Metric.searching
+                    self.addlocationButton.tintColor = .systemRed
+                case false:
+                    self.locationInfoLabel.text = self.address
+                    self.addlocationButton.tintColor = .appColor(.white)
+                    
+                }
+            })
+            .disposed(by: disposeBag)
+        
+        viewModel.addressSubject
+            .bind(to: locationInfoLabel.rx.text)
+            .disposed(by: disposeBag)
+        
+        viewModel.locationSubject
+            .withUnretained(self)
+            .subscribe(onNext: { _, location in
+                self.location = location
+            })
+            .disposed(by: disposeBag)
+    }
+}
 extension DiaryEditViewController: UIImagePickerControllerDelegate, UINavigationControllerDelegate {
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
         var newImage: UIImage? = nil // update 할 이미지
@@ -492,7 +553,6 @@ extension DiaryEditViewController: UITextFieldDelegate {
 
 extension DiaryEditViewController: UITextViewDelegate {
     func textViewDidBeginEditing(_ textView: UITextView) {
-        print("진입 : ", textView.text)
         if textView.text == Metric.bodyPlaceholder {
             textView.text = nil
             textView.textColor = .appColor(.black)

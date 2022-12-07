@@ -8,24 +8,29 @@
 import RxSwift
 
 final class DiaryEditViewModel {
+    var locationSubject = PublishSubject<Location>()
+    var addressSubject = PublishSubject<String>()
     private let disposeBag = DisposeBag()
     var diaryDetail: DiaryDetail?
     // 에딧 화면에 들어갈 여러 요소들
     
     let diaryDetailUseCase: DiaryDetailUseCase
     let searchMusicUseCase: SearchMusicUseCase
-    // 위치 검색 유즈케이스
+    let locationUseCase: LocationUseCase
     
     var isSearching = BehaviorSubject(value: false)
+    var isReceivingLocation = BehaviorSubject(value: false)
     var musicInfo = PublishSubject<MusicInfoResult>()
     
     init(diaryDetailUseCase: DiaryDetailUseCase = DiaryDetailUseCaseImpl(),
-         searchMusicUseCase: SearchMusicUseCase = SearchMusicUseCaseImpl()) {
+         searchMusicUseCase: SearchMusicUseCase = SearchMusicUseCaseImpl(),
+         locationUseCase: LocationUseCase = LocationUseCaseImpl()) {
         self.diaryDetailUseCase = diaryDetailUseCase
         self.searchMusicUseCase = searchMusicUseCase
-        
+        self.locationUseCase = locationUseCase
         subscribeSearchingStatus()
         subscribeSearchResult()
+        subscribeLocation()
     }
     
     func addTags() {
@@ -37,7 +42,7 @@ final class DiaryEditViewModel {
             return
         }
         
-        value ? isSearching.onNext(false) : isSearching.onNext(true)
+        isSearching.onNext(!value)
     }
     
     func subscribeSearchingStatus() {
@@ -65,8 +70,26 @@ final class DiaryEditViewModel {
             .disposed(by: disposeBag)
     }
     
-    func setLocation() {
+    private func subscribeLocation() {
+        isReceivingLocation
+            .withUnretained(self)
+            .subscribe(onNext: {
+                $1 ? self.locationUseCase.getLocation() : self.locationUseCase.stopLocation()
+            })
+            .disposed(by: disposeBag)
         
+        locationUseCase.locationSubject
+            .bind(to: locationSubject)
+            .disposed(by: disposeBag)
+        
+        locationUseCase.addressSubject
+            .bind(to: addressSubject)
+            .disposed(by: disposeBag)
+    }
+    
+    func toggleLocation() {
+        guard let value = try? isReceivingLocation.value() else { return }
+        isReceivingLocation.onNext(!value)
     }
     
     func saveDiary() {
