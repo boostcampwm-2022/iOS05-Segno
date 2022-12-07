@@ -71,6 +71,7 @@ final class DiaryEditViewController: UIViewController {
         imageView.backgroundColor = .appColor(.color4)
         imageView.contentMode = .scaleAspectFit
         imageView.image = Metric.imageViewStockImage
+        imageView.tintColor = .appColor(.white)
         imageView.layer.cornerRadius = Metric.standardCornerRadius
         return imageView
     }()
@@ -167,8 +168,9 @@ final class DiaryEditViewController: UIViewController {
         return button
     }()
     
-    
     private lazy var photoImageViewTapGesture = UITapGestureRecognizer()
+    
+    private let imagePicker = UIImagePickerController()
     
     init(viewModel: DiaryEditViewModel = DiaryEditViewModel()) {
         self.viewModel = viewModel
@@ -185,6 +187,7 @@ final class DiaryEditViewController: UIViewController {
         
         setupView()
         bindImageView()
+        setImagePicker()
         setRecognizer()
         bindButtonAction()
         subscribeSearchingStatus()
@@ -290,9 +293,15 @@ final class DiaryEditViewController: UIViewController {
         photoImageViewTapGesture.rx.event
             .bind(onNext: { recognizer in
                 self.view.endEditing(true)
-                print("gestures: \(recognizer.numberOfTouches)")
+                self.present(self.imagePicker, animated: true)
             })
             .disposed(by: disposeBag)
+    }
+    
+    private func setImagePicker() {
+        imagePicker.sourceType = .photoLibrary
+        imagePicker.allowsEditing = true
+        imagePicker.delegate = self
     }
     
     private func setRecognizer() {
@@ -383,6 +392,21 @@ extension DiaryEditViewController {
     
     private func searchTapped() {
         viewModel.toggleSearchMusic()
+    }
+}
+
+extension DiaryEditViewController: UIImagePickerControllerDelegate, UINavigationControllerDelegate {
+    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
+        var newImage: UIImage? = nil // update 할 이미지
+        
+        if let possibleImage = info[UIImagePickerController.InfoKey.editedImage] as? UIImage {
+            newImage = possibleImage // 수정된 이미지가 있을 경우
+        } else if let possibleImage = info[UIImagePickerController.InfoKey.originalImage] as? UIImage {
+            newImage = possibleImage // 원본 이미지가 있을 경우
+        }
+        photoImageView.backgroundColor = .clear
+        photoImageView.image = newImage // 받아온 이미지를 update
+        dismiss(animated: true)
     }
 }
 
