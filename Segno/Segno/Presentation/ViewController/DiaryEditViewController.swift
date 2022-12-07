@@ -46,11 +46,11 @@ final class DiaryEditViewController: UIViewController {
     
     let viewModel: DiaryEditViewModel
     private var disposeBag = DisposeBag()
+    private var tags: [String] = []
     
     private lazy var mainScrollView: UIScrollView = {
         let scrollView = UIScrollView()
         scrollView.keyboardDismissMode = .onDrag
-        scrollView.backgroundColor = .red
         return scrollView
     }()
     
@@ -104,6 +104,7 @@ final class DiaryEditViewController: UIViewController {
     
     private lazy var tagScrollView: UIScrollView = {
         let scrollView = UIScrollView()
+        scrollView.showsHorizontalScrollIndicator = false
         return scrollView
     }()
     
@@ -445,14 +446,36 @@ extension DiaryEditViewController: UIImagePickerControllerDelegate, UINavigation
 
 extension DiaryEditViewController: UITextFieldDelegate {
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
-        
         if textField == tagTextField {
-            print("입력된 태그 : ", tagTextField.text)
+            guard let tagText = tagTextField.text, !tagText.isEmpty, !tags.contains(tagText) else {
+                return false
+            }
+            let tagView = TagView(tagTitle: tagText)
+            let deleteGesture = DeleteGestureRecognizer(target: self, action: #selector(deleteTagView))
+            deleteGesture.title = tagText
+            tagView.addGestureRecognizer(deleteGesture)
+            
+            tags.append(tagText)
+            tagStackView.addArrangedSubview(tagView)
             tagTextField.text = ""
         }
         return true
     }
     
+    @objc func deleteTagView(sender: DeleteGestureRecognizer) {
+        guard let tagTitle = sender.title else { return }
+        let tagViews = tagStackView.arrangedSubviews
+            .compactMap { $0 as? TagView }
+            .filter { $0.tagLabel.text == tagTitle }
+        guard let tagView = tagViews.first else { return }
+        
+        if let index = tags.firstIndex(of: tagTitle) {
+            tags.remove(at: index)
+        }
+        
+        tagStackView.removeArrangedSubview(tagView)
+        tagView.removeFromSuperview()
+    }
 }
 
 #if canImport(SwiftUI) && DEBUG

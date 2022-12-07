@@ -76,6 +76,7 @@
 		7940FB33292E065F00276EFC /* DiaryDetailUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7940FB32292E065F00276EFC /* DiaryDetailUseCase.swift */; };
 		79767E64293E2A1200E489DD /* DiaryDeleteEndpoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79767E63293E2A1200E489DD /* DiaryDeleteEndpoint.swift */; };
 		98003E0E293F20F6009FBC35 /* DarkModeManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98003E0D293F20F6009FBC35 /* DarkModeManager.swift */; };
+		98138D292940B00900D2CEDF /* DeleteTapGestureRecognizer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98138D282940B00900D2CEDF /* DeleteTapGestureRecognizer.swift */; };
 		9825F41B29377875005F2163 /* ChangeNicknameUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9825F41A29377875005F2163 /* ChangeNicknameUseCase.swift */; };
 		9825F41D29377ACF005F2163 /* SettingsRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9825F41C29377ACF005F2163 /* SettingsRepository.swift */; };
 		982A2A472924AE74006F6ACD /* UserDefaultsKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = 982A2A462924AE74006F6ACD /* UserDefaultsKey.swift */; };
@@ -170,6 +171,7 @@
 		7940FB32292E065F00276EFC /* DiaryDetailUseCase.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DiaryDetailUseCase.swift; sourceTree = "<group>"; };
 		79767E63293E2A1200E489DD /* DiaryDeleteEndpoint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiaryDeleteEndpoint.swift; sourceTree = "<group>"; };
 		98003E0D293F20F6009FBC35 /* DarkModeManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DarkModeManager.swift; sourceTree = "<group>"; };
+		98138D282940B00900D2CEDF /* DeleteTapGestureRecognizer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeleteTapGestureRecognizer.swift; sourceTree = "<group>"; };
 		9825F41A29377875005F2163 /* ChangeNicknameUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChangeNicknameUseCase.swift; sourceTree = "<group>"; };
 		9825F41C29377ACF005F2163 /* SettingsRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsRepository.swift; sourceTree = "<group>"; };
 		982A2A462924AE74006F6ACD /* UserDefaultsKey.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDefaultsKey.swift; sourceTree = "<group>"; };
@@ -509,6 +511,7 @@
 			isa = PBXGroup;
 			children = (
 				9894EAF729375281005F2B15 /* DarkMode.swift */,
+				98138D282940B00900D2CEDF /* DeleteTapGestureRecognizer.swift */,
 			);
 			path = Utility;
 			sourceTree = "<group>";
@@ -602,6 +605,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				98138D292940B00900D2CEDF /* DeleteTapGestureRecognizer.swift in Sources */,
 				98F5AD2A292DDDEB00E53E25 /* LocationContentView.swift in Sources */,
 				791529DE29333D40005A8DDB /* ImageEndpoint.swift in Sources */,
 				4F4E0D3E2924B925005ABA8F /* LoginRepository.swift in Sources */,
