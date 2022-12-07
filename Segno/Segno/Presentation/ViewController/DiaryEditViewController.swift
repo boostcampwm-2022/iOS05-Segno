@@ -28,14 +28,16 @@ final class DiaryEditViewController: UIViewController {
         static let mediumFontSize: CGFloat = 24
         static let smallFontSize: CGFloat = 16
         static let textFieldFontSize: CGFloat = 12
+        static let padding: CGFloat = 12
         static let titlePlaceholder = "제목을 입력하세요."
+        static let bodyPlaceholder = "내용을 입력하세요."
         static let musicPlaceholder = "지금 이 음악은 뭘까요?"
         static let searching = "검색 중입니다..."
         static let musicNotFound = "음악을 찾지 못했어요."
         static let locationPlaceholder = "여기는 어디인가요?"
         static let tagPlaceholder = "태그를 입력해주세요. enter로 태그를 구분합니다."
         static let imageViewStockImage = UIImage(systemName: "photo")
-        static let leftView = UIView(frame: CGRect(x: 0.0, y: 0.0, width: 12.0, height: 0.0))
+        static let leftView = UIView(frame: CGRect(x: 0.0, y: 0.0, width: padding, height: 0.0))
         // 스택 뷰 안에 들어가는 버튼 설정
         static let musicButtonImage = UIImage(systemName: "music.note")
         static let locationButtonImage = UIImage(systemName: "location.fill")
@@ -84,9 +86,13 @@ final class DiaryEditViewController: UIViewController {
         let textView = UITextView()
         textView.backgroundColor = .appColor(.color2)
         textView.font = .appFont(.shiningStar, size: Metric.mediumFontSize)
+        textView.text = Metric.bodyPlaceholder
+        textView.textColor = .appColor(.grey3)
         textView.layer.borderColor = UIColor.appColor(.color4)?.cgColor
         textView.layer.borderWidth = 1
         textView.layer.cornerRadius = Metric.standardCornerRadius
+        textView.textContainerInset = .init(top: Metric.padding, left: Metric.padding, bottom: Metric.padding, right: Metric.padding)
+        textView.delegate = self
         return textView
     }()
     
@@ -457,7 +463,7 @@ extension DiaryEditViewController: UITextFieldDelegate {
             
             tags.append(tagText)
             tagStackView.addArrangedSubview(tagView)
-            tagTextField.text = ""
+            tagTextField.text = nil
         }
         return true
     }
@@ -475,6 +481,23 @@ extension DiaryEditViewController: UITextFieldDelegate {
         
         tagStackView.removeArrangedSubview(tagView)
         tagView.removeFromSuperview()
+    }
+}
+
+extension DiaryEditViewController: UITextViewDelegate {
+    func textViewDidBeginEditing(_ textView: UITextView) {
+        print("진입 : ", textView.text)
+        if textView.text == Metric.bodyPlaceholder {
+            textView.text = nil
+            textView.textColor = .appColor(.black)
+        }
+    }
+    
+    func textViewDidEndEditing(_ textView: UITextView) {
+        if textView.text.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty {
+            textView.text = Metric.bodyPlaceholder
+            textView.textColor = .appColor(.grey3)
+        }
     }
 }
 
