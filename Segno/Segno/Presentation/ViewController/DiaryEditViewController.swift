@@ -22,17 +22,20 @@ final class DiaryEditViewController: UIViewController {
         // 스택 뷰 안에 들어가는 컨텐츠 설정
         static let majorContentHeight: CGFloat = 400
         static let minorContentHeight: CGFloat = 60
+        static let tagTextFieldHeight: CGFloat = 40
         static let halfMinorContentHeight: CGFloat = 30
         static let standardCornerRadius: CGFloat = 8
         static let mediumFontSize: CGFloat = 24
         static let smallFontSize: CGFloat = 16
+        static let textFieldFontSize: CGFloat = 12
         static let titlePlaceholder = "제목을 입력하세요."
         static let musicPlaceholder = "지금 이 음악은 뭘까요?"
         static let searching = "검색 중입니다..."
         static let musicNotFound = "음악을 찾지 못했어요."
         static let locationPlaceholder = "여기는 어디인가요?"
+        static let tagPlaceholder = "태그를 입력해주세요. enter로 태그를 구분합니다."
         static let imageViewStockImage = UIImage(systemName: "photo")
-        
+        static let leftView = UIView(frame: CGRect(x: 0.0, y: 0.0, width: 12.0, height: 0.0))
         // 스택 뷰 안에 들어가는 버튼 설정
         static let musicButtonImage = UIImage(systemName: "music.note")
         static let locationButtonImage = UIImage(systemName: "location.fill")
@@ -47,6 +50,7 @@ final class DiaryEditViewController: UIViewController {
     private lazy var mainScrollView: UIScrollView = {
         let scrollView = UIScrollView()
         scrollView.keyboardDismissMode = .onDrag
+        scrollView.backgroundColor = .red
         return scrollView
     }()
     
@@ -86,6 +90,18 @@ final class DiaryEditViewController: UIViewController {
         return textView
     }()
     
+    private lazy var tagTextField: UITextField = {
+        let textField = UITextField()
+        textField.backgroundColor = .appColor(.grey1)
+        textField.placeholder = Metric.tagPlaceholder
+        textField.leftView = Metric.leftView
+        textField.leftViewMode = .always
+        textField.font = .appFont(.surroundAir, size: Metric.textFieldFontSize)
+        textField.layer.cornerRadius = Metric.standardCornerRadius
+        textField.delegate = self
+        return textField
+    }()
+    
     private lazy var tagScrollView: UIScrollView = {
         let scrollView = UIScrollView()
         return scrollView
@@ -98,14 +114,6 @@ final class DiaryEditViewController: UIViewController {
         stackView.distribution = .equalSpacing
         stackView.spacing = Metric.standardSpacing
         return stackView
-    }()
-    
-    private lazy var addTagButton: UIButton = {
-        let button = UIButton()
-        button.backgroundColor = .black // 테스트용 색상..?
-        button.layer.cornerRadius = Metric.tagButtonCornerRadius
-        button.setTitle("+", for: .normal)
-        return button
     }()
     
     private lazy var musicStackView: UIStackView = {
@@ -196,15 +204,16 @@ final class DiaryEditViewController: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        
+        tabBarController?.tabBar.isHidden = true
         registerForKeyboardNotification()
     }
     
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
-        
+        tabBarController?.tabBar.isHidden = false
         removeRegisterForKeyboardNotification()
     }
+    
     private func setupView() {
         view.backgroundColor = .appColor(.white)
         
@@ -241,6 +250,11 @@ final class DiaryEditViewController: UIViewController {
             $0.height.equalTo(Metric.majorContentHeight)
         }
         
+        contentsStackView.addArrangedSubview(tagTextField)
+        tagTextField.snp.makeConstraints {
+            $0.height.equalTo(Metric.tagTextFieldHeight)
+        }
+        
         contentsStackView.addArrangedSubview(tagScrollView)
         tagScrollView.snp.makeConstraints {
             $0.height.equalTo(Metric.halfMinorContentHeight)
@@ -268,7 +282,6 @@ final class DiaryEditViewController: UIViewController {
             $0.edges.equalTo(tagScrollView)
             $0.height.equalTo(tagScrollView)
         }
-        tagStackView.addArrangedSubview(addTagButton)
     }
     
     private func setupMusicStackView() {
@@ -319,11 +332,16 @@ final class DiaryEditViewController: UIViewController {
         NotificationCenter.default.removeObserver(self, name: UIResponder.keyboardWillHideNotification, object: nil)
     }
     
-    private func keyboardAnimate(keyboardRectangle: CGRect ,textView: UITextView) {
-        let boundary = textView.frame.minY - mainScrollView.contentOffset.y - keyboardRectangle.height
-        if boundary > 0 {
-            mainScrollView.contentOffset = CGPoint(x: mainScrollView.contentOffset.x, y: boundary)
-        }
+    private func keyboardAnimate(keyboardRectangle: CGRect, frame: CGRect) {
+        let contentInset: UIEdgeInsets = .init(
+            top: 0,
+            left: 0,
+            bottom: keyboardRectangle.size.height,
+            right: 0
+        )
+        mainScrollView.contentInset = contentInset
+        mainScrollView.scrollIndicatorInsets = contentInset
+        mainScrollView.scrollRectToVisible(frame, animated: true)
     }
     
     @objc private func singleTapMethod(sender: UITapGestureRecognizer) {
@@ -332,16 +350,19 @@ final class DiaryEditViewController: UIViewController {
     
     
     @objc private func keyboardHide(_ notification: Notification) {
-        self.view.transform = .identity
+        mainScrollView.contentInset = UIEdgeInsets.zero
+        mainScrollView.scrollIndicatorInsets = UIEdgeInsets.zero
     }
     
     @objc private func keyboardShow(notification: NSNotification) {
         let userInfo: NSDictionary = notification.userInfo! as NSDictionary
-        let keyboardFrame: NSValue = userInfo.value(forKey: UIResponder.keyboardFrameEndUserInfoKey) as! NSValue
-        let keyboardRectangle = keyboardFrame.cgRectValue
+        guard let keyboardFrame: CGRect = userInfo.value(forKey: UIResponder.keyboardFrameEndUserInfoKey) as? CGRect else { return }
+        
 
         if bodyTextView.isFirstResponder {
-            keyboardAnimate(keyboardRectangle: keyboardRectangle, textView: bodyTextView)
+            keyboardAnimate(keyboardRectangle: keyboardFrame, frame: bodyTextView.frame)
+        } else if tagTextField.isFirstResponder {
+            keyboardAnimate(keyboardRectangle: keyboardFrame, frame: tagScrollView.frame)
         }
     }
 }
@@ -367,6 +388,18 @@ extension DiaryEditViewController {
             .withUnretained(self)
             .bind { _ in
                 self.searchTapped()
+            }
+            .disposed(by: disposeBag)
+        
+        saveButton.rx.tap
+            .withUnretained(self)
+            .bind { _ in
+                if self.photoImageView.image == nil {
+                    debugPrint("이미지를 넣지 않으면 저장할 수 없습니다!")
+                } else {
+                    // TODO: 저장
+                    self.viewModel.saveDiary()
+                }
             }
             .disposed(by: disposeBag)
     }
@@ -408,6 +441,18 @@ extension DiaryEditViewController: UIImagePickerControllerDelegate, UINavigation
         photoImageView.image = newImage // 받아온 이미지를 update
         dismiss(animated: true)
     }
+}
+
+extension DiaryEditViewController: UITextFieldDelegate {
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        
+        if textField == tagTextField {
+            print("입력된 태그 : ", tagTextField.text)
+            tagTextField.text = ""
+        }
+        return true
+    }
+    
 }
 
 #if canImport(SwiftUI) && DEBUG
