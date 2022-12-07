@@ -14,7 +14,7 @@ struct MusicInfo: Codable {
     let album: String
     let imageURL: URL?
     
-    init(shazamSong: ShazamSong) {
+    init(shazamSong: ShazamSongDTO) {
         self.isrc = shazamSong.isrc
         self.title = shazamSong.title
         self.artist = shazamSong.artist

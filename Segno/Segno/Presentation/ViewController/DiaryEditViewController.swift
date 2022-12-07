@@ -28,6 +28,8 @@ final class DiaryEditViewController: UIViewController {
         static let smallFontSize: CGFloat = 16
         static let titlePlaceholder = "제목을 입력하세요."
         static let musicPlaceholder = "지금 이 음악은 뭘까요?"
+        static let searching = "검색 중입니다..."
+        static let musicNotFound = "음악을 찾지 못했어요."
         static let locationPlaceholder = "여기는 어디인가요?"
         static let imageViewStockImage = UIImage(systemName: "photo")
         
@@ -39,8 +41,7 @@ final class DiaryEditViewController: UIViewController {
         static let tagButtonCornerRadius = CGFloat(halfMinorContentHeight / 2)
     }
     
-//    let viewModel: DiaryEditViewModel
-    private let shazamSession = ShazamSession() // 임시로 연동 - 추후 분리 예정
+    let viewModel: DiaryEditViewModel
     private var disposeBag = DisposeBag()
     
     private lazy var mainScrollView: UIScrollView = {
@@ -169,16 +170,9 @@ final class DiaryEditViewController: UIViewController {
     
     private lazy var photoImageViewTapGesture = UITapGestureRecognizer()
     
-//    // 뷰 모델이 작성되었을 경우, 위의 뷰 모델 프로퍼티 주석 해제와 함께 사용하면 됩니다.
-//    init(viewModel: DiaryEditViewModel
-//         = DiaryEditViewModel()) {
-//        self.viewModel = viewModel
-//
-//        super.init(nibName: nil, bundle: nil)
-//    }
-    
-    // 뷰 모델이 작성되기 전 임시로 사용하는 이니셜라이저입니다.
-    init() {
+    init(viewModel: DiaryEditViewModel = DiaryEditViewModel()) {
+        self.viewModel = viewModel
+
         super.init(nibName: nil, bundle: nil)
     }
     
@@ -192,10 +186,9 @@ final class DiaryEditViewController: UIViewController {
         setupView()
         bindImageView()
         setRecognizer()
-        // 샤잠킷 연동 메서드입니다. 향후 조정 예정입니다.
-        bindLabel()
         bindButtonAction()
-        bindSearchResult()
+        subscribeSearchingStatus()
+        sunscribeSearchResult()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -344,17 +337,17 @@ final class DiaryEditViewController: UIViewController {
     }
 }
 
-// 샤잠킷 로직 부분 - 추후 뜯어서 옮길 계획입니다.
+// 샤잠킷 로직 부분
 extension DiaryEditViewController {
-    private func bindLabel() {
-        shazamSession.isSearching
+    private func subscribeSearchingStatus() {
+        viewModel.isSearching
             .observe(on: MainScheduler.instance)
             .subscribe(onNext: { searchState in
                 switch searchState {
                 case true:
-                    self.musicInfoLabel.text = "검색 중입니다..."
+                    self.musicInfoLabel.text = Metric.searching
                 case false:
-                    self.musicInfoLabel.text = "지금 이 음악은 뭘까요?"
+                    self.musicInfoLabel.text = Metric.musicPlaceholder
                 }
             })
             .disposed(by: disposeBag)
@@ -369,31 +362,27 @@ extension DiaryEditViewController {
             .disposed(by: disposeBag)
     }
     
-    private func bindSearchResult() {
-        shazamSession.result
+    private func sunscribeSearchResult() {
+        viewModel.musicInfo
+            .observe(on: MainScheduler.instance)
             .subscribe(onNext: { result in
                 switch result {
                 case .success(let song):
                     let title = song.title
                     let artist = song.artist
                     
-                    let musicInfo = MusicInfo(shazamSong: song) // 뷰모델에서 이 작업을 할 때, 향후 사용될 엔티티
-                    debugPrint(musicInfo)
+                    debugPrint(song)
                     
-                    DispatchQueue.main.async {
-                        self.musicInfoLabel.text = "\(artist) - \(title)"
-                    }
+                    self.musicInfoLabel.text = "\(artist) - \(title)"
                 case .failure(_):
-                    DispatchQueue.main.async {
-                        self.musicInfoLabel.text = "음악을 찾지 못했어요."
-                    }
+                    self.musicInfoLabel.text = Metric.musicNotFound
                 }
             })
             .disposed(by: disposeBag)
     }
     
     private func searchTapped() {
-        shazamSession.toggleSearch()
+        viewModel.toggleSearchMusic()
     }
 }
 

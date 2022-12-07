@@ -10,11 +10,10 @@ import ShazamKit
 
 import RxSwift
 
-typealias ShazamSearchResult = Result<ShazamSong, ShazamError>
+typealias ShazamSearchResult = Result<ShazamSongDTO, ShazamError>
 
 final class ShazamSession: NSObject {
     var result = PublishSubject<ShazamSearchResult>()
-    var isSearching = BehaviorSubject(value: false)
     private let disposeBag = DisposeBag()
     
     private lazy var audioSession: AVAudioSession = .sharedInstance()
@@ -27,31 +26,6 @@ final class ShazamSession: NSObject {
         super.init()
         
         session.delegate = self
-        bindRecord()
-    }
-    
-    func bindRecord() {
-        isSearching
-            .subscribe(onNext: {
-                switch $0 {
-                case true:
-                    self.start()
-                case false:
-                    self.stop()
-                }
-            })
-            .disposed(by: disposeBag)
-    }
-    
-    func toggleSearch() {
-        guard let currentState = try? isSearching.value() else { return }
-        
-        switch currentState {
-        case true:
-            isSearching.onNext(false)
-        case false:
-            isSearching.onNext(true)
-        }
     }
     
     func start() {
@@ -59,19 +33,19 @@ final class ShazamSession: NSObject {
         case .granted:
             record()
         case .denied:
-            isSearching.onNext(false)
+            stop()
             result.onNext(.failure(.recordDenied))
         case .undetermined:
             audioSession.requestRecordPermission { granted in
                 if granted {
                     self.record()
                 } else {
-                    self.isSearching.onNext(false)
+                    self.stop()
                     self.result.onNext(.failure(.recordDenied))
                 }
             }
         @unknown default:
-            isSearching.onNext(false)
+            stop()
             result.onNext(.failure(.unknown))
         }
     }
@@ -97,10 +71,10 @@ final class ShazamSession: NSObject {
 
 extension ShazamSession: SHSessionDelegate {
     func session(_ session: SHSession, didFind match: SHMatch) {
-        isSearching.onNext(false)
+        stop()
         
         guard let mediaItem = match.mediaItems.first,
-              let shazamSong = ShazamSong(mediaItem: mediaItem) else {
+              let shazamSong = ShazamSongDTO(mediaItem: mediaItem) else {
             result.onNext(.failure(.matchFailed))
             return
         }
@@ -109,48 +83,7 @@ extension ShazamSession: SHSessionDelegate {
     }
     
     func session(_ session: SHSession, didNotFindMatchFor signature: SHSignature, error: Error?) {
-        isSearching.onNext(false)
+        stop()
         result.onNext(.failure(.matchFailed))
-    }
-}
-
-// TODO: DTO가 될지 안 될지 판단해서, 파일로 따로 빼 주기
-struct ShazamSong {
-    let isrc: String
-    let title: String
-    let artist: String
-    let album: String
-    let imageURL: URL?
-    
-    init?(mediaItem: SHMatchedMediaItem) {
-        guard let isrc = mediaItem.isrc,
-              let title = mediaItem.title,
-              let artist = mediaItem.artist,
-              let album = mediaItem.album
-        else { return nil }
-        
-        self.isrc = isrc
-        self.title = title
-        self.artist = artist
-        self.album = album
-        self.imageURL = mediaItem.artworkURL
-    }
-}
-
-// TODO: 파일로 빼 주기
-enum ShazamError: Error, LocalizedError {
-    case recordDenied
-    case unknown
-    case matchFailed
-    
-    var errorDescription: String {
-        switch self {
-        case .recordDenied:
-            return "Record permission is denied. Please enable it in Settings."
-        case .matchFailed:
-            return "No song found or internet connection is bad."
-        case .unknown:
-            return "Unknown error occured."
-        }
     }
 }

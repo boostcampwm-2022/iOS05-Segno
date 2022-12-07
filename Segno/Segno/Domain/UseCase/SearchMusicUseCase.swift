@@ -7,16 +7,48 @@
 
 import RxSwift
 
+typealias MusicInfoResult = Result<MusicInfo, Error>
+
 protocol SearchMusicUseCase {
-    func searchMusic() -> Single<MusicInfo>
+    var musicInfoResult: PublishSubject<MusicInfoResult> { get set }
+    
+    func startSearching()
+    func stopSearching()
 }
 
 final class SearchMusicUseCaseImpl: SearchMusicUseCase {
-    func searchMusic() -> Single<MusicInfo> {
-        // 음악을 검색해줄 것을 레포지토리에 요청
+    private let disposeBag = DisposeBag()
+    
+    let musicRepository: MusicRepository
+    var musicInfoResult = PublishSubject<MusicInfoResult>()
+    
+    init(musicRepository: MusicRepository = MusicRepositoryImpl()) {
+        self.musicRepository = musicRepository
         
-        return Single.create { _ in
-            return Disposables.create()
-        }
+        subscribeShazamResult()
+    }
+    
+    func startSearching() {
+        musicRepository.startSearchingMusic()
+    }
+    
+    func stopSearching() {
+        musicRepository.stopSearchingMusic()
+    }
+}
+
+extension SearchMusicUseCaseImpl {
+    private func subscribeShazamResult() {
+        musicRepository.shazamSearchResult
+            .subscribe(onNext: {
+                switch $0 {
+                case .success(let shazamSongDTO):
+                    let musicInfo = MusicInfo(shazamSong: shazamSongDTO)
+                    self.musicInfoResult.onNext(.success(musicInfo))
+                case .failure(let error):
+                    self.musicInfoResult.onNext(.failure(error))
+                }
+            })
+            .disposed(by: disposeBag)
     }
 }

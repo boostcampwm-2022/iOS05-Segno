@@ -102,7 +102,7 @@ final class LoginViewController: UIViewController {
         let view = UIView()
         
         view.backgroundColor = .clear
-        
+        view.isUserInteractionEnabled = false
         return view
     }()
     
