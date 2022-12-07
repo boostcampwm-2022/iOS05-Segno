@@ -90,6 +90,12 @@ final class DiaryCollectionViewController: UIViewController {
         getDatasource()
     }
     
+    
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        print("Touched!")
+        searchBar.endEditing(true)
+    }
+    
     private func setupView() {
         view.backgroundColor = .appColor(.background)
         
@@ -104,6 +110,7 @@ final class DiaryCollectionViewController: UIViewController {
             NSAttributedString.Key.font: UIFont.appFont(.surroundAir, size: Metric.navigationBackButtonTitleSize)], for: .normal)
         navigationItem.backBarButtonItem = backBarButtonItem
         
+        searchBar.delegate = self
         diaryCollectionView.delegate = self
         
         appendButton.layer.cornerRadius = Metric.buttonRadius
@@ -174,7 +181,8 @@ final class DiaryCollectionViewController: UIViewController {
     private func bindDataSource() {
         viewModel.diaryListItems
             .subscribe(onNext: { [weak self] datas in
-                self?.updateSnapshot(with: datas)
+                self?.diaryCells = datas
+                self?.updateSnapshot()
             })
             .disposed(by: disposeBag)
     }
@@ -200,10 +208,17 @@ extension DiaryCollectionViewController: UICollectionViewDelegate {
         return layout
     }
     
-    func updateSnapshot(with models: [DiaryListItem]) {
+    func updateSnapshot(with filter: String? = nil) {
         var snapshot = Snapshot()
         snapshot.appendSections(Section.allCases)
-        snapshot.appendItems(models)
+        
+        if let filter = filter, filter != "" {
+            let filtered = diaryCells.filter { $0.title.contains(filter) }
+            snapshot.appendItems(filtered)
+        }
+        else {
+            snapshot.appendItems(diaryCells)
+        }
         
         dataSource?.apply(snapshot)
     }
@@ -212,5 +227,23 @@ extension DiaryCollectionViewController: UICollectionViewDelegate {
         guard let id = dataSource?.itemIdentifier(for: indexPath)?.identifier else { return }
         
         delegate?.diaryCellSelected(id: id)
+    }
+}
+
+extension DiaryCollectionViewController: UISearchBarDelegate {
+    func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
+        updateSnapshot(with: searchBar.text)
+    }
+    
+    func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
+        searchBar.resignFirstResponder()
+        
+        updateSnapshot(with: searchBar.text)
+    }
+    
+    func searchBarTextDidEndEditing(_ searchBar: UISearchBar) {
+        searchBar.resignFirstResponder()
+        
+        updateSnapshot(with: searchBar.text)
     }
 }

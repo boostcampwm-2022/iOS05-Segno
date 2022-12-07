@@ -21,6 +21,12 @@ enum SettingsCellActions: Int {
 }
 
 final class SettingsViewController: UIViewController {
+    private enum Metric {
+        static let settingString: String = "설정"
+        static let darkModeSettingString: String = "다크 모드 설정"
+        static let cancelMessage: String = "취소"
+    }
+    
     private let disposeBag = DisposeBag()
     private let viewModel: SettingsViewModel
     private lazy var tableView: UITableView = {
@@ -50,7 +56,7 @@ final class SettingsViewController: UIViewController {
     }
     
     private func setupView() {
-        title = "설정"
+        title = Metric.settingString
         view.backgroundColor = .appColor(.background)
     }
     
@@ -118,21 +124,26 @@ final class SettingsViewController: UIViewController {
                 guard let action = SettingsCellActions(rawValue: indexPath.row) else { return }
                 switch action {
                 case .darkmode: // 다크 모드 설정
-                    guard let cell = self?.tableView.cellForRow(at: indexPath) as? SettingsActionSheetCell else { return }
-                    let actionSheet = UIAlertController(title: "다크 모드 설정", message: nil, preferredStyle: .actionSheet)
+                    guard let cell = self?.tableView.cellForRow(at: indexPath) as? SettingsActionSheetCell,
+                          let self = self else { return }
+                    let actionSheet = UIAlertController(title: Metric.darkModeSettingString, message: nil, preferredStyle: .actionSheet)
                     actionSheet.addAction(UIAlertAction(title: DarkMode.system.title, style: .default, handler: { _ in
-                        self?.viewModel.changeDarkMode(to: DarkMode.system.rawValue)
+                        self.viewModel.changeDarkMode(to: DarkMode.system.rawValue)
                         cell.configure(right: DarkMode.system.title)
                     }))
                     actionSheet.addAction(UIAlertAction(title: DarkMode.light.title, style: .default, handler: { _ in
-                        self?.viewModel.changeDarkMode(to: DarkMode.light.rawValue)
+                        self.viewModel.changeDarkMode(to: DarkMode.light.rawValue)
                         cell.configure(right: DarkMode.light.title)
                     }))
                     actionSheet.addAction(UIAlertAction(title: DarkMode.dark.title, style: .default, handler: { _ in
-                        self?.viewModel.changeDarkMode(to: DarkMode.dark.rawValue)
+                        self.viewModel.changeDarkMode(to: DarkMode.dark.rawValue)
                         cell.configure(right: DarkMode.dark.title)
                     }))
-                    self?.present(actionSheet, animated: true)
+                    actionSheet.addAction(UIAlertAction(title: Metric.cancelMessage
+                                                        , style: .cancel, handler: { _ in
+                        self.dismiss(animated: true)
+                    }))
+                    self.present(actionSheet, animated: true)
                 default:
                     break
                 }

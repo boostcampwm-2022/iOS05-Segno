@@ -39,18 +39,10 @@ final class SettingsUseCaseImpl: SettingsUseCase {
     }
     
     func getDarkMode() -> Int {
-        if let mode = repository.getUserDefaultsObject(forKey: .darkmode) as? Int {
-            debugPrint("SettingsUseCase - getDarkMode : 키가 있습니다 - \(mode)")
-            return mode
-        } else {
-            repository.setUserDefaults(DarkMode.system.rawValue, forKey: .darkmode)
-            debugPrint("SettingsUseCase - getDarkMode : 키가 없어 \(DarkMode.system.rawValue) 로 설정합니다.")
-            return DarkMode.system.rawValue
-        }
+        return DarkModeManager.shared.getDarkMode()
     }
     
     func changeDarkMode(to mode: Int) {
-        repository.setUserDefaults(mode, forKey: .darkmode)
-        debugPrint("SettingsUseCase - changeDarkMode : \(mode)로 설정")
+        DarkModeManager.shared.changeDarkMode(to: mode)
     }
 }

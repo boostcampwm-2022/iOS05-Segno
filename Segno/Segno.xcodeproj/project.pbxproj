@@ -75,6 +75,7 @@
 		7940FB31292E065100276EFC /* DiaryDetailEndpoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7940FB30292E065100276EFC /* DiaryDetailEndpoint.swift */; };
 		7940FB33292E065F00276EFC /* DiaryDetailUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7940FB32292E065F00276EFC /* DiaryDetailUseCase.swift */; };
 		79767E64293E2A1200E489DD /* DiaryDeleteEndpoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79767E63293E2A1200E489DD /* DiaryDeleteEndpoint.swift */; };
+		98003E0E293F20F6009FBC35 /* DarkModeManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98003E0D293F20F6009FBC35 /* DarkModeManager.swift */; };
 		9825F41B29377875005F2163 /* ChangeNicknameUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9825F41A29377875005F2163 /* ChangeNicknameUseCase.swift */; };
 		9825F41D29377ACF005F2163 /* SettingsRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9825F41C29377ACF005F2163 /* SettingsRepository.swift */; };
 		982A2A472924AE74006F6ACD /* UserDefaultsKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = 982A2A462924AE74006F6ACD /* UserDefaultsKey.swift */; };
@@ -168,6 +169,7 @@
 		7940FB30292E065100276EFC /* DiaryDetailEndpoint.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DiaryDetailEndpoint.swift; sourceTree = "<group>"; };
 		7940FB32292E065F00276EFC /* DiaryDetailUseCase.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DiaryDetailUseCase.swift; sourceTree = "<group>"; };
 		79767E63293E2A1200E489DD /* DiaryDeleteEndpoint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiaryDeleteEndpoint.swift; sourceTree = "<group>"; };
+		98003E0D293F20F6009FBC35 /* DarkModeManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DarkModeManager.swift; sourceTree = "<group>"; };
 		9825F41A29377875005F2163 /* ChangeNicknameUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChangeNicknameUseCase.swift; sourceTree = "<group>"; };
 		9825F41C29377ACF005F2163 /* SettingsRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsRepository.swift; sourceTree = "<group>"; };
 		982A2A462924AE74006F6ACD /* UserDefaultsKey.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDefaultsKey.swift; sourceTree = "<group>"; };
@@ -259,6 +261,7 @@
 		4F317791291BEB490019BDFC /* Data */ = {
 			isa = PBXGroup;
 			children = (
+				98003E0C293F20E7009FBC35 /* Manager */,
 				4FCAC5C3292B792200BF9CDD /* Session */,
 				4F3177A0291BF1810019BDFC /* Repository */,
 				4F31779F291BF1780019BDFC /* Network */,
@@ -494,6 +497,14 @@
 			path = Font;
 			sourceTree = "<group>";
 		};
+		98003E0C293F20E7009FBC35 /* Manager */ = {
+			isa = PBXGroup;
+			children = (
+				98003E0D293F20F6009FBC35 /* DarkModeManager.swift */,
+			);
+			path = Manager;
+			sourceTree = "<group>";
+		};
 		9894EAF629375272005F2B15 /* Utility */ = {
 			isa = PBXGroup;
 			children = (
@@ -610,6 +621,7 @@
 				66A8CF6D29379A9900C17F84 /* UserDetailEndpoint.swift in Sources */,
 				4FEBFAAD291CF62E00E78139 /* DiaryDetail.swift in Sources */,
 				4FEBFAB1291CFB5500E78139 /* SHMediaItem+.swift in Sources */,
+				98003E0E293F20F6009FBC35 /* DarkModeManager.swift in Sources */,
 				66A8CF692937945300C17F84 /* UserDetailUseCase.swift in Sources */,
 				988414AE2922235B007C9132 /* LocalUtilityRepository.swift in Sources */,
 				66A8CF612935F44100C17F84 /* MyPageViewModel.swift in Sources */,
