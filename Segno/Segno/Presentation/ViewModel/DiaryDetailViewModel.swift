@@ -34,7 +34,6 @@ final class DiaryDetailViewModel {
         self.playMusicUseCase = playMusicUseCase
         
         setupMusicPlayer()
-        testDataInsert()
     }
     
     func testDataInsert() {
