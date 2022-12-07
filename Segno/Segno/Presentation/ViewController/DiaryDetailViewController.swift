@@ -118,9 +118,6 @@ final class DiaryDetailViewController: UIViewController {
         setupLayout()
         bindDiaryItem()
         getDiary()
-        
-        // 뮤직세션 테스트용으로, 임시로 정해진 데이터를 넣어 두었습니다.
-        musicSession.fetchMusic(term: MusicInfo.yokohama)
     }
     
     override func viewWillDisappear(_ animated: Bool) {
@@ -222,6 +219,7 @@ final class DiaryDetailViewController: UIViewController {
             .observe(on: MainScheduler.instance)
             .subscribe(onNext: { [weak self] musicInfo in
                 self?.musicContentView.setMusic(info: musicInfo)
+                self?.viewModel.setupMusicPlayer(musicInfo)
             })
             .disposed(by: disposeBag)
         

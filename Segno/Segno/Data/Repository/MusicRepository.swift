@@ -12,7 +12,9 @@ protocol MusicRepository {
     
     func startSearchingMusic()
     func stopSearchingMusic()
-    func playMusic()
+    func setupMusic(_ song: MusicInfo?)
+    func toggleMusicPlayer()
+    func stopPlayingMusic()
 }
 
 final class MusicRepositoryImpl: MusicRepository {
@@ -30,6 +32,10 @@ final class MusicRepositoryImpl: MusicRepository {
         subscribeSearchresult()
     }
     
+    func setupMusic(_ song: MusicInfo?) {
+        musicSession.fetchMusic(term: song)
+    }
+    
     func startSearchingMusic() {
         shazamSession.start()
     }
@@ -38,8 +44,12 @@ final class MusicRepositoryImpl: MusicRepository {
         shazamSession.stop()
     }
     
-    func playMusic() {
-        
+    func toggleMusicPlayer() {
+        musicSession.togglePlayer()
+    }
+    
+    func stopPlayingMusic() {
+        musicSession.stopMusic()
     }
 }
 

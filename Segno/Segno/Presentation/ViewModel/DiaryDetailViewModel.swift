@@ -12,7 +12,8 @@ import RxSwift
 final class DiaryDetailViewModel {
     
     private let itemIdentifier: String
-    let useCase: DiaryDetailUseCase
+    let getDetailUseCase: DiaryDetailUseCase
+    let playMusicUseCase: PlayMusicUseCase
     var diaryItem = PublishSubject<DiaryDetail>()
     // TODO: DiaryDetail에 date 추가
     // lazy var dateObservable = diaryItem.map { $0.date }
@@ -25,17 +26,32 @@ final class DiaryDetailViewModel {
         
     private let disposeBag = DisposeBag()
     
-    init(itemIdentifier: String, useCase: DiaryDetailUseCase = DiaryDetailUseCaseImpl()) {
+    init(itemIdentifier: String,
+         getDetailUseCase: DiaryDetailUseCase = DiaryDetailUseCaseImpl(),
+         playMusicUseCase: PlayMusicUseCase = PlayMusicUseCaseImpl()) {
         self.itemIdentifier = itemIdentifier
-        self.useCase = useCase
+        self.getDetailUseCase = getDetailUseCase
+        self.playMusicUseCase = playMusicUseCase
     }
     
     func getDiary() {
-        useCase.getDiary(id: itemIdentifier)
+        getDetailUseCase.getDiary(id: itemIdentifier)
             .subscribe(onSuccess: { [weak self] diary in
                 self?.diaryItem.onNext(diary)
             }, onFailure: { error in
                 print(error.localizedDescription)
             }).disposed(by: disposeBag)
+    }
+    
+    func setupMusicPlayer(_ song: MusicInfo?) {
+        playMusicUseCase.setupPlayer(song)
+    }
+    
+    func toggleMusicPlayer() {
+        playMusicUseCase.togglePlayer()
+    }
+    
+    func stopMusic() {
+        playMusicUseCase.stopPlaying()
     }
 }
