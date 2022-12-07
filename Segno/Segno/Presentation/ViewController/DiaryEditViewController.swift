@@ -126,10 +126,12 @@ final class DiaryEditViewController: UIViewController {
     private lazy var musicStackView: UIStackView = {
         let stackView = UIStackView()
         stackView.axis = .horizontal
-        stackView.backgroundColor = .appColor(.color1)
+        stackView.backgroundColor = .appColor(.grey1)
         stackView.distribution = .equalSpacing
-        stackView.layer.cornerRadius = Metric.standardCornerRadius
+        stackView.layer.cornerRadius = Metric.buttonCornerRadius
         stackView.spacing = Metric.doubleSpacing
+        stackView.layoutMargins = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: Metric.padding)
+        stackView.isLayoutMarginsRelativeArrangement = true
         return stackView
     }()
     
@@ -137,6 +139,7 @@ final class DiaryEditViewController: UIViewController {
         let button = UIButton()
         button.backgroundColor = .appColor(.color3)
         button.layer.cornerRadius = Metric.buttonCornerRadius
+        button.tintColor = .appColor(.white)
         button.setImage(Metric.musicButtonImage, for: .normal)
         return button
     }()
@@ -152,17 +155,20 @@ final class DiaryEditViewController: UIViewController {
     private lazy var locationStackView: UIStackView = {
         let stackView = UIStackView()
         stackView.axis = .horizontal
-        stackView.backgroundColor = .appColor(.color1)
+        stackView.backgroundColor = .appColor(.grey1)
         stackView.distribution = .equalSpacing
-        stackView.layer.cornerRadius = Metric.standardCornerRadius
+        stackView.layer.cornerRadius = Metric.buttonCornerRadius
         stackView.spacing = Metric.doubleSpacing
+        stackView.layoutMargins = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: Metric.padding)
+        stackView.isLayoutMarginsRelativeArrangement = true
         return stackView
     }()
     
     private lazy var addlocationButton: UIButton = {
         let button = UIButton()
-        button.backgroundColor = .appColor(.color3) // 테스트용 색상..?
+        button.backgroundColor = .appColor(.color3)
         button.layer.cornerRadius = Metric.buttonCornerRadius
+        button.tintColor = .appColor(.white)
         button.setImage(Metric.locationButtonImage, for: .normal)
         return button
     }()
@@ -222,7 +228,7 @@ final class DiaryEditViewController: UIViewController {
     }
     
     private func setupView() {
-        view.backgroundColor = .appColor(.white)
+        view.backgroundColor = .appColor(.background)
         
         view.addSubview(mainScrollView)
         mainScrollView.snp.makeConstraints {
