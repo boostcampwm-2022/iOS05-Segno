@@ -5,11 +5,15 @@
 //  Created by Gordon Choi on 2022/12/06.
 //
 
+import Foundation
+
 import RxSwift
 
 final class DiaryEditViewModel {
     var locationSubject = PublishSubject<Location>()
     var addressSubject = PublishSubject<String>()
+    var imageSubject = PublishSubject<String>()
+    
     private let disposeBag = DisposeBag()
     var diaryDetail: DiaryDetail?
     // 에딧 화면에 들어갈 여러 요소들
@@ -17,6 +21,7 @@ final class DiaryEditViewModel {
     let diaryDetailUseCase: DiaryDetailUseCase
     let searchMusicUseCase: SearchMusicUseCase
     let locationUseCase: LocationUseCase
+    let imageUseCase: ImageUseCase
     
     var isSearching = BehaviorSubject(value: false)
     var isReceivingLocation = BehaviorSubject(value: false)
@@ -24,17 +29,15 @@ final class DiaryEditViewModel {
     
     init(diaryDetailUseCase: DiaryDetailUseCase = DiaryDetailUseCaseImpl(),
          searchMusicUseCase: SearchMusicUseCase = SearchMusicUseCaseImpl(),
-         locationUseCase: LocationUseCase = LocationUseCaseImpl()) {
+         locationUseCase: LocationUseCase = LocationUseCaseImpl(),
+         imageUseCase: ImageUseCase = ImageUseCaseImpl()) {
         self.diaryDetailUseCase = diaryDetailUseCase
         self.searchMusicUseCase = searchMusicUseCase
         self.locationUseCase = locationUseCase
+        self.imageUseCase = imageUseCase
         subscribeSearchingStatus()
         subscribeSearchResult()
         subscribeLocation()
-    }
-    
-    func addTags() {
-        
     }
     
     func toggleSearchMusic() {
@@ -45,7 +48,7 @@ final class DiaryEditViewModel {
         isSearching.onNext(!value)
     }
     
-    func subscribeSearchingStatus() {
+    private func subscribeSearchingStatus() {
         isSearching
             .subscribe(onNext: {
                 $0 ? self.startSearchingMusic() : self.stopSearchingMusic()
@@ -53,15 +56,7 @@ final class DiaryEditViewModel {
             .disposed(by: disposeBag)
     }
     
-    func startSearchingMusic() {
-        searchMusicUseCase.startSearching()
-    }
-    
-    func stopSearchingMusic() {
-        searchMusicUseCase.stopSearching()
-    }
-    
-    func subscribeSearchResult() {
+    private func subscribeSearchResult() {
         searchMusicUseCase.musicInfoResult
             .subscribe(onNext: {
                 self.toggleSearchMusic()
@@ -87,6 +82,15 @@ final class DiaryEditViewModel {
             .disposed(by: disposeBag)
     }
     
+    func startSearchingMusic() {
+        searchMusicUseCase.startSearching()
+    }
+    
+    func stopSearchingMusic() {
+        searchMusicUseCase.stopSearching()
+    }
+    
+    
     func toggleLocation() {
         guard let value = try? isReceivingLocation.value() else { return }
         isReceivingLocation.onNext(!value)
@@ -94,5 +98,15 @@ final class DiaryEditViewModel {
     
     func saveDiary() {
         
+    }
+    
+    func uploadImage(data: Data) {
+        imageUseCase.uploadImage(data: data)
+            .subscribe(onSuccess: { [weak self] imageInfo in
+                guard let filename = imageInfo.filename else { return }
+                debugPrint(filename)
+                self?.imageSubject.onNext(filename)
+            })
+            .disposed(by: disposeBag)
     }
 }

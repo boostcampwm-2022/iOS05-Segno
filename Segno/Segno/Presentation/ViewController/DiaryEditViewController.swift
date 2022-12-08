@@ -216,7 +216,7 @@ final class DiaryEditViewController: UIViewController {
         setRecognizer()
         bindButtonAction()
         subscribeSearchingStatus()
-        sunscribeSearchResult()
+        subscribeSearchResult()
         subscribeLocationResult()
     }
     
@@ -431,7 +431,7 @@ extension DiaryEditViewController {
             .disposed(by: disposeBag)
     }
     
-    private func sunscribeSearchResult() {
+    private func subscribeSearchResult() {
         viewModel.musicInfo
             .observe(on: MainScheduler.instance)
             .subscribe(onNext: { result in
@@ -459,16 +459,22 @@ extension DiaryEditViewController {
     }
     
     private func saveDiary() {
+        // TODO: 이미지 업로드 해야
+        guard let imageData = photoImageView.image?.jpegData(compressionQuality: 1) else {
+            return
+        }
+        
+        viewModel.uploadImage(data: imageData)
+
         // TODO: 제목 없으면 날짜로 제목 만들기
         debugPrint("title : ", titleTextField.text)
         debugPrint("tags : ",  tags)
-        // TODO: 이미지 업로드 해야
         debugPrint("bodyText : ", bodyTextView.text)
         // TODO: MusicInfo엔 어떤 정보가 string으로?
         debugPrint("location : ", location)
         
         // TODO: 저장
-        self.viewModel.saveDiary()
+        viewModel.saveDiary()
     }
 }
 

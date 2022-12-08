@@ -25,8 +25,8 @@
 		4F4E0D7629252236005ABA8F /* LoginEndpoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F4E0D7529252236005ABA8F /* LoginEndpoint.swift */; };
 		4F4E0D79292522B7005ABA8F /* BaseURL.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F4E0D78292522B7005ABA8F /* BaseURL.swift */; };
 		4F4E0D7B29252526005ABA8F /* TokenDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F4E0D7A29252526005ABA8F /* TokenDTO.swift */; };
-		4F51A6FF2940FE810039D86A /* UIViewController+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F51A6FE2940FE810039D86A /* UIViewController+.swift */; };
 		4F51A6FD294096480039D86A /* PlayMusicUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F51A6FC294096480039D86A /* PlayMusicUseCase.swift */; };
+		4F51A6FF2940FE810039D86A /* UIViewController+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F51A6FE2940FE810039D86A /* UIViewController+.swift */; };
 		4F5291DE293F065D00DF930A /* DiaryEditViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F5291DD293F065D00DF930A /* DiaryEditViewModel.swift */; };
 		4F589DD6293FB9AB00DB39E5 /* ShazamSongDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F589DD5293FB9AB00DB39E5 /* ShazamSongDTO.swift */; };
 		4F589DD9293FBA0900DB39E5 /* ShazamError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F589DD8293FBA0900DB39E5 /* ShazamError.swift */; };
@@ -100,6 +100,9 @@
 		9894EAF829375281005F2B15 /* DarkMode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9894EAF729375281005F2B15 /* DarkMode.swift */; };
 		98B5263E292CA46C00446413 /* TagView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98B5263D292CA46C00446413 /* TagView.swift */; };
 		98B52640292CB92900446413 /* MusicContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98B5263F292CB92900446413 /* MusicContentView.swift */; };
+		98B5EF342941B85A00287405 /* ImageUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98B5EF332941B85A00287405 /* ImageUseCase.swift */; };
+		98B5EF362941B90400287405 /* ImageRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98B5EF352941B90400287405 /* ImageRepository.swift */; };
+		98B5EF382941BC8F00287405 /* ImageInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98B5EF372941BC8F00287405 /* ImageInfo.swift */; };
 		98BEE36E2934907700B20143 /* LoginError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98BEE36D2934907700B20143 /* LoginError.swift */; };
 		98BEE3702934A19800B20143 /* SettingsSwitchCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98BEE36F2934A19800B20143 /* SettingsSwitchCell.swift */; };
 		98F5AD2A292DDDEB00E53E25 /* LocationContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98F5AD29292DDDEB00E53E25 /* LocationContentView.swift */; };
@@ -125,8 +128,8 @@
 		4F4E0D7529252236005ABA8F /* LoginEndpoint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginEndpoint.swift; sourceTree = "<group>"; };
 		4F4E0D78292522B7005ABA8F /* BaseURL.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseURL.swift; sourceTree = "<group>"; };
 		4F4E0D7A29252526005ABA8F /* TokenDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TokenDTO.swift; sourceTree = "<group>"; };
-		4F51A6FE2940FE810039D86A /* UIViewController+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+.swift"; sourceTree = "<group>"; };
 		4F51A6FC294096480039D86A /* PlayMusicUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayMusicUseCase.swift; sourceTree = "<group>"; };
+		4F51A6FE2940FE810039D86A /* UIViewController+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+.swift"; sourceTree = "<group>"; };
 		4F5291DD293F065D00DF930A /* DiaryEditViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiaryEditViewModel.swift; sourceTree = "<group>"; };
 		4F589DD5293FB9AB00DB39E5 /* ShazamSongDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShazamSongDTO.swift; sourceTree = "<group>"; };
 		4F589DD8293FBA0900DB39E5 /* ShazamError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShazamError.swift; sourceTree = "<group>"; };
@@ -199,6 +202,9 @@
 		9894EAF729375281005F2B15 /* DarkMode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DarkMode.swift; sourceTree = "<group>"; };
 		98B5263D292CA46C00446413 /* TagView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TagView.swift; sourceTree = "<group>"; };
 		98B5263F292CB92900446413 /* MusicContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MusicContentView.swift; sourceTree = "<group>"; };
+		98B5EF332941B85A00287405 /* ImageUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageUseCase.swift; sourceTree = "<group>"; };
+		98B5EF352941B90400287405 /* ImageRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageRepository.swift; sourceTree = "<group>"; };
+		98B5EF372941BC8F00287405 /* ImageInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageInfo.swift; sourceTree = "<group>"; };
 		98BEE36D2934907700B20143 /* LoginError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginError.swift; sourceTree = "<group>"; };
 		98BEE36F2934A19800B20143 /* SettingsSwitchCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsSwitchCell.swift; sourceTree = "<group>"; };
 		98F5AD29292DDDEB00E53E25 /* LocationContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationContentView.swift; sourceTree = "<group>"; };
@@ -300,6 +306,7 @@
 				4F6F74B0292C9BF3007E7AC1 /* UserInfo.swift */,
 				98FDF8A0292F56580083FA05 /* Location.swift */,
 				66A8CF662937937300C17F84 /* UserDetailItem.swift */,
+				98B5EF372941BC8F00287405 /* ImageInfo.swift */,
 			);
 			path = Entity;
 			sourceTree = "<group>";
@@ -348,6 +355,7 @@
 				4F307A49293889C200FA36A0 /* SearchMusicUseCase.swift */,
 				9825F41A29377875005F2163 /* ChangeNicknameUseCase.swift */,
 				4F51A6FC294096480039D86A /* PlayMusicUseCase.swift */,
+				98B5EF332941B85A00287405 /* ImageUseCase.swift */,
 			);
 			path = UseCase;
 			sourceTree = "<group>";
@@ -429,6 +437,8 @@
 				66A8CF642937934A00C17F84 /* MyPageRepository.swift */,
 				9825F41C29377ACF005F2163 /* SettingsRepository.swift */,
 				4F307A4B29388D4600FA36A0 /* MusicRepository.swift */,
+				98B5EF352941B90400287405 /* ImageRepository.swift */,
+				98138D2A2940EA0800D2CEDF /* LocationRepository.swift */,
 			);
 			path = Repository;
 			sourceTree = "<group>";
@@ -485,7 +495,6 @@
 				4FCAC5C1292B5C9000BF9CDD /* LoginSession.swift */,
 				4F307A4529387C1100FA36A0 /* ShazamSession.swift */,
 				4F307A472938832900FA36A0 /* MusicSession.swift */,
-				98138D2A2940EA0800D2CEDF /* LocationRepository.swift */,
 			);
 			path = Session;
 			sourceTree = "<group>";
@@ -619,6 +628,8 @@
 				4F4E0D3E2924B925005ABA8F /* LoginRepository.swift in Sources */,
 				4F9A00212922338E007D9057 /* AppDelegate.swift in Sources */,
 				983AE9D82935CEE2006547BD /* SettingsViewModel.swift in Sources */,
+				98B5EF342941B85A00287405 /* ImageUseCase.swift in Sources */,
+				98B5EF362941B90400287405 /* ImageRepository.swift in Sources */,
 				9825F41D29377ACF005F2163 /* SettingsRepository.swift in Sources */,
 				66F0D7EE2925FF8B0074872E /* DiaryCell.swift in Sources */,
 				79767E64293E2A1200E489DD /* DiaryDeleteEndpoint.swift in Sources */,
@@ -670,6 +681,7 @@
 				79183800292225DC00BC6992 /* UIFont+.swift in Sources */,
 				666E6F83291CF4A600CECD4B /* TabBarCoordinator.swift in Sources */,
 				791529E0293344E9005A8DDB /* DiaryPostEndpoint.swift in Sources */,
+				98B5EF382941BC8F00287405 /* ImageInfo.swift in Sources */,
 				4F9A001D29222B1B007D9057 /* Endpoint.swift in Sources */,
 				4F9A001F29222C97007D9057 /* NetworkError.swift in Sources */,
 				98FDF8A1292F56580083FA05 /* Location.swift in Sources */,
