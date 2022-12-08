@@ -216,7 +216,7 @@ final class DiaryEditViewController: UIViewController {
         setRecognizer()
         bindButtonAction()
         subscribeSearchingStatus()
-        sunscribeSearchResult()
+        subscribeSearchResult()
         subscribeLocationResult()
     }
     
@@ -431,7 +431,7 @@ extension DiaryEditViewController {
             .disposed(by: disposeBag)
     }
     
-    private func sunscribeSearchResult() {
+    private func subscribeSearchResult() {
         viewModel.musicInfo
             .observe(on: MainScheduler.instance)
             .subscribe(onNext: { result in
@@ -445,6 +445,8 @@ extension DiaryEditViewController {
                     self.musicInfoLabel.text = "\(artist) - \(title)"
                 case .failure(_):
                     self.musicInfoLabel.text = Metric.musicNotFound
+                default:
+                    break
                 }
             })
             .disposed(by: disposeBag)
@@ -459,16 +461,19 @@ extension DiaryEditViewController {
     }
     
     private func saveDiary() {
-        // TODO: 제목 없으면 날짜로 제목 만들기
-        debugPrint("title : ", titleTextField.text)
-        debugPrint("tags : ",  tags)
-        // TODO: 이미지 업로드 해야
-        debugPrint("bodyText : ", bodyTextView.text)
-        // TODO: MusicInfo엔 어떤 정보가 string으로?
-        debugPrint("location : ", location)
-        
-        // TODO: 저장
-        self.viewModel.saveDiary()
+        guard let imageData = photoImageView.image?.jpegData(compressionQuality: 1),
+              var title = titleTextField.text else { return }
+        if title.isEmpty {
+            let dateFormatter = DateFormatter()
+            dateFormatter.dateFormat = "yyyy년 MM월 dd일 HH시 mm분에 저장된 세뇨입니다."
+            dateFormatter.locale = Locale(identifier: "ko_KR")
+            title = dateFormatter.string(from: Date())
+        }
+        var bodyText: String?
+        if bodyTextView.text == Metric.bodyPlaceholder || bodyTextView.text.isEmpty {
+            bodyText = nil
+        }
+        viewModel.saveDiary(title: title, body: bodyText, tags: tags, imageData: imageData)
     }
 }
 

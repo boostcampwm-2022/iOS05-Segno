@@ -9,27 +9,30 @@ import Foundation
 import RxSwift
 
 protocol DiaryEditUseCase {
-    func postDiary(_ diary: DiaryDetail, image: Data) -> Single<DiaryDetail>
+    func postDiary(_ newDiary: NewDiaryDetail) -> Single<NewDiaryDetail>
 }
 
 final class DiaryEditUseCaseImpl: DiaryEditUseCase {
-    let repository: DiaryRepository
+    let diaryRepository: DiaryRepository
+    let imageRepository: ImageRepository
     private let disposeBag = DisposeBag()
     
-    init(repository: DiaryRepository = DiaryRepositoryImpl()) {
-        self.repository = repository
+    init(diaryRepository: DiaryRepository = DiaryRepositoryImpl(),
+         imageRepository: ImageRepository = ImageRepositoryImpl()) {
+        self.diaryRepository = diaryRepository
+        self.imageRepository = imageRepository
     }
     
-    func postDiary(_ diary: DiaryDetail, image: Data) -> Single<DiaryDetail> {
-        repository.postDiary(diary, image: image).map { dto in
-            DiaryDetail(
-                identifier: dto.id,
+    func postDiary(_ newDiary: NewDiaryDetail) -> Single<NewDiaryDetail> {
+        return diaryRepository.postDiary(newDiary).map { dto in
+            NewDiaryDetail(
                 title: dto.title,
                 tags: dto.tags,
                 imagePath: dto.imagePath,
                 bodyText: dto.bodyText,
                 musicInfo: dto.musicInfo,
-                location: dto.location
+                location: dto.location,
+                token: "A1lmMjb2pgNWg6ZzAaPYgMcqRv/8BOyO4U/ui6i/Ic4="
             )
         }
     }

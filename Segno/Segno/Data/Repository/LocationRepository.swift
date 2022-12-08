@@ -35,7 +35,7 @@ final class LocationRepositoryImpl: NSObject, LocationRepository {
                 debugPrint("위치 서비스 on")
                 self.locationManager.startUpdatingLocation()
             } else {
-                print("위치 서비스 off 상태")
+                debugPrint("위치 서비스 off 상태")
             }
         }
     }
@@ -67,8 +67,6 @@ extension LocationRepositoryImpl: CLLocationManagerDelegate {
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
         debugPrint("didUpdateLocations")
         if let cllocation = locations.first {
-            print("위도 : \(cllocation.coordinate.latitude)")
-            print("경도 : \(cllocation.coordinate.longitude)")
             let location = Location(latitude: cllocation.coordinate.latitude, longitude: cllocation.coordinate.longitude)
             getAddress(location: cllocation)
             locationSubject.onNext(location)
