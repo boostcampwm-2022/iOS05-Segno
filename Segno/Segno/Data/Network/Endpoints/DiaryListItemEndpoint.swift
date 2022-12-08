@@ -7,12 +7,11 @@
 
 import Foundation
 
-// TODO: 서버 구현이 완료된 후 그에 맞게 바뀔 예정입니다.
 enum DiaryListItemEndpoint: Endpoint {
     case item
     
     var baseURL: URL? {
-        return URL(string: "https://baero.me")
+        return URL(string: BaseURL.urlString)
     }
     
     var httpMethod: HTTPMethod {
@@ -20,7 +19,7 @@ enum DiaryListItemEndpoint: Endpoint {
     }
     
     var path: String {
-        return "items"
+        return "diary"
     }
     
     var parameters: HTTPRequestParameter? {

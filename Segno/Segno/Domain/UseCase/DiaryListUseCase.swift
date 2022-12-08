@@ -22,8 +22,8 @@ final class DiaryListUseCaseImpl: DiaryListUseCase {
     func getDiaryList() -> Single<[DiaryListItem]> {
         return repository.getDiaryListItem()
             .map {
-                $0.data.map { diaryData in
-                    DiaryListItem(id: diaryData.id, title: diaryData.title, thumbnailPath: diaryData.thumbnailPath)
+                $0.diaries.map { diaryData in
+                    DiaryListItem(identifier: diaryData.identifier, title: diaryData.title, thumbnailPath: diaryData.thumbnailPath)
                 }
             }
     }

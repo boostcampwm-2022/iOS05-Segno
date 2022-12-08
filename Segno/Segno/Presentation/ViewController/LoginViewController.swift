@@ -5,159 +5,128 @@
 //  Created by Gordon Choi on 2022/11/09.
 //
 
+import AuthenticationServices
 import UIKit
+
 import RxCocoa
 import RxSwift
 import SnapKit
 
+protocol LoginViewControllerDelegate: AnyObject {
+    func loginDidSucceed()
+    func loginDidFail()
+}
+
 final class LoginViewController: UIViewController {
     
     // MARK: - Property
+    private let viewModel: LoginViewModel
     private let disposeBag = DisposeBag()
     
+    private var session: LoginSession?
+    weak var delegate: LoginViewControllerDelegate?
+    
     private enum Metric {
-        static let googleTitle = "구글 로그인"
-        static let appleTitle = "애플 로그인"
-        
         static let titleText = "Segno"
         static let subTitleText = "다시 이곳의 추억에서부터"
         static let footerText = "D.S."
         
-        static let spacingBetweenButtons: CGFloat = 20
+        static let buttonHeight: CGFloat = 50
+        static let footerBottomOffset: CGFloat = -100
+        static let footerHeight: CGFloat = 50
         static let inset: CGFloat = 20
-     
+        static let subTitleFontSize: CGFloat = 30
+        static let subTitleHeight: CGFloat = 50
+        static let titleFontSize: CGFloat = 80
         static let titleHeight: CGFloat = 100
         static let titleOffset: CGFloat = 200
-        static let subTitleHeight: CGFloat = 50
-        static let buttonHeight: CGFloat = 50
-        static let buttonRadius: CGFloat = 20
     }
     
     // MARK: - View
-    
     private lazy var titleLabel: UILabel = {
         let label = UILabel()
-        
         label.text = Metric.titleText
-        
-        // TODO: Apply color, font
-        label.font = .boldSystemFont(ofSize: 30)
-        label.textColor = .black
-        
+        label.font = .appFont(.shiningStar, size: Metric.titleFontSize)
+        label.textColor = .appColor(.black)
         return label
     }()
     
     private lazy var subTitleLabel: UILabel = {
         let label = UILabel()
-        
         label.text = Metric.subTitleText
-        
-        // TODO: Apply color, font
-        label.font = .systemFont(ofSize: 15)
-        label.textColor = .systemGray
-        
+        label.font = .appFont(.shiningStar, size: Metric.subTitleFontSize)
+        label.textColor = .appColor(.grey2)
         return label
     }()
     
-    private lazy var googleButton: UIButton = {
-        let button = UIButton()
-        
-        button.setTitle(Metric.googleTitle, for: .normal)
-        
-        // TODO: Apply color, font
-        button.setTitleColor(.black, for: .normal)
-        button.backgroundColor = .systemGray5
-        
+    private lazy var appleButton: ASAuthorizationAppleIDButton = {
+        let button = ASAuthorizationAppleIDButton(type: .signIn, style: .black)
         return button
-    }()
-    
-    private lazy var appleButton: UIButton = {
-        let button = UIButton()
-        
-        button.setTitle(Metric.appleTitle, for: .normal)
-        
-        // TODO: Apply color, font
-        button.setTitleColor(.black, for: .normal)
-        button.backgroundColor = .systemGray5
-        
-        return button
-    }()
-    
-    private lazy var buttonStack = {
-        let stackView = UIStackView()
-        
-        stackView.alignment = .center
-        stackView.axis = .vertical
-        stackView.distribution = .equalSpacing
-        stackView.spacing = Metric.inset
-        
-        return stackView
     }()
     
     private lazy var footerLabel: UILabel = {
         let label = UILabel()
-        
-        // TODO: Apply color, font
         label.text = Metric.footerText
         label.textAlignment = .right
-        label.textColor = .systemGray4
-        
+        label.textColor = .appColor(.grey2)
         return label
     }()
     
-    // MARK: - Life Cycle
+    private lazy var buttonStackHolder: UIView = {
+        let view = UIView()
+        
+        view.backgroundColor = .clear
+        view.isUserInteractionEnabled = false
+        return view
+    }()
     
+    // MARK: - initializer
+    init(viewModel: LoginViewModel = LoginViewModel()) {
+        self.viewModel = viewModel
+        
+        super.init(nibName: nil, bundle: nil)
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("Not imported")
+    }
+    
+    // MARK: - Life Cycle
     override func viewDidLoad() {
         super.viewDidLoad()
+        
         setupView()
         setupLayout()
         setupRx()
+        session = LoginSession(presenter: self)
+        bindAppleLoginResult()
+        subscribeLoginResult()
     }
     
     // MARK: - Private
+    private func bindAppleLoginResult() {
+        session?.appleEmail
+            .subscribe(onNext: { email in
+                self.viewModel.signIn(withApple: email)
+            })
+            .disposed(by: disposeBag)
+    }
     
     private func setupRx() {
-        googleButton.rx.tap
+        appleButton.rx.controlEvent(.touchDown)
             .withUnretained(self)
             .bind { _ in
-                // TODO: Bind with Google Login Button Action
-                print("google")
-            }
-            .disposed(by: disposeBag)
-        
-        appleButton.rx.tap
-            .withUnretained(self)
-            .bind { _ in
-                // TODO: Bind with Apple Login Button Action
-                print("apple")
+                self.appleButtonTapped()
             }
             .disposed(by: disposeBag)
     }
     
     private func setupView() {
-        view.backgroundColor = UIColor(red: 0.93, green: 0.93, blue: 0.93, alpha: 1)
-        
-        googleButton.layer.cornerRadius = Metric.buttonRadius
-        googleButton.layer.masksToBounds = true
-        
-        appleButton.layer.cornerRadius = Metric.buttonRadius
-        appleButton.layer.masksToBounds = true
-        
-        googleButton.setBackgroundColor(.systemGray5, for: .normal)
-        googleButton.setBackgroundColor(.systemGray4, for: .selected)
-        googleButton.setBackgroundColor(.systemGray4, for: .disabled)
-        
-        appleButton.setBackgroundColor(.systemGray5, for: .normal)
-        appleButton.setBackgroundColor(.systemGray4, for: .selected)
-        appleButton.setBackgroundColor(.systemGray4, for: .disabled)
+        view.backgroundColor = .appColor(.background)
     }
     
     private func setupLayout() {
-        [googleButton, appleButton].forEach {
-            buttonStack.addArrangedSubview($0)
-        }
-        
-        [titleLabel, subTitleLabel, buttonStack, footerLabel].forEach {
+        [titleLabel, subTitleLabel, appleButton, footerLabel, buttonStackHolder].forEach {
             view.addSubview($0)
             
             $0.snp.makeConstraints { make in
@@ -177,21 +146,46 @@ final class LoginViewController: UIViewController {
         }
         
         footerLabel.snp.makeConstraints { make in
-            make.bottom.equalToSuperview().offset(-100)
+            make.height.equalTo(Metric.footerHeight)
+            make.bottom.equalToSuperview().offset(Metric.footerBottomOffset)
         }
         
-        buttonStack.snp.makeConstraints { make in
-            make.centerY.equalToSuperview()
+        buttonStackHolder.snp.makeConstraints { make in
+            make.top.equalTo(subTitleLabel.snp.bottom)
+            make.bottom.equalTo(footerLabel.snp.top)
         }
         
-        buttonStack.arrangedSubviews.forEach {
-            $0.snp.makeConstraints { make in
-                make.width.equalToSuperview()
-                make.height.equalTo(Metric.buttonHeight)
-            }
+        appleButton.snp.makeConstraints { make in
+            make.centerY.equalTo(buttonStackHolder.snp.centerY)
+            make.height.equalTo(Metric.buttonHeight)
         }
     }
     
-    // MARK: - Public
+    private func subscribeLoginResult() {
+        viewModel.isLoginSucceeded
+            .subscribe(onNext: { [weak self] result in
+                DispatchQueue.main.async {
+                    switch result {
+                    case true:
+                        self?.titleLabel.backgroundColor = .blue // 테스트용 색상
+                        self?.delegate?.loginDidSucceed()
+                    case false:
+                        self?.titleLabel.backgroundColor = .orange // 테스트용 색상
+                        self?.delegate?.loginDidFail()
+                    }
+                }
+            })
+            .disposed(by: disposeBag)
+    }
     
+    // MARK: - Public
+    private func appleButtonTapped() {
+        session?.performAppleLogin()
+    }
+}
+
+extension LoginViewController: ASAuthorizationControllerPresentationContextProviding {
+    func presentationAnchor(for controller: ASAuthorizationController) -> ASPresentationAnchor {
+        return view.window ?? UIWindow()
+    }
 }

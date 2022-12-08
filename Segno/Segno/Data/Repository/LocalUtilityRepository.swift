@@ -6,94 +6,95 @@
 //
 
 import Foundation
-import RxSwift
 
 protocol LocalUtilityRepository {
-    func createToken(key: Any, token: Any) -> Single<Bool>
-    func getToken(key: Any) -> Single<Any>
-    func deleteToken(key: Any) -> Single<Bool>
+    func createToken(token: String) -> Bool
+    func getToken() -> String
+    func updateToken(token: String) -> Bool
+    func deleteToken() -> Bool
+    func setUserDefaults(_ value: Any, forKey defaultsKey: UserDefaultsKey)
+    func getUserDefaultsObject(forKey defaultsKey: UserDefaultsKey) -> Any?
 }
 
 final class LocalUtilityRepositoryImpl: LocalUtilityRepository {
-    func createToken(key: Any, token: Any) -> Single<Bool> {
-        return Single.create { single in
-            let token = (token as AnyObject).data(using: String.Encoding.utf8.rawValue)!
-            let addQuery: [String: Any] = [
-                kSecClass as String: kSecClassGenericPassword,
-                kSecAttrAccount as String: key,
-                kSecValueData as String: token
-            ]
-            
-            let status = SecItemAdd(addQuery as CFDictionary, nil)
-            if status == errSecSuccess {
-                single(.success(true))
-            }
-            else if status == errSecDuplicateItem {
-                single(.failure(KeychainError.duplicatedKey))
-            }
-            else {
-                single(.failure(KeychainError.unhandledError(status: status)))
-            }
-            return Disposables.create()
-        }
-    }
+    private let keyName: String = "userToken"
     
-    func getToken(key: Any) -> Single<Any> {
-        return Single.create { single in
-            let getQuery: [String: Any] = [
-                kSecClass as String: kSecClassGenericPassword,
-                kSecAttrAccount as String: key,
-                kSecReturnAttributes as String: true,
-                kSecReturnData as String: true
-            ]
-            var item: CFTypeRef?
-            let result = SecItemCopyMatching(getQuery as CFDictionary, &item)
-            if result == errSecSuccess {
-                if let existingItem = item as? [String: Any],
-                   let data = existingItem[kSecValueData as String] as? Data,
-                   let token = String(data: data, encoding: .utf8) {
-                    single(.success(token))
-                } else {
-                    single(.failure(KeychainError.unexpectedToken))
-                }
-            } else {
-                single(.failure(KeychainError.unexpectedToken))
-            }
-            return Disposables.create()
-        }
-    }
-    
-    func updateToken(key: Any, token: Any) -> Bool {
-        let prevQuery: [String: Any] = [
-            kSecClass as String: kSecClassGenericPassword,
-            kSecAttrAccount as String: key
-        ]
-        let token = (token as AnyObject).data(using: String.Encoding.utf8.rawValue)!
-        let updateQuery: [String: Any] = [
-            kSecValueData as String: token as Any
+    func createToken(token: String) -> Bool {
+        let addQuery: [CFString: Any] = [
+            kSecClass: kSecClassGenericPassword,
+            kSecAttrAccount: keyName,
+            kSecValueData: (token as AnyObject).data(using: String.Encoding.utf8.rawValue) as Any
         ]
         
-        let status = SecItemUpdate(prevQuery as CFDictionary, updateQuery as CFDictionary)
-        if status == errSecSuccess {
-            return true
-        } else {
-            return false
+        let status = SecItemAdd(addQuery as CFDictionary, nil)
+        if status == errSecSuccess { return true }
+        else if status == errSecDuplicateItem {
+            print(KeychainError.duplicatedKey)
+            return updateToken(token: token)
         }
+        
+        print(KeychainError.unhandledError(status: status))
+        return false
     }
     
-    func deleteToken(key: Any) -> Single<Bool> {
-        return Single.create { single in
-            let query: [String: Any] = [
-                kSecClass as String: kSecClassGenericPassword,
-                kSecAttrAccount as String: key
-            ]
-            let status = SecItemDelete(query as CFDictionary)
-            if status == errSecSuccess {
-                single(.success(true))
-            } else {
-                single(.failure(KeychainError.unhandledError(status: status)))
+    func getToken() -> String {
+        let getQuery: [CFString: Any] = [
+            kSecClass: kSecClassGenericPassword,
+            kSecAttrAccount: keyName,
+            kSecReturnAttributes: true,
+            kSecReturnData: true
+        ]
+        
+        var item: CFTypeRef?
+        let result = SecItemCopyMatching(getQuery as CFDictionary, &item)
+        if result == errSecSuccess {
+            if let existingItem = item as? [String: Any],
+               let data = existingItem[kSecValueData as String] as? Data,
+               let token = String(data: data, encoding: .utf8) {
+                return token
             }
-            return Disposables.create()
+        }
+        
+        print(KeychainError.unexpectedToken)
+        return ""
+    }
+    
+    func updateToken(token: String) -> Bool {
+        let prevQuery: [CFString: Any] = [
+            kSecClass: kSecClassGenericPassword,
+            kSecAttrAccount: keyName
+        ]
+        let updateQuery: [CFString: Any] = [ kSecValueData: (token as AnyObject).data(using: String.Encoding.utf8.rawValue) as Any ]
+        
+        let status = SecItemUpdate(prevQuery as CFDictionary, updateQuery as CFDictionary)
+        if status == errSecSuccess { return true }
+        
+        print(KeychainError.unhandledError(status: status))
+        return false
+    }
+    
+    func deleteToken() -> Bool {
+        let query: [CFString: Any] = [
+            kSecClass: kSecClassGenericPassword,
+            kSecAttrAccount: keyName
+        ]
+        
+        let status = SecItemDelete(query as CFDictionary)
+        if status == errSecSuccess { return true }
+        
+        print(KeychainError.unhandledError(status: status))
+        return false
+    }
+    
+    func setUserDefaults(_ value: Any, forKey defaultsKey: UserDefaultsKey) {
+        UserDefaults.standard.set(value, forKey: defaultsKey.rawValue)
+    }
+    
+    func getUserDefaultsObject(forKey defaultsKey: UserDefaultsKey) -> Any? {
+        if let object = UserDefaults.standard.object(forKey: defaultsKey.rawValue) {
+            return object
+        } else {
+            return nil
         }
     }
 }

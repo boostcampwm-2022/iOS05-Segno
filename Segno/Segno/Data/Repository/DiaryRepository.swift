@@ -6,20 +6,58 @@
 //
 
 import Foundation
+
 import RxSwift
 
 protocol DiaryRepository {
     func getDiaryListItem() -> Single<DiaryListDTO>
+    func getDiary(id: String) -> Single<DiaryDetailDTO>
+    func postDiary(_ newDiary: NewDiaryDetail) -> Single<NewDiaryDetailDTO>
+    func deleteDiary(id: String) -> Single<Bool>
 }
 
 final class DiaryRepositoryImpl: DiaryRepository {
+    private let localUtilityRepository = LocalUtilityRepositoryImpl()
+    
     func getDiaryListItem() -> Single<DiaryListDTO> {
         let endpoint = DiaryListItemEndpoint.item
-        
+
         return NetworkManager.shared.call(endpoint)
             .map {
                 let diaryListItemDTO = try JSONDecoder().decode(DiaryListDTO.self, from: $0)
                 return diaryListItemDTO
             }
+    }
+    
+    func getDiary(id: String) -> Single<DiaryDetailDTO> {
+        let endpoint = DiaryDetailEndpoint.item(id)
+
+        return NetworkManager.shared.call(endpoint).map {
+            return try JSONDecoder().decode(DiaryDetailDTO.self, from: $0)
+        }
+    }
+    
+    func postDiary(_ newDiary: NewDiaryDetail) -> Single<NewDiaryDetailDTO> {
+        let newDiaryDetailEndpoint = NewDiaryPostEndpoint.item(newDiary)
+        print("========= repository -> ", newDiary)
+        
+        let single = NetworkManager.shared.call(newDiaryDetailEndpoint)
+            .map { try JSONDecoder().decode(NewDiaryDetailDTO.self, from: $0) }
+            .asObservable()
+            .asSingle()
+        
+        return single
+    }
+    
+    func deleteDiary(id: String) -> Single<Bool> {
+        let token = localUtilityRepository.getToken()
+        let diaryDeleteEndpoint = DiaryDeleteEndpoint.item(token: token, diaryId: id)
+        
+        let single = NetworkManager.shared.call(diaryDeleteEndpoint)
+            .map { _ in
+                return true
+            }
+        
+        return single
     }
 }

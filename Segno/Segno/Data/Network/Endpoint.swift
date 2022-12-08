@@ -13,13 +13,14 @@ typealias Body = Encodable
 
 // MARK: HTTP 요청 메서드
 enum HTTPMethod: String {
-    case GET, POST, PUT, DELETE
+    case GET, POST, PUT, DELETE, PATCH
 }
 
 // MARK: 요청 파라미터
 enum HTTPRequestParameter {
     case queries(Queries)
     case body(Body)
+    case data(Data)
 }
 
 // MARK: Endpoint 본체
@@ -35,7 +36,12 @@ protocol Endpoint {
 
 extension Endpoint {
     var headers: Headers {
-        return ["Content-Type": "application/json"]
+        switch self.parameters {
+        case .data(_):
+            return ["Content-Type": "multipart/form-data; boundary=SEGNO"]
+        default:
+            return ["Content-Type": "application/json"]
+        }
     }
     
     func toURLRequest() throws -> URLRequest {
