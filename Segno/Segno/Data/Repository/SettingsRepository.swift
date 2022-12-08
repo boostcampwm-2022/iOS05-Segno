@@ -12,9 +12,10 @@ protocol SettingsRepository {
 }
 
 final class SettingsRepositoryImpl: SettingsRepository {
+    private let localUtilityRepository = LocalUtilityRepositoryImpl()
+    
     func changeNickname(to nickname: String) -> Single<Bool> {
-        // TODO: Keychain으로부터 토큰 가져오기
-        let token = "/43JoWf24Y7SS8yJj3oIPqIFGZRD3P7u9kUZVwkMwug="
+        let token = localUtilityRepository.getToken()
         let endpoint = ChangeNicknameEndpoint.item(token: token, nickname: nickname)
         return NetworkManager.shared.call(endpoint)
             .map { _ in

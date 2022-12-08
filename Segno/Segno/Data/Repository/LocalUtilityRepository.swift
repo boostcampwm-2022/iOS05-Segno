@@ -8,9 +8,9 @@
 import Foundation
 
 protocol LocalUtilityRepository {
-    func createToken(token: Any) -> Bool
-    func getToken() -> Any?
-    func updateToken(token: Any) -> Bool
+    func createToken(token: String) -> Bool
+    func getToken() -> String
+    func updateToken(token: String) -> Bool
     func deleteToken() -> Bool
     func setUserDefaults(_ value: Any, forKey defaultsKey: UserDefaultsKey)
     func getUserDefaultsObject(forKey defaultsKey: UserDefaultsKey) -> Any?
@@ -19,7 +19,7 @@ protocol LocalUtilityRepository {
 final class LocalUtilityRepositoryImpl: LocalUtilityRepository {
     private let keyName: String = "userToken"
     
-    func createToken(token: Any) -> Bool {
+    func createToken(token: String) -> Bool {
         let addQuery: [CFString: Any] = [
             kSecClass: kSecClassGenericPassword,
             kSecAttrAccount: keyName,
@@ -29,7 +29,6 @@ final class LocalUtilityRepositoryImpl: LocalUtilityRepository {
         let status = SecItemAdd(addQuery as CFDictionary, nil)
         if status == errSecSuccess { return true }
         else if status == errSecDuplicateItem {
-            // MARK: 기존에는 Error만 return 해주었지만, Error 출력 후 자체적으로 update까지 진행
             print(KeychainError.duplicatedKey)
             return updateToken(token: token)
         }
@@ -38,7 +37,7 @@ final class LocalUtilityRepositoryImpl: LocalUtilityRepository {
         return false
     }
     
-    func getToken() -> Any? {
+    func getToken() -> String {
         let getQuery: [CFString: Any] = [
             kSecClass: kSecClassGenericPassword,
             kSecAttrAccount: keyName,
@@ -57,10 +56,10 @@ final class LocalUtilityRepositoryImpl: LocalUtilityRepository {
         }
         
         print(KeychainError.unexpectedToken)
-        return nil
+        return ""
     }
     
-    func updateToken(token: Any) -> Bool {
+    func updateToken(token: String) -> Bool {
         let prevQuery: [CFString: Any] = [
             kSecClass: kSecClassGenericPassword,
             kSecAttrAccount: keyName

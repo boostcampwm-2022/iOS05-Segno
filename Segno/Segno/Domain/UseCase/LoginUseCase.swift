@@ -12,11 +12,6 @@ protocol LoginUseCase {
 }
 
 final class LoginUseCaseImpl: LoginUseCase {
-
-    private enum Metric {
-        static let serverToken = "serverToken"
-    }
-
     let repository: LoginRepository
     let localUtilityRepository: LocalUtilityRepository
     private let disposeBag = DisposeBag()
@@ -33,6 +28,10 @@ final class LoginUseCaseImpl: LoginUseCase {
                 guard let tokenString = $0.token else {
                     return false
                 }
+                
+                _ = self.localUtilityRepository.createToken(token: tokenString)
+                // TODO: 추후 아래 updateToken 삭제하기!
+                _ = self.localUtilityRepository.updateToken(token: "A1lmMjb2pgNWg6ZzAaPYgMcqRv/8BOyO4U/ui6i/Ic4=")
                 return true
             }
     }

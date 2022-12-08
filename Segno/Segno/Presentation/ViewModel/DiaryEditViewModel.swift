@@ -22,6 +22,7 @@ final class DiaryEditViewModel {
     let searchMusicUseCase: SearchMusicUseCase
     let locationUseCase: LocationUseCase
     let imageUseCase: ImageUseCase
+    let localUtilityRepository: LocalUtilityRepository
     
     var isSearching = BehaviorSubject(value: false)
     var isReceivingLocation = BehaviorSubject(value: false)
@@ -31,12 +32,14 @@ final class DiaryEditViewModel {
          diaryDetailUseCase: DiaryDetailUseCase = DiaryDetailUseCaseImpl(),
          searchMusicUseCase: SearchMusicUseCase = SearchMusicUseCaseImpl(),
          locationUseCase: LocationUseCase = LocationUseCaseImpl(),
-         imageUseCase: ImageUseCase = ImageUseCaseImpl()) {
+         imageUseCase: ImageUseCase = ImageUseCaseImpl(),
+         localUtilityRepository: LocalUtilityRepository = LocalUtilityRepositoryImpl()) {
         self.diaryEditUseCase = diaryEditUseCase
         self.diaryDetailUseCase = diaryDetailUseCase
         self.searchMusicUseCase = searchMusicUseCase
         self.locationUseCase = locationUseCase
         self.imageUseCase = imageUseCase
+        self.localUtilityRepository = localUtilityRepository
         subscribeSearchingStatus()
         subscribeSearchResult()
         subscribeLocation()
@@ -119,7 +122,7 @@ final class DiaryEditViewModel {
                                       bodyText: body,
                                       musicInfo: musicInfo,
                                       location: location,
-                                      token: "A1lmMjb2pgNWg6ZzAaPYgMcqRv/8BOyO4U/ui6i/Ic4=")
+                                      token: localUtilityRepository.getToken())
         }
         // music data가 없는 경우
         else {
@@ -129,7 +132,7 @@ final class DiaryEditViewModel {
                                       bodyText: body,
                                       musicInfo: nil,
                                       location: location,
-                                      token: "A1lmMjb2pgNWg6ZzAaPYgMcqRv/8BOyO4U/ui6i/Ic4=")
+                                      token: localUtilityRepository.getToken())
         }
         
         diaryEditUseCase.postDiary(newDiary)
