@@ -218,6 +218,7 @@ final class DiaryEditViewController: UIViewController {
         subscribeSearchingStatus()
         subscribeSearchResult()
         subscribeLocationResult()
+        subscribeEditSucceed()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -456,6 +457,20 @@ extension DiaryEditViewController {
         viewModel.toggleSearchMusic()
     }
     
+    private func subscribeEditSucceed() {
+        viewModel.isSucceed
+            .observe(on: MainScheduler.instance)
+            .subscribe(onNext: { [weak self] result in
+                if result {
+                    self?.navigationController?.popViewController(animated: true)
+                } else {
+                    // TODO: 알럿
+                    self?.navigationController?.popViewController(animated: true)
+                }
+            })
+            .disposed(by: disposeBag)
+    }
+    
     private func locationButtonTapped() {
         viewModel.toggleLocation()
     }
@@ -474,6 +489,7 @@ extension DiaryEditViewController {
             bodyText = nil
         }
         viewModel.saveDiary(title: title, body: bodyText, tags: tags, imageData: imageData)
+
     }
 }
 

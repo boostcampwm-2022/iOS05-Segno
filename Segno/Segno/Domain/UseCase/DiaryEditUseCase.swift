@@ -9,7 +9,7 @@ import Foundation
 import RxSwift
 
 protocol DiaryEditUseCase {
-    func postDiary(_ newDiary: NewDiaryDetail) -> Single<NewDiaryDetail>
+    func postDiary(_ newDiary: NewDiaryDetail) -> Completable 
 }
 
 final class DiaryEditUseCaseImpl: DiaryEditUseCase {
@@ -23,17 +23,8 @@ final class DiaryEditUseCaseImpl: DiaryEditUseCase {
         self.imageRepository = imageRepository
     }
     
-    func postDiary(_ newDiary: NewDiaryDetail) -> Single<NewDiaryDetail> {
-        return diaryRepository.postDiary(newDiary).map { dto in
-            NewDiaryDetail(
-                title: dto.title,
-                tags: dto.tags,
-                imagePath: dto.imagePath,
-                bodyText: dto.bodyText,
-                musicInfo: dto.musicInfo,
-                location: dto.location,
-                token: "A1lmMjb2pgNWg6ZzAaPYgMcqRv/8BOyO4U/ui6i/Ic4="
-            )
-        }
+    func postDiary(_ newDiary: NewDiaryDetail) -> Completable {
+        return diaryRepository.postDiary(newDiary)
+            .asCompletable()
     }
 }
