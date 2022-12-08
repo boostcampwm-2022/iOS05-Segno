@@ -206,9 +206,7 @@ final class DiaryDetailViewController: UIViewController {
         viewModel.imagePathObservable
             .observe(on: MainScheduler.instance)
             .subscribe(onNext: { [weak self] imagePath in
-                let imageURL = URL(string: BaseURL.urlString)?
-                    .appendingPathComponent("image")
-                    .appendingPathComponent(imagePath)
+                let imageURL = BaseURL.getImageURL(imagePath: imagePath)
                 self?.imageView.kf.setImage(with: imageURL)
             })
             .disposed(by: disposeBag)
