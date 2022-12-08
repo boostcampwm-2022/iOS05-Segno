@@ -469,8 +469,10 @@ extension DiaryEditViewController {
             dateFormatter.locale = Locale(identifier: "ko_KR")
             title = dateFormatter.string(from: Date())
         }
-        guard let bodyText = bodyTextView.text else { return }
-        
+        var bodyText: String?
+        if bodyTextView.text == Metric.bodyPlaceholder || bodyTextView.text.isEmpty {
+            bodyText = nil
+        }
         viewModel.saveDiary(title: title, body: bodyText, tags: tags, imageData: imageData)
     }
 }

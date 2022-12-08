@@ -84,6 +84,9 @@
 		9825F41D29377ACF005F2163 /* SettingsRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9825F41C29377ACF005F2163 /* SettingsRepository.swift */; };
 		982A2A472924AE74006F6ACD /* UserDefaultsKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = 982A2A462924AE74006F6ACD /* UserDefaultsKey.swift */; };
 		982A3699292C905300FDC6CF /* DiaryDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 982A3698292C905300FDC6CF /* DiaryDetailViewController.swift */; };
+		982A4FBF2941F1CA005AEB1D /* NewDiaryDetail.swift in Sources */ = {isa = PBXBuildFile; fileRef = 982A4FBE2941F1CA005AEB1D /* NewDiaryDetail.swift */; };
+		982A4FC12941F481005AEB1D /* NewDiaryPostEndpoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 982A4FC02941F481005AEB1D /* NewDiaryPostEndpoint.swift */; };
+		982A4FC32941F580005AEB1D /* NewDiaryDetailDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 982A4FC22941F580005AEB1D /* NewDiaryDetailDTO.swift */; };
 		982B3B7F292E68FB0077A44B /* DiaryDetailViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 982B3B7E292E68FB0077A44B /* DiaryDetailViewModel.swift */; };
 		9838443E29387C0A00BCCEE2 /* ChangeNicknameEndpoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9838443D29387C0A00BCCEE2 /* ChangeNicknameEndpoint.swift */; };
 		983AE9D22934F041006547BD /* NicknameCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 983AE9D12934F041006547BD /* NicknameCell.swift */; };
@@ -186,6 +189,9 @@
 		9825F41C29377ACF005F2163 /* SettingsRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsRepository.swift; sourceTree = "<group>"; };
 		982A2A462924AE74006F6ACD /* UserDefaultsKey.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDefaultsKey.swift; sourceTree = "<group>"; };
 		982A3698292C905300FDC6CF /* DiaryDetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DiaryDetailViewController.swift; sourceTree = "<group>"; };
+		982A4FBE2941F1CA005AEB1D /* NewDiaryDetail.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewDiaryDetail.swift; sourceTree = "<group>"; };
+		982A4FC02941F481005AEB1D /* NewDiaryPostEndpoint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewDiaryPostEndpoint.swift; sourceTree = "<group>"; };
+		982A4FC22941F580005AEB1D /* NewDiaryDetailDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewDiaryDetailDTO.swift; sourceTree = "<group>"; };
 		982B3B7E292E68FB0077A44B /* DiaryDetailViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DiaryDetailViewModel.swift; sourceTree = "<group>"; };
 		9838443D29387C0A00BCCEE2 /* ChangeNicknameEndpoint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChangeNicknameEndpoint.swift; sourceTree = "<group>"; };
 		983AE9D12934F041006547BD /* NicknameCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NicknameCell.swift; sourceTree = "<group>"; };
@@ -302,6 +308,7 @@
 			children = (
 				4FEBFAAA291CF30E00E78139 /* DiaryListItem.swift */,
 				4FEBFAAC291CF62E00E78139 /* DiaryDetail.swift */,
+				982A4FBE2941F1CA005AEB1D /* NewDiaryDetail.swift */,
 				4FEBFAAE291CF9F300E78139 /* MusicInfo.swift */,
 				4F6F74B0292C9BF3007E7AC1 /* UserInfo.swift */,
 				98FDF8A0292F56580083FA05 /* Location.swift */,
@@ -466,6 +473,7 @@
 				4FA324252923600C00DB04D5 /* DiaryListDTO.swift */,
 				4F4E0D73292521D0005ABA8F /* UserInfoDTO.swift */,
 				7940FB2E292E063100276EFC /* DiaryDetailDTO.swift */,
+				982A4FC22941F580005AEB1D /* NewDiaryDetailDTO.swift */,
 				4F4E0D7A29252526005ABA8F /* TokenDTO.swift */,
 				66A8CF6A2937947A00C17F84 /* UserDetailDTO.swift */,
 				791529DB29332CF2005A8DDB /* ImageDTO.swift */,
@@ -480,6 +488,7 @@
 				4FA3242A2923646F00DB04D5 /* DiaryListItemEndpoint.swift */,
 				7940FB30292E065100276EFC /* DiaryDetailEndpoint.swift */,
 				791529DF293344E8005A8DDB /* DiaryPostEndpoint.swift */,
+				982A4FC02941F481005AEB1D /* NewDiaryPostEndpoint.swift */,
 				79767E63293E2A1200E489DD /* DiaryDeleteEndpoint.swift */,
 				4F4E0D7529252236005ABA8F /* LoginEndpoint.swift */,
 				66A8CF6C29379A9900C17F84 /* UserDetailEndpoint.swift */,
@@ -633,6 +642,7 @@
 				9825F41D29377ACF005F2163 /* SettingsRepository.swift in Sources */,
 				66F0D7EE2925FF8B0074872E /* DiaryCell.swift in Sources */,
 				79767E64293E2A1200E489DD /* DiaryDeleteEndpoint.swift in Sources */,
+				982A4FC32941F580005AEB1D /* NewDiaryDetailDTO.swift in Sources */,
 				4F307A482938832900FA36A0 /* MusicSession.swift in Sources */,
 				4F9A00202922337F007D9057 /* LoginViewController.swift in Sources */,
 				982A2A472924AE74006F6ACD /* UserDefaultsKey.swift in Sources */,
@@ -648,6 +658,7 @@
 				98003E0E293F20F6009FBC35 /* DarkModeManager.swift in Sources */,
 				66A8CF692937945300C17F84 /* UserDetailUseCase.swift in Sources */,
 				988414AE2922235B007C9132 /* LocalUtilityRepository.swift in Sources */,
+				982A4FC12941F481005AEB1D /* NewDiaryPostEndpoint.swift in Sources */,
 				66A8CF612935F44100C17F84 /* MyPageViewModel.swift in Sources */,
 				98138D4D2940F53F00D2CEDF /* LocationUseCase.swift in Sources */,
 				988414D929235345007C9132 /* DiaryCollectionViewModel.swift in Sources */,
@@ -707,6 +718,7 @@
 				4F4E0D7629252236005ABA8F /* LoginEndpoint.swift in Sources */,
 				791529D82932F364005A8DDB /* DiaryEditUseCase.swift in Sources */,
 				4FA324262923600C00DB04D5 /* DiaryListDTO.swift in Sources */,
+				982A4FBF2941F1CA005AEB1D /* NewDiaryDetail.swift in Sources */,
 				666E6F87291CF4B400CECD4B /* DiaryCoordinator.swift in Sources */,
 				4F31777F291BE4710019BDFC /* SceneDelegate.swift in Sources */,
 				4F307A4629387C1100FA36A0 /* ShazamSession.swift in Sources */,

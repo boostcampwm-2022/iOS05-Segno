@@ -12,7 +12,7 @@ import RxSwift
 protocol DiaryRepository {
     func getDiaryListItem() -> Single<DiaryListDTO>
     func getDiary(id: String) -> Single<DiaryDetailDTO>
-    func postDiary(_ diary: DiaryDetail, image: Data) -> Single<DiaryDetailDTO>
+    func postDiary(_ newDiary: NewDiaryDetail) -> Single<NewDiaryDetailDTO>
     func deleteDiary(id: String) -> Single<Bool>
 }
 
@@ -25,7 +25,7 @@ final class DiaryRepositoryImpl: DiaryRepository {
                 let diaryListItemDTO = try JSONDecoder().decode(DiaryListDTO.self, from: $0)
                 return diaryListItemDTO
             }
-//
+
 //        // TODO: 추후에 NetworkManager로 변경
 //        return Single.create { observer -> Disposable in
 //            let dto = DiaryListDTO.example
@@ -51,31 +51,12 @@ final class DiaryRepositoryImpl: DiaryRepository {
 //        }
     }
     
-    func postDiary(_ diary: DiaryDetail, image: Data) -> Single<DiaryDetailDTO> {
-        // Dummy endpoint
+    func postDiary(_ newDiary: NewDiaryDetail) -> Single<NewDiaryDetailDTO> {
+        let newDiaryDetailEndpoint = NewDiaryPostEndpoint.item(newDiary)
+        print("========= repository -> ", newDiary)
         
-        let imageEndpoint = ImageEndpoint.item(image)
-
-        let single = NetworkManager.shared.call(imageEndpoint)
-            .compactMap {
-                // image 전송 후 이름 받아오기
-                let imageDTO = try JSONDecoder().decode(ImageDTO.self, from: $0)
-                return imageDTO.filename
-            }.map { imagePath in
-                // diary에 imagePath넣어 전달
-                return DiaryDetail(diary, imagePath: imagePath)
-            }.flatMap { diaryDetail in
-                // diary를 다시 서버에 전달
-                // TODO: - token 넣어야됩니당
-                let testDiaryDetail = DiaryDetail(diaryDetail, token: "0KjV78s0YPKbrlVP3QeAwUJcjohs2h2ysdWDLWg")
-                                
-                let diaryDetailEndpoint = DiaryPostEndpoint.item(testDiaryDetail)
-                
-                return NetworkManager.shared.call(diaryDetailEndpoint)
-                    .map { try JSONDecoder().decode(DiaryDetailDTO.self, from: $0) }
-                    .asObservable()
-                    .asMaybe()
-            }
+        let single = NetworkManager.shared.call(newDiaryDetailEndpoint)
+            .map { try JSONDecoder().decode(NewDiaryDetailDTO.self, from: $0) }
             .asObservable()
             .asSingle()
         
