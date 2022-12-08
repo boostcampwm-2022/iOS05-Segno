@@ -92,14 +92,6 @@ final class DiaryEditViewModel {
             .disposed(by: disposeBag)
     }
     
-    func startSearchingMusic() {
-        searchMusicUseCase.startSearching()
-    }
-    
-    func stopSearchingMusic() {
-        searchMusicUseCase.stopSearching()
-    }
-    
     func toggleLocation() {
         guard let value = try? isReceivingLocation.value() else { return }
         isReceivingLocation.onNext(!value)
