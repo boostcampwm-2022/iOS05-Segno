@@ -113,7 +113,7 @@ final class MyPageViewController: UIViewController {
                 numberFormatter.numberStyle = .decimal
                 
                 let price = Double(writtenDiary)
-                let result = numberFormatter.string(from: NSNumber(value:price))! + "개"
+                let result = numberFormatter.string(from: NSNumber(value:price)) ?? 0 + "개"
                 
                 _ = Observable<[MyPageCellModel]>.just([
                     .writtenDiary(title: "작성한 일기 수", subtitle: result),
