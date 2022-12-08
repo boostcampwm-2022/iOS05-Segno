@@ -5,6 +5,8 @@
 //  Created by 이예준 on 2022/11/30.
 //
 
+import Foundation
+
 import RxSwift
 
 protocol MyPageRepository {
@@ -13,18 +15,14 @@ protocol MyPageRepository {
 
 final class MyPageRepositoryImpl: MyPageRepository {
     func getUserDetail() -> Single<UserDetailDTO> {
-//        let endpoint = UserDetailEndpoint.item(id)
-//
-//        return NetworkManager.shared.call(endpoint)
-//            .map {
-//                try JSONDecoder().decode(UserDetailDTO.self, from: $0)
-//            }
-        
-        // TODO: 추후에 NetworkManager로 변경
-        return Single.create { observer -> Disposable in
-            observer(.success(UserDetailDTO.example))
+        // TODO: Keychain으로부터 토큰 가져오기
+        let token = "A1lmMjb2pgNWg6ZzAaPYgMcqRv/8BOyO4U/ui6i/Ic4="
+        let endpoint = UserDetailEndpoint.item(token)
 
-            return Disposables.create()
-        }
+        return NetworkManager.shared.call(endpoint)
+            .map {
+                let userDetailDTO = try JSONDecoder().decode(UserDetailDTO.self, from: $0)
+                return userDetailDTO
+            }
     }
 }

@@ -6,7 +6,8 @@
 //
 
 struct UserDetailItem: Hashable {
-    let identifier: String
     let nickname: String
-    let writtenDiary: String
+    let email: String
+    let oauthType: String
+    let diaryCount: Int
 }

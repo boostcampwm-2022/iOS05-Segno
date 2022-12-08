@@ -21,7 +21,7 @@ final class UserDetailUseCaseImpl: UserDetailUseCase {
     
     func getUserDetail() -> Single<UserDetailItem> {
         return repository.getUserDetail().map {
-            UserDetailItem(identifier: $0.identifier, nickname: $0.nickname, writtenDiary: $0.writtenDiary)
+            UserDetailItem(nickname: $0.nickname, email: $0.email, oauthType: $0.oauthType, diaryCount: $0.diaryCount)
         }
     }
 }
