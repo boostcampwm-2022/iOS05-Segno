@@ -11,7 +11,7 @@ final class MyPageViewModel {
     let useCase: UserDetailUseCase
     var userDetailItem = PublishSubject<UserDetailItem>()
     lazy var nicknameObservable = userDetailItem.map { $0.nickname }
-    lazy var writtenDiaryObservable = userDetailItem.map { $0.writtenDiary }
+    lazy var writtenDiaryObservable = userDetailItem.map { $0.diaryCount }
     
     private let disposeBag = DisposeBag()
     
