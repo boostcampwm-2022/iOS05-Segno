@@ -49,7 +49,7 @@ final class DiaryRepositoryImpl: DiaryRepository {
         return single
     }
     
-    func deleteDiary(id: String) -> RxSwift.Single<Bool> {
+    func deleteDiary(id: String) -> Single<Bool> {
         let token = localUtilityRepository.getToken()
         let diaryDeleteEndpoint = DiaryDeleteEndpoint.item(token: token, diaryId: id)
         
