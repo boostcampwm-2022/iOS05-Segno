@@ -7,6 +7,8 @@
 
 import UIKit
 
+import Kingfisher
+
 final class DiaryCell: UICollectionViewCell {
     private enum Metric {
         static let labelFontSize: CGFloat = 20
@@ -20,6 +22,7 @@ final class DiaryCell: UICollectionViewCell {
     
     private lazy var titleLabel: UILabel = {
         let label = UILabel()
+        label.adjustsFontSizeToFitWidth = true
         label.font = .appFont(.shiningStar, size: Metric.labelFontSize)
         label.textAlignment = .center
         return label
@@ -72,5 +75,7 @@ final class DiaryCell: UICollectionViewCell {
 //            posterImageView.load(from: path)
 //        }
         titleLabel.text = model.title
+        let imageURL = BaseURL.getImageURL(imagePath: model.thumbnailPath)
+        thumbnailImageView.kf.setImage(with: imageURL)
     }
 }

@@ -34,6 +34,7 @@ final class DiaryDetailViewModel {
         self.getDetailUseCase = getDetailUseCase
         self.playMusicUseCase = playMusicUseCase
         
+        print(itemIdentifier)
         setupMusicPlayer()
     }
     
