@@ -20,7 +20,6 @@ final class LoginRepositoryImpl: LoginRepository {
         return NetworkManager.shared.call(endpoint)
             .map {
                 let tokenDTO = try JSONDecoder().decode(TokenDTO.self, from: $0)
-                print(tokenDTO)
                 return tokenDTO
             }
     }

@@ -7,6 +7,8 @@
 
 import Foundation
 
-enum LoginError: Error {
+enum LoginError: Error, LocalizedError {
     case userDataNotFound
+    case failedToDecodeUserInfo
+    case failedToCompleteLogin
 }

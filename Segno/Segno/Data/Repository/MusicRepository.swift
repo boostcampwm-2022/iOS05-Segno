@@ -8,13 +8,12 @@
 import RxSwift
 
 protocol MusicRepository {
-    var shazamSearchResult: PublishSubject<ShazamSearchResult> { get set }
-    
     func startSearchingMusic()
     func stopSearchingMusic()
     func setupMusic(_ song: MusicInfo?)
     func toggleMusicPlayer()
     func stopPlayingMusic()
+    func subscribeSearchresult() -> Observable<ShazamSearchResult>
 }
 
 final class MusicRepositoryImpl: MusicRepository {
@@ -22,14 +21,10 @@ final class MusicRepositoryImpl: MusicRepository {
     private let musicSession: MusicSession
     private let disposeBag = DisposeBag()
     
-    var shazamSearchResult = PublishSubject<ShazamSearchResult>()
-    
     init(shazamSession: ShazamSession = ShazamSession(),
          musicSession: MusicSession = MusicSession()) {
         self.shazamSession = shazamSession
         self.musicSession = musicSession
-        
-        subscribeSearchresult()
     }
     
     func setupMusic(_ song: MusicInfo?) {
@@ -51,14 +46,8 @@ final class MusicRepositoryImpl: MusicRepository {
     func stopPlayingMusic() {
         musicSession.stopMusic()
     }
-}
-
-extension MusicRepositoryImpl {
-    private func subscribeSearchresult() {
-        shazamSession.result
-            .subscribe(onNext: {
-                self.shazamSearchResult.onNext($0)
-            })
-            .disposed(by: disposeBag)
+    
+    func subscribeSearchresult() -> Observable<ShazamSearchResult> {
+        return shazamSession.resultObservable
     }
 }

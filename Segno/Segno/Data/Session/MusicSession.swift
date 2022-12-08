@@ -15,6 +15,10 @@ final class MusicSession {
         return playerState.playbackStatus == .playing
     }
     
+    init() {
+        playerState.repeatMode = .one
+    }
+    
     func fetchMusic(term: MusicInfo?) {
         guard let term else { return }
         
@@ -28,18 +32,16 @@ final class MusicSession {
                     if let item = response.items.first {
                         player.queue = [item]
                     }
-                } catch (let error) {
-                    // TODO: 에러 처리
-                    print(error.localizedDescription)
+                } catch {
+                    debugPrint(MusicError.failedToFetch)
                 }
             default:
-                // TODO: 에러 처리
-                debugPrint("no")
+                debugPrint(MusicError.libraryAccessDenied)
             }
         }
     }
     
-    // 음악을 재생하는 함수
+    // 음악 재생, 일시정지, 정지에 관여하는 메서드
     func togglePlayer() {
         if !isPlaying {
             playMusic()
@@ -52,9 +54,8 @@ final class MusicSession {
         Task {
             do {
                 try await player.play()
-            } catch let error {
-                // TODO: 에러 처리
-                print(error.localizedDescription)
+            } catch {
+                debugPrint(MusicError.failedToPlay)
             }
         }
     }

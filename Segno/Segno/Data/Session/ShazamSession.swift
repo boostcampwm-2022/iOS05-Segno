@@ -13,8 +13,12 @@ import RxSwift
 typealias ShazamSearchResult = Result<ShazamSongDTO, ShazamError>
 
 final class ShazamSession: NSObject {
-    var result = PublishSubject<ShazamSearchResult>()
+    private var result = PublishSubject<ShazamSearchResult>()
     private let disposeBag = DisposeBag()
+    
+    var resultObservable: Observable<ShazamSearchResult> {
+        result.asObservable()
+    }
     
     private lazy var audioSession: AVAudioSession = .sharedInstance()
     private lazy var session: SHSession = .init()

@@ -36,8 +36,7 @@ extension LoginSession: ASAuthorizationControllerDelegate {
         guard let auth = authorization.credential as? ASAuthorizationAppleIDCredential,
               let data = auth.identityToken,
               let email = parseEmailFromJWT(data) else {
-            // TODO: 중간에 데이터를 가져오는 과정 하나라도 실패했을 때 에러 처리
-            debugPrint("데이터를 변환하는 데 실패")
+            debugPrint(LoginError.failedToDecodeUserInfo.localizedDescription)
             return
         }
         
@@ -45,8 +44,7 @@ extension LoginSession: ASAuthorizationControllerDelegate {
     }
     
     func authorizationController(controller: ASAuthorizationController, didCompleteWithError error: Error) {
-        // TODO: 아예 인증이 안 됐을 때 에러 처리
-        debugPrint("인증 실패")
+        debugPrint(LoginError.failedToCompleteLogin.localizedDescription)
     }
 }
 
@@ -61,11 +59,9 @@ extension LoginSession {
         do {
             let payload = try decode(jwtToken: jwt)
             email = payload["email"] as? String
-        } catch(let err) {
-            print(err)
+        } catch {
             return nil
         }
-        print(email)
         
         return email
     }

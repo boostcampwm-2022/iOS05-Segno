@@ -58,8 +58,16 @@ final class DiaryEditViewModel {
             .disposed(by: disposeBag)
     }
     
-    private func subscribeSearchResult() {
-        searchMusicUseCase.musicInfoResult
+    func startSearchingMusic() {
+        searchMusicUseCase.startSearching()
+    }
+    
+    func stopSearchingMusic() {
+        searchMusicUseCase.stopSearching()
+    }
+    
+    func subscribeSearchResult() {
+        searchMusicUseCase.subscribeShazamResult()
             .subscribe(onNext: {
                 self.toggleSearchMusic()
                 self.musicInfo.onNext($0)

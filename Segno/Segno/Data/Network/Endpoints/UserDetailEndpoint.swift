@@ -8,25 +8,24 @@
 import Foundation
 
 enum UserDetailEndpoint: Endpoint {
-    case item
+    case item(String)
     
     var baseURL: URL? {
         return URL(string: BaseURL.urlString)
     }
     
     var httpMethod: HTTPMethod {
-        return .GET
+        return .POST
     }
     
     var path: String {
-        // TODO: 서버에 맞춰서 path 조정
-        return ""
+        return "user"
     }
     
     var parameters: HTTPRequestParameter? {
         switch self {
-        case .item:
-            return HTTPRequestParameter.queries([:]) // TODO: queries로 무언가 들어가야함
+        case .item(let token):
+            return HTTPRequestParameter.body(["token": token])
         }
     }
 }

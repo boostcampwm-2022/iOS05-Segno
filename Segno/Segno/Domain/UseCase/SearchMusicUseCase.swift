@@ -10,22 +10,18 @@ import RxSwift
 typealias MusicInfoResult = Result<MusicInfo, Error>
 
 protocol SearchMusicUseCase {
-    var musicInfoResult: PublishSubject<MusicInfoResult> { get set }
-    
     func startSearching()
     func stopSearching()
+    func subscribeShazamResult() -> Observable<MusicInfoResult>
 }
 
 final class SearchMusicUseCaseImpl: SearchMusicUseCase {
     private let disposeBag = DisposeBag()
     
     let musicRepository: MusicRepository
-    var musicInfoResult = PublishSubject<MusicInfoResult>()
     
     init(musicRepository: MusicRepository = MusicRepositoryImpl()) {
         self.musicRepository = musicRepository
-        
-        subscribeShazamResult()
     }
     
     func startSearching() {
@@ -35,20 +31,17 @@ final class SearchMusicUseCaseImpl: SearchMusicUseCase {
     func stopSearching() {
         musicRepository.stopSearchingMusic()
     }
-}
-
-extension SearchMusicUseCaseImpl {
-    private func subscribeShazamResult() {
-        musicRepository.shazamSearchResult
-            .subscribe(onNext: {
+    
+    func subscribeShazamResult() -> Observable<MusicInfoResult> {
+        musicRepository.subscribeSearchresult()
+            .map {
                 switch $0 {
                 case .success(let shazamSongDTO):
                     let musicInfo = MusicInfo(shazamSong: shazamSongDTO)
-                    self.musicInfoResult.onNext(.success(musicInfo))
+                    return .success(musicInfo)
                 case .failure(let error):
-                    self.musicInfoResult.onNext(.failure(error))
+                    return .failure(error)
                 }
-            })
-            .disposed(by: disposeBag)
+            }
     }
 }

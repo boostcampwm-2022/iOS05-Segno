@@ -10,11 +10,11 @@ import UIKit
 final class DiaryCell: UICollectionViewCell {
     private enum Metric {
         static let labelFontSize: CGFloat = 20
+        static let cornerRadius: CGFloat = 20
     }
     
     private lazy var thumbnailImageView: UIImageView = {
         let imageView = UIImageView()
-        imageView.layer.borderWidth = 0.5 // MARK: 추후 삭제
         return imageView
     }()
     
@@ -22,7 +22,6 @@ final class DiaryCell: UICollectionViewCell {
         let label = UILabel()
         label.font = .appFont(.shiningStar, size: Metric.labelFontSize)
         label.textAlignment = .center
-        label.layer.borderWidth = 0.5 // MARK: 추후 삭제
         return label
     }()
     
@@ -38,9 +37,12 @@ final class DiaryCell: UICollectionViewCell {
     }
     
     private func setupView() {
-        contentView.backgroundColor = .appColor(.color3)
+        contentView.backgroundColor = .appColor(.color2)
+        contentView.clipsToBounds = true
+        contentView.layer.cornerRadius = Metric.cornerRadius
         
-        thumbnailImageView.image = UIImage(systemName: "popcorn.fill")
+        thumbnailImageView.image = UIImage(systemName: "photo.on.rectangle")
+        thumbnailImageView.tintColor = .appColor(.color4)
         titleLabel.text = "Title"
     }
     
