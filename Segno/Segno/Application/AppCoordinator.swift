@@ -8,6 +8,7 @@
 import UIKit
 
 final class AppCoordinator: Coordinator {
+    let localUtilityRepository = LocalUtilityRepositoryImpl()
     var navigationController: UINavigationController
     var childCoordinators: [Coordinator] = []
     
@@ -17,10 +18,12 @@ final class AppCoordinator: Coordinator {
     }
     
     func start() {
-        // TODO: login이 안되어있으면 LoginCoordinator 실행
-//        startLoginCoordinator()
-        // TODO: login이 되어있으면 TabBarCoordinator 실행
-        startTabBarCoordinator()
+        let token = localUtilityRepository.getToken()
+        if token == "" {
+            startLoginCoordinator()
+        } else {
+            startTabBarCoordinator()
+        }
     }
     
     func startLoginCoordinator() {
