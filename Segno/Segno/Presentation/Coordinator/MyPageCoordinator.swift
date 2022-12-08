@@ -17,7 +17,7 @@ final class MyPageCoordinator: Coordinator {
     
     func start() {
         let vc = MyPageViewController()
-        vc.delegate = self
+        vc.mypageDelegate = self
         self.navigationController.pushViewController(vc, animated: true)
     }
 }

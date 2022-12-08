@@ -17,6 +17,8 @@ protocol DiaryRepository {
 }
 
 final class DiaryRepositoryImpl: DiaryRepository {
+    private let localUtilityRepository = LocalUtilityRepositoryImpl()
+    
     func getDiaryListItem() -> Single<DiaryListDTO> {
         let endpoint = DiaryListItemEndpoint.item
 
@@ -47,10 +49,8 @@ final class DiaryRepositoryImpl: DiaryRepository {
         return single
     }
     
-    func deleteDiary(id: String) -> RxSwift.Single<Bool> {
-        //TODO: - Token 받아오기
-        let token = "0KjV78s0YPKbrlVP3QeAwUJcjohs2h2ysdWDLWg"
-        
+    func deleteDiary(id: String) -> Single<Bool> {
+        let token = localUtilityRepository.getToken()
         let diaryDeleteEndpoint = DiaryDeleteEndpoint.item(token: token, diaryId: id)
         
         let single = NetworkManager.shared.call(diaryDeleteEndpoint)

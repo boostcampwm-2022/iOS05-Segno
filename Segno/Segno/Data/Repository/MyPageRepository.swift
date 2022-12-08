@@ -14,9 +14,10 @@ protocol MyPageRepository {
 }
 
 final class MyPageRepositoryImpl: MyPageRepository {
+    private let localUtilityRepository = LocalUtilityRepositoryImpl()
+    
     func getUserDetail() -> Single<UserDetailDTO> {
-        // TODO: Keychain으로부터 토큰 가져오기
-        let token = "A1lmMjb2pgNWg6ZzAaPYgMcqRv/8BOyO4U/ui6i/Ic4="
+        let token = localUtilityRepository.getToken()
         let endpoint = UserDetailEndpoint.item(token)
 
         return NetworkManager.shared.call(endpoint)

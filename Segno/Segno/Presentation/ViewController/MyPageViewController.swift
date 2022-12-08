@@ -34,7 +34,8 @@ protocol MyPageViewDelegate: AnyObject {
 final class MyPageViewController: UIViewController {
     private let disposeBag = DisposeBag()
     private let viewModel: MyPageViewModel
-    weak var delegate: MyPageViewDelegate?
+    private let localUtilityRepository: LocalUtilityRepository
+    weak var mypageDelegate: MyPageViewDelegate?
     
     private enum Metric {
         static let titleText: String = "안녕하세요,\nboostcamp님!"
@@ -63,8 +64,10 @@ final class MyPageViewController: UIViewController {
         return tableView
     }()
     
-    init(viewModel: MyPageViewModel = MyPageViewModel()) {
+    init(viewModel: MyPageViewModel = MyPageViewModel(),
+         localUtilityRepository: LocalUtilityRepository = localUtilityRepositoryImpl()) {
         self.viewModel = MyPageViewModel()
+        self.localUtilityRepository = localUtilityRepository
         
         super.init(nibName: nil, bundle: nil)
     }
@@ -146,6 +149,8 @@ final class MyPageViewController: UIViewController {
                 switch action {
                 case .setting:
                     self?.settingButtonTapped()
+                case .logout:
+                    self?.logoutButtonTapped()
                 default:
                     break
                 }
@@ -158,7 +163,12 @@ final class MyPageViewController: UIViewController {
     }
     
     private func settingButtonTapped() {
-        delegate?.settingButtonTapped()
+        mypageDelegate?.settingButtonTapped()
+    }
+    
+    private func logoutButtonTapped() {
+        localUtilityRepository.deleteToken()
+        // TODO: 로그아웃 후에 로그인코디네이터 띄워주기
     }
 }
 

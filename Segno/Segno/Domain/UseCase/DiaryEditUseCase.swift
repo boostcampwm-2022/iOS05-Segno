@@ -13,12 +13,15 @@ protocol DiaryEditUseCase {
 }
 
 final class DiaryEditUseCaseImpl: DiaryEditUseCase {
+    let localUtilityRepository: LocalUtilityRepositoryImpl
     let diaryRepository: DiaryRepository
     let imageRepository: ImageRepository
     private let disposeBag = DisposeBag()
     
-    init(diaryRepository: DiaryRepository = DiaryRepositoryImpl(),
+    init(localUtilityRepository: LocalUtilityRepositoryImpl = LocalUtilityRepositoryImpl(),
+         diaryRepository: DiaryRepository = DiaryRepositoryImpl(),
          imageRepository: ImageRepository = ImageRepositoryImpl()) {
+        self.localUtilityRepository = localUtilityRepository
         self.diaryRepository = diaryRepository
         self.imageRepository = imageRepository
     }
