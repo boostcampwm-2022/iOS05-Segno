@@ -19,7 +19,7 @@ final class AppCoordinator: Coordinator {
     
     func start() {
         let token = localUtilityRepository.getToken()
-        if token == "" {
+        if token.isEmpty {
             startLoginCoordinator()
         } else {
             startTabBarCoordinator()
