@@ -8,8 +8,6 @@
 import MusicKit
 
 final class MusicSession {
-    private var song: Song?
-    
     private lazy var player = ApplicationMusicPlayer.shared
     private lazy var playerState = player.state
     
@@ -28,9 +26,8 @@ final class MusicSession {
                     let request = MusicCatalogResourceRequest<Song>(matching: \.isrc, equalTo: term.isrc)
                     let response = try await request.response()
                     if let item = response.items.first {
-                        song = item
+                        player.queue = [item]
                     }
-                    
                 } catch (let error) {
                     // TODO: 에러 처리
                     print(error.localizedDescription)
@@ -44,20 +41,14 @@ final class MusicSession {
     
     // 음악을 재생하는 함수
     func togglePlayer() {
-        guard let song else { return }
         if !isPlaying {
-            playMusic(song: song)
+            playMusic()
         } else {
             player.pause()
         }
-        
-        // 뷰 컨트롤러를 나갈 때 큐를 비워 준다.
-        // 뮤직세션, 샤잠세션은 싱글턴 인스턴스로 만들어 주는 것이 좋겠다.
     }
     
-    private func playMusic(song: Song) {
-        player.queue = [song]
-        
+    private func playMusic() {
         Task {
             do {
                 try await player.play()
@@ -70,5 +61,6 @@ final class MusicSession {
     
     func stopMusic() {
         player.stop()
+        player.queue = []
     }
 }

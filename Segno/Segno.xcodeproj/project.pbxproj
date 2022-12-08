@@ -26,6 +26,7 @@
 		4F4E0D79292522B7005ABA8F /* BaseURL.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F4E0D78292522B7005ABA8F /* BaseURL.swift */; };
 		4F4E0D7B29252526005ABA8F /* TokenDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F4E0D7A29252526005ABA8F /* TokenDTO.swift */; };
 		4F51A6FF2940FE810039D86A /* UIViewController+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F51A6FE2940FE810039D86A /* UIViewController+.swift */; };
+		4F51A6FD294096480039D86A /* PlayMusicUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F51A6FC294096480039D86A /* PlayMusicUseCase.swift */; };
 		4F5291DE293F065D00DF930A /* DiaryEditViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F5291DD293F065D00DF930A /* DiaryEditViewModel.swift */; };
 		4F589DD6293FB9AB00DB39E5 /* ShazamSongDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F589DD5293FB9AB00DB39E5 /* ShazamSongDTO.swift */; };
 		4F589DD9293FBA0900DB39E5 /* ShazamError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F589DD8293FBA0900DB39E5 /* ShazamError.swift */; };
@@ -123,6 +124,7 @@
 		4F4E0D78292522B7005ABA8F /* BaseURL.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseURL.swift; sourceTree = "<group>"; };
 		4F4E0D7A29252526005ABA8F /* TokenDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TokenDTO.swift; sourceTree = "<group>"; };
 		4F51A6FE2940FE810039D86A /* UIViewController+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+.swift"; sourceTree = "<group>"; };
+		4F51A6FC294096480039D86A /* PlayMusicUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayMusicUseCase.swift; sourceTree = "<group>"; };
 		4F5291DD293F065D00DF930A /* DiaryEditViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiaryEditViewModel.swift; sourceTree = "<group>"; };
 		4F589DD5293FB9AB00DB39E5 /* ShazamSongDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShazamSongDTO.swift; sourceTree = "<group>"; };
 		4F589DD8293FBA0900DB39E5 /* ShazamError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShazamError.swift; sourceTree = "<group>"; };
@@ -340,6 +342,7 @@
 				9894EAF429373385005F2B15 /* SettingsUseCase.swift */,
 				4F307A49293889C200FA36A0 /* SearchMusicUseCase.swift */,
 				9825F41A29377875005F2163 /* ChangeNicknameUseCase.swift */,
+				4F51A6FC294096480039D86A /* PlayMusicUseCase.swift */,
 			);
 			path = UseCase;
 			sourceTree = "<group>";
@@ -631,6 +634,7 @@
 				66A8CF612935F44100C17F84 /* MyPageViewModel.swift in Sources */,
 				988414D929235345007C9132 /* DiaryCollectionViewModel.swift in Sources */,
 				4F589DD6293FB9AB00DB39E5 /* ShazamSongDTO.swift in Sources */,
+				4F51A6FD294096480039D86A /* PlayMusicUseCase.swift in Sources */,
 				4FEBFAAF291CF9F300E78139 /* MusicInfo.swift in Sources */,
 				4FEBFAAB291CF30E00E78139 /* DiaryListItem.swift in Sources */,
 				7918380829233F7100BC6992 /* UIButton+.swift in Sources */,

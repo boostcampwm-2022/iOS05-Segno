@@ -6,10 +6,10 @@
 //
 
 struct DiaryListDTO: Decodable {
-    let data: [DiaryListItemDTO]
+    let diaries: [DiaryListItemDTO]
     
     #if DEBUG
-    static let example = DiaryListDTO(data: [DiaryListItemDTO.exampleData1,
+    static let example = DiaryListDTO(diaries: [DiaryListItemDTO.exampleData1,
                                              DiaryListItemDTO.exampleData2,
                                              DiaryListItemDTO.exampleData3,
                                              DiaryListItemDTO.exampleData4,
@@ -21,7 +21,6 @@ struct DiaryListDTO: Decodable {
 }
 
 struct DiaryListItemDTO: Decodable {
-    // TODO: 일단은 다이어리 리스트 아이템과 동일하게 작성. 이후 서버 사이드에 따라 바꾸겠습니다.
     let identifier: String
     let title: String
     let thumbnailPath: String

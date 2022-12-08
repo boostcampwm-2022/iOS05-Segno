@@ -19,7 +19,7 @@ enum DiaryDetailEndpoint: Endpoint {
     }
     
     var path: String {
-        return "items"
+        return "diary"
     }
     
     var parameters: HTTPRequestParameter? {
