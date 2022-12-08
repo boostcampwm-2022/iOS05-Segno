@@ -26,14 +26,4 @@ final class LoginViewModel {
                 })
                 .disposed(by: disposeBag)
     }
-    
-    func signIn(withGoogle email: String) {
-        useCase.sendLoginRequest(withGoogle: email)
-            .subscribe(onSuccess: { [weak self] result in
-                self?.isLoginSucceeded.onNext(result)
-            }, onFailure: { [weak self] _ in
-                self?.isLoginSucceeded.onNext(false)
-            })
-            .disposed(by: disposeBag)
-    }
 }

@@ -42,6 +42,7 @@ final class MyPageViewController: UIViewController {
         static let settingsOffset: CGFloat = 100
         static let titleFontSize: CGFloat = 32
         static let titleOffset: CGFloat = 30
+        static let separatorInset: CGFloat = 15
     }
     
     private lazy var titleLabel: UILabel = {
@@ -58,6 +59,7 @@ final class MyPageViewController: UIViewController {
         tableView.register(SettingsActionSheetCell.self, forCellReuseIdentifier: "writtenDiary")
         tableView.register(SettingsActionSheetCell.self, forCellReuseIdentifier: "settings")
         tableView.register(SettingsActionSheetCell.self, forCellReuseIdentifier: "logout")
+        tableView.separatorInset = UIEdgeInsets(top: 0, left: Metric.separatorInset, bottom: 0, right: Metric.separatorInset)
         return tableView
     }()
     
@@ -85,14 +87,7 @@ final class MyPageViewController: UIViewController {
     }
     
     private func setupLayout() {
-        [titleLabel, tableView].forEach {
-            view.addSubview($0)
-
-            $0.snp.makeConstraints { make in
-                make.width.equalToSuperview()
-                make.centerX.equalTo(view.snp.centerX)
-            }
-        }
+        view.addSubviews([titleLabel, tableView])
         
         titleLabel.snp.makeConstraints { make in
             make.top.leading.equalTo(view.safeAreaLayoutGuide).offset(Metric.titleOffset)
@@ -120,7 +115,7 @@ final class MyPageViewController: UIViewController {
                 let price = Double(writtenDiary)
                 let result = numberFormatter.string(from: NSNumber(value:price!))! + "개"
                 
-                let dataSource = Observable<[MyPageCellModel]>.just([
+                _ = Observable<[MyPageCellModel]>.just([
                     .writtenDiary(title: "작성한 일기 수", subtitle: result),
                     .settings(title: "설정"),
                     .logout(title: "logout", color: .red)

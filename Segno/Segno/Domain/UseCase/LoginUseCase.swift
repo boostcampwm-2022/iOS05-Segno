@@ -9,7 +9,6 @@ import RxSwift
 
 protocol LoginUseCase {
     func sendLoginRequest(withApple email: String) -> Single<Bool>
-    func sendLoginRequest(withGoogle email: String) -> Single<Bool>
 }
 
 final class LoginUseCaseImpl: LoginUseCase {
@@ -30,18 +29,6 @@ final class LoginUseCaseImpl: LoginUseCase {
 
     func sendLoginRequest(withApple email: String) -> Single<Bool> {
         return repository.sendLoginRequest(withApple: email)
-            .map {
-                guard let tokenString = $0.token else {
-                    return false
-                }
-                
-                print(tokenString)
-                return true
-            }
-    }
-    
-    func sendLoginRequest(withGoogle email: String) -> Single<Bool> {
-        return repository.sendLoginRequest(withGoogle: email)
             .map {
                 guard let tokenString = $0.token else {
                     return false

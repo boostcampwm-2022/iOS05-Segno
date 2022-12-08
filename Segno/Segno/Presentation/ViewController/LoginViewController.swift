@@ -27,16 +27,11 @@ final class LoginViewController: UIViewController {
     weak var delegate: LoginViewControllerDelegate?
     
     private enum Metric {
-        static let googleTitle = "구글 로그인"
-        static let appleTitle = "애플 로그인"
-        
         static let titleText = "Segno"
         static let subTitleText = "다시 이곳의 추억에서부터"
         static let footerText = "D.S."
         
-        static let buttonFontSize: CGFloat = 24
         static let buttonHeight: CGFloat = 50
-        static let buttonRadius: CGFloat = 20
         static let footerBottomOffset: CGFloat = -100
         static let footerHeight: CGFloat = 50
         static let inset: CGFloat = 20
@@ -48,7 +43,6 @@ final class LoginViewController: UIViewController {
     }
     
     // MARK: - View
-    
     private lazy var titleLabel: UILabel = {
         let label = UILabel()
         label.text = Metric.titleText
@@ -65,29 +59,9 @@ final class LoginViewController: UIViewController {
         return label
     }()
     
-    private lazy var googleButton: UIButton = {
-        let button = UIButton()
-        button.setTitle(Metric.googleTitle, for: .normal)
-        button.setTitleColor(.appColor(.white), for: .normal)
-        button.titleLabel?.font = .appFont(.surround, size: Metric.buttonFontSize)
+    private lazy var appleButton: ASAuthorizationAppleIDButton = {
+        let button = ASAuthorizationAppleIDButton(type: .signIn, style: .black)
         return button
-    }()
-    
-    private lazy var appleButton: UIButton = {
-        let button = UIButton()
-        button.setTitle(Metric.appleTitle, for: .normal)
-        button.setTitleColor(.appColor(.white), for: .normal)
-        button.titleLabel?.font = .appFont(.surround, size: Metric.buttonFontSize)
-        return button
-    }()
-    
-    private lazy var buttonStack = {
-        let stackView = UIStackView()
-        stackView.alignment = .bottom
-        stackView.axis = .vertical
-        stackView.distribution = .equalCentering
-        stackView.spacing = Metric.inset
-        return stackView
     }()
     
     private lazy var footerLabel: UILabel = {
@@ -118,7 +92,6 @@ final class LoginViewController: UIViewController {
     }
     
     // MARK: - Life Cycle
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -140,18 +113,9 @@ final class LoginViewController: UIViewController {
     }
     
     private func setupRx() {
-        googleButton.rx.tap
+        appleButton.rx.controlEvent(.touchDown)
             .withUnretained(self)
             .bind { _ in
-                print("google") // MARK: Test용
-                self.googleButtonTapped()
-            }
-            .disposed(by: disposeBag)
-        
-        appleButton.rx.tap
-            .withUnretained(self)
-            .bind { _ in
-                print("apple")  // MARK: Test용
                 self.appleButtonTapped()
             }
             .disposed(by: disposeBag)
@@ -159,23 +123,10 @@ final class LoginViewController: UIViewController {
     
     private func setupView() {
         view.backgroundColor = .appColor(.background)
-        
-        googleButton.layer.cornerRadius = Metric.buttonRadius
-        googleButton.layer.masksToBounds = true
-        
-        appleButton.layer.cornerRadius = Metric.buttonRadius
-        appleButton.layer.masksToBounds = true
-        
-        googleButton.setBackgroundColor(.appColor(.color4) ?? .red, for: .normal)
-        appleButton.setBackgroundColor(.appColor(.color4) ?? .red, for: .normal)
     }
     
     private func setupLayout() {
-        [googleButton, appleButton].forEach {
-            buttonStack.addArrangedSubview($0)
-        }
-        
-        [titleLabel, subTitleLabel, buttonStack, footerLabel, buttonStackHolder].forEach {
+        [titleLabel, subTitleLabel, appleButton, footerLabel, buttonStackHolder].forEach {
             view.addSubview($0)
             
             $0.snp.makeConstraints { make in
@@ -204,15 +155,9 @@ final class LoginViewController: UIViewController {
             make.bottom.equalTo(footerLabel.snp.top)
         }
         
-        buttonStack.snp.makeConstraints { make in
+        appleButton.snp.makeConstraints { make in
             make.centerY.equalTo(buttonStackHolder.snp.centerY)
-        }
-        
-        buttonStack.arrangedSubviews.forEach {
-            $0.snp.makeConstraints { make in
-                make.width.equalToSuperview()
-                make.height.equalTo(Metric.buttonHeight)
-            }
+            make.height.equalTo(Metric.buttonHeight)
         }
     }
     
@@ -234,14 +179,6 @@ final class LoginViewController: UIViewController {
     }
     
     // MARK: - Public
-    private func googleButtonTapped() {
-        session?.performGoogleLogin()
-            .subscribe(onNext: { email in
-                self.viewModel.signIn(withGoogle: email)
-            })
-            .disposed(by: disposeBag)
-    }
-    
     private func appleButtonTapped() {
         session?.performAppleLogin()
     }

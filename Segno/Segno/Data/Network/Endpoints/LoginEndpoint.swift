@@ -9,7 +9,6 @@ import Foundation
 
 enum LoginEndpoint: Endpoint {
     case apple(String)
-    case google(String)
     
     var baseURL: URL? {
         return URL(string: BaseURL.urlString)?
@@ -28,8 +27,6 @@ enum LoginEndpoint: Endpoint {
         switch self {
         case .apple(let email):
             return HTTPRequestParameter.body(["email": email, "oauthType": "apple"])
-        case .google(let email):
-            return HTTPRequestParameter.body(["email": email, "oauthType": "google"])
         }
     }
 }
