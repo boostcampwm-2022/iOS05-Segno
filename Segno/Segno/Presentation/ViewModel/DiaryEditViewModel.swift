@@ -12,7 +12,6 @@ import RxSwift
 final class DiaryEditViewModel {
     var locationSubject = PublishSubject<Location>()
     var addressSubject = PublishSubject<String>()
-    var imageSubject = PublishSubject<String>()
     
     private let disposeBag = DisposeBag()
     var diaryDetail: DiaryDetail?
@@ -96,16 +95,12 @@ final class DiaryEditViewModel {
         isReceivingLocation.onNext(!value)
     }
     
-    func saveDiary() {
-        
-    }
-    
-    func uploadImage(data: Data) {
-        imageUseCase.uploadImage(data: data)
+    func saveDiary(title: String, body: String, tags: [String], imageData: Data) {
+        imageUseCase.uploadImage(data: imageData)
             .subscribe(onSuccess: { [weak self] imageInfo in
-                guard let filename = imageInfo.filename else { return }
-                debugPrint(filename)
-                self?.imageSubject.onNext(filename)
+                guard let imageName = imageInfo.filename else { return }
+                debugPrint(imageName)
+                
             })
             .disposed(by: disposeBag)
     }
