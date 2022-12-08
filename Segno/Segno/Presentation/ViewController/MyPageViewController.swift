@@ -65,7 +65,7 @@ final class MyPageViewController: UIViewController {
     }()
     
     init(viewModel: MyPageViewModel = MyPageViewModel(),
-         localUtilityRepository: LocalUtilityRepository = localUtilityRepositoryImpl()) {
+         localUtilityRepository: LocalUtilityRepository = LocalUtilityRepositoryImpl()) {
         self.viewModel = MyPageViewModel()
         self.localUtilityRepository = localUtilityRepository
         

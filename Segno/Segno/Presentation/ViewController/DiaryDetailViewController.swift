@@ -7,6 +7,7 @@
 
 import UIKit
 
+import Kingfisher
 import RxCocoa
 import RxSwift
 import SnapKit
@@ -118,7 +119,7 @@ final class DiaryDetailViewController: UIViewController {
         bindDiaryItem()
         getDiary()
         
-        viewModel.testDataInsert() // 임시 투입 메서드입니다.
+//        viewModel.testDataInsert() // 임시 투입 메서드입니다.
     }
     
     override func viewWillDisappear(_ animated: Bool) {
@@ -205,7 +206,10 @@ final class DiaryDetailViewController: UIViewController {
         viewModel.imagePathObservable
             .observe(on: MainScheduler.instance)
             .subscribe(onNext: { [weak self] imagePath in
-                self?.imageView.image = UIImage(named: imagePath)
+                let imageURL = URL(string: BaseURL.urlString)?
+                    .appendingPathComponent("image")
+                    .appendingPathComponent(imagePath)
+                self?.imageView.kf.setImage(with: imageURL)
             })
             .disposed(by: disposeBag)
         
@@ -290,6 +294,7 @@ extension UIViewController {
 
 #if canImport(SwiftUI) && DEBUG
 import SwiftUI
+import Kingfisher
 
 struct DiaryDetailViewController_Preview: PreviewProvider {
     static var previews: some View {
