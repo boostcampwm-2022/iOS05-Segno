@@ -34,6 +34,6 @@ extension LoginCoordinator: LoginViewControllerDelegate {
     }
     
     func loginDidFail() {
-        print("로그인 실패. 얼럿 팝업 반환")
+        debugPrint("로그인 실패. 얼럿 팝업 반환")
     }
 }

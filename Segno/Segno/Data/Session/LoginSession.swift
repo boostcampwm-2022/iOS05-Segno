@@ -62,7 +62,6 @@ extension LoginSession {
         } catch {
             return nil
         }
-        print(email)
         
         return email
     }
