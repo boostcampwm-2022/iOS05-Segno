@@ -22,6 +22,7 @@ final class DiaryCell: UICollectionViewCell {
     
     private lazy var titleLabel: UILabel = {
         let label = UILabel()
+        label.adjustsFontSizeToFitWidth = true
         label.font = .appFont(.shiningStar, size: Metric.labelFontSize)
         label.textAlignment = .center
         return label

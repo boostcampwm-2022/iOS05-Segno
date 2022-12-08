@@ -7,6 +7,7 @@
 
 import UIKit
 
+import MarqueeLabel
 import Kingfisher
 import RxCocoa
 import RxSwift
@@ -53,9 +54,10 @@ final class DiaryDetailViewController: UIViewController {
         return label
     }()
     
-    private lazy var titleLabel: UILabel = {
-        let label = UILabel()
+    private lazy var titleLabel: MarqueeLabel = {
+        let label = MarqueeLabel(frame: .zero, rate: 32, fadeLength: 32.0)
         label.font = .appFont(.surround, size: Metric.titleFontSize)
+        label.trailingBuffer = 16
         return label
     }()
     
@@ -71,11 +73,11 @@ final class DiaryDetailViewController: UIViewController {
         return stackView
     }()
     
-    private lazy var tagViews: [UIView] = []
+    private lazy var tagViews: [TagView] = []
     
     private lazy var imageView: UIImageView = {
         let imageView = UIImageView()
-        imageView.backgroundColor = .systemBlue
+        imageView.backgroundColor = .appColor(.color3)
         return imageView
     }()
     
@@ -150,11 +152,6 @@ final class DiaryDetailViewController: UIViewController {
         }
         tagScrollView.addSubview(tagStackView)
         
-        tagViews.forEach {
-            tagStackView.addArrangedSubview($0)
-        }
-        
-        
         tagScrollView.snp.makeConstraints {
             $0.height.equalTo(Metric.tagScrollViewHeight)
         }
@@ -197,8 +194,9 @@ final class DiaryDetailViewController: UIViewController {
             .observe(on: MainScheduler.instance)
             .subscribe(onNext: { [weak self] tags in
                 tags.forEach { tagTitle in
+                    debugPrint(tagTitle)
                     let tagView = TagView(tagTitle: tagTitle)
-                    self?.tagViews.append(tagView)
+                    self?.tagStackView.addArrangedSubview(tagView)
                 }
             })
             .disposed(by: disposeBag)
