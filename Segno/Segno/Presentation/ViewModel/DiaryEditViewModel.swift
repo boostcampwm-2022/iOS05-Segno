@@ -62,7 +62,7 @@ final class DiaryEditViewModel {
     }
     
     func subscribeSearchResult() {
-        searchMusicUseCase.musicInfoResult
+        searchMusicUseCase.subscribeShazamResult()
             .subscribe(onNext: {
                 self.toggleSearchMusic()
                 self.musicInfo.onNext($0)
