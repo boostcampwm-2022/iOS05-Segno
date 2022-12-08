@@ -14,7 +14,6 @@ final class DiaryCell: UICollectionViewCell {
     
     private lazy var thumbnailImageView: UIImageView = {
         let imageView = UIImageView()
-        imageView.layer.borderWidth = 0.5 // MARK: 추후 삭제
         return imageView
     }()
     
@@ -22,7 +21,6 @@ final class DiaryCell: UICollectionViewCell {
         let label = UILabel()
         label.font = .appFont(.shiningStar, size: Metric.labelFontSize)
         label.textAlignment = .center
-        label.layer.borderWidth = 0.5 // MARK: 추후 삭제
         return label
     }()
     
@@ -38,7 +36,9 @@ final class DiaryCell: UICollectionViewCell {
     }
     
     private func setupView() {
-        contentView.backgroundColor = .appColor(.color3)
+        contentView.backgroundColor = .appColor(.color2)
+        contentView.clipsToBounds = true
+        contentView.layer.cornerRadius = 20
         
         thumbnailImageView.image = UIImage(systemName: "popcorn.fill")
         titleLabel.text = "Title"

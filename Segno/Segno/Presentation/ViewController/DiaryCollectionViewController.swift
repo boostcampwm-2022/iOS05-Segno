@@ -54,7 +54,7 @@ final class DiaryCollectionViewController: UIViewController {
     private lazy var diaryCollectionView: UICollectionView = {
         let layout = makeCollectionViewLayout()
         let collectionView = UICollectionView(frame: .zero, collectionViewLayout: layout)
-        collectionView.backgroundColor = .appColor(.color1)
+        collectionView.backgroundColor = .appColor(.color3)
         return collectionView
     }()
     
