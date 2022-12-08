@@ -118,7 +118,7 @@ final class DiaryDetailViewController: UIViewController {
         bindDiaryItem()
         getDiary()
         
-//        viewModel.testDataInsert() // 임시 투입 메서드입니다.
+        viewModel.testDataInsert() // 임시 투입 메서드입니다.
     }
     
     override func viewWillDisappear(_ animated: Bool) {
