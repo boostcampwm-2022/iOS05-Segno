@@ -15,7 +15,7 @@ final class TagView: UIView {
         static let cornerRadius: CGFloat = 15
     }
 
-    private lazy var tagLabel: UILabel = {
+    lazy var tagLabel: UILabel = {
         let label = UILabel()
         label.font = .appFont(.surround, size: Metric.tagFontSize)
         label.textColor = .appColor(.white)
@@ -34,7 +34,7 @@ final class TagView: UIView {
     
     private func setupLayout(tagTitle: String) {
         addSubview(tagLabel)
-        backgroundColor = .appColor(.color3)
+        backgroundColor = .appColor(.color4)
         layer.cornerRadius = Metric.cornerRadius
         
         tagLabel.text = tagTitle
