@@ -118,7 +118,7 @@ final class DiaryDetailViewController: UIViewController {
         bindDiaryItem()
         getDiary()
         
-//        viewModel.testDataInsert() // 임시 투입 메서드입니다.
+        viewModel.testDataInsert() // 임시 투입 메서드입니다.
     }
     
     override func viewWillDisappear(_ animated: Bool) {
@@ -185,7 +185,6 @@ final class DiaryDetailViewController: UIViewController {
     }
     
     private func bindDiaryItem() {
-        
         dateLabel.text = "11/22 14:54"
         
         viewModel.titleObservable
@@ -220,6 +219,13 @@ final class DiaryDetailViewController: UIViewController {
             .observe(on: MainScheduler.instance)
             .subscribe(onNext: { [weak self] musicInfo in
                 self?.musicContentView.setMusic(info: musicInfo)
+            })
+            .disposed(by: disposeBag)
+        
+        viewModel.isPlaying
+            .observe(on: MainScheduler.instance)
+            .subscribe(onNext: { [weak self] status in
+                self?.musicContentView.changeButtonIcon(isPlaying: status)
             })
             .disposed(by: disposeBag)
         

@@ -15,6 +15,10 @@ final class MusicSession {
         return playerState.playbackStatus == .playing
     }
     
+    init() {
+        playerState.repeatMode = .one
+    }
+    
     func fetchMusic(term: MusicInfo?) {
         guard let term else { return }
         
@@ -39,7 +43,7 @@ final class MusicSession {
         }
     }
     
-    // 음악을 재생하는 함수
+    // 음악 재생, 일시정지, 정지에 관여하는 메서드
     func togglePlayer() {
         if !isPlaying {
             playMusic()

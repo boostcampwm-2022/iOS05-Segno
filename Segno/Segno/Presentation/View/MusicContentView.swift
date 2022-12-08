@@ -22,6 +22,8 @@ final class MusicContentView: UIView {
         static let albumArtImageViewSize: CGFloat = 30
         static let albumArtCornerRadius: CGFloat = 5
         static let playButtonSize: CGFloat = 30
+        static let playImage = UIImage(systemName: "play.fill")
+        static let pauseImage = UIImage(systemName: "pause.fill")
     }
     
     private let disposeBag = DisposeBag()
@@ -48,7 +50,7 @@ final class MusicContentView: UIView {
     
     private lazy var playButton: UIButton = {
         let button = UIButton()
-        button.setImage(UIImage(systemName: "play.fill"), for: .normal)
+        button.setImage(Metric.playImage, for: .normal)
         button.tintColor = .appColor(.black)
         button.rx.tap
             .bind { [weak self] in
@@ -100,6 +102,15 @@ final class MusicContentView: UIView {
         titleLabel.text = info.title
         artistLabel.text = info.artist
         albumArtImageView.kf.setImage(with: info.imageURL)
+    }
+    
+    func changeButtonIcon(isPlaying status: Bool) {
+        switch status {
+        case true:
+            playButton.setImage(Metric.pauseImage, for: .normal)
+        case false:
+            playButton.setImage(Metric.playImage, for: .normal)
+        }
     }
 }
 
