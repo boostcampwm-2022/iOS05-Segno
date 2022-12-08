@@ -33,8 +33,6 @@ final class LoginUseCaseImpl: LoginUseCase {
                 guard let tokenString = $0.token else {
                     return false
                 }
-                
-                print(tokenString)
                 return true
             }
     }

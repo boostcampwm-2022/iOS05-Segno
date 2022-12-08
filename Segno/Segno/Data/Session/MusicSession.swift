@@ -32,13 +32,11 @@ final class MusicSession {
                     if let item = response.items.first {
                         player.queue = [item]
                     }
-                } catch (let error) {
-                    // TODO: 에러 처리
-                    print(error.localizedDescription)
+                } catch {
+                    debugPrint(MusicError.failedToFetch)
                 }
             default:
-                // TODO: 에러 처리
-                debugPrint("no")
+                debugPrint(MusicError.libraryAccessDenied)
             }
         }
     }
@@ -56,9 +54,8 @@ final class MusicSession {
         Task {
             do {
                 try await player.play()
-            } catch let error {
-                // TODO: 에러 처리
-                print(error.localizedDescription)
+            } catch {
+                debugPrint(MusicError.failedToPlay)
             }
         }
     }

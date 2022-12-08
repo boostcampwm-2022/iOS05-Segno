@@ -46,7 +46,7 @@ final class DiaryDetailViewModel {
             .subscribe(onSuccess: { [weak self] diary in
                 self?.diaryItem.onNext(diary)
             }, onFailure: { error in
-                print(error.localizedDescription)
+                debugPrint(error.localizedDescription)
             }).disposed(by: disposeBag)
     }
     

@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		4F0372D62941DBD40014131F /* MusicError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F0372D52941DBD40014131F /* MusicError.swift */; };
 		4F307A4629387C1100FA36A0 /* ShazamSession.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F307A4529387C1100FA36A0 /* ShazamSession.swift */; };
 		4F307A482938832900FA36A0 /* MusicSession.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F307A472938832900FA36A0 /* MusicSession.swift */; };
 		4F307A4A293889C200FA36A0 /* SearchMusicUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F307A49293889C200FA36A0 /* SearchMusicUseCase.swift */; };
@@ -25,8 +26,8 @@
 		4F4E0D7629252236005ABA8F /* LoginEndpoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F4E0D7529252236005ABA8F /* LoginEndpoint.swift */; };
 		4F4E0D79292522B7005ABA8F /* BaseURL.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F4E0D78292522B7005ABA8F /* BaseURL.swift */; };
 		4F4E0D7B29252526005ABA8F /* TokenDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F4E0D7A29252526005ABA8F /* TokenDTO.swift */; };
-		4F51A6FF2940FE810039D86A /* UIViewController+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F51A6FE2940FE810039D86A /* UIViewController+.swift */; };
 		4F51A6FD294096480039D86A /* PlayMusicUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F51A6FC294096480039D86A /* PlayMusicUseCase.swift */; };
+		4F51A6FF2940FE810039D86A /* UIViewController+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F51A6FE2940FE810039D86A /* UIViewController+.swift */; };
 		4F5291DE293F065D00DF930A /* DiaryEditViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F5291DD293F065D00DF930A /* DiaryEditViewModel.swift */; };
 		4F589DD6293FB9AB00DB39E5 /* ShazamSongDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F589DD5293FB9AB00DB39E5 /* ShazamSongDTO.swift */; };
 		4F589DD9293FBA0900DB39E5 /* ShazamError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F589DD8293FBA0900DB39E5 /* ShazamError.swift */; };
@@ -109,6 +110,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		4F0372D52941DBD40014131F /* MusicError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MusicError.swift; sourceTree = "<group>"; };
 		4F307A4529387C1100FA36A0 /* ShazamSession.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShazamSession.swift; sourceTree = "<group>"; };
 		4F307A472938832900FA36A0 /* MusicSession.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MusicSession.swift; sourceTree = "<group>"; };
 		4F307A49293889C200FA36A0 /* SearchMusicUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchMusicUseCase.swift; sourceTree = "<group>"; };
@@ -125,8 +127,8 @@
 		4F4E0D7529252236005ABA8F /* LoginEndpoint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginEndpoint.swift; sourceTree = "<group>"; };
 		4F4E0D78292522B7005ABA8F /* BaseURL.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseURL.swift; sourceTree = "<group>"; };
 		4F4E0D7A29252526005ABA8F /* TokenDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TokenDTO.swift; sourceTree = "<group>"; };
-		4F51A6FE2940FE810039D86A /* UIViewController+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+.swift"; sourceTree = "<group>"; };
 		4F51A6FC294096480039D86A /* PlayMusicUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayMusicUseCase.swift; sourceTree = "<group>"; };
+		4F51A6FE2940FE810039D86A /* UIViewController+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+.swift"; sourceTree = "<group>"; };
 		4F5291DD293F065D00DF930A /* DiaryEditViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiaryEditViewModel.swift; sourceTree = "<group>"; };
 		4F589DD5293FB9AB00DB39E5 /* ShazamSongDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShazamSongDTO.swift; sourceTree = "<group>"; };
 		4F589DD8293FBA0900DB39E5 /* ShazamError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShazamError.swift; sourceTree = "<group>"; };
@@ -224,6 +226,16 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		4F0372D42941DBC20014131F /* Errors */ = {
+			isa = PBXGroup;
+			children = (
+				4F589DD8293FBA0900DB39E5 /* ShazamError.swift */,
+				4F0372D52941DBD40014131F /* MusicError.swift */,
+				98BEE36D2934907700B20143 /* LoginError.swift */,
+			);
+			path = Errors;
+			sourceTree = "<group>";
+		};
 		4F317770291BE4710019BDFC = {
 			isa = PBXGroup;
 			children = (
@@ -273,8 +285,6 @@
 				4FCAC5C3292B792200BF9CDD /* Session */,
 				4F3177A0291BF1810019BDFC /* Repository */,
 				4F31779F291BF1780019BDFC /* Network */,
-				988414D62923304F007C9132 /* KeychainError.swift */,
-				98BEE36D2934907700B20143 /* LoginError.swift */,
 			);
 			path = Data;
 			sourceTree = "<group>";
@@ -445,7 +455,7 @@
 			isa = PBXGroup;
 			children = (
 				4F9A001E29222C97007D9057 /* NetworkError.swift */,
-				4F589DD8293FBA0900DB39E5 /* ShazamError.swift */,
+				988414D62923304F007C9132 /* KeychainError.swift */,
 			);
 			path = Errors;
 			sourceTree = "<group>";
@@ -482,6 +492,7 @@
 		4FCAC5C3292B792200BF9CDD /* Session */ = {
 			isa = PBXGroup;
 			children = (
+				4F0372D42941DBC20014131F /* Errors */,
 				4FCAC5C1292B5C9000BF9CDD /* LoginSession.swift */,
 				4F307A4529387C1100FA36A0 /* ShazamSession.swift */,
 				4F307A472938832900FA36A0 /* MusicSession.swift */,
@@ -671,6 +682,7 @@
 				666E6F83291CF4A600CECD4B /* TabBarCoordinator.swift in Sources */,
 				791529E0293344E9005A8DDB /* DiaryPostEndpoint.swift in Sources */,
 				4F9A001D29222B1B007D9057 /* Endpoint.swift in Sources */,
+				4F0372D62941DBD40014131F /* MusicError.swift in Sources */,
 				4F9A001F29222C97007D9057 /* NetworkError.swift in Sources */,
 				98FDF8A1292F56580083FA05 /* Location.swift in Sources */,
 				7940FB33292E065F00276EFC /* DiaryDetailUseCase.swift in Sources */,
