@@ -10,6 +10,7 @@ import UIKit
 final class DiaryCell: UICollectionViewCell {
     private enum Metric {
         static let labelFontSize: CGFloat = 20
+        static let cornerRadius: CGFloat = 20
     }
     
     private lazy var thumbnailImageView: UIImageView = {
@@ -38,9 +39,10 @@ final class DiaryCell: UICollectionViewCell {
     private func setupView() {
         contentView.backgroundColor = .appColor(.color2)
         contentView.clipsToBounds = true
-        contentView.layer.cornerRadius = 20
+        contentView.layer.cornerRadius = Metric.cornerRadius
         
-        thumbnailImageView.image = UIImage(systemName: "popcorn.fill")
+        thumbnailImageView.image = UIImage(systemName: "photo.on.rectangle")
+        thumbnailImageView.tintColor = .appColor(.color4)
         titleLabel.text = "Title"
     }
     
