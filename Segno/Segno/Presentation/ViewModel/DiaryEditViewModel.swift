@@ -10,7 +10,7 @@ import Foundation
 import RxSwift
 
 final class DiaryEditViewModel {
-    var locationSubject = PublishSubject<Location>()
+    var locationSubject = BehaviorSubject<Location?>(value: nil)
     var addressSubject = PublishSubject<String>()
     
     private let disposeBag = DisposeBag()
@@ -24,7 +24,7 @@ final class DiaryEditViewModel {
     
     var isSearching = BehaviorSubject(value: false)
     var isReceivingLocation = BehaviorSubject(value: false)
-    var musicInfo = PublishSubject<MusicInfoResult>()
+    var musicInfo = BehaviorSubject<MusicInfoResult?>(value: nil)
     
     init(diaryDetailUseCase: DiaryDetailUseCase = DiaryDetailUseCaseImpl(),
          searchMusicUseCase: SearchMusicUseCase = SearchMusicUseCaseImpl(),
@@ -100,8 +100,20 @@ final class DiaryEditViewModel {
             .subscribe(onSuccess: { [weak self] imageInfo in
                 guard let imageName = imageInfo.filename else { return }
                 debugPrint(imageName)
-                
+                guard let location = try? self?.locationSubject.value() else { return }
+                guard let musicInfoResult = try? self?.musicInfo.value() else { return }
+                switch musicInfoResult {
+                case .success(let musicInfo):
+                    debugPrint(musicInfo)
+                    self?.saveDiary(title: title, body: body, tags: tags, imageName: imageName, musicInfo: musicInfo, location: location)
+                case .failure(let error):
+                    debugPrint(error)
+                }
             })
             .disposed(by: disposeBag)
+    }
+    
+    func saveDiary(title: String, body: String, tags: [String], imageName: String, musicInfo: MusicInfo, location: Location) {
+        debugPrint("저장할 프로퍼티 : \(title), \(body), \(tags), \(imageName), \(musicInfo), \(location)")
     }
 }

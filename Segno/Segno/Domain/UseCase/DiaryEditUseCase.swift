@@ -21,7 +21,7 @@ final class DiaryEditUseCaseImpl: DiaryEditUseCase {
     }
     
     func postDiary(_ diary: DiaryDetail, image: Data) -> Single<DiaryDetail> {
-        repository.postDiary(diary, image: image).map { dto in
+        return repository.postDiary(diary, image: image).map { dto in
             DiaryDetail(
                 identifier: dto.id,
                 title: dto.title,

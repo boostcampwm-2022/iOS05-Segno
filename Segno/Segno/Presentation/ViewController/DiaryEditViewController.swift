@@ -445,6 +445,8 @@ extension DiaryEditViewController {
                     self.musicInfoLabel.text = "\(artist) - \(title)"
                 case .failure(_):
                     self.musicInfoLabel.text = Metric.musicNotFound
+                default:
+                    break
                 }
             })
             .disposed(by: disposeBag)
