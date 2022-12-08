@@ -25,30 +25,14 @@ final class DiaryRepositoryImpl: DiaryRepository {
                 let diaryListItemDTO = try JSONDecoder().decode(DiaryListDTO.self, from: $0)
                 return diaryListItemDTO
             }
-//
-//        // TODO: 추후에 NetworkManager로 변경
-//        return Single.create { observer -> Disposable in
-//            let dto = DiaryListDTO.example
-//            observer(.success(dto))
-//
-//            return Disposables.create()
-//        }
     }
     
     func getDiary(id: String) -> Single<DiaryDetailDTO> {
         let endpoint = DiaryDetailEndpoint.item(id)
 
         return NetworkManager.shared.call(endpoint).map {
-            debugPrint("repository: \($0)")
             return try JSONDecoder().decode(DiaryDetailDTO.self, from: $0)
         }
-        
-//        // TODO: 추후에 NetworkManager로 변경
-//        return Single.create { observer -> Disposable in
-//            observer(.success(DiaryDetailDTO.example))
-//
-//            return Disposables.create()
-//        }
     }
     
     func postDiary(_ diary: DiaryDetail, image: Data) -> Single<DiaryDetailDTO> {
