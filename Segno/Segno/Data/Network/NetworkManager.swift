@@ -52,7 +52,6 @@ struct NetworkManager {
                 if (200...299) ~= httpResponse.statusCode {
                     observer(.success(data))
                 } else {
-                    // TODO: 서버에서 설정하는 에러 코드에 따라 에러 메시지 다르게 설정
                     observer(.failure(NetworkError.invalidNetworkStatusCode))
                 }
             }
