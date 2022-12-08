@@ -54,7 +54,7 @@ final class DiaryCollectionViewController: UIViewController {
     private lazy var diaryCollectionView: UICollectionView = {
         let layout = makeCollectionViewLayout()
         let collectionView = UICollectionView(frame: .zero, collectionViewLayout: layout)
-        collectionView.backgroundColor = .appColor(.color1)
+        collectionView.backgroundColor = .appColor(.color3)
         return collectionView
     }()
     
@@ -84,16 +84,11 @@ final class DiaryCollectionViewController: UIViewController {
         setupView()
         setupLayout()
         setupRx()
+        setRecognizer()
         
         dataSource = makeDataSource()
         bindDataSource()
         getDatasource()
-    }
-    
-    
-    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
-        print("Touched!")
-        searchBar.endEditing(true)
     }
     
     private func setupView() {
@@ -164,6 +159,16 @@ final class DiaryCollectionViewController: UIViewController {
             .disposed(by: disposeBag)
     }
     
+    private func setRecognizer() {
+        let tap = UITapGestureRecognizer(target: self, action: #selector(singleTapMethod))
+        diaryCollectionView.addGestureRecognizer(tap)
+        tap.cancelsTouchesInView = false
+    }
+    
+    @objc private func singleTapMethod(sender: UITapGestureRecognizer) {
+        view.endEditing(true)
+    }
+    
     private func makeDataSource() -> DataSource {
         let cellRegistration = UICollectionView.CellRegistration<DiaryCell, DiaryListItem> { (cell, _, item) in
             cell.configure(with: item)
@@ -220,7 +225,9 @@ extension DiaryCollectionViewController: UICollectionViewDelegate {
             snapshot.appendItems(diaryCells)
         }
         
-        dataSource?.apply(snapshot)
+        DispatchQueue.main.async {
+            self.dataSource?.apply(snapshot)
+        }
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
@@ -231,11 +238,23 @@ extension DiaryCollectionViewController: UICollectionViewDelegate {
 }
 
 extension DiaryCollectionViewController: UISearchBarDelegate {
+    func searchBarTextDidBeginEditing(_ searchBar: UISearchBar) {
+        searchBar.showsCancelButton = true
+    }
+    
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
         updateSnapshot(with: searchBar.text)
     }
     
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
+        searchBar.resignFirstResponder()
+        
+        updateSnapshot(with: searchBar.text)
+    }
+    
+    func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
+        searchBar.text = ""
+        searchBar.showsCancelButton = false
         searchBar.resignFirstResponder()
         
         updateSnapshot(with: searchBar.text)
