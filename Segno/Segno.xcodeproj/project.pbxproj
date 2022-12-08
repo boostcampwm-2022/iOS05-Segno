@@ -231,6 +231,7 @@
 			children = (
 				4F589DD8293FBA0900DB39E5 /* ShazamError.swift */,
 				4F0372D52941DBD40014131F /* MusicError.swift */,
+				98BEE36D2934907700B20143 /* LoginError.swift */,
 			);
 			path = Errors;
 			sourceTree = "<group>";
@@ -455,7 +456,6 @@
 			children = (
 				4F9A001E29222C97007D9057 /* NetworkError.swift */,
 				988414D62923304F007C9132 /* KeychainError.swift */,
-				98BEE36D2934907700B20143 /* LoginError.swift */,
 			);
 			path = Errors;
 			sourceTree = "<group>";
