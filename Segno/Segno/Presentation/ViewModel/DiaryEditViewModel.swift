@@ -26,6 +26,7 @@ final class DiaryEditViewModel {
     var isSearching = BehaviorSubject(value: false)
     var isReceivingLocation = BehaviorSubject(value: false)
     var musicInfo = BehaviorSubject<MusicInfoResult?>(value: nil)
+    var isSucceed = PublishSubject<Bool>()
     
     init(diaryEditUseCase: DiaryEditUseCase = DiaryEditUseCaseImpl(),
          diaryDetailUseCase: DiaryDetailUseCase = DiaryDetailUseCaseImpl(),
@@ -91,7 +92,7 @@ final class DiaryEditViewModel {
             .bind(to: addressSubject)
             .disposed(by: disposeBag)
     }
-    
+
     func toggleLocation() {
         guard let value = try? isReceivingLocation.value() else { return }
         isReceivingLocation.onNext(!value)
@@ -133,8 +134,12 @@ final class DiaryEditViewModel {
         }
         
         diaryEditUseCase.postDiary(newDiary)
-            .subscribe(onSuccess: { newDiaryDetail in
-                debugPrint("전송 성공, 결과 : ", newDiaryDetail)
+            .subscribe(onCompleted: { [weak self] in
+                debugPrint("전송 성공, 결과")
+                self?.isSucceed.onNext(true)
+            }, onError: { [weak self] _ in
+                debugPrint("전송 실패")
+                self?.isSucceed.onNext(false)
             })
             .disposed(by: disposeBag)
     }
