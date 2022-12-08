@@ -15,6 +15,7 @@ final class DiaryDetailViewModel {
     let getDetailUseCase: DiaryDetailUseCase
     let playMusicUseCase: PlayMusicUseCase
     var diaryItem = PublishSubject<DiaryDetail>()
+    var isPlaying = BehaviorSubject(value: false)
     // TODO: DiaryDetail에 date 추가
     // lazy var dateObservable = diaryItem.map { $0.date }
     lazy var titleObservable = diaryItem.map { $0.title }
@@ -51,17 +52,23 @@ final class DiaryDetailViewModel {
     
     func setupMusicPlayer() {
         musicObservable
-            .subscribe(onNext: {
-                self.playMusicUseCase.setupPlayer($0)
+            .subscribe(onNext: { [weak self] music in
+                self?.playMusicUseCase.setupPlayer(music)
             })
             .disposed(by: disposeBag)
     }
     
     func toggleMusicPlayer() {
+        guard let status = try? isPlaying.value() else {
+            return
+        }
+        
+        status ? isPlaying.onNext(false) : isPlaying.onNext(true)
         playMusicUseCase.togglePlayer()
     }
     
     func stopMusic() {
+        isPlaying.onNext(false)
         playMusicUseCase.stopPlaying()
     }
 }
