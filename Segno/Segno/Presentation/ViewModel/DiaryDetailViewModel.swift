@@ -14,7 +14,10 @@ final class DiaryDetailViewModel {
     private let itemIdentifier: String
     let getDetailUseCase: DiaryDetailUseCase
     let playMusicUseCase: PlayMusicUseCase
+    let getAddressUseCase: GetAddressUseCase
+    
     var diaryItem = PublishSubject<DiaryDetail>()
+    var addressSubject = PublishSubject<String>()
     var isPlaying = BehaviorSubject(value: false)
     // TODO: DiaryDetail에 date 추가
     // lazy var dateObservable = diaryItem.map { $0.date }
@@ -29,12 +32,15 @@ final class DiaryDetailViewModel {
     
     init(itemIdentifier: String,
          getDetailUseCase: DiaryDetailUseCase = DiaryDetailUseCaseImpl(),
-         playMusicUseCase: PlayMusicUseCase = PlayMusicUseCaseImpl()) {
+         playMusicUseCase: PlayMusicUseCase = PlayMusicUseCaseImpl(),
+         getAddressUseCase: GetAddressUseCase = GetAddressUseCaseImpl()
+    ) {
         self.itemIdentifier = itemIdentifier
         self.getDetailUseCase = getDetailUseCase
         self.playMusicUseCase = playMusicUseCase
+        self.getAddressUseCase = getAddressUseCase
         
-        print(itemIdentifier)
+        debugPrint(itemIdentifier)
         setupMusicPlayer()
     }
     
@@ -71,5 +77,9 @@ final class DiaryDetailViewModel {
     func stopMusic() {
         isPlaying.onNext(false)
         playMusicUseCase.stopPlaying()
+    }
+    
+    func getAddress(by location: Location) {
+        getAddressUseCase.getAddress(by: location)
     }
 }
