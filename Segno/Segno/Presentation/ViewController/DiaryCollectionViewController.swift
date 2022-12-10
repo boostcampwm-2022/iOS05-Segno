@@ -122,7 +122,6 @@ final class DiaryCollectionViewController: UIViewController {
         appendButton.setBackgroundColor(.appColor(.color4) ?? .red, for: .normal)
         
         diaryCollectionView.refreshControl = refreshControl
-        refreshControl.addTarget(self, action: #selector(refresh), for: .valueChanged)
     }
 
     private func setupLayout() {
@@ -168,6 +167,12 @@ final class DiaryCollectionViewController: UIViewController {
                 self.appendButtonTapped()
             }
             .disposed(by: disposeBag)
+        
+        refreshControl.rx.controlEvent(.valueChanged)
+            .withUnretained(self)
+            .subscribe(onNext: { _ in
+                self.refresh()
+            }).disposed(by: disposeBag)
     }
     
     private func setRecognizer() {
