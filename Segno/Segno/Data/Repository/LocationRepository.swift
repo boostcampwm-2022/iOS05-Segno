@@ -72,7 +72,6 @@ final class LocationRepositoryImpl: NSObject, LocationRepository {
 
 extension LocationRepositoryImpl: CLLocationManagerDelegate {
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
-        debugPrint("didUpdateLocations")
         if let cllocation = locations.first {
             let location = Location(latitude: cllocation.coordinate.latitude, longitude: cllocation.coordinate.longitude)
             getAddress(location: cllocation)
