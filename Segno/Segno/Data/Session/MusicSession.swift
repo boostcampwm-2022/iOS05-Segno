@@ -7,12 +7,25 @@
 
 import MusicKit
 
+import RxSwift
+
 final class MusicSession {
     private lazy var player = ApplicationMusicPlayer.shared
     private lazy var playerState = player.state
     
     private var isPlaying: Bool {
         return playerState.playbackStatus == .playing
+    }
+    private var playingStatus: BehaviorSubject<Bool> {
+        return BehaviorSubject(value: isPlaying)
+    }
+    private var errorStatus = PublishSubject<MusicError>()
+    
+    var playingStatusObservable: Observable<Bool> {
+        return playingStatus.asObservable()
+    }
+    var errorStatusObservable: Observable<MusicError> {
+        return errorStatus.asObservable()
     }
     
     init() {
