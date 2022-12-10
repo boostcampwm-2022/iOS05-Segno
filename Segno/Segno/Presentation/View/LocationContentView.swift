@@ -21,20 +21,21 @@ final class LocationContentView: UIView {
         static let fontSize: CGFloat = 16
         static let spacing: CGFloat = 10
         static let mapButtonSize: CGFloat = 30
+        static let titleText: String = "위치"
     }
     
-    private var location: CLLocation?
+    private var location: Location?
     private let disposeBag = DisposeBag()
     weak var delegate: LocationContentViewDelegate?
     
     private lazy var titleLabel: UILabel = {
         let label = UILabel()
         label.font = .appFont(.surround, size: Metric.fontSize)
-        label.text = "위치"
+        label.text = Metric.titleText
         return label
     }()
     
-    private lazy var locationLabel: UILabel = {
+    lazy var locationLabel: UILabel = {
         let label = UILabel()
         label.font = .appFont(.surroundAir, size: Metric.fontSize)
         return label
@@ -46,9 +47,9 @@ final class LocationContentView: UIView {
         button.tintColor = .appColor(.black)
         button.rx.tap
             .bind { [weak self] in
-                // TODO: CLLocation 변수 location을 Location으로 변환하는 로직 필요. 지금은 임시 데이터 부여
-                let customLocation = Location(latitude: 37.248128, longitude: 127.076597)
-                self?.delegate?.mapButtonTapped(location: customLocation)
+                debugPrint("===>", self?.location)
+                guard let location = self?.location else { return }
+                self?.delegate?.mapButtonTapped(location: location)
             }
             .disposed(by: disposeBag)
         return button
@@ -87,9 +88,10 @@ final class LocationContentView: UIView {
         }
     }
     
-    func setLocation(location: CLLocation) {
-        // TODO: titleLabel에 표시하기 위해 CLLocation을 주소 String으로 변환하는 로직 필요
-        
+    func setLocation(cllocation: CLLocation) {
+        let latitude = cllocation.coordinate.latitude
+        let longitude = cllocation.coordinate.longitude
+        let location = Location(latitude: latitude, longitude: longitude)
         self.location = location
     }
 }
