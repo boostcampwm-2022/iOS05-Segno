@@ -57,6 +57,6 @@ struct DiaryDetail: Encodable {
 
 #if DEBUG
 extension DiaryDetail {
-    static let dummy = DiaryDetail(identifier: "1", title: "테스트", tags: ["테스트"], imagePath: "", bodyText: "테스트", musicInfo: MusicInfo.yokohama, location: nil)
+    static let dummy = DiaryDetail(identifier: "1", title: "테스트", tags: ["큿소"], imagePath: "", bodyText: "테스트", musicInfo: MusicInfo.yokohama, location: nil)
 }
 #endif

@@ -16,12 +16,11 @@ final class MusicSession {
     private var isPlaying: Bool {
         return playerState.playbackStatus == .playing
     }
-    private var playingStatus: BehaviorSubject<Bool> {
-        return BehaviorSubject(value: isPlaying)
-    }
+    private var playingStatus = BehaviorSubject(value: false)
     private var errorStatus = PublishSubject<MusicError>()
     
     var playingStatusObservable: Observable<Bool> {
+        debugPrint("Changed to \(try? playingStatus.value())")
         return playingStatus.asObservable()
     }
     var errorStatusObservable: Observable<MusicError> {
@@ -60,6 +59,7 @@ final class MusicSession {
             playMusic()
         } else {
             player.pause()
+            playingStatus.onNext(isPlaying)
         }
     }
     
@@ -67,6 +67,7 @@ final class MusicSession {
         Task {
             do {
                 try await player.play()
+                playingStatus.onNext(isPlaying)
             } catch {
                 debugPrint(MusicError.failedToPlay)
             }
@@ -76,5 +77,6 @@ final class MusicSession {
     func stopMusic() {
         player.stop()
         player.queue = []
+        playingStatus.onNext(isPlaying)
     }
 }

@@ -120,8 +120,7 @@ final class DiaryDetailViewController: UIViewController {
         setupLayout()
         bindDiaryItem()
         getDiary()
-        
-//        viewModel.testDataInsert() // 임시 투입 메서드입니다.
+        viewModel.testDataInsert() // 임시 투입 메서드입니다.
     }
     
     override func viewWillDisappear(_ animated: Bool) {
@@ -194,7 +193,6 @@ final class DiaryDetailViewController: UIViewController {
             .observe(on: MainScheduler.instance)
             .subscribe(onNext: { [weak self] tags in
                 tags.forEach { tagTitle in
-                    debugPrint(tagTitle)
                     let tagView = TagView(tagTitle: tagTitle)
                     self?.tagStackView.addArrangedSubview(tagView)
                 }
@@ -222,6 +220,19 @@ final class DiaryDetailViewController: UIViewController {
             })
             .disposed(by: disposeBag)
         
+        viewModel.locationObservable
+            .compactMap { $0 }
+            .map { $0.createCLLocation() }
+            .observe(on: MainScheduler.instance)
+            .subscribe(onNext: { [weak self] location in
+                self?.locationContentView.setLocation(location: location)
+            })
+            .disposed(by: disposeBag)
+        
+        subscribeMusicPlayer()
+    }
+    
+    private func subscribeMusicPlayer() {
         viewModel.isPlaying
             .observe(on: MainScheduler.instance)
             .subscribe(onNext: { [weak self] status in
@@ -229,12 +240,10 @@ final class DiaryDetailViewController: UIViewController {
             })
             .disposed(by: disposeBag)
         
-        viewModel.locationObservable
-            .compactMap { $0 }
-            .map { $0.createCLLocation() }
+        viewModel.playerErrorStatus
             .observe(on: MainScheduler.instance)
-            .subscribe(onNext: { [weak self] location in
-                self?.locationContentView.setLocation(location: location)
+            .subscribe(onNext: { [weak self] error in
+                self?.makeOKAlert(title: "Error!", message: error.localizedDescription)
             })
             .disposed(by: disposeBag)
     }
