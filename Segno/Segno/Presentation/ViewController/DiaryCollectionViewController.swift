@@ -51,6 +51,8 @@ final class DiaryCollectionViewController: UIViewController {
         return bar
     }()
     
+    private lazy var refreshControl = UIRefreshControl()
+    
     private lazy var diaryCollectionView: UICollectionView = {
         let layout = makeCollectionViewLayout()
         let collectionView = UICollectionView(frame: .zero, collectionViewLayout: layout)
@@ -112,6 +114,9 @@ final class DiaryCollectionViewController: UIViewController {
         appendButton.layer.masksToBounds = true
         
         appendButton.setBackgroundColor(.appColor(.color4) ?? .red, for: .normal)
+        
+        diaryCollectionView.refreshControl = refreshControl
+        refreshControl.addTarget(self, action: #selector(refresh), for: .valueChanged)
     }
 
     private func setupLayout() {
@@ -167,6 +172,12 @@ final class DiaryCollectionViewController: UIViewController {
     
     @objc private func singleTapMethod(sender: UITapGestureRecognizer) {
         view.endEditing(true)
+    }
+    
+    @objc func refresh(){
+        getDatasource()
+        updateSnapshot(with: searchBar.text)
+        refreshControl.endRefreshing()
     }
     
     private func makeDataSource() -> DataSource {
