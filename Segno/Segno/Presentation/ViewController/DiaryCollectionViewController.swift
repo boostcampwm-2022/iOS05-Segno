@@ -90,7 +90,6 @@ final class DiaryCollectionViewController: UIViewController {
         
         dataSource = makeDataSource()
         bindDataSource()
-        getDatasource()
     }
     
     override func viewWillAppear(_ animated: Bool) {
