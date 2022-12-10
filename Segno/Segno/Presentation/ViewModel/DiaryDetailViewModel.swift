@@ -42,6 +42,7 @@ final class DiaryDetailViewModel {
         
         debugPrint(itemIdentifier)
         setupMusicPlayer()
+        bindAddress()
     }
     
     func testDataInsert() {
@@ -81,5 +82,11 @@ final class DiaryDetailViewModel {
     
     func getAddress(by location: Location) {
         getAddressUseCase.getAddress(by: location)
+    }
+    
+    func bindAddress() {
+        getAddressUseCase.addressSubject
+            .bind(to: addressSubject)
+            .disposed(by: disposeBag)
     }
 }
