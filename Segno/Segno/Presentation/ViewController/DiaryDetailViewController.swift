@@ -123,6 +123,11 @@ final class DiaryDetailViewController: UIViewController {
         
 //        viewModel.testDataInsert() // 임시 투입 메서드입니다.
     }
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        bindAddress()
+    }
     
     override func viewWillDisappear(_ animated: Bool) {
         viewModel.stopMusic()
@@ -234,13 +239,34 @@ final class DiaryDetailViewController: UIViewController {
             .map { $0.createCLLocation() }
             .observe(on: MainScheduler.instance)
             .subscribe(onNext: { [weak self] location in
-                self?.locationContentView.setLocation(location: location)
+                self?.locationContentView.setLocation(cllocation: location)
+            })
+            .disposed(by: disposeBag)
+        
+        viewModel.addressSubject
+            .observe(on: MainScheduler.instance)
+            .subscribe(onNext: { [weak self] address in
+                self?.locationContentView.locationLabel.text  = address
+            })
+            .disposed(by: disposeBag)
+    }
+    
+    private func bindAddress() {
+        viewModel.locationObservable
+            .compactMap { $0 }
+            .observe(on: MainScheduler.instance)
+            .subscribe(onNext: { [weak self] location in
+                self?.getAddress(by: location)
             })
             .disposed(by: disposeBag)
     }
     
     private func getDiary() {
         viewModel.getDiary()
+    }
+    
+    private func getAddress(by location: Location) {
+        viewModel.getAddress(by: location)
     }
 }
 
