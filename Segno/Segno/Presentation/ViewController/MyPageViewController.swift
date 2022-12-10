@@ -82,6 +82,12 @@ final class MyPageViewController: UIViewController {
         setupView()
         setupLayout()
         bindTableView()
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        tableView.dataSource = nil
         getUserDetail()
     }
 
