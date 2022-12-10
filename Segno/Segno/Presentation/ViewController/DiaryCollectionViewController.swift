@@ -93,6 +93,13 @@ final class DiaryCollectionViewController: UIViewController {
         getDatasource()
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        getDatasource()
+        updateSnapshot(with: searchBar.text)
+    }
+    
     private func setupView() {
         view.backgroundColor = .appColor(.background)
         
