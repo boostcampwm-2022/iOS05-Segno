@@ -20,7 +20,6 @@ final class MusicSession {
     private var errorStatus = PublishSubject<MusicError>()
     
     var playingStatusObservable: Observable<Bool> {
-        debugPrint("Changed to \(try? playingStatus.value())")
         return playingStatus.asObservable()
     }
     var errorStatusObservable: Observable<MusicError> {
@@ -45,10 +44,10 @@ final class MusicSession {
                         player.queue = [item]
                     }
                 } catch {
-                    debugPrint(MusicError.failedToFetch)
+                    handleMusicError(.failedToFetch)
                 }
             default:
-                debugPrint(MusicError.libraryAccessDenied)
+                handleMusicError(.libraryAccessDenied)
             }
         }
     }
@@ -59,7 +58,7 @@ final class MusicSession {
             playMusic()
         } else {
             player.pause()
-            playingStatus.onNext(isPlaying)
+            playingStatus.onNext(false)
         }
     }
     
@@ -67,9 +66,9 @@ final class MusicSession {
         Task {
             do {
                 try await player.play()
-                playingStatus.onNext(isPlaying)
+                playingStatus.onNext(true)
             } catch {
-                debugPrint(MusicError.failedToPlay)
+                handleMusicError(.failedToPlay)
             }
         }
     }
@@ -77,6 +76,11 @@ final class MusicSession {
     func stopMusic() {
         player.stop()
         player.queue = []
-        playingStatus.onNext(isPlaying)
+        playingStatus.onNext(false)
+    }
+    
+    private func handleMusicError(_ error: MusicError) {
+        errorStatus.onNext(error)
+        playingStatus.onNext(false)
     }
 }

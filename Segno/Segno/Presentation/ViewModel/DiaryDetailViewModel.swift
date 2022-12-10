@@ -75,7 +75,6 @@ final class DiaryDetailViewModel {
     func subscribePlayingStatus() {
         playMusicUseCase.subscribePlayingStatus()
             .subscribe(onNext: { [weak self] status in
-                debugPrint("isPlaying: \(self?.isPlaying)")
                 self?.isPlaying.onNext(status)
             })
             .disposed(by: disposeBag)
