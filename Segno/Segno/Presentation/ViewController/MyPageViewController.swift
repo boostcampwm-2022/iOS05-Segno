@@ -29,6 +29,7 @@ enum MyPageCellModel {
 
 protocol MyPageViewDelegate: AnyObject {
     func settingButtonTapped()
+    func logoutButtonTapped()
 }
 
 final class MyPageViewController: UIViewController {
@@ -122,7 +123,7 @@ final class MyPageViewController: UIViewController {
                 numberFormatter.numberStyle = .decimal
                 
                 let price = Double(writtenDiary)
-                let result = numberFormatter.string(from: NSNumber(value:price)) ?? "0" + "개"
+                let result = (numberFormatter.string(from: NSNumber(value:price)) ?? "0") + "개"
                 
                 _ = Observable<[MyPageCellModel]>.just([
                     .writtenDiary(title: "작성한 일기 수", subtitle: result),
@@ -145,6 +146,7 @@ final class MyPageViewController: UIViewController {
                             return cell
                         }
                     }
+                    .disposed(by: self?.disposeBag ?? DisposeBag())
             })
             .disposed(by: disposeBag)
         
@@ -173,8 +175,9 @@ final class MyPageViewController: UIViewController {
     }
     
     private func logoutButtonTapped() {
-        localUtilityRepository.deleteToken()
-        // TODO: 로그아웃 후에 로그인코디네이터 띄워주기
+        _ = localUtilityRepository.deleteToken()
+        
+        mypageDelegate?.logoutButtonTapped()
     }
 }
 

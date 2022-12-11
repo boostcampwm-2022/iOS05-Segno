@@ -7,9 +7,14 @@
 
 import UIKit
 
+protocol MyPageCoordinatorDelegate: AnyObject {
+    func logoutButtonTapped()
+}
+
 final class MyPageCoordinator: Coordinator {
     var navigationController: UINavigationController
     var childCoordinators: [Coordinator] = []
+    weak var delegate: MyPageCoordinatorDelegate?
     
     init(_ navigationController: UINavigationController) {
         self.navigationController = navigationController
@@ -26,5 +31,9 @@ extension MyPageCoordinator: MyPageViewDelegate {
     func settingButtonTapped() {
         let vc = SettingsViewController()
         navigationController.pushViewController(vc, animated: true)
+    }
+    
+    func logoutButtonTapped() {
+        delegate?.logoutButtonTapped()
     }
 }

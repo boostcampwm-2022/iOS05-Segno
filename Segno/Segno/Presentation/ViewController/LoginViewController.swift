@@ -167,10 +167,8 @@ final class LoginViewController: UIViewController {
                 DispatchQueue.main.async {
                     switch result {
                     case true:
-                        self?.titleLabel.backgroundColor = .blue // 테스트용 색상
                         self?.delegate?.loginDidSucceed()
                     case false:
-                        self?.titleLabel.backgroundColor = .orange // 테스트용 색상
                         self?.delegate?.loginDidFail()
                     }
                 }

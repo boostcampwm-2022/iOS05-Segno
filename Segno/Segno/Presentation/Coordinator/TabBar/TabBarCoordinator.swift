@@ -7,6 +7,10 @@
 
 import UIKit
 
+protocol TabBarCoordinatorDelegate: AnyObject {
+    func logoutButtonTapped()
+}
+
 final class TabBarCoordinator: Coordinator {
     private enum Metric {
         static let tabBarItemFontSize: CGFloat = 15
@@ -15,6 +19,7 @@ final class TabBarCoordinator: Coordinator {
     var navigationController: UINavigationController
     var tabBarController: UITabBarController
     var childCoordinators: [Coordinator] = []
+    weak var delegate: TabBarCoordinatorDelegate?
     
     init(_ navigationController: UINavigationController) {
         self.navigationController = navigationController
@@ -34,7 +39,7 @@ private extension TabBarCoordinator {
     private func configureTabBarController(with tabViewControllers: [UIViewController]) {
         self.tabBarController.setViewControllers(tabViewControllers, animated: true)
         self.tabBarController.selectedIndex = TabBarPageCase.diary.pageOrderNumber
-        self.navigationController.pushViewController(tabBarController, animated: true)
+        self.navigationController.pushViewController(tabBarController, animated: false)
     }
     
     func createTabNavigationController(page: TabBarPageCase) -> UINavigationController {
@@ -73,7 +78,14 @@ private extension TabBarCoordinator {
     
     func connectMyPageFlow(to tabNavigationController: UINavigationController) {
         let myPageCoordinator = MyPageCoordinator(tabNavigationController)
+        myPageCoordinator.delegate = self
         myPageCoordinator.start()
         childCoordinators.append(myPageCoordinator)
+    }
+}
+
+extension TabBarCoordinator: MyPageCoordinatorDelegate {
+    func logoutButtonTapped() {
+        delegate?.logoutButtonTapped()
     }
 }
