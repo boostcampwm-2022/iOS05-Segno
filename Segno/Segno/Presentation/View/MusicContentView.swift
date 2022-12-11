@@ -7,7 +7,6 @@
 
 import UIKit
 
-import Kingfisher
 import RxSwift
 import SnapKit
 
@@ -102,7 +101,7 @@ final class MusicContentView: UIView {
         titleLabel.text = info.title
         artistLabel.text = info.artist
         guard let imageURL = info.imageURL else { return }
-        albumArtImageView.kf.setImage(with: URL(string: imageURL))
+        albumArtImageView.setImage(urlString: imageURL)
     }
     
     func activatePlayButton(isReady status: Bool) {

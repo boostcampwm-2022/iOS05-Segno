@@ -7,8 +7,6 @@
 
 import UIKit
 
-import Kingfisher
-
 final class DiaryCell: UICollectionViewCell {
     private enum Metric {
         static let labelFontSize: CGFloat = 20
@@ -71,7 +69,6 @@ final class DiaryCell: UICollectionViewCell {
     
     func configure(with model: DiaryListItem) {
         titleLabel.text = model.title
-        let imageURL = BaseURL.getImageURL(imagePath: model.thumbnailPath)
-        thumbnailImageView.kf.setImage(with: imageURL)
+        thumbnailImageView.setImage(imagePath: model.thumbnailPath)
     }
 }
