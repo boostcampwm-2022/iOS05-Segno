@@ -105,7 +105,8 @@ final class DiaryCollectionViewController: UIViewController {
         title = "일기 리스트"
         navigationController?.navigationBar.titleTextAttributes = [
             NSAttributedString.Key.font: UIFont.appFont(.surround, size: Metric.navigationTitleSize),
-            NSAttributedString.Key.foregroundColor: UIColor.appColor(.color4) ?? .red]
+            NSAttributedString.Key.foregroundColor: UIColor.appColor(.color4) ?? .red
+        ]
         
         let backBarButtonItem = UIBarButtonItem(title: "리스트", style: .plain, target: self, action: nil)
         backBarButtonItem.tintColor = UIColor.appColor(.color4)
