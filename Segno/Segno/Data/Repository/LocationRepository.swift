@@ -13,6 +13,8 @@ import RxSwift
 protocol LocationRepository {
     var locationSubject: PublishSubject<Location> { get set }
     var addressSubject: PublishSubject<String> { get set }
+    func getAddress(by location: Location)
+    func getAddress(location: CLLocation)
     func getLocation()
     func stopLocation()
 }
@@ -46,6 +48,11 @@ final class LocationRepositoryImpl: NSObject, LocationRepository {
         }
     }
     
+    func getAddress(by location: Location) {
+        let cllocation = CLLocation(latitude: location.latitude, longitude: location.longitude)
+        getAddress(location: cllocation)
+    }
+    
     func getAddress(location: CLLocation) {
         let geocoder = CLGeocoder()
         let locale = Locale(identifier: "Ko-kr")
@@ -56,7 +63,7 @@ final class LocationRepositoryImpl: NSObject, LocationRepository {
             let fullAddress = address.description.components(separatedBy: ", ")[1]
             let array = Array(fullAddress.components(separatedBy: " ").dropFirst())
             let refinedAddress = array.joined(separator: " ")
-            debugPrint("full : ", refinedAddress)
+            debugPrint("변환된 주소값 : ", refinedAddress)
             
             self.addressSubject.onNext(refinedAddress)
         }
@@ -65,7 +72,6 @@ final class LocationRepositoryImpl: NSObject, LocationRepository {
 
 extension LocationRepositoryImpl: CLLocationManagerDelegate {
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
-        debugPrint("didUpdateLocations")
         if let cllocation = locations.first {
             let location = Location(latitude: cllocation.coordinate.latitude, longitude: cllocation.coordinate.longitude)
             getAddress(location: cllocation)

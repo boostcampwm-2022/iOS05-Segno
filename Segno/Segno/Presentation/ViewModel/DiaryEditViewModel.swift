@@ -21,6 +21,7 @@ final class DiaryEditViewModel {
     let diaryDetailUseCase: DiaryDetailUseCase
     let searchMusicUseCase: SearchMusicUseCase
     let locationUseCase: LocationUseCase
+    let getAddressUseCase: GetAddressUseCase
     let imageUseCase: ImageUseCase
     let localUtilityRepository: LocalUtilityRepository
     
@@ -33,12 +34,14 @@ final class DiaryEditViewModel {
          diaryDetailUseCase: DiaryDetailUseCase = DiaryDetailUseCaseImpl(),
          searchMusicUseCase: SearchMusicUseCase = SearchMusicUseCaseImpl(),
          locationUseCase: LocationUseCase = LocationUseCaseImpl(),
+         getAddressUseCase: GetAddressUseCase = GetAddressUseCaseImpl(),
          imageUseCase: ImageUseCase = ImageUseCaseImpl(),
          localUtilityRepository: LocalUtilityRepository = LocalUtilityRepositoryImpl()) {
         self.diaryEditUseCase = diaryEditUseCase
         self.diaryDetailUseCase = diaryDetailUseCase
         self.searchMusicUseCase = searchMusicUseCase
         self.locationUseCase = locationUseCase
+        self.getAddressUseCase = getAddressUseCase
         self.imageUseCase = imageUseCase
         self.localUtilityRepository = localUtilityRepository
         subscribeSearchingStatus()
@@ -91,7 +94,7 @@ final class DiaryEditViewModel {
             .bind(to: locationSubject)
             .disposed(by: disposeBag)
         
-        locationUseCase.addressSubject
+        getAddressUseCase.addressSubject
             .bind(to: addressSubject)
             .disposed(by: disposeBag)
     }

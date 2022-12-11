@@ -15,8 +15,10 @@ final class DiaryDetailViewModel {
     let getDetailUseCase: DiaryDetailUseCase
     let playMusicUseCase: PlayMusicUseCase
     let settingsUseCase: SettingsUseCase
+    let getAddressUseCase: GetAddressUseCase
     
     var diaryItem = PublishSubject<DiaryDetail>()
+    var addressSubject = PublishSubject<String>()
     var isPlaying = BehaviorSubject(value: false)
     var isReady = BehaviorSubject(value: false)
     var playerErrorStatus = PublishSubject<MusicError>()
@@ -35,10 +37,12 @@ final class DiaryDetailViewModel {
     init(itemIdentifier: String,
          getDetailUseCase: DiaryDetailUseCase = DiaryDetailUseCaseImpl(),
          playMusicUseCase: PlayMusicUseCase = PlayMusicUseCaseImpl(),
+         getAddressUseCase: GetAddressUseCase = GetAddressUseCaseImpl(),
          settingsUseCase: SettingsUseCase = SettingsUseCaseImpl()) {
         self.itemIdentifier = itemIdentifier
         self.getDetailUseCase = getDetailUseCase
         self.playMusicUseCase = playMusicUseCase
+        self.getAddressUseCase = getAddressUseCase
         self.settingsUseCase = settingsUseCase
         
         subscribePlayingStatus()
@@ -46,6 +50,7 @@ final class DiaryDetailViewModel {
         subscribePlayerError()
         setupMusicPlayer()
         autoPlay()
+        bindAddress()
     }
     
     func testDataInsert() {
@@ -117,6 +122,13 @@ final class DiaryDetailViewModel {
                     self?.toggleMusicPlayer()
                 }
             })
+    func getAddress(by location: Location) {
+        getAddressUseCase.getAddress(by: location)
+    }
+    
+    func bindAddress() {
+        getAddressUseCase.addressSubject
+            .bind(to: addressSubject)
             .disposed(by: disposeBag)
     }
 }

@@ -102,6 +102,8 @@
 		988414DB2923606B007C9132 /* DiaryListUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 988414DA2923606B007C9132 /* DiaryListUseCase.swift */; };
 		9894EAF529373385005F2B15 /* SettingsUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9894EAF429373385005F2B15 /* SettingsUseCase.swift */; };
 		9894EAF829375281005F2B15 /* DarkMode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9894EAF729375281005F2B15 /* DarkMode.swift */; };
+		98AE6A88294450520039A666 /* MapViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98AE6A87294450520039A666 /* MapViewModel.swift */; };
+		98AE6A8A29445F2A0039A666 /* GetAddressUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98AE6A8929445F2A0039A666 /* GetAddressUseCase.swift */; };
 		98B5263E292CA46C00446413 /* TagView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98B5263D292CA46C00446413 /* TagView.swift */; };
 		98B52640292CB92900446413 /* MusicContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98B5263F292CB92900446413 /* MusicContentView.swift */; };
 		98B5EF342941B85A00287405 /* ImageUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98B5EF332941B85A00287405 /* ImageUseCase.swift */; };
@@ -111,7 +113,7 @@
 		98BEE3702934A19800B20143 /* SettingsSwitchCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98BEE36F2934A19800B20143 /* SettingsSwitchCell.swift */; };
 		98F5AD2A292DDDEB00E53E25 /* LocationContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98F5AD29292DDDEB00E53E25 /* LocationContentView.swift */; };
 		98FDF8A1292F56580083FA05 /* Location.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98FDF8A0292F56580083FA05 /* Location.swift */; };
-		98FDF8A3292F5CCA0083FA05 /* MapKitViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98FDF8A2292F5CCA0083FA05 /* MapKitViewController.swift */; };
+		98FDF8A3292F5CCA0083FA05 /* MapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98FDF8A2292F5CCA0083FA05 /* MapViewController.swift */; };
 		98FDF8A5292F7A350083FA05 /* UIView+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98FDF8A4292F7A350083FA05 /* UIView+.swift */; };
 /* End PBXBuildFile section */
 
@@ -208,6 +210,8 @@
 		988414DA2923606B007C9132 /* DiaryListUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiaryListUseCase.swift; sourceTree = "<group>"; };
 		9894EAF429373385005F2B15 /* SettingsUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsUseCase.swift; sourceTree = "<group>"; };
 		9894EAF729375281005F2B15 /* DarkMode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DarkMode.swift; sourceTree = "<group>"; };
+		98AE6A87294450520039A666 /* MapViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapViewModel.swift; sourceTree = "<group>"; };
+		98AE6A8929445F2A0039A666 /* GetAddressUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetAddressUseCase.swift; sourceTree = "<group>"; };
 		98B5263D292CA46C00446413 /* TagView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TagView.swift; sourceTree = "<group>"; };
 		98B5263F292CB92900446413 /* MusicContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MusicContentView.swift; sourceTree = "<group>"; };
 		98B5EF332941B85A00287405 /* ImageUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageUseCase.swift; sourceTree = "<group>"; };
@@ -217,7 +221,7 @@
 		98BEE36F2934A19800B20143 /* SettingsSwitchCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsSwitchCell.swift; sourceTree = "<group>"; };
 		98F5AD29292DDDEB00E53E25 /* LocationContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationContentView.swift; sourceTree = "<group>"; };
 		98FDF8A0292F56580083FA05 /* Location.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Location.swift; sourceTree = "<group>"; };
-		98FDF8A2292F5CCA0083FA05 /* MapKitViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapKitViewController.swift; sourceTree = "<group>"; };
+		98FDF8A2292F5CCA0083FA05 /* MapViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapViewController.swift; sourceTree = "<group>"; };
 		98FDF8A4292F7A350083FA05 /* UIView+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -367,6 +371,7 @@
 				7940FB32292E065F00276EFC /* DiaryDetailUseCase.swift */,
 				791529D72932F364005A8DDB /* DiaryEditUseCase.swift */,
 				98138D4C2940F53F00D2CEDF /* LocationUseCase.swift */,
+				98AE6A8929445F2A0039A666 /* GetAddressUseCase.swift */,
 				66A8CF682937945300C17F84 /* UserDetailUseCase.swift */,
 				9894EAF429373385005F2B15 /* SettingsUseCase.swift */,
 				4F307A49293889C200FA36A0 /* SearchMusicUseCase.swift */,
@@ -384,6 +389,7 @@
 				982B3B7E292E68FB0077A44B /* DiaryDetailViewModel.swift */,
 				4F5291DD293F065D00DF930A /* DiaryEditViewModel.swift */,
 				988414D829235345007C9132 /* DiaryCollectionViewModel.swift */,
+				98AE6A87294450520039A666 /* MapViewModel.swift */,
 				983AE9D72935CEE2006547BD /* SettingsViewModel.swift */,
 				66A8CF602935F44100C17F84 /* MyPageViewModel.swift */,
 			);
@@ -398,7 +404,7 @@
 				982A3698292C905300FDC6CF /* DiaryDetailViewController.swift */,
 				4FA05B96292DFCCC00AFB020 /* DiaryEditViewController.swift */,
 				666E6F8D291CFADD00CECD4B /* MyPageViewController.swift */,
-				98FDF8A2292F5CCA0083FA05 /* MapKitViewController.swift */,
+				98FDF8A2292F5CCA0083FA05 /* MapViewController.swift */,
 				6692A9EE292F605E00DDA835 /* SettingsViewController.swift */,
 			);
 			path = ViewController;
@@ -665,6 +671,7 @@
 				9841D6172925FACC00318EA9 /* LoginUseCase.swift in Sources */,
 				66A8CF6D29379A9900C17F84 /* UserDetailEndpoint.swift in Sources */,
 				4FEBFAAD291CF62E00E78139 /* DiaryDetail.swift in Sources */,
+				98AE6A88294450520039A666 /* MapViewModel.swift in Sources */,
 				4FEBFAB1291CFB5500E78139 /* SHMediaItem+.swift in Sources */,
 				98003E0E293F20F6009FBC35 /* DarkModeManager.swift in Sources */,
 				66A8CF692937945300C17F84 /* UserDetailUseCase.swift in Sources */,
@@ -714,11 +721,12 @@
 				666E6F8E291CFADD00CECD4B /* MyPageViewController.swift in Sources */,
 				4F6F74B1292C9BF3007E7AC1 /* UserInfo.swift in Sources */,
 				98FDF8A5292F7A350083FA05 /* UIView+.swift in Sources */,
-				98FDF8A3292F5CCA0083FA05 /* MapKitViewController.swift in Sources */,
+				98FDF8A3292F5CCA0083FA05 /* MapViewController.swift in Sources */,
 				983AE9D6293514E8006547BD /* SettingsActionSheetCell.swift in Sources */,
 				4FA3242B2923646F00DB04D5 /* DiaryListItemEndpoint.swift in Sources */,
 				791837FF292225DC00BC6992 /* UIColor+.swift in Sources */,
 				4F307A4A293889C200FA36A0 /* SearchMusicUseCase.swift in Sources */,
+				98AE6A8A29445F2A0039A666 /* GetAddressUseCase.swift in Sources */,
 				666E6F7F291CF46800CECD4B /* AppCoordinator.swift in Sources */,
 				791529DC29332CF2005A8DDB /* ImageDTO.swift in Sources */,
 				9841D61B2926131200318EA9 /* LoginViewModel.swift in Sources */,
@@ -880,6 +888,7 @@
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = Segno/Resource/Info.plist;
 				INFOPLIST_KEY_NSAppleMusicUsageDescription = "";
+				INFOPLIST_KEY_NSCameraUsageDescription = "";
 				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "위치 정보를 받아오기 위해 권한이 필요합니다.";
 				INFOPLIST_KEY_NSMicrophoneUsageDescription = "음악 검색 기능을 위해 마이크 사용 허가가 필요합니다.";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
@@ -912,6 +921,7 @@
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = Segno/Resource/Info.plist;
 				INFOPLIST_KEY_NSAppleMusicUsageDescription = "";
+				INFOPLIST_KEY_NSCameraUsageDescription = "";
 				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "위치 정보를 받아오기 위해 권한이 필요합니다.";
 				INFOPLIST_KEY_NSMicrophoneUsageDescription = "음악 검색 기능을 위해 마이크 사용 허가가 필요합니다.";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;

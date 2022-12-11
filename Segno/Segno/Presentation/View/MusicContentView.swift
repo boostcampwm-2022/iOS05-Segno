@@ -101,7 +101,8 @@ final class MusicContentView: UIView {
     func setMusic(info: MusicInfo) {
         titleLabel.text = info.title
         artistLabel.text = info.artist
-        albumArtImageView.kf.setImage(with: info.imageURL)
+        guard let imageURL = info.imageURL else { return }
+        albumArtImageView.kf.setImage(with: URL(string: imageURL))
     }
     
     func activatePlayButton(isReady status: Bool) {

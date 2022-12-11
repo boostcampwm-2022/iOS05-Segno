@@ -30,6 +30,11 @@ final class DiaryEditViewController: UIViewController {
         static let textFieldFontSize: CGFloat = 12
         static let padding: CGFloat = 12
         static let titlePlaceholder = "제목을 입력하세요."
+        static let pickerActionSheetTitle = "옵션 선택"
+        static let pickerActionSheetMessage = "원하는 옵션을 선택하세요."
+        static let libaryText = "앨범"
+        static let cameraText = "카메라"
+        static let cancelText = "취소"
         static let bodyPlaceholder = "내용을 입력하세요."
         static let musicPlaceholder = "지금 이 음악은 뭘까요?"
         static let searching = "검색 중입니다..."
@@ -223,12 +228,14 @@ final class DiaryEditViewController: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        
         tabBarController?.tabBar.isHidden = true
         registerForKeyboardNotification()
     }
     
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
+        
         tabBarController?.tabBar.isHidden = false
         removeRegisterForKeyboardNotification()
     }
@@ -328,13 +335,29 @@ final class DiaryEditViewController: UIViewController {
         photoImageViewTapGesture.rx.event
             .bind(onNext: { recognizer in
                 self.view.endEditing(true)
-                self.present(self.imagePicker, animated: true)
+                self.presentPickerActionSheet()
             })
             .disposed(by: disposeBag)
     }
     
+    private func presentPickerActionSheet() {
+        let alert = UIAlertController(title: Metric.pickerActionSheetTitle, message: Metric.pickerActionSheetMessage, preferredStyle: .actionSheet)
+        let libraryAction = UIAlertAction(title: Metric.libaryText, style: .default) { _ in
+            self.imagePicker.sourceType = .photoLibrary
+            self.present(self.imagePicker, animated: true)
+        }
+        let cameraAction = UIAlertAction(title: Metric.cameraText, style: .default) { _ in
+            self.imagePicker.sourceType = .camera
+            self.present(self.imagePicker, animated: true)
+        }
+        let cancelAction = UIAlertAction(title: Metric.cancelText, style: .cancel)
+        alert.addAction(libraryAction)
+        alert.addAction(cameraAction)
+        alert.addAction(cancelAction)
+        present(alert, animated: true, completion: nil)
+    }
+    
     private func setImagePicker() {
-        imagePicker.sourceType = .photoLibrary
         imagePicker.allowsEditing = true
         imagePicker.delegate = self
     }
@@ -484,9 +507,9 @@ extension DiaryEditViewController {
             dateFormatter.locale = Locale(identifier: "ko_KR")
             title = dateFormatter.string(from: Date())
         }
-        var bodyText: String?
+        guard var bodyText = bodyTextView.text else { return }
         if bodyTextView.text == Metric.bodyPlaceholder || bodyTextView.text.isEmpty {
-            bodyText = nil
+            bodyText = ""
         }
         viewModel.saveDiary(title: title, body: bodyText, tags: tags, imageData: imageData)
 

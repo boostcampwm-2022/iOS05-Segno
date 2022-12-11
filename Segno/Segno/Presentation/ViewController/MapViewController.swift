@@ -1,5 +1,5 @@
 //
-//  MapKitViewController.swift
+//  MapViewController.swift
 //  Segno
 //
 //  Created by YOONJONG on 2022/11/24.
@@ -8,9 +8,11 @@
 import MapKit
 import UIKit
 
+import RxCocoa
+import RxSwift
 import SnapKit
 
-class MapKitViewController: UIViewController {
+class MapViewController: UIViewController {
 
     private enum Metric {
         static let topSpace: CGFloat = 30
@@ -27,6 +29,10 @@ class MapKitViewController: UIViewController {
         titleLabel.text = "위치"
         return titleLabel
     }()
+    
+    private let viewModel: MapViewModel
+    private let disposeBag = DisposeBag()
+    private let location: Location
     
     private lazy var closeButton: UIButton = {
         let closeButton = UIButton()
@@ -55,9 +61,11 @@ class MapKitViewController: UIViewController {
         return addressLabel
     }()
     
-    init(location: Location) {
+    init(viewModel: MapViewModel, location: Location) {
+        self.viewModel = viewModel
+        self.location = location
+
         super.init(nibName: nil, bundle: nil)
-        setupMapView(location: location)
     }
     
     required init?(coder: NSCoder) {
@@ -69,9 +77,17 @@ class MapKitViewController: UIViewController {
         super.viewDidLoad()
 
         setupLayout()
+        setupMapView()
+        bindAddressItem()
     }
     
-    private func setupMapView(location: Location) {
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        debugPrint("====", location)
+        getAddress()
+    }
+    
+    private func setupMapView() {
         let latitude = location.latitude
         let longitude = location.longitude
         let locationCoordinate = CLLocationCoordinate2D(latitude: latitude, longitude: longitude)
@@ -79,12 +95,9 @@ class MapKitViewController: UIViewController {
         let region = MKCoordinateRegion(center: locationCoordinate, span: span)
         
         let annotation = MKPointAnnotation()
-        annotation.title = "여기지롱"
         annotation.coordinate = locationCoordinate
         mapView.setRegion(region, animated: true)
         mapView.addAnnotation(annotation)
-        
-        bindLocationItem(location: location)
     }
     
     private func setupLayout() {
@@ -113,9 +126,16 @@ class MapKitViewController: UIViewController {
         }
     }
     
-    private func bindLocationItem(location: Location) {
+    private func bindAddressItem() {
         // TODO: Location to Address 변환 작업
-        addressLabel.text = "경기도 수원시 영통구 덕영대로 1732"
+        viewModel.addressSubject
+            .bind(to: addressLabel.rx.text)
+            .disposed(by: disposeBag)
+//        addressLabel.text = "경기도 수원시 영통구 덕영대로 1732"
+    }
+    
+    private func getAddress() {
+        viewModel.getAddress(by: location)
     }
 }
 
@@ -124,7 +144,8 @@ import SwiftUI
 
 struct MapKitViewController_Preview: PreviewProvider {
     static var previews: some View {
-        MapKitViewController(
+        MapViewController(
+            viewModel: MapViewModel(),
             location: Location(latitude: 37.248128, longitude: 127.076597)
         )
             .showPreview(.iPhone14Pro)

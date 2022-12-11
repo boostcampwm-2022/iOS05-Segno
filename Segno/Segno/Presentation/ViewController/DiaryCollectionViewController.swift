@@ -51,6 +51,8 @@ final class DiaryCollectionViewController: UIViewController {
         return bar
     }()
     
+    private lazy var refreshControl = UIRefreshControl()
+    
     private lazy var diaryCollectionView: UICollectionView = {
         let layout = makeCollectionViewLayout()
         let collectionView = UICollectionView(frame: .zero, collectionViewLayout: layout)
@@ -88,7 +90,13 @@ final class DiaryCollectionViewController: UIViewController {
         
         dataSource = makeDataSource()
         bindDataSource()
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
         getDatasource()
+        updateSnapshot(with: searchBar.text)
     }
     
     private func setupView() {
@@ -112,6 +120,8 @@ final class DiaryCollectionViewController: UIViewController {
         appendButton.layer.masksToBounds = true
         
         appendButton.setBackgroundColor(.appColor(.color4) ?? .red, for: .normal)
+        
+        diaryCollectionView.refreshControl = refreshControl
     }
 
     private func setupLayout() {
@@ -157,6 +167,12 @@ final class DiaryCollectionViewController: UIViewController {
                 self.appendButtonTapped()
             }
             .disposed(by: disposeBag)
+        
+        refreshControl.rx.controlEvent(.valueChanged)
+            .withUnretained(self)
+            .subscribe(onNext: { _ in
+                self.refresh()
+            }).disposed(by: disposeBag)
     }
     
     private func setRecognizer() {
@@ -167,6 +183,12 @@ final class DiaryCollectionViewController: UIViewController {
     
     @objc private func singleTapMethod(sender: UITapGestureRecognizer) {
         view.endEditing(true)
+    }
+    
+    @objc func refresh(){
+        getDatasource()
+        updateSnapshot(with: searchBar.text)
+        refreshControl.endRefreshing()
     }
     
     private func makeDataSource() -> DataSource {
