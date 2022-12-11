@@ -499,8 +499,16 @@ extension DiaryEditViewController {
     }
     
     private func saveDiary() {
-        guard let imageData = photoImageView.image?.jpegData(compressionQuality: 1),
-              var title = titleTextField.text else { return }
+        guard photoImageView.image != Metric.imageViewStockImage else {
+            makeOKAlert(title: "사진이 없습니다.", message: "사진은 필수 입력 항목입니다.")
+            return
+        }
+        
+        guard let imageData = photoImageView.image?.jpegData(compressionQuality: 1) else {
+            return
+        }
+        
+        guard var title = titleTextField.text else { return }
         if title.isEmpty {
             let dateFormatter = DateFormatter()
             dateFormatter.dateFormat = "yyyy년 MM월 dd일 HH시 mm분에 저장된 세뇨입니다."
