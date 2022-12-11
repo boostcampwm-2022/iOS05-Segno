@@ -25,7 +25,7 @@ final class DiaryCell: UICollectionViewCell {
         label.adjustsFontSizeToFitWidth = true
         label.font = .appFont(.shiningStar, size: Metric.labelFontSize)
         label.textAlignment = .center
-        label.textColor = .appColor(.black)
+        label.textColor = .appColor(.label)
         return label
     }()
     

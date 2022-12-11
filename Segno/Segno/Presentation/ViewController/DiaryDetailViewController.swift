@@ -80,6 +80,7 @@ final class DiaryDetailViewController: UIViewController {
         let imageView = UIImageView()
         imageView.backgroundColor = .appColor(.color3)
         imageView.layer.cornerRadius = Metric.standardCornerRadius
+        imageView.clipsToBounds = true
         return imageView
     }()
     
