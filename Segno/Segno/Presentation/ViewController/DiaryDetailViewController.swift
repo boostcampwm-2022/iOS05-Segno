@@ -104,6 +104,18 @@ final class DiaryDetailViewController: UIViewController {
         return locationContentView
     }()
     
+    private lazy var editBarButtonItem: UIBarButtonItem = {
+        let item = UIBarButtonItem(barButtonSystemItem: .edit, target: self, action: nil)
+        item.tintColor = UIColor.appColor(.color4)
+        return item
+    }()
+    
+    private lazy var trashBarButtonItem: UIBarButtonItem = {
+        let item = UIBarButtonItem(barButtonSystemItem: .trash, target: self, action: nil)
+        item.tintColor = UIColor.appColor(.color4)
+        return item
+    }()
+    
     init(viewModel: DiaryDetailViewModel) {
         self.viewModel = viewModel
         
@@ -117,6 +129,7 @@ final class DiaryDetailViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        setupView()
         setupLayout()
         bindDiaryItem()
 //        viewModel.testDataInsert() // 임시 투입 메서드입니다.
@@ -135,6 +148,10 @@ final class DiaryDetailViewController: UIViewController {
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         self.view.endEditing(true)
+    }
+    
+    private func setupView() {
+        navigationItem.rightBarButtonItems = [trashBarButtonItem, editBarButtonItem]
     }
     
     private func setupLayout() {
