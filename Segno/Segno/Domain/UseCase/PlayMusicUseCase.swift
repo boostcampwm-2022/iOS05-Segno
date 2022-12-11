@@ -14,6 +14,7 @@ protocol PlayMusicUseCase {
     func togglePlayer()
     func stopPlaying()
     func subscribePlayingStatus() -> Observable<Bool>
+    func subscribeDownloadStatus() -> Observable<Bool>
     func subscribePlayerError() -> Observable<MusicError>
 }
 
@@ -38,6 +39,10 @@ final class PlayMusicUseCaseImpl: PlayMusicUseCase {
     
     func subscribePlayingStatus() -> Observable<Bool> {
         return musicRepository.subscribePlayingStatus()
+    }
+    
+    func subscribeDownloadStatus() -> Observable<Bool> {
+        return musicRepository.subscribeDownloadStatus()
     }
     
     func subscribePlayerError() -> Observable<MusicError> {

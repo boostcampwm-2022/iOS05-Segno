@@ -120,7 +120,7 @@ final class DiaryDetailViewController: UIViewController {
         setupLayout()
         bindDiaryItem()
         getDiary()
-        viewModel.testDataInsert() // 임시 투입 메서드입니다.
+//        viewModel.testDataInsert() // 임시 투입 메서드입니다.
     }
     
     override func viewWillDisappear(_ animated: Bool) {
@@ -237,6 +237,13 @@ final class DiaryDetailViewController: UIViewController {
             .observe(on: MainScheduler.instance)
             .subscribe(onNext: { [weak self] status in
                 self?.musicContentView.changeButtonIcon(isPlaying: status)
+            })
+            .disposed(by: disposeBag)
+        
+        viewModel.isReady
+            .observe(on: MainScheduler.instance)
+            .subscribe(onNext: { [weak self] status in
+                self?.musicContentView.activatePlayButton(isReady: status)
             })
             .disposed(by: disposeBag)
         

@@ -18,6 +18,7 @@ final class DiaryDetailViewModel {
     
     var diaryItem = PublishSubject<DiaryDetail>()
     var isPlaying = BehaviorSubject(value: false)
+    var isReady = BehaviorSubject(value: false)
     var playerErrorStatus = PublishSubject<MusicError>()
     
     // TODO: DiaryDetail에 date 추가
@@ -41,9 +42,10 @@ final class DiaryDetailViewModel {
         self.settingsUseCase = settingsUseCase
         
         subscribePlayingStatus()
+        subscribeDownloadStatus()
         subscribePlayerError()
         setupMusicPlayer()
-        // 오토플레이 메서드를 잠시 후에 실행 (혹은 다운로드가 끝나면 실행)
+        autoPlay()
     }
     
     func testDataInsert() {
@@ -83,6 +85,14 @@ final class DiaryDetailViewModel {
             .disposed(by: disposeBag)
     }
     
+    func subscribeDownloadStatus() {
+        playMusicUseCase.subscribeDownloadStatus()
+            .subscribe(onNext: { [weak self] status in
+                self?.isReady.onNext(status)
+            })
+            .disposed(by: disposeBag)
+    }
+    
     func subscribePlayerError() {
         playMusicUseCase.subscribePlayerError()
             .subscribe(onNext: { [weak self] error in
@@ -94,11 +104,19 @@ final class DiaryDetailViewModel {
     func autoPlay() {
         switch settingsUseCase.getAutoPlayMode() {
         case true:
-            debugPrint(true)
-            toggleMusicPlayer()
+            subscribeAutoPlay()
         case false:
-            debugPrint(false)
             return
         }
+    }
+    
+    func subscribeAutoPlay() {
+        isReady
+            .subscribe(onNext: { [weak self] status in
+                if status == true {
+                    self?.toggleMusicPlayer()
+                }
+            })
+            .disposed(by: disposeBag)
     }
 }

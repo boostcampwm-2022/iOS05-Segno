@@ -17,10 +17,14 @@ final class MusicSession {
         return playerState.playbackStatus == .playing
     }
     private var playingStatus = BehaviorSubject(value: false)
+    private var isReady = BehaviorSubject(value: false)
     private var errorStatus = PublishSubject<MusicError>()
     
     var playingStatusObservable: Observable<Bool> {
         return playingStatus.asObservable()
+    }
+    var downloadStatusObservable: Observable<Bool> {
+        return isReady.asObservable()
     }
     var errorStatusObservable: Observable<MusicError> {
         return errorStatus.asObservable()
@@ -42,6 +46,7 @@ final class MusicSession {
                     let response = try await request.response()
                     if let item = response.items.first {
                         player.queue = [item]
+                        isReady.onNext(true)
                     }
                 } catch {
                     handleMusicError(.failedToFetch)
