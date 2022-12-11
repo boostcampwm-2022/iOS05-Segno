@@ -54,6 +54,8 @@ final class DiaryDetailViewController: UIViewController {
         return label
     }()
     
+    private lazy var userId: String = ""
+    
     private lazy var titleLabel: MarqueeLabel = {
         let label = MarqueeLabel(frame: .zero, rate: 32, fadeLength: 32.0)
         label.font = .appFont(.surround, size: Metric.titleFontSize)
@@ -131,8 +133,9 @@ final class DiaryDetailViewController: UIViewController {
         
         setupView()
         setupLayout()
+        setupRx()
+        
         bindDiaryItem()
-//        viewModel.testDataInsert() // 임시 투입 메서드입니다.
         bindAddress()
     }
     
@@ -204,8 +207,24 @@ final class DiaryDetailViewController: UIViewController {
         }
     }
     
+    private func setupRx() {
+        trashBarButtonItem.rx.tap
+            .withUnretained(self)
+            .bind { _ in
+                self.trashButtonTapped()
+            }
+            .disposed(by: disposeBag)
+    }
+    
     private func bindDiaryItem() {
         dateLabel.text = "11/22 14:54"
+        
+        viewModel.userIdObservable
+            .observe(on: MainScheduler.instance)
+            .subscribe(onNext: { [weak self] userId in
+                self?.userId = userId
+            })
+            .disposed(by: disposeBag)
         
         viewModel.titleObservable
             .observe(on: MainScheduler.instance)
@@ -255,7 +274,7 @@ final class DiaryDetailViewController: UIViewController {
         viewModel.addressSubject
             .observe(on: MainScheduler.instance)
             .subscribe(onNext: { [weak self] address in
-                self?.locationContentView.locationLabel.text  = address
+                self?.locationContentView.locationLabel.text = address
             })
             .disposed(by: disposeBag)
         
@@ -301,6 +320,12 @@ final class DiaryDetailViewController: UIViewController {
     
     private func getAddress(by location: Location) {
         viewModel.getAddress(by: location)
+    }
+    
+    private func trashButtonTapped() {
+        makeCancelOKAlert(title: "해당 Segno를 삭제하시겠습니까?", message: "") { _ in
+            print(self.userId)
+        }
     }
 }
 
