@@ -25,6 +25,7 @@ final class DiaryCell: UICollectionViewCell {
         label.adjustsFontSizeToFitWidth = true
         label.font = .appFont(.shiningStar, size: Metric.labelFontSize)
         label.textAlignment = .center
+        label.textColor = .appColor(.black)
         return label
     }()
     
@@ -46,7 +47,6 @@ final class DiaryCell: UICollectionViewCell {
         
         thumbnailImageView.image = UIImage(systemName: "photo.on.rectangle")
         thumbnailImageView.tintColor = .appColor(.color4)
-        titleLabel.text = "Title"
     }
     
     private func setupLayout() {
