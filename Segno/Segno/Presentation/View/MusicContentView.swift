@@ -7,6 +7,7 @@
 
 import UIKit
 
+import MarqueeLabel
 import RxSwift
 import SnapKit
 
@@ -21,6 +22,7 @@ final class MusicContentView: UIView {
         static let albumArtImageViewSize: CGFloat = 30
         static let albumArtCornerRadius: CGFloat = 5
         static let playButtonSize: CGFloat = 30
+        static let playButtonCornerRadius = playButtonSize / 2
         static let playImage = UIImage(systemName: "play.fill")
         static let pauseImage = UIImage(systemName: "pause.fill")
     }
@@ -35,20 +37,16 @@ final class MusicContentView: UIView {
         return imageView
     }()
     
-    private lazy var titleLabel: UILabel = {
-        let label = UILabel()
+    private lazy var musicInfoLabel: MarqueeLabel = {
+        let label = MarqueeLabel(frame: .zero, rate: 32, fadeLength: 32.0)
         label.font = .appFont(.surround, size: Metric.fontSize)
-        return label
-    }()
-    
-    private lazy var artistLabel: UILabel = {
-        let label = UILabel()
-        label.font = .appFont(.surroundAir, size: Metric.fontSize)
         return label
     }()
     
     private lazy var playButton: UIButton = {
         let button = UIButton()
+        button.backgroundColor = .appColor(.color3)
+        button.layer.cornerRadius = Metric.playButtonCornerRadius
         button.setImage(Metric.playImage, for: .normal)
         button.tintColor = .appColor(.black)
         button.rx.tap
@@ -70,7 +68,7 @@ final class MusicContentView: UIView {
     }
     
     private func setLayout() {
-        [albumArtImageView, titleLabel, artistLabel, playButton].forEach {
+        [albumArtImageView, musicInfoLabel, playButton].forEach {
             addSubview($0)
         }
         
@@ -80,14 +78,12 @@ final class MusicContentView: UIView {
             $0.leading.equalTo(Metric.spacing)
         }
         
-        titleLabel.snp.makeConstraints {
+        musicInfoLabel.snp.makeConstraints {
             $0.centerY.equalToSuperview()
-            $0.leading.equalTo(albumArtImageView.snp.trailing).offset(Metric.spacing)
-        }
-        
-        artistLabel.snp.makeConstraints {
-            $0.centerY.equalToSuperview()
-            $0.leading.equalTo(titleLabel.snp.trailing).offset(Metric.spacing)
+            $0.leading.equalTo(albumArtImageView.snp.trailing)
+                .offset(Metric.spacing)
+            $0.trailing.equalTo(playButton.snp.leading)
+                .offset(-Metric.spacing)
         }
         
         playButton.snp.makeConstraints {
@@ -98,8 +94,7 @@ final class MusicContentView: UIView {
     }
     
     func setMusic(info: MusicInfo) {
-        titleLabel.text = info.title
-        artistLabel.text = info.artist
+        musicInfoLabel.text = "\(info.artist) - \(info.title)  "
         guard let imageURL = info.imageURL else { return }
         albumArtImageView.setImage(urlString: imageURL)
     }
