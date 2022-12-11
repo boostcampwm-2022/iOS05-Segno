@@ -237,6 +237,7 @@ final class DiaryEditViewController: UIViewController {
         
         tabBarController?.tabBar.isHidden = false
         removeRegisterForKeyboardNotification()
+        viewModel.stopLocation()
     }
     
     private func setupView() {
