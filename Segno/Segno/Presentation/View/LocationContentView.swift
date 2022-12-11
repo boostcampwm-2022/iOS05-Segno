@@ -44,7 +44,7 @@ final class LocationContentView: UIView {
     private lazy var mapButton: UIButton = {
         let button = UIButton()
         button.setImage(UIImage(systemName: "map.fill"), for: .normal)
-        button.tintColor = .appColor(.black)
+        button.tintColor = .appColor(.label)
         button.rx.tap
             .bind { [weak self] in
                 debugPrint("===>", self?.location)

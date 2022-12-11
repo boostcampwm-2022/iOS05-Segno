@@ -51,7 +51,7 @@ final class MusicContentView: UIView {
     private lazy var playButton: UIButton = {
         let button = UIButton()
         button.setImage(Metric.playImage, for: .normal)
-        button.tintColor = .appColor(.black)
+        button.tintColor = .appColor(.label)
         button.rx.tap
             .bind { [weak self] in
                 self?.delegate?.playButtonTapped()
