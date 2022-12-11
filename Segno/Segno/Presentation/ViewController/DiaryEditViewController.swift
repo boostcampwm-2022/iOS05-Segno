@@ -97,8 +97,6 @@ final class DiaryEditViewController: UIViewController {
         textView.font = .appFont(.shiningStar, size: Metric.mediumFontSize)
         textView.text = Metric.bodyPlaceholder
         textView.textColor = .appColor(.grey3)
-        textView.layer.borderColor = UIColor.appColor(.color4)?.cgColor
-        textView.layer.borderWidth = 1
         textView.layer.cornerRadius = Metric.standardCornerRadius
         textView.textContainerInset = .init(top: Metric.padding, left: Metric.padding, bottom: Metric.padding, right: Metric.padding)
         textView.delegate = self
