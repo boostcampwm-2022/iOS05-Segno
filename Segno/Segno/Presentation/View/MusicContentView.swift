@@ -105,6 +105,10 @@ final class MusicContentView: UIView {
         albumArtImageView.kf.setImage(with: URL(string: imageURL))
     }
     
+    func activatePlayButton(isReady status: Bool) {
+        playButton.isEnabled = status
+    }
+    
     func changeButtonIcon(isPlaying status: Bool) {
         switch status {
         case true:

@@ -14,11 +14,15 @@ final class DiaryDetailViewModel {
     private let itemIdentifier: String
     let getDetailUseCase: DiaryDetailUseCase
     let playMusicUseCase: PlayMusicUseCase
+    let settingsUseCase: SettingsUseCase
     let getAddressUseCase: GetAddressUseCase
     
     var diaryItem = PublishSubject<DiaryDetail>()
     var addressSubject = PublishSubject<String>()
     var isPlaying = BehaviorSubject(value: false)
+    var isReady = BehaviorSubject(value: false)
+    var playerErrorStatus = PublishSubject<MusicError>()
+    
     // TODO: DiaryDetail에 date 추가
     // lazy var dateObservable = diaryItem.map { $0.date }
     lazy var titleObservable = diaryItem.map { $0.title }
@@ -33,15 +37,19 @@ final class DiaryDetailViewModel {
     init(itemIdentifier: String,
          getDetailUseCase: DiaryDetailUseCase = DiaryDetailUseCaseImpl(),
          playMusicUseCase: PlayMusicUseCase = PlayMusicUseCaseImpl(),
-         getAddressUseCase: GetAddressUseCase = GetAddressUseCaseImpl()
-    ) {
+         getAddressUseCase: GetAddressUseCase = GetAddressUseCaseImpl(),
+         settingsUseCase: SettingsUseCase = SettingsUseCaseImpl()) {
         self.itemIdentifier = itemIdentifier
         self.getDetailUseCase = getDetailUseCase
         self.playMusicUseCase = playMusicUseCase
         self.getAddressUseCase = getAddressUseCase
+        self.settingsUseCase = settingsUseCase
         
-        debugPrint(itemIdentifier)
+        subscribePlayingStatus()
+        subscribeDownloadStatus()
+        subscribePlayerError()
         setupMusicPlayer()
+        autoPlay()
         bindAddress()
     }
     
@@ -67,19 +75,53 @@ final class DiaryDetailViewModel {
     }
     
     func toggleMusicPlayer() {
-        guard let status = try? isPlaying.value() else {
-            return
-        }
-        
-        status ? isPlaying.onNext(false) : isPlaying.onNext(true)
         playMusicUseCase.togglePlayer()
     }
     
     func stopMusic() {
-        isPlaying.onNext(false)
         playMusicUseCase.stopPlaying()
     }
     
+    func subscribePlayingStatus() {
+        playMusicUseCase.subscribePlayingStatus()
+            .subscribe(onNext: { [weak self] status in
+                self?.isPlaying.onNext(status)
+            })
+            .disposed(by: disposeBag)
+    }
+    
+    func subscribeDownloadStatus() {
+        playMusicUseCase.subscribeDownloadStatus()
+            .subscribe(onNext: { [weak self] status in
+                self?.isReady.onNext(status)
+            })
+            .disposed(by: disposeBag)
+    }
+    
+    func subscribePlayerError() {
+        playMusicUseCase.subscribePlayerError()
+            .subscribe(onNext: { [weak self] error in
+                self?.playerErrorStatus.onNext(error)
+            })
+            .disposed(by: disposeBag)
+    }
+    
+    func autoPlay() {
+        switch settingsUseCase.getAutoPlayMode() {
+        case true:
+            subscribeAutoPlay()
+        case false:
+            return
+        }
+    }
+    
+    func subscribeAutoPlay() {
+        isReady
+            .subscribe(onNext: { [weak self] status in
+                if status == true {
+                    self?.toggleMusicPlayer()
+                }
+            })
     func getAddress(by location: Location) {
         getAddressUseCase.getAddress(by: location)
     }

@@ -119,8 +119,10 @@ final class DiaryDetailViewController: UIViewController {
         
         setupLayout()
         bindDiaryItem()
+//        viewModel.testDataInsert() // 임시 투입 메서드입니다.
         bindAddress()
     }
+    
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
@@ -197,7 +199,6 @@ final class DiaryDetailViewController: UIViewController {
             .observe(on: MainScheduler.instance)
             .subscribe(onNext: { [weak self] tags in
                 tags.forEach { tagTitle in
-                    debugPrint(tagTitle)
                     let tagView = TagView(tagTitle: tagTitle)
                     self?.tagStackView.addArrangedSubview(tagView)
                 }
@@ -225,19 +226,12 @@ final class DiaryDetailViewController: UIViewController {
             })
             .disposed(by: disposeBag)
         
-        viewModel.isPlaying
-            .observe(on: MainScheduler.instance)
-            .subscribe(onNext: { [weak self] status in
-                self?.musicContentView.changeButtonIcon(isPlaying: status)
-            })
-            .disposed(by: disposeBag)
-        
         viewModel.locationObservable
             .compactMap { $0 }
             .map { $0.createCLLocation() }
             .observe(on: MainScheduler.instance)
             .subscribe(onNext: { [weak self] location in
-                self?.locationContentView.setLocation(cllocation: location)
+                self?.locationContentView.setLocation(location: location)
             })
             .disposed(by: disposeBag)
         
@@ -247,6 +241,29 @@ final class DiaryDetailViewController: UIViewController {
                 self?.locationContentView.locationLabel.text  = address
             })
             .disposed(by: disposeBag)
+        
+        subscribeMusicPlayer()
+    }
+    
+    private func subscribeMusicPlayer() {
+        viewModel.isPlaying
+            .observe(on: MainScheduler.instance)
+            .subscribe(onNext: { [weak self] status in
+                self?.musicContentView.changeButtonIcon(isPlaying: status)
+            })
+            .disposed(by: disposeBag)
+        
+        viewModel.isReady
+            .observe(on: MainScheduler.instance)
+            .subscribe(onNext: { [weak self] status in
+                self?.musicContentView.activatePlayButton(isReady: status)
+            })
+            .disposed(by: disposeBag)
+        
+        viewModel.playerErrorStatus
+            .observe(on: MainScheduler.instance)
+            .subscribe(onNext: { [weak self] error in
+                self?.makeOKAlert(title: "Error!", message: error.localizedDescription)
     }
     
     private func bindAddress() {

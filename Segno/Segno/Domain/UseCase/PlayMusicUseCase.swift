@@ -7,10 +7,15 @@
 
 import Foundation
 
+import RxSwift
+
 protocol PlayMusicUseCase {
     func setupPlayer(_ song: MusicInfo?)
     func togglePlayer()
     func stopPlaying()
+    func subscribePlayingStatus() -> Observable<Bool>
+    func subscribeDownloadStatus() -> Observable<Bool>
+    func subscribePlayerError() -> Observable<MusicError>
 }
 
 final class PlayMusicUseCaseImpl: PlayMusicUseCase {
@@ -30,5 +35,17 @@ final class PlayMusicUseCaseImpl: PlayMusicUseCase {
     
     func stopPlaying() {
         musicRepository.stopPlayingMusic()
+    }
+    
+    func subscribePlayingStatus() -> Observable<Bool> {
+        return musicRepository.subscribePlayingStatus()
+    }
+    
+    func subscribeDownloadStatus() -> Observable<Bool> {
+        return musicRepository.subscribeDownloadStatus()
+    }
+    
+    func subscribePlayerError() -> Observable<MusicError> {
+        return musicRepository.subscribePlayerError()
     }
 }

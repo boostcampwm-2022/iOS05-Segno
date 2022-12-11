@@ -7,12 +7,27 @@
 
 import MusicKit
 
+import RxSwift
+
 final class MusicSession {
     private lazy var player = ApplicationMusicPlayer.shared
     private lazy var playerState = player.state
     
     private var isPlaying: Bool {
         return playerState.playbackStatus == .playing
+    }
+    private var playingStatus = BehaviorSubject(value: false)
+    private var isReady = BehaviorSubject(value: false)
+    private var errorStatus = PublishSubject<MusicError>()
+    
+    var playingStatusObservable: Observable<Bool> {
+        return playingStatus.asObservable()
+    }
+    var downloadStatusObservable: Observable<Bool> {
+        return isReady.asObservable()
+    }
+    var errorStatusObservable: Observable<MusicError> {
+        return errorStatus.asObservable()
     }
     
     init() {
@@ -31,12 +46,13 @@ final class MusicSession {
                     let response = try await request.response()
                     if let item = response.items.first {
                         player.queue = [item]
+                        isReady.onNext(true)
                     }
                 } catch {
-                    debugPrint(MusicError.failedToFetch)
+                    handleMusicError(.failedToFetch)
                 }
             default:
-                debugPrint(MusicError.libraryAccessDenied)
+                handleMusicError(.libraryAccessDenied)
             }
         }
     }
@@ -47,6 +63,7 @@ final class MusicSession {
             playMusic()
         } else {
             player.pause()
+            playingStatus.onNext(false)
         }
     }
     
@@ -54,8 +71,9 @@ final class MusicSession {
         Task {
             do {
                 try await player.play()
+                playingStatus.onNext(true)
             } catch {
-                debugPrint(MusicError.failedToPlay)
+                handleMusicError(.failedToPlay)
             }
         }
     }
@@ -63,5 +81,11 @@ final class MusicSession {
     func stopMusic() {
         player.stop()
         player.queue = []
+        playingStatus.onNext(false)
+    }
+    
+    private func handleMusicError(_ error: MusicError) {
+        errorStatus.onNext(error)
+        playingStatus.onNext(false)
     }
 }
