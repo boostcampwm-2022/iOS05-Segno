@@ -31,7 +31,7 @@ final class MusicContentView: UIView {
     
     private lazy var albumArtImageView: UIImageView = {
         let imageView = UIImageView()
-        imageView.backgroundColor = .systemMint
+        imageView.backgroundColor = .appColor(.grey2)
         imageView.layer.cornerRadius = Metric.albumArtCornerRadius
         return imageView
     }()
