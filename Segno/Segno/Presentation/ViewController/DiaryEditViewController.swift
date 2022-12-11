@@ -21,6 +21,7 @@ final class DiaryEditViewController: UIViewController {
         
         // 스택 뷰 안에 들어가는 컨텐츠 설정
         static let majorContentHeight: CGFloat = 400
+        static let bodyContentHeight: CGFloat = 200
         static let minorContentHeight: CGFloat = 60
         static let semiMinorContentHeight: CGFloat = 40
         static let halfMinorContentHeight: CGFloat = 30
@@ -273,7 +274,7 @@ final class DiaryEditViewController: UIViewController {
         
         contentsStackView.addArrangedSubview(bodyTextView)
         bodyTextView.snp.makeConstraints {
-            $0.height.equalTo(Metric.majorContentHeight)
+            $0.height.equalTo(Metric.bodyContentHeight)
         }
         
         contentsStackView.addArrangedSubview(tagTextField)
