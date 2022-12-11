@@ -119,14 +119,12 @@ final class DiaryDetailViewController: UIViewController {
         
         setupLayout()
         bindDiaryItem()
-        getDiary()
-        
-//        viewModel.testDataInsert() // 임시 투입 메서드입니다.
+        bindAddress()
     }
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
-        bindAddress()
+        getDiary()
     }
     
     override func viewWillDisappear(_ animated: Bool) {
