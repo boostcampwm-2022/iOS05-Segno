@@ -30,6 +30,7 @@ final class DiaryDetailViewController: UIViewController {
         static let tagScrollViewHeight: CGFloat = 30
         static let musicContentViewHeight: CGFloat = 30
         static let locationContentViewHeight: CGFloat = 30
+        static let standardCornerRadius: CGFloat = 8
     }
     
     private let disposeBag = DisposeBag()
@@ -78,6 +79,7 @@ final class DiaryDetailViewController: UIViewController {
     private lazy var imageView: UIImageView = {
         let imageView = UIImageView()
         imageView.backgroundColor = .appColor(.color3)
+        imageView.layer.cornerRadius = Metric.standardCornerRadius
         return imageView
     }()
     
@@ -87,6 +89,7 @@ final class DiaryDetailViewController: UIViewController {
         textView.text = Metric.textViewPlaceHolder
         textView.font = .appFont(.shiningStar, size: Metric.textViewFontSize)
         textView.textColor = .appColor(.label)
+        textView.layer.cornerRadius = Metric.standardCornerRadius
         textView.isEditable = false
         textView.textContainerInset = UIEdgeInsets(top: Metric.textViewInset, left: Metric.textViewInset, bottom: Metric.textViewInset, right: Metric.textViewInset)
         return textView
