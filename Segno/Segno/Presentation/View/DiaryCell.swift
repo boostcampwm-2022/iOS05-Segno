@@ -70,10 +70,6 @@ final class DiaryCell: UICollectionViewCell {
     }
     
     func configure(with model: DiaryListItem) {
-        // TODO: 추후에 서버에서 path 받아오면 실행해주기
-//        if let path = model.imagePath {
-//            posterImageView.load(from: path)
-//        }
         titleLabel.text = model.title
         let imageURL = BaseURL.getImageURL(imagePath: model.thumbnailPath)
         thumbnailImageView.kf.setImage(with: imageURL)

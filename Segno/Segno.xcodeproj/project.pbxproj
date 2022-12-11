@@ -41,6 +41,7 @@
 		4FA324262923600C00DB04D5 /* DiaryListDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FA324252923600C00DB04D5 /* DiaryListDTO.swift */; };
 		4FA32428292363AB00DB04D5 /* DiaryRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FA32427292363AA00DB04D5 /* DiaryRepository.swift */; };
 		4FA3242B2923646F00DB04D5 /* DiaryListItemEndpoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FA3242A2923646F00DB04D5 /* DiaryListItemEndpoint.swift */; };
+		4FBB42192946333A0017DAB8 /* UIImageView+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FBB42182946333A0017DAB8 /* UIImageView+.swift */; };
 		4FCAC5C2292B5C9000BF9CDD /* LoginSession.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FCAC5C1292B5C9000BF9CDD /* LoginSession.swift */; };
 		4FEBFAAB291CF30E00E78139 /* DiaryListItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FEBFAAA291CF30E00E78139 /* DiaryListItem.swift */; };
 		4FEBFAAD291CF62E00E78139 /* DiaryDetail.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FEBFAAC291CF62E00E78139 /* DiaryDetail.swift */; };
@@ -148,6 +149,7 @@
 		4FA324252923600C00DB04D5 /* DiaryListDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiaryListDTO.swift; sourceTree = "<group>"; };
 		4FA32427292363AA00DB04D5 /* DiaryRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiaryRepository.swift; sourceTree = "<group>"; };
 		4FA3242A2923646F00DB04D5 /* DiaryListItemEndpoint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiaryListItemEndpoint.swift; sourceTree = "<group>"; };
+		4FBB42182946333A0017DAB8 /* UIImageView+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImageView+.swift"; sourceTree = "<group>"; };
 		4FCAC5C1292B5C9000BF9CDD /* LoginSession.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginSession.swift; sourceTree = "<group>"; };
 		4FEBFAAA291CF30E00E78139 /* DiaryListItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiaryListItem.swift; sourceTree = "<group>"; };
 		4FEBFAAC291CF62E00E78139 /* DiaryDetail.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiaryDetail.swift; sourceTree = "<group>"; };
@@ -359,6 +361,7 @@
 				4FEBFAB0291CFB5500E78139 /* SHMediaItem+.swift */,
 				7918380729233F7100BC6992 /* UIButton+.swift */,
 				4F51A6FE2940FE810039D86A /* UIViewController+.swift */,
+				4FBB42182946333A0017DAB8 /* UIImageView+.swift */,
 			);
 			path = Extension;
 			sourceTree = "<group>";
@@ -720,6 +723,7 @@
 				4F589DD9293FBA0900DB39E5 /* ShazamError.swift in Sources */,
 				666E6F8E291CFADD00CECD4B /* MyPageViewController.swift in Sources */,
 				4F6F74B1292C9BF3007E7AC1 /* UserInfo.swift in Sources */,
+				4FBB42192946333A0017DAB8 /* UIImageView+.swift in Sources */,
 				98FDF8A5292F7A350083FA05 /* UIView+.swift in Sources */,
 				98FDF8A3292F5CCA0083FA05 /* MapViewController.swift in Sources */,
 				983AE9D6293514E8006547BD /* SettingsActionSheetCell.swift in Sources */,
