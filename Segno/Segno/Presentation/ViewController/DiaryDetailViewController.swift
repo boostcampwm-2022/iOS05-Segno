@@ -86,7 +86,7 @@ final class DiaryDetailViewController: UIViewController {
         textView.backgroundColor = .appColor(.grey1)
         textView.text = Metric.textViewPlaceHolder
         textView.font = .appFont(.shiningStar, size: Metric.textViewFontSize)
-        textView.textColor = .appColor(.black)
+        textView.textColor = .appColor(.label)
         textView.isEditable = false
         textView.textContainerInset = UIEdgeInsets(top: Metric.textViewInset, left: Metric.textViewInset, bottom: Metric.textViewInset, right: Metric.textViewInset)
         return textView
