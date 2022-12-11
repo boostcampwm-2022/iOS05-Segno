@@ -45,10 +45,10 @@ final class MusicContentView: UIView {
     
     private lazy var playButton: UIButton = {
         let button = UIButton()
-        button.backgroundColor = .appColor(.color3)
+        button.backgroundColor = .appColor(.color4)
         button.layer.cornerRadius = Metric.playButtonCornerRadius
         button.setImage(Metric.playImage, for: .normal)
-        button.tintColor = .appColor(.black)
+        button.tintColor = .appColor(.white)
         button.rx.tap
             .bind { [weak self] in
                 self?.delegate?.playButtonTapped()
