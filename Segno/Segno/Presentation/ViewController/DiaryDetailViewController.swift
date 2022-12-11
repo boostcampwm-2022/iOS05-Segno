@@ -231,7 +231,7 @@ final class DiaryDetailViewController: UIViewController {
             .map { $0.createCLLocation() }
             .observe(on: MainScheduler.instance)
             .subscribe(onNext: { [weak self] location in
-                self?.locationContentView.setLocation(location: location)
+                self?.locationContentView.setLocation(cllocation: location)
             })
             .disposed(by: disposeBag)
         
@@ -264,6 +264,8 @@ final class DiaryDetailViewController: UIViewController {
             .observe(on: MainScheduler.instance)
             .subscribe(onNext: { [weak self] error in
                 self?.makeOKAlert(title: "Error!", message: error.localizedDescription)
+            })
+            .disposed(by: disposeBag)
     }
     
     private func bindAddress() {

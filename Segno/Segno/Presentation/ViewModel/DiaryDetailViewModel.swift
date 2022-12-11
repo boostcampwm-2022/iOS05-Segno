@@ -122,6 +122,9 @@ final class DiaryDetailViewModel {
                     self?.toggleMusicPlayer()
                 }
             })
+            .disposed(by: disposeBag)
+    }
+    
     func getAddress(by location: Location) {
         getAddressUseCase.getAddress(by: location)
     }
