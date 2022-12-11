@@ -35,6 +35,7 @@ final class AppCoordinator: Coordinator {
     
     func startTabBarCoordinator() {
         let tabBarCoordinator = TabBarCoordinator(navigationController)
+        tabBarCoordinator.delegate = self
         tabBarCoordinator.start()
         childCoordinators.append(tabBarCoordinator)
     }
@@ -45,5 +46,13 @@ extension AppCoordinator: LoginCoordinatorDelegate {
         childCoordinators = childCoordinators.filter { $0 === coordinator }
         
         startTabBarCoordinator()
+    }
+}
+
+extension AppCoordinator: TabBarCoordinatorDelegate {
+    func logoutButtonTapped() {
+        navigationController.popViewController(animated: true)
+        
+        startLoginCoordinator()
     }
 }
