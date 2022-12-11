@@ -25,7 +25,7 @@ enum DiaryDeleteEndpoint: Endpoint {
     var parameters: HTTPRequestParameter? {
         switch self {
         case .item(let token, let diaryId):
-            return HTTPRequestParameter.body(["token": token, "diaryId": diaryId])
+            return HTTPRequestParameter.body(["token": token, "id": diaryId])
         }
     }
 }

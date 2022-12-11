@@ -22,9 +22,11 @@ final class DiaryDetailViewModel {
     var isPlaying = BehaviorSubject(value: false)
     var isReady = BehaviorSubject(value: false)
     var playerErrorStatus = PublishSubject<MusicError>()
+    var isSucceed = PublishSubject<Bool>()
     
     // TODO: DiaryDetail에 date 추가
     // lazy var dateObservable = diaryItem.map { $0.date }
+    lazy var idObservable = diaryItem.map { $0.identifier }
     lazy var userIdObservable = diaryItem.map { $0.userId }
     lazy var titleObservable = diaryItem.map { $0.title }
     lazy var tagsObservable = diaryItem.map { $0.tags }
@@ -133,6 +135,18 @@ final class DiaryDetailViewModel {
     func bindAddress() {
         getAddressUseCase.addressSubject
             .bind(to: addressSubject)
+            .disposed(by: disposeBag)
+    }
+    
+    func deleteDiary(id: String) {
+        getDetailUseCase.deleteDiary(id: id)
+            .subscribe(onCompleted: { [weak self] in
+                debugPrint("delete 성공")
+                self?.isSucceed.onNext(true)
+            }, onError: { [weak self] _ in
+                debugPrint("delete 실패")
+                self?.isSucceed.onNext(false)
+            })
             .disposed(by: disposeBag)
     }
 }

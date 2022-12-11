@@ -54,7 +54,8 @@ final class DiaryDetailViewController: UIViewController {
         return label
     }()
     
-    private lazy var userId: String = ""
+    private lazy var diaryId: String = ""
+    private lazy var diaryUserId: String = ""
     
     private lazy var titleLabel: MarqueeLabel = {
         let label = MarqueeLabel(frame: .zero, rate: 32, fadeLength: 32.0)
@@ -219,10 +220,17 @@ final class DiaryDetailViewController: UIViewController {
     private func bindDiaryItem() {
         dateLabel.text = "11/22 14:54"
         
+        viewModel.idObservable
+            .observe(on: MainScheduler.instance)
+            .subscribe(onNext: { [weak self] id in
+                self?.diaryId = id
+            })
+            .disposed(by: disposeBag)
+        
         viewModel.userIdObservable
             .observe(on: MainScheduler.instance)
             .subscribe(onNext: { [weak self] userId in
-                self?.userId = userId
+                self?.diaryUserId = userId
             })
             .disposed(by: disposeBag)
         
@@ -279,6 +287,7 @@ final class DiaryDetailViewController: UIViewController {
             .disposed(by: disposeBag)
         
         subscribeMusicPlayer()
+        subscribeEditSucceed()
     }
     
     private func subscribeMusicPlayer() {
@@ -314,6 +323,20 @@ final class DiaryDetailViewController: UIViewController {
             .disposed(by: disposeBag)
     }
     
+    private func subscribeEditSucceed() {
+        viewModel.isSucceed
+            .observe(on: MainScheduler.instance)
+            .subscribe(onNext: { [weak self] result in
+                if result {
+                    self?.navigationController?.popViewController(animated: true)
+                } else {
+                    // TODO: 알럿
+                    self?.navigationController?.popViewController(animated: true)
+                }
+            })
+            .disposed(by: disposeBag)
+    }
+    
     private func getDiary() {
         viewModel.getDiary()
     }
@@ -324,7 +347,7 @@ final class DiaryDetailViewController: UIViewController {
     
     private func trashButtonTapped() {
         makeCancelOKAlert(title: "해당 Segno를 삭제하시겠습니까?", message: "") { _ in
-            print(self.userId)
+            self.viewModel.deleteDiary(id: self.diaryId)
         }
     }
 }

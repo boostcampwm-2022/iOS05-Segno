@@ -141,10 +141,10 @@ final class DiaryEditViewModel {
         
         diaryEditUseCase.postDiary(newDiary)
             .subscribe(onCompleted: { [weak self] in
-                debugPrint("전송 성공, 결과")
+                debugPrint("post 성공")
                 self?.isSucceed.onNext(true)
             }, onError: { [weak self] _ in
-                debugPrint("전송 실패")
+                debugPrint("post 실패")
                 self?.isSucceed.onNext(false)
             })
             .disposed(by: disposeBag)
