@@ -39,7 +39,6 @@ final class DiaryRepositoryImpl: DiaryRepository {
     
     func postDiary(_ newDiary: NewDiaryDetail) -> Single<NewDiaryDetailDTO> {
         let newDiaryDetailEndpoint = NewDiaryPostEndpoint.item(newDiary)
-        print("========= repository -> ", newDiary)
         
         let single = NetworkManager.shared.call(newDiaryDetailEndpoint)
             .map { try JSONDecoder().decode(NewDiaryDetailDTO.self, from: $0) }

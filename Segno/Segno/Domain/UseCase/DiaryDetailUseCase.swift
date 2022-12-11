@@ -22,6 +22,7 @@ final class DiaryDetailUseCaseImpl: DiaryDetailUseCase {
     func getDiary(id: String) -> Single<DiaryDetail> {
         return repository.getDiary(id: id).map {
             return DiaryDetail(identifier: $0.id,
+                               userId: $0.userId,
                                title: $0.title,
                                tags: $0.tags,
                                imagePath: $0.imagePath,

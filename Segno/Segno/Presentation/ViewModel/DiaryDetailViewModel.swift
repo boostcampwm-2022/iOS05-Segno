@@ -25,6 +25,7 @@ final class DiaryDetailViewModel {
     
     // TODO: DiaryDetail에 date 추가
     // lazy var dateObservable = diaryItem.map { $0.date }
+    lazy var userIdObservable = diaryItem.map { $0.userId }
     lazy var titleObservable = diaryItem.map { $0.title }
     lazy var tagsObservable = diaryItem.map { $0.tags }
     lazy var imagePathObservable = diaryItem.map { $0.imagePath }
