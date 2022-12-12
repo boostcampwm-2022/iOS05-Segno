@@ -14,6 +14,7 @@ import SnapKit
 
 protocol DiaryDetailViewDelegate: AnyObject {
     func mapButtonTapped(viewController: UIViewController, location: Location)
+    func editButtonTapped(diaryData: DiaryDetail?)
 }
 
 final class DiaryDetailViewController: UIViewController {
@@ -397,7 +398,7 @@ final class DiaryDetailViewController: UIViewController {
     }
     
     private func editButtonTapped() {
-        // TODO: editButton
+        delegate?.editButtonTapped(diaryData: viewModel.diaryData)
     }
     
     private func trashButtonTapped() {

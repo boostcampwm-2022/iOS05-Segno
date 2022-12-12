@@ -17,6 +17,7 @@ final class DiaryDetailViewModel {
     let settingsUseCase: SettingsUseCase
     let getAddressUseCase: GetAddressUseCase
     
+    var diaryData: DiaryDetail?
     var diaryItem = PublishSubject<DiaryDetail>()
     var addressSubject = PublishSubject<String>()
     var isPlaying = BehaviorSubject(value: false)
@@ -59,6 +60,7 @@ final class DiaryDetailViewModel {
         getDetailUseCase.getDiary(id: itemIdentifier)
             .subscribe(onSuccess: { [weak self] diary in
                 self?.diaryItem.onNext(diary)
+                self?.diaryData = diary
             }, onFailure: { error in
                 debugPrint(error.localizedDescription)
             }).disposed(by: disposeBag)

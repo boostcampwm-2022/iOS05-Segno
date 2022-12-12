@@ -18,8 +18,17 @@ final class DiaryEditViewModel {
     var addressSubject = PublishSubject<String>()
     
     private let disposeBag = DisposeBag()
-    var diaryDetail: DiaryDetail?
-    // 에딧 화면에 들어갈 여러 요소들
+    private var diaryItem = PublishSubject<DiaryDetail>()
+    private var diaryData: DiaryDetail?
+    private var isUpdating = false
+    
+    lazy var idObservable = diaryItem.map { $0.identifier }
+    lazy var titleObservable = diaryItem.map { $0.title }
+    lazy var tagsObservable = diaryItem.map { $0.tags }
+    lazy var imagePathObservable = diaryItem.map { $0.imagePath }
+    lazy var bodyObservable = diaryItem.map { $0.bodyText }
+    lazy var musicObservable = diaryItem.map { $0.musicInfo }
+    lazy var locationObservable = diaryItem.map { $0.location }
     
     let diaryEditUseCase: DiaryEditUseCase
     let diaryDetailUseCase: DiaryDetailUseCase
@@ -37,13 +46,15 @@ final class DiaryEditViewModel {
     var searchError = PublishSubject<ShazamError>()
     var isSucceed = PublishSubject<Bool>()
     
-    init(diaryEditUseCase: DiaryEditUseCase = DiaryEditUseCaseImpl(),
+    init(diaryData: DiaryDetail? = nil,
+         diaryEditUseCase: DiaryEditUseCase = DiaryEditUseCaseImpl(),
          diaryDetailUseCase: DiaryDetailUseCase = DiaryDetailUseCaseImpl(),
          searchMusicUseCase: SearchMusicUseCase = SearchMusicUseCaseImpl(),
          locationUseCase: LocationUseCase = LocationUseCaseImpl(),
          getAddressUseCase: GetAddressUseCase = GetAddressUseCaseImpl(),
          imageUseCase: ImageUseCase = ImageUseCaseImpl(),
          localUtilityManager: LocalUtilityManager = LocalUtilityManagerImpl()) {
+        self.diaryData = diaryData
         self.diaryEditUseCase = diaryEditUseCase
         self.diaryDetailUseCase = diaryDetailUseCase
         self.searchMusicUseCase = searchMusicUseCase
@@ -56,6 +67,13 @@ final class DiaryEditViewModel {
         subscribeSearchError()
         subscribeLocation()
         subscribeMusicInfo()
+    }
+    
+    func checkExistingDiary() {
+        if let diaryData {
+            diaryItem.onNext(diaryData)
+            isUpdating = true
+        }
     }
     
     func toggleSearchMusic() {

@@ -223,6 +223,9 @@ final class DiaryEditViewController: UIViewController {
         subscribeSearchError()
         subscribeLocationResult()
         subscribeEditSucceed()
+        subscribeExistingDiary()
+        
+        checkExistingDiary()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -327,6 +330,53 @@ final class DiaryEditViewController: UIViewController {
             $0.width.equalTo(Metric.minorContentHeight)
         }
         locationStackView.addArrangedSubview(locationInfoLabel)
+    }
+    
+    private func checkExistingDiary() {
+        viewModel.checkExistingDiary()
+    }
+    
+    private func subscribeExistingDiary() {
+        viewModel.titleObservable
+            .observe(on: MainScheduler.instance)
+            .subscribe(onNext: { [weak self] title in
+                self?.titleTextField.text = title
+            })
+            .disposed(by: disposeBag)
+        
+        viewModel.imagePathObservable
+            .observe(on: MainScheduler.instance)
+            .subscribe(onNext: { [weak self] path in
+                self?.photoImageView.setImage(imagePath: path)
+            })
+            .disposed(by: disposeBag)
+        
+        viewModel.bodyObservable
+            .observe(on: MainScheduler.instance)
+            .subscribe(onNext: { [weak self] body in
+                self?.bodyTextView.text = body
+            })
+            .disposed(by: disposeBag)
+        
+        viewModel.musicObservable
+            .observe(on: MainScheduler.instance)
+            .subscribe(onNext: { [weak self] info in
+                guard let info else { return }
+                self?.musicInfoLabel.text = "\(info.artist) - \(info.title)"
+            })
+            .disposed(by: disposeBag)
+        
+        viewModel.tagsObservable
+            .observe(on: MainScheduler.instance)
+            .subscribe(onNext: { [weak self] tags in
+                for tag in tags {
+                    let tagView = TagView(tagTitle: tag)
+                    self?.tagStackView.addArrangedSubview(tagView)
+                }
+            })
+            .disposed(by: disposeBag)
+        
+        
     }
     
     private func bindImageView() {
