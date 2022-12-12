@@ -13,11 +13,11 @@ protocol LoginUseCase {
 
 final class LoginUseCaseImpl: LoginUseCase {
     let repository: LoginRepository
-    let localUtilityRepository: LocalUtilityRepository
+    let localUtilityRepository: LocalUtilityManager
     private let disposeBag = DisposeBag()
 
     init(repository: LoginRepository = LoginRepositoryImpl(),
-         localUtilityRepository: LocalUtilityRepository = LocalUtilityRepositoryImpl()) {
+         localUtilityRepository: LocalUtilityManager = LocalUtilityManagerImpl()) {
         self.repository = repository
         self.localUtilityRepository = localUtilityRepository
     }
@@ -31,7 +31,7 @@ final class LoginUseCaseImpl: LoginUseCase {
                 
                 _ = self.localUtilityRepository.createToken(token: tokenString)
                 // TODO: 추후 아래 updateToken 삭제하기!
-                _ = self.localUtilityRepository.updateToken(token: "A1lmMjb2pgNWg6ZzAaPYgMcqRv/8BOyO4U/ui6i/Ic4=")
+                _ = self.localUtilityRepository.updateToken(token: "D62WywExHJYoNkLIEsKs+neMK3Fad27IcKtQKfrE3MI=")
                 return true
             }
     }

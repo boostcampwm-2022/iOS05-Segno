@@ -8,7 +8,7 @@
 import UIKit
 
 final class AppCoordinator: Coordinator {
-    let localUtilityRepository = LocalUtilityRepositoryImpl()
+    let localUtilityRepository = LocalUtilityManagerImpl()
     var navigationController: UINavigationController
     var childCoordinators: [Coordinator] = []
     

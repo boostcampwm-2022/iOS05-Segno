@@ -12,7 +12,7 @@ protocol SettingsRepository {
 }
 
 final class SettingsRepositoryImpl: SettingsRepository {
-    private let localUtilityRepository = LocalUtilityRepositoryImpl()
+    private let localUtilityRepository = LocalUtilityManagerImpl()
     
     func changeNickname(to nickname: String) -> Single<Bool> {
         let token = localUtilityRepository.getToken()

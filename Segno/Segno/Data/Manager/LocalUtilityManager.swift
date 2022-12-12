@@ -1,13 +1,13 @@
 //
-//  LocalUtilityRepository.swift
+//  LocalUtilityManager.swift
 //  Segno
 //
-//  Created by YOONJONG on 2022/11/14.
+//  Created by 이예준 on 2022/12/12.
 //
 
 import Foundation
 
-protocol LocalUtilityRepository {
+protocol LocalUtilityManager {
     func createToken(token: String) -> Bool
     func getToken() -> String
     func updateToken(token: String) -> Bool
@@ -16,7 +16,7 @@ protocol LocalUtilityRepository {
     func getUserDefaultsObject(forKey defaultsKey: UserDefaultsKey) -> Any?
 }
 
-final class LocalUtilityRepositoryImpl: LocalUtilityRepository {
+final class LocalUtilityManagerImpl: LocalUtilityManager {
     private let keyName: String = "userToken"
     
     func createToken(token: String) -> Bool {

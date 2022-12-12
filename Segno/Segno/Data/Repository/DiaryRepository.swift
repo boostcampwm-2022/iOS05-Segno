@@ -17,7 +17,7 @@ protocol DiaryRepository {
 }
 
 final class DiaryRepositoryImpl: DiaryRepository {
-    private let localUtilityRepository = LocalUtilityRepositoryImpl()
+    private let localUtilityRepository = LocalUtilityManagerImpl()
     
     func getDiaryListItem() -> Single<DiaryListDTO> {
         let endpoint = DiaryListItemEndpoint.item

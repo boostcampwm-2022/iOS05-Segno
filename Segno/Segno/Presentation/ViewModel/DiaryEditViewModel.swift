@@ -23,7 +23,7 @@ final class DiaryEditViewModel {
     let locationUseCase: LocationUseCase
     let getAddressUseCase: GetAddressUseCase
     let imageUseCase: ImageUseCase
-    let localUtilityRepository: LocalUtilityRepository
+    let localUtilityRepository: LocalUtilityManager
     
     var musicInfo: MusicInfo?
     
@@ -39,7 +39,7 @@ final class DiaryEditViewModel {
          locationUseCase: LocationUseCase = LocationUseCaseImpl(),
          getAddressUseCase: GetAddressUseCase = GetAddressUseCaseImpl(),
          imageUseCase: ImageUseCase = ImageUseCaseImpl(),
-         localUtilityRepository: LocalUtilityRepository = LocalUtilityRepositoryImpl()) {
+         localUtilityRepository: LocalUtilityManager = LocalUtilityManagerImpl()) {
         self.diaryEditUseCase = diaryEditUseCase
         self.diaryDetailUseCase = diaryDetailUseCase
         self.searchMusicUseCase = searchMusicUseCase

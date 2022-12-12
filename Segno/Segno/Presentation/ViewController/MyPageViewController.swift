@@ -35,7 +35,7 @@ protocol MyPageViewDelegate: AnyObject {
 final class MyPageViewController: UIViewController {
     private let disposeBag = DisposeBag()
     private let viewModel: MyPageViewModel
-    private let localUtilityRepository: LocalUtilityRepository
+    private let localUtilityRepository: LocalUtilityManager
     weak var mypageDelegate: MyPageViewDelegate?
     
     private enum Metric {
@@ -70,7 +70,7 @@ final class MyPageViewController: UIViewController {
     }()
     
     init(viewModel: MyPageViewModel = MyPageViewModel(),
-         localUtilityRepository: LocalUtilityRepository = LocalUtilityRepositoryImpl()) {
+         localUtilityRepository: LocalUtilityManager = LocalUtilityManagerImpl()) {
         self.viewModel = MyPageViewModel()
         self.localUtilityRepository = localUtilityRepository
         

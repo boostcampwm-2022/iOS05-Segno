@@ -47,6 +47,7 @@
 		4FEBFAAD291CF62E00E78139 /* DiaryDetail.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FEBFAAC291CF62E00E78139 /* DiaryDetail.swift */; };
 		4FEBFAAF291CF9F300E78139 /* MusicInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FEBFAAE291CF9F300E78139 /* MusicInfo.swift */; };
 		4FEBFAB1291CFB5500E78139 /* SHMediaItem+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FEBFAB0291CFB5500E78139 /* SHMediaItem+.swift */; };
+		66541BFB2947723F00AE25FB /* LocalUtilityManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66541BFA2947723F00AE25FB /* LocalUtilityManager.swift */; };
 		666E6F7D291CF45600CECD4B /* Coordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 666E6F7C291CF45600CECD4B /* Coordinator.swift */; };
 		666E6F7F291CF46800CECD4B /* AppCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 666E6F7E291CF46800CECD4B /* AppCoordinator.swift */; };
 		666E6F81291CF49E00CECD4B /* LoginCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 666E6F80291CF49E00CECD4B /* LoginCoordinator.swift */; };
@@ -97,7 +98,6 @@
 		983AE9D82935CEE2006547BD /* SettingsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 983AE9D72935CEE2006547BD /* SettingsViewModel.swift */; };
 		9841D6172925FACC00318EA9 /* LoginUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9841D6162925FACC00318EA9 /* LoginUseCase.swift */; };
 		9841D61B2926131200318EA9 /* LoginViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9841D61A2926131200318EA9 /* LoginViewModel.swift */; };
-		988414AE2922235B007C9132 /* LocalUtilityRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 988414AD2922235B007C9132 /* LocalUtilityRepository.swift */; };
 		988414D72923304F007C9132 /* KeychainError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 988414D62923304F007C9132 /* KeychainError.swift */; };
 		988414D929235345007C9132 /* DiaryCollectionViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 988414D829235345007C9132 /* DiaryCollectionViewModel.swift */; };
 		988414DB2923606B007C9132 /* DiaryListUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 988414DA2923606B007C9132 /* DiaryListUseCase.swift */; };
@@ -155,6 +155,7 @@
 		4FEBFAAC291CF62E00E78139 /* DiaryDetail.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiaryDetail.swift; sourceTree = "<group>"; };
 		4FEBFAAE291CF9F300E78139 /* MusicInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MusicInfo.swift; sourceTree = "<group>"; };
 		4FEBFAB0291CFB5500E78139 /* SHMediaItem+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "SHMediaItem+.swift"; sourceTree = "<group>"; };
+		66541BFA2947723F00AE25FB /* LocalUtilityManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalUtilityManager.swift; sourceTree = "<group>"; };
 		666E6F7C291CF45600CECD4B /* Coordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Coordinator.swift; sourceTree = "<group>"; };
 		666E6F7E291CF46800CECD4B /* AppCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppCoordinator.swift; sourceTree = "<group>"; };
 		666E6F80291CF49E00CECD4B /* LoginCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginCoordinator.swift; sourceTree = "<group>"; };
@@ -206,7 +207,6 @@
 		983AE9D72935CEE2006547BD /* SettingsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsViewModel.swift; sourceTree = "<group>"; };
 		9841D6162925FACC00318EA9 /* LoginUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginUseCase.swift; sourceTree = "<group>"; };
 		9841D61A2926131200318EA9 /* LoginViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewModel.swift; sourceTree = "<group>"; };
-		988414AD2922235B007C9132 /* LocalUtilityRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalUtilityRepository.swift; sourceTree = "<group>"; };
 		988414D62923304F007C9132 /* KeychainError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeychainError.swift; sourceTree = "<group>"; };
 		988414D829235345007C9132 /* DiaryCollectionViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiaryCollectionViewModel.swift; sourceTree = "<group>"; };
 		988414DA2923606B007C9132 /* DiaryListUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiaryListUseCase.swift; sourceTree = "<group>"; };
@@ -456,7 +456,6 @@
 			isa = PBXGroup;
 			children = (
 				4FA3242429235FF800DB04D5 /* DTO */,
-				988414AD2922235B007C9132 /* LocalUtilityRepository.swift */,
 				4FA32427292363AA00DB04D5 /* DiaryRepository.swift */,
 				982A2A462924AE74006F6ACD /* UserDefaultsKey.swift */,
 				4F4E0D3D2924B925005ABA8F /* LoginRepository.swift */,
@@ -551,6 +550,7 @@
 			isa = PBXGroup;
 			children = (
 				98003E0D293F20F6009FBC35 /* DarkModeManager.swift */,
+				66541BFA2947723F00AE25FB /* LocalUtilityManager.swift */,
 			);
 			path = Manager;
 			sourceTree = "<group>";
@@ -678,7 +678,6 @@
 				4FEBFAB1291CFB5500E78139 /* SHMediaItem+.swift in Sources */,
 				98003E0E293F20F6009FBC35 /* DarkModeManager.swift in Sources */,
 				66A8CF692937945300C17F84 /* UserDetailUseCase.swift in Sources */,
-				988414AE2922235B007C9132 /* LocalUtilityRepository.swift in Sources */,
 				982A4FC12941F481005AEB1D /* NewDiaryPostEndpoint.swift in Sources */,
 				66A8CF612935F44100C17F84 /* MyPageViewModel.swift in Sources */,
 				98138D4D2940F53F00D2CEDF /* LocationUseCase.swift in Sources */,
@@ -739,6 +738,7 @@
 				98B5263E292CA46C00446413 /* TagView.swift in Sources */,
 				4F307A4C29388D4600FA36A0 /* MusicRepository.swift in Sources */,
 				7940FB2F292E063100276EFC /* DiaryDetailDTO.swift in Sources */,
+				66541BFB2947723F00AE25FB /* LocalUtilityManager.swift in Sources */,
 				4F4E0D7629252236005ABA8F /* LoginEndpoint.swift in Sources */,
 				791529D82932F364005A8DDB /* DiaryEditUseCase.swift in Sources */,
 				4FA324262923600C00DB04D5 /* DiaryListDTO.swift in Sources */,

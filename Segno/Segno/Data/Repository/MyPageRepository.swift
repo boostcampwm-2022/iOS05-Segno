@@ -14,7 +14,7 @@ protocol MyPageRepository {
 }
 
 final class MyPageRepositoryImpl: MyPageRepository {
-    private let localUtilityRepository = LocalUtilityRepositoryImpl()
+    private let localUtilityRepository = LocalUtilityManagerImpl()
     
     func getUserDetail() -> Single<UserDetailDTO> {
         let token = localUtilityRepository.getToken()
