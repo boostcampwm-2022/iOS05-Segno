@@ -221,6 +221,20 @@ final class DiaryDetailViewController: UIViewController {
     }
     
     private func setupRx() {
+        reportBarButtonItem.rx.tap
+            .withUnretained(self)
+            .bind { _ in
+                self.reportButtonTapped()
+            }
+            .disposed(by: disposeBag)
+        
+        editBarButtonItem.rx.tap
+            .withUnretained(self)
+            .bind { _ in
+                self.editButtonTapped()
+            }
+            .disposed(by: disposeBag)
+        
         trashBarButtonItem.rx.tap
             .withUnretained(self)
             .bind { _ in
@@ -242,6 +256,8 @@ final class DiaryDetailViewController: UIViewController {
         // TODO: [weak self]로는 에러가 많이 떠서 [self]로 하니 됨. 수정 필요.
             .subscribe(onNext: { [self] diaryUserId in
                 let userId = localUtilityManager.getToken(key: "userId")
+                print("self : \(userId)")
+                print("diary: \(diaryUserId)")
                 if userId == diaryUserId {
                     navigationItem.rightBarButtonItems = [trashBarButtonItem, editBarButtonItem]
                 } else {
@@ -372,6 +388,16 @@ final class DiaryDetailViewController: UIViewController {
         for subview in tagStackView.subviews {
             subview.removeFromSuperview()
         }
+    }
+    
+    private func reportButtonTapped() {
+        makeCancelOKAlert(title: "해당 Segno를 신고하시겠습니까?", message: "") { _ in
+            self.makeOKAlert(title: "해당 Segno를 신고하였습니다.", message: "관리자가 확인 후 조치하도록 하겠습니다.")
+        }
+    }
+    
+    private func editButtonTapped() {
+        // TODO: editButton
     }
     
     private func trashButtonTapped() {
