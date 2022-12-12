@@ -12,10 +12,10 @@ import RxSwift
 class DarkModeManager {
     static let shared = DarkModeManager()
     
-    let repository: LocalUtilityRepository
+    let repository: LocalUtilityManager
     
     private init() {
-        self.repository = LocalUtilityRepositoryImpl()
+        self.repository = LocalUtilityManagerImpl()
     }
     
     func getDarkMode() -> Int {

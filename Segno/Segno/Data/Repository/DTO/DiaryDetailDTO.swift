@@ -42,16 +42,4 @@ struct DiaryDetailDTO: Decodable {
         case id = "_id"
         case userId, date, title, tags, imagePath, bodyText, musicInfo, location
     }
-    
-    #if DEBUG
-    static let example = DiaryDetailDTO(
-        id: "id",
-        userId: "userId",
-        date: "date",
-        title: "title",
-        tags: ["tag1", "tag2"],
-        imagePath: "test.png",
-        bodyText: "bodyText"
-    )
-    #endif
 }

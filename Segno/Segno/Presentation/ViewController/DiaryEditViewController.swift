@@ -489,6 +489,7 @@ extension DiaryEditViewController {
         viewModel.isSucceed
             .observe(on: MainScheduler.instance)
             .subscribe(onNext: { [weak self] result in
+                // TODO: Coordinator로 이동
                 if result {
                     self?.navigationController?.popViewController(animated: true)
                 } else {
@@ -520,12 +521,13 @@ extension DiaryEditViewController {
             dateFormatter.locale = Locale(identifier: "ko_KR")
             title = dateFormatter.string(from: Date())
         }
+        
         guard var bodyText = bodyTextView.text else { return }
         if bodyTextView.text == Metric.bodyPlaceholder || bodyTextView.text.isEmpty {
             bodyText = ""
         }
+        
         viewModel.saveDiary(title: title, body: bodyText, tags: tags, imageData: imageData)
-
     }
 }
 
