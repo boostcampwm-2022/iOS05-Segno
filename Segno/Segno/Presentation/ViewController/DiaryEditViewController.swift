@@ -36,6 +36,7 @@ final class DiaryEditViewController: UIViewController {
         static let pickerActionSheetMessage = "원하는 옵션을 선택하세요."
         static let cameraAccessDeniedTitle = "카메라 권한 설정 필요"
         static let cameraAccessDeniedMessage = "카메라 권한 설정이 필요합니다. 설정 - Segno에서 카메라 권한을 허가해주세요."
+        static let micAccessDeniedTitle = "마이크 권한 설정 필요"
         static let libaryText = "앨범"
         static let cameraText = "카메라"
         static let cancelText = "취소"
@@ -488,7 +489,7 @@ extension DiaryEditViewController {
         viewModel.searchError
             .observe(on: MainScheduler.instance)
             .subscribe(onNext: { [weak self] error in
-                self?.makeOKAlert(title: "Error!", message: error.errorDescription) { _ in
+                self?.makeOKAlert(title: Metric.micAccessDeniedTitle , message: error.errorDescription) { _ in
                     self?.musicInfoLabel.text = Metric.musicNotFound
                 }
             })
