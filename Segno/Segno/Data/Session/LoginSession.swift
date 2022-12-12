@@ -11,6 +11,11 @@ import Foundation
 import RxSwift
 
 final class LoginSession: NSObject {
+    private enum Metric {
+        static let errorTitle: String = "로그인 실패"
+        static let errorMessage: String = "다시 시도해주세요."
+        static let parsingErrorMessage: String = "파싱 오류"
+    }
     private let presenter: LoginViewController
     var authorizationController: ASAuthorizationController?
     var appleEmail = PublishSubject<String>()
@@ -37,6 +42,7 @@ extension LoginSession: ASAuthorizationControllerDelegate {
               let data = auth.identityToken,
               let email = parseEmailFromJWT(data) else {
             debugPrint(LoginError.failedToDecodeUserInfo.localizedDescription)
+            presenter.makeOKAlert(title: Metric.errorTitle, message: Metric.parsingErrorMessage)
             return
         }
         
@@ -45,6 +51,7 @@ extension LoginSession: ASAuthorizationControllerDelegate {
     
     func authorizationController(controller: ASAuthorizationController, didCompleteWithError error: Error) {
         debugPrint(LoginError.failedToCompleteLogin.localizedDescription)
+        presenter.makeOKAlert(title: Metric.errorTitle, message: Metric.errorMessage)
     }
 }
 
