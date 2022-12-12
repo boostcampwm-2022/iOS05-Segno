@@ -18,7 +18,7 @@ protocol LocationContentViewDelegate: AnyObject {
 
 final class LocationContentView: UIView {
     private enum Metric {
-        static let fontSize: CGFloat = 16
+        static let fontSize: CGFloat = 12
         static let spacing: CGFloat = 10
         static let mapButtonSize: CGFloat = 30
         static let mapButtonCornerRadius = mapButtonSize / 2
@@ -31,7 +31,7 @@ final class LocationContentView: UIView {
     
     private lazy var titleLabel: UILabel = {
         let label = UILabel()
-        label.font = .appFont(.surround, size: Metric.fontSize)
+        label.font = .systemFont(ofSize: Metric.fontSize, weight: .bold)
         label.text = Metric.titleText
         return label
     }()
@@ -39,7 +39,7 @@ final class LocationContentView: UIView {
     lazy var locationLabel: UILabel = {
         let label = UILabel()
         label.adjustsFontSizeToFitWidth = true
-        label.font = .appFont(.surroundAir, size: Metric.fontSize)
+        label.font = .systemFont(ofSize: Metric.fontSize)
         return label
     }()
     
@@ -82,10 +82,10 @@ final class LocationContentView: UIView {
         
         locationLabel.snp.makeConstraints {
             $0.centerY.equalToSuperview()
-            $0.leading.equalTo(titleLabel.snp.trailing)
-                .offset(Metric.spacing)
             $0.trailing.equalTo(mapButton.snp.leading)
                 .offset(-Metric.spacing)
+            $0.leading.equalTo(titleLabel.snp.trailing)
+                .offset(Metric.spacing)
         }
         
         mapButton.snp.makeConstraints {

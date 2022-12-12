@@ -75,7 +75,7 @@ final class DiaryEditViewController: UIViewController {
     // TODO: 이미지 뷰를 버튼처럼 활용할 수 있도록 액션 연결
     private lazy var titleTextField: UITextField = {
         let textField = UITextField()
-        textField.font = .appFont(.surroundAir, size: Metric.mediumFontSize)
+        textField.font = .systemFont(ofSize: Metric.mediumFontSize)
         textField.placeholder = Metric.titlePlaceholder
         return textField
     }()
@@ -108,7 +108,7 @@ final class DiaryEditViewController: UIViewController {
         textField.placeholder = Metric.tagPlaceholder
         textField.leftView = Metric.leftView
         textField.leftViewMode = .always
-        textField.font = .appFont(.surroundAir, size: Metric.textFieldFontSize)
+        textField.font = .systemFont(ofSize: Metric.textFieldFontSize)
         textField.layer.cornerRadius = Metric.standardCornerRadius
         textField.delegate = self
         return textField
@@ -152,7 +152,7 @@ final class DiaryEditViewController: UIViewController {
     
     private lazy var musicInfoLabel: MarqueeLabel = {
         let label = MarqueeLabel(frame: .zero, rate: 32, fadeLength: 32.0)
-        label.font = .appFont(.surroundAir, size: Metric.smallFontSize)
+        label.font = .systemFont(ofSize: Metric.smallFontSize)
         label.text = Metric.musicPlaceholder
         label.trailingBuffer = 16.0
         return label
@@ -181,7 +181,7 @@ final class DiaryEditViewController: UIViewController {
     
     private lazy var locationInfoLabel: UILabel = {
         let label = UILabel()
-        label.font = .appFont(.surroundAir, size: Metric.smallFontSize)
+        label.font = .systemFont(ofSize: Metric.smallFontSize)
         label.text = Metric.locationPlaceholder
         label.adjustsFontSizeToFitWidth = true
         return label
@@ -192,7 +192,7 @@ final class DiaryEditViewController: UIViewController {
         button.backgroundColor = .appColor(.color4)
         button.layer.cornerRadius = Metric.semiMinorCornerRadius
         button.setTitle(Metric.saveButtonTitle, for: .normal)
-        button.titleLabel?.font = .appFont(.surroundAir, size: Metric.smallFontSize)
+        button.titleLabel?.font = .systemFont(ofSize: Metric.smallFontSize)
         return button
     }()
     

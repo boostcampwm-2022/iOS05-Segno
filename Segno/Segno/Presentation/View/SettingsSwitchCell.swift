@@ -13,12 +13,12 @@ import SnapKit
 final class SettingsSwitchCell: UITableViewCell {
     private enum Metric {
         static let edgeSpacing: CGFloat = 20
-        static let labelFontSize: CGFloat = 20
+        static let labelFontSize: CGFloat = 16
     }
     
     private lazy var titleLabel: UILabel = {
         let label = UILabel()
-        label.font = .appFont(.shiningStar, size: Metric.labelFontSize)
+        label.font = .systemFont(ofSize: Metric.labelFontSize)
         return label
     }()
     

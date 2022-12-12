@@ -25,6 +25,7 @@ final class DiaryCollectionViewController: UIViewController {
     }
     
     private enum Metric {
+        static let title = "Segno"
         static let buttonFontSize: CGFloat = 80
         static let buttonLabelOffset: CGFloat = 7
         static let buttonOffset: CGFloat = -20
@@ -74,7 +75,8 @@ final class DiaryCollectionViewController: UIViewController {
         let item = UIBarButtonItem(title: "리스트", style: .plain, target: self, action: nil)
         item.tintColor = UIColor.appColor(.color4)
         item.setTitleTextAttributes([
-            NSAttributedString.Key.font: UIFont.appFont(.surroundAir, size: Metric.navigationBackButtonTitleSize)], for: .normal)
+            NSAttributedString.Key.font: UIFont.systemFont(ofSize: Metric.navigationBackButtonTitleSize)
+        ], for: .normal)
         return item
     }()
     
@@ -110,9 +112,9 @@ final class DiaryCollectionViewController: UIViewController {
     private func setupView() {
         view.backgroundColor = .appColor(.background)
         
-        title = "일기 리스트"
+        title = Metric.title
         navigationController?.navigationBar.titleTextAttributes = [
-            NSAttributedString.Key.font: UIFont.appFont(.surround, size: Metric.navigationTitleSize),
+            NSAttributedString.Key.font: UIFont.systemFont(ofSize: Metric.navigationTitleSize, weight: .bold),
             NSAttributedString.Key.foregroundColor: UIColor.appColor(.color4) ?? .red
         ]
         

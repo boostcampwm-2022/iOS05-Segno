@@ -51,7 +51,7 @@ final class MyPageViewController: UIViewController {
     
     private lazy var titleLabel: UILabel = {
         let label = UILabel()
-        label.font = .appFont(.surround, size: Metric.titleFontSize)
+        label.font = .systemFont(ofSize: Metric.titleFontSize, weight: .bold)
         label.numberOfLines = 0
         label.text = Metric.titleText
         return label
@@ -98,14 +98,15 @@ final class MyPageViewController: UIViewController {
         view.backgroundColor = .appColor(.background)
         
         navigationController?.navigationBar.titleTextAttributes = [
-            NSAttributedString.Key.font: UIFont.appFont(.surround, size: Metric.navigationTitleSize),
+            NSAttributedString.Key.font: UIFont.systemFont(ofSize: Metric.navigationTitleSize),
             NSAttributedString.Key.foregroundColor: UIColor.appColor(.color4) ?? .red
         ]
         
         let backBarButtonItem = UIBarButtonItem(title: Metric.mypageText, style: .plain, target: self, action: nil)
         backBarButtonItem.tintColor = UIColor.appColor(.color4)
         backBarButtonItem.setTitleTextAttributes([
-            NSAttributedString.Key.font: UIFont.appFont(.surroundAir, size: Metric.navigationBackButtonTitleSize)], for: .normal)
+            NSAttributedString.Key.font: UIFont.systemFont(ofSize: Metric.navigationBackButtonTitleSize)
+        ], for: .normal)
         navigationItem.backBarButtonItem = backBarButtonItem
     }
     

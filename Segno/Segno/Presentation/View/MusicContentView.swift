@@ -17,7 +17,7 @@ protocol MusicContentViewDelegate: AnyObject {
 
 final class MusicContentView: UIView {
     private enum Metric {
-        static let fontSize: CGFloat = 16
+        static let fontSize: CGFloat = 12
         static let spacing: CGFloat = 10
         static let albumArtImageViewSize: CGFloat = 30
         static let albumArtCornerRadius: CGFloat = 5
@@ -39,7 +39,8 @@ final class MusicContentView: UIView {
     
     private lazy var musicInfoLabel: MarqueeLabel = {
         let label = MarqueeLabel(frame: .zero, rate: 32, fadeLength: 32.0)
-        label.font = .appFont(.surround, size: Metric.fontSize)
+//        label.font = .appFont(.surround, size: Metric.fontSize)
+        label.font = .systemFont(ofSize: Metric.fontSize)
         return label
     }()
     
@@ -80,10 +81,10 @@ final class MusicContentView: UIView {
         
         musicInfoLabel.snp.makeConstraints {
             $0.centerY.equalToSuperview()
-            $0.leading.equalTo(albumArtImageView.snp.trailing)
-                .offset(Metric.spacing)
             $0.trailing.equalTo(playButton.snp.leading)
                 .offset(-Metric.spacing)
+            $0.leading.equalTo(albumArtImageView.snp.trailing)
+                .offset(Metric.spacing)
         }
         
         playButton.snp.makeConstraints {

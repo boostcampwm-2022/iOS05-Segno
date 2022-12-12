@@ -13,7 +13,7 @@ import SnapKit
 
 final class SettingsActionSheetCell: UITableViewCell {
     private enum Metric {
-        static let labelFontSize: CGFloat = 20
+        static let labelFontSize: CGFloat = 16
         static let edgeSpacing: CGFloat = 20
         static let cellWidth: CGFloat = UIScreen.main.bounds.width
         static let cellHeight: CGFloat = 44
@@ -26,19 +26,19 @@ final class SettingsActionSheetCell: UITableViewCell {
     
     private lazy var leftLabel: UILabel = {
         let label = UILabel()
-        label.font = .appFont(.shiningStar, size: Metric.labelFontSize)
+        label.font = .systemFont(ofSize: Metric.labelFontSize)
         return label
     }()
     
     private lazy var centerLabel: UILabel = {
         let label = UILabel()
-        label.font = .appFont(.shiningStar, size: Metric.labelFontSize)
+        label.font = .systemFont(ofSize: Metric.labelFontSize)
         return label
     }()
     
     private lazy var rightLabel: UILabel = {
         let label = UILabel()
-        label.font = .appFont(.shiningStar, size: Metric.labelFontSize)
+        label.font = .systemFont(ofSize: Metric.labelFontSize)
         return label
     }()
     

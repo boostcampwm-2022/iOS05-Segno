@@ -26,6 +26,7 @@ final class SettingsViewController: UIViewController {
         static let darkModeSettingString: String = "다크 모드 설정"
         static let cancelMessage: String = "취소"
         
+        static let navigationTitleSize: CGFloat = 20
         static let nicknameCellHeight: CGFloat = 100
         static let otherCellsHeight: CGFloat = 44
         static let separatorInset: CGFloat = 15
@@ -64,6 +65,11 @@ final class SettingsViewController: UIViewController {
     private func setupView() {
         title = Metric.settingString
         view.backgroundColor = .appColor(.background)
+        
+        navigationController?.navigationBar.titleTextAttributes = [
+            NSAttributedString.Key.font: UIFont.systemFont(ofSize: Metric.navigationTitleSize, weight: .bold),
+            NSAttributedString.Key.foregroundColor: UIColor.appColor(.color4) ?? .red
+        ]
         
         tableView.delegate = self
     }
