@@ -13,6 +13,8 @@ import RxSwift
 protocol LocationRepository {
     var locationSubject: PublishSubject<Location> { get set }
     var addressSubject: PublishSubject<String> { get set }
+    var errorStatus: PublishSubject<LocationError> { get set }
+    var errorObservable: Observable<LocationError> { get }
     func getAddress(by location: Location)
     func getAddress(location: CLLocation)
     func getLocation()
@@ -22,6 +24,16 @@ protocol LocationRepository {
 final class LocationRepositoryImpl: NSObject, LocationRepository {
     var locationSubject = PublishSubject<Location>()
     var addressSubject = PublishSubject<String>()
+    var errorStatus = PublishSubject<LocationError>()
+    
+    var errorObservable: Observable<LocationError> {
+        errorStatus.asObservable()
+    }
+    
+    var locationStatus: CLAuthorizationStatus {
+        locationManager.authorizationStatus
+    }
+    
     private var locationManager = CLLocationManager()
     
     override init() {
@@ -35,9 +47,11 @@ final class LocationRepositoryImpl: NSObject, LocationRepository {
         DispatchQueue.global().async {
             if CLLocationManager.locationServicesEnabled() {
                 debugPrint("위치 서비스 on")
-                self.locationManager.startUpdatingLocation()
+                self.locationManager.requestLocation()
             } else {
                 debugPrint("위치 서비스 off 상태")
+                self.errorStatus.onNext(.restricted)
+                
             }
         }
     }
@@ -81,5 +95,14 @@ extension LocationRepositoryImpl: CLLocationManagerDelegate {
     
     func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {
         debugPrint("didFailWithError")
+        debugPrint("현재 권한 상태 : ", locationStatus.rawValue)
+        switch locationStatus {
+        case .restricted:
+            errorStatus.onNext(.restricted)
+        case .denied:
+            errorStatus.onNext(.denied)
+        default:
+            getLocation()
+        }
     }
 }

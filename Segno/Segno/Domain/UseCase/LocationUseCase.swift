@@ -13,6 +13,7 @@ protocol LocationUseCase {
     var locationSubject: PublishSubject<Location> { get set }
     func getLocation()
     func stopLocation()
+    func subscribeError() -> Observable<LocationError>
 }
 
 final class LocationUseCaseImpl: LocationUseCase {
@@ -37,5 +38,9 @@ final class LocationUseCaseImpl: LocationUseCase {
         repository.locationSubject
             .bind(to: locationSubject)
             .disposed(by: disposeBag)
+    }
+    
+    func subscribeError() -> Observable<LocationError> {
+        return repository.errorObservable
     }
 }

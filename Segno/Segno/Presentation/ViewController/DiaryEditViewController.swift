@@ -57,7 +57,7 @@ final class DiaryEditViewController: UIViewController {
     private var disposeBag = DisposeBag()
     private var tags: [String] = []
     private var location: Location?
-    
+    private var address: String?
     private lazy var mainScrollView: UIScrollView = {
         let scrollView = UIScrollView()
         scrollView.keyboardDismissMode = .onDrag
@@ -222,6 +222,7 @@ final class DiaryEditViewController: UIViewController {
         subscribeSearchResult()
         subscribeSearchError()
         subscribeLocationResult()
+        subscribeLocationError()
         subscribeEditSucceed()
     }
     
@@ -542,19 +543,51 @@ extension DiaryEditViewController {
                     self.locationInfoLabel.text = Metric.searching
                     self.addlocationButton.tintColor = .systemRed
                 case false:
+                    if self.location == nil {
+                        self.locationInfoLabel.text = Metric.locationPlaceholder
+                    } else {
+                        self.locationInfoLabel.text = self.address
+                    }
                     self.addlocationButton.tintColor = .appColor(.white)
                 }
             })
             .disposed(by: disposeBag)
         
         viewModel.addressSubject
-            .bind(to: locationInfoLabel.rx.text)
+            .withUnretained(self)
+            .subscribe(onNext: {_, address in
+                self.locationInfoLabel.text = address
+                self.address = address
+            })
             .disposed(by: disposeBag)
         
         viewModel.locationSubject
             .withUnretained(self)
             .subscribe(onNext: { _, location in
                 self.location = location
+            })
+            .disposed(by: disposeBag)
+    }
+    
+    private func subscribeLocationError() {
+        viewModel.subscribeError()
+            .observe(on: MainScheduler.instance)
+            .withUnretained(self)
+            .subscribe(onNext: { _, locationError in
+                switch locationError {
+                case .restricted:
+                    self.makeOKAlert(title: "위치 꺼짐", message: locationError.errorDescription)
+                    self.locationInfoLabel.text = Metric.locationPlaceholder
+                    self.addlocationButton.tintColor = .appColor(.white)
+                case .denied:                  
+                    self.makeOKAlert(title: "위치 오류", message: locationError.errorDescription)
+                    self.locationInfoLabel.text = Metric.locationPlaceholder
+                    self.addlocationButton.tintColor = .appColor(.white)
+                case .unknown:
+                    self.makeOKAlert(title: "알 수 없는 오류", message: locationError.errorDescription)
+                    self.locationInfoLabel.text = Metric.locationPlaceholder
+                    self.addlocationButton.tintColor = .appColor(.white)
+                }
             })
             .disposed(by: disposeBag)
     }
@@ -626,6 +659,7 @@ extension DiaryEditViewController: UITextViewDelegate {
 
 #if canImport(SwiftUI) && DEBUG
 import SwiftUI
+import CoreLocation
 
 struct DiaryEditViewController_Preview: PreviewProvider {
     static var previews: some View {
