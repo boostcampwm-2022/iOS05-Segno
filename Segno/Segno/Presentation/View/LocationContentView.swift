@@ -48,7 +48,7 @@ final class LocationContentView: UIView {
         button.backgroundColor = .appColor(.color4)
         button.layer.cornerRadius = Metric.mapButtonCornerRadius
         button.setImage(UIImage(systemName: "map.fill"), for: .normal)
-        button.tintColor = .appColor(.white)
+        button.tintColor = .appColor(.label)
         button.rx.tap
             .bind { [weak self] in
                 debugPrint("===>", self?.location)

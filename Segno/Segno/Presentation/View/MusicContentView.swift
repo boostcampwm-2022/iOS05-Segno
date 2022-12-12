@@ -32,7 +32,7 @@ final class MusicContentView: UIView {
     
     private lazy var albumArtImageView: UIImageView = {
         let imageView = UIImageView()
-        imageView.backgroundColor = .systemMint
+        imageView.backgroundColor = .appColor(.grey2)
         imageView.layer.cornerRadius = Metric.albumArtCornerRadius
         return imageView
     }()
@@ -48,7 +48,7 @@ final class MusicContentView: UIView {
         button.backgroundColor = .appColor(.color4)
         button.layer.cornerRadius = Metric.playButtonCornerRadius
         button.setImage(Metric.playImage, for: .normal)
-        button.tintColor = .appColor(.white)
+        button.tintColor = .appColor(.label)
         button.rx.tap
             .bind { [weak self] in
                 self?.delegate?.playButtonTapped()

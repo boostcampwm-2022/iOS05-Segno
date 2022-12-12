@@ -19,6 +19,7 @@ enum SColor: String {
     case grey2
     case grey3
     case black
+    case label
 }
 
 extension UIColor {

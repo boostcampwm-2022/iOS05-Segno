@@ -40,11 +40,13 @@ final class MyPageViewController: UIViewController {
     
     private enum Metric {
         static let titleText: String = "안녕하세요,\nboostcamp님!"
-        
+        static let mypageText: String = "마이페이지"
         static let settingsOffset: CGFloat = 100
         static let titleFontSize: CGFloat = 32
         static let titleOffset: CGFloat = 30
         static let separatorInset: CGFloat = 15
+        static let navigationTitleSize: CGFloat = 20
+        static let navigationBackButtonTitleSize: CGFloat = 16
     }
     
     private lazy var titleLabel: UILabel = {
@@ -94,6 +96,17 @@ final class MyPageViewController: UIViewController {
 
     private func setupView() {
         view.backgroundColor = .appColor(.background)
+        
+        navigationController?.navigationBar.titleTextAttributes = [
+            NSAttributedString.Key.font: UIFont.appFont(.surround, size: Metric.navigationTitleSize),
+            NSAttributedString.Key.foregroundColor: UIColor.appColor(.color4) ?? .red
+        ]
+        
+        let backBarButtonItem = UIBarButtonItem(title: Metric.mypageText, style: .plain, target: self, action: nil)
+        backBarButtonItem.tintColor = UIColor.appColor(.color4)
+        backBarButtonItem.setTitleTextAttributes([
+            NSAttributedString.Key.font: UIFont.appFont(.surroundAir, size: Metric.navigationBackButtonTitleSize)], for: .normal)
+        navigationItem.backBarButtonItem = backBarButtonItem
     }
     
     private func setupLayout() {
