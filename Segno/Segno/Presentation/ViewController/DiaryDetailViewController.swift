@@ -20,11 +20,13 @@ protocol DiaryDetailViewDelegate: AnyObject {
 final class DiaryDetailViewController: UIViewController {
     private enum Metric {
         static let textViewPlaceHolder: String = "내용이 없네요"
+        static let musicLibraryDeniedTitle: String = "음악 접근 권한 설정 필요"
+        static let locationEmptyMessage: String = "저장된 위치가 없습니다."
         static let stackViewSpacing: CGFloat = 10
         static let stackViewInset: CGFloat = 16
         static let dateFontSize: CGFloat = 17
         static let titleFontSize: CGFloat = 32
-        static let textViewFontSize: CGFloat = 20
+        static let textViewFontSize: CGFloat = 24
         static let textViewHeight: CGFloat = 200
         static let textViewInset: CGFloat = 16
         static let tagScrollViewHeight: CGFloat = 30
@@ -310,6 +312,16 @@ final class DiaryDetailViewController: UIViewController {
             })
             .disposed(by: disposeBag)
         
+        viewModel.locationObservable
+            .observe(on: MainScheduler.instance)
+            .subscribe(onNext: { [weak self] location in
+                if location == nil {
+                    self?.locationContentView.mapButton.isEnabled = false
+                    self?.locationContentView.locationLabel.text = Metric.locationEmptyMessage
+                }
+            })
+            .disposed(by: disposeBag)
+        
         viewModel.addressSubject
             .observe(on: MainScheduler.instance)
             .subscribe(onNext: { [weak self] address in
@@ -339,7 +351,7 @@ final class DiaryDetailViewController: UIViewController {
         viewModel.playerErrorStatus
             .observe(on: MainScheduler.instance)
             .subscribe(onNext: { [weak self] error in
-                self?.makeOKAlert(title: "Error!", message: error.localizedDescription)
+                self?.makeOKAlert(title: Metric.musicLibraryDeniedTitle, message: error.localizedDescription)
             })
             .disposed(by: disposeBag)
     }

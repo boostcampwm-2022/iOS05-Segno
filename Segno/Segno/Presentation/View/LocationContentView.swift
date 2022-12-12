@@ -18,7 +18,7 @@ protocol LocationContentViewDelegate: AnyObject {
 
 final class LocationContentView: UIView {
     private enum Metric {
-        static let fontSize: CGFloat = 12
+        static let fontSize: CGFloat = 16
         static let spacing: CGFloat = 10
         static let mapButtonSize: CGFloat = 30
         static let mapButtonCornerRadius = mapButtonSize / 2
@@ -43,7 +43,7 @@ final class LocationContentView: UIView {
         return label
     }()
     
-    private lazy var mapButton: UIButton = {
+    lazy var mapButton: UIButton = {
         let button = UIButton()
         button.backgroundColor = .appColor(.color4)
         button.layer.cornerRadius = Metric.mapButtonCornerRadius

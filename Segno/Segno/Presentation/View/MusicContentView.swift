@@ -17,7 +17,7 @@ protocol MusicContentViewDelegate: AnyObject {
 
 final class MusicContentView: UIView {
     private enum Metric {
-        static let fontSize: CGFloat = 12
+        static let fontSize: CGFloat = 16
         static let spacing: CGFloat = 10
         static let albumArtImageViewSize: CGFloat = 30
         static let albumArtCornerRadius: CGFloat = 5
