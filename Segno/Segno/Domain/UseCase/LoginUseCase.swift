@@ -14,6 +14,7 @@ protocol LoginUseCase {
 final class LoginUseCaseImpl: LoginUseCase {
     private enum Metric {
         static let userToken: String = "userToken"
+        static let userId: String = "userId"
     }
     
     let repository: LoginRepository
@@ -29,11 +30,11 @@ final class LoginUseCaseImpl: LoginUseCase {
     func sendLoginRequest(withApple email: String) -> Single<Bool> {
         return repository.sendLoginRequest(withApple: email)
             .map {
-                guard let tokenString = $0.token else {
-                    return false
-                }
+                guard let token = $0.token,
+                      let userId = $0.userId else { return false }
                 
-                _ = self.localUtilityManager.createToken(key: Metric.userToken, token: tokenString)
+                _ = self.localUtilityManager.createToken(key: Metric.userToken, token: token)
+                _ = self.localUtilityManager.createToken(key: Metric.userId, token: userId)
                 return true
             }
     }
