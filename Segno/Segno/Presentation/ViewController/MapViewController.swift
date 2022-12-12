@@ -16,6 +16,7 @@ class MapViewController: UIViewController {
 
     private enum Metric {
         static let topSpace: CGFloat = 30
+        static let bottomSpace: CGFloat = 80
         static let edgeSpace: CGFloat = 20
         static let mapViewHeight: CGFloat = 500
         static let titleSize: CGFloat = 40
@@ -117,11 +118,11 @@ class MapViewController: UIViewController {
         mapView.snp.makeConstraints {
             $0.top.equalTo(titleLabel.snp.bottom).offset(Metric.edgeSpace)
             $0.leading.trailing.equalToSuperview().inset(Metric.edgeSpace)
-            $0.height.equalTo(Metric.mapViewHeight)
+            $0.bottom.equalTo(addressLabel.snp.top).offset(-Metric.edgeSpace)
         }
         
         addressLabel.snp.makeConstraints {
-            $0.top.equalTo(mapView.snp.bottom).offset(Metric.edgeSpace)
+            $0.bottom.equalToSuperview().inset(Metric.bottomSpace)
             $0.leading.equalToSuperview().inset(Metric.edgeSpace)
         }
     }
