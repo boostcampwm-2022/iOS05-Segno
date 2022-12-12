@@ -56,7 +56,6 @@ final class DiaryEditViewController: UIViewController {
     private var disposeBag = DisposeBag()
     private var tags: [String] = []
     private var location: Location?
-    private var address = Metric.locationPlaceholder
     
     private lazy var mainScrollView: UIScrollView = {
         let scrollView = UIScrollView()
@@ -238,6 +237,7 @@ final class DiaryEditViewController: UIViewController {
         
         tabBarController?.tabBar.isHidden = false
         removeRegisterForKeyboardNotification()
+        viewModel.stopLocation()
     }
     
     private func setupView() {
@@ -527,9 +527,7 @@ extension DiaryEditViewController {
                     self.locationInfoLabel.text = Metric.searching
                     self.addlocationButton.tintColor = .systemRed
                 case false:
-                    self.locationInfoLabel.text = self.address
                     self.addlocationButton.tintColor = .appColor(.white)
-                    
                 }
             })
             .disposed(by: disposeBag)
@@ -548,15 +546,15 @@ extension DiaryEditViewController {
 }
 extension DiaryEditViewController: UIImagePickerControllerDelegate, UINavigationControllerDelegate {
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
-        var newImage: UIImage? = nil // update 할 이미지
+        var newImage: UIImage? = nil
         
         if let possibleImage = info[UIImagePickerController.InfoKey.editedImage] as? UIImage {
-            newImage = possibleImage // 수정된 이미지가 있을 경우
+            newImage = possibleImage
         } else if let possibleImage = info[UIImagePickerController.InfoKey.originalImage] as? UIImage {
-            newImage = possibleImage // 원본 이미지가 있을 경우
+            newImage = possibleImage
         }
         photoImageView.backgroundColor = .clear
-        photoImageView.image = newImage // 받아온 이미지를 update
+        photoImageView.image = newImage
         dismiss(animated: true)
     }
 }
