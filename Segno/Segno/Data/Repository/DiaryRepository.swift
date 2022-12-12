@@ -13,6 +13,7 @@ protocol DiaryRepository {
     func getDiaryListItem() -> Single<DiaryListDTO>
     func getDiary(id: String) -> Single<DiaryDetailDTO>
     func postDiary(_ newDiary: NewDiaryDetail) -> Single<NewDiaryDetailDTO>
+    func updateDiary(_ diary: UpdateDiaryDetail) -> Single<Bool>
     func deleteDiary(id: String) -> Single<Bool>
 }
 
@@ -48,6 +49,17 @@ final class DiaryRepositoryImpl: DiaryRepository {
             .map { try JSONDecoder().decode(NewDiaryDetailDTO.self, from: $0) }
             .asObservable()
             .asSingle()
+        
+        return single
+    }
+    
+    func updateDiary(_ diary: UpdateDiaryDetail) -> Single<Bool> {
+        let diaryUpdateEndpoint = DiaryUpdateEndpoint.item(diary: diary)
+        
+        let single = NetworkManager.shared.call(diaryUpdateEndpoint)
+            .map { _ in
+                return true
+            }
         
         return single
     }

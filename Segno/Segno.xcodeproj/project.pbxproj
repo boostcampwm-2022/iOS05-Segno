@@ -48,6 +48,8 @@
 		4FEBFAB1291CFB5500E78139 /* SHMediaItem+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FEBFAB0291CFB5500E78139 /* SHMediaItem+.swift */; };
 		66541BFB2947723F00AE25FB /* LocalUtilityManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66541BFA2947723F00AE25FB /* LocalUtilityManager.swift */; };
 		66541BFD29477D3D00AE25FB /* UserLoginDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66541BFC29477D3D00AE25FB /* UserLoginDTO.swift */; };
+		66541BFF2947AC5600AE25FB /* DiaryUpdateEndpoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66541BFE2947AC5600AE25FB /* DiaryUpdateEndpoint.swift */; };
+		66541C012947B99A00AE25FB /* UpdateDiaryDetail.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66541C002947B99A00AE25FB /* UpdateDiaryDetail.swift */; };
 		666E6F7D291CF45600CECD4B /* Coordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 666E6F7C291CF45600CECD4B /* Coordinator.swift */; };
 		666E6F7F291CF46800CECD4B /* AppCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 666E6F7E291CF46800CECD4B /* AppCoordinator.swift */; };
 		666E6F81291CF49E00CECD4B /* LoginCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 666E6F80291CF49E00CECD4B /* LoginCoordinator.swift */; };
@@ -157,6 +159,8 @@
 		4FEBFAB0291CFB5500E78139 /* SHMediaItem+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "SHMediaItem+.swift"; sourceTree = "<group>"; };
 		66541BFA2947723F00AE25FB /* LocalUtilityManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalUtilityManager.swift; sourceTree = "<group>"; };
 		66541BFC29477D3D00AE25FB /* UserLoginDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserLoginDTO.swift; sourceTree = "<group>"; };
+		66541BFE2947AC5600AE25FB /* DiaryUpdateEndpoint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiaryUpdateEndpoint.swift; sourceTree = "<group>"; };
+		66541C002947B99A00AE25FB /* UpdateDiaryDetail.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UpdateDiaryDetail.swift; sourceTree = "<group>"; };
 		666E6F7C291CF45600CECD4B /* Coordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Coordinator.swift; sourceTree = "<group>"; };
 		666E6F7E291CF46800CECD4B /* AppCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppCoordinator.swift; sourceTree = "<group>"; };
 		666E6F80291CF49E00CECD4B /* LoginCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginCoordinator.swift; sourceTree = "<group>"; };
@@ -328,6 +332,7 @@
 				4FEBFAAA291CF30E00E78139 /* DiaryListItem.swift */,
 				4FEBFAAC291CF62E00E78139 /* DiaryDetail.swift */,
 				982A4FBE2941F1CA005AEB1D /* NewDiaryDetail.swift */,
+				66541C002947B99A00AE25FB /* UpdateDiaryDetail.swift */,
 				4FEBFAAE291CF9F300E78139 /* MusicInfo.swift */,
 				4F6F74B0292C9BF3007E7AC1 /* UserInfo.swift */,
 				98FDF8A0292F56580083FA05 /* Location.swift */,
@@ -511,6 +516,7 @@
 				791529DF293344E8005A8DDB /* DiaryPostEndpoint.swift */,
 				982A4FC02941F481005AEB1D /* NewDiaryPostEndpoint.swift */,
 				79767E63293E2A1200E489DD /* DiaryDeleteEndpoint.swift */,
+				66541BFE2947AC5600AE25FB /* DiaryUpdateEndpoint.swift */,
 				4F4E0D7529252236005ABA8F /* LoginEndpoint.swift */,
 				66A8CF6C29379A9900C17F84 /* UserDetailEndpoint.swift */,
 				791529DD29333D40005A8DDB /* ImageEndpoint.swift */,
@@ -703,6 +709,7 @@
 				4FA05B97292DFCCC00AFB020 /* DiaryEditViewController.swift in Sources */,
 				988414DB2923606B007C9132 /* DiaryListUseCase.swift in Sources */,
 				982B3B7F292E68FB0077A44B /* DiaryDetailViewModel.swift in Sources */,
+				66541BFF2947AC5600AE25FB /* DiaryUpdateEndpoint.swift in Sources */,
 				4FCAC5C2292B5C9000BF9CDD /* LoginSession.swift in Sources */,
 				66A8CF672937937300C17F84 /* UserDetailItem.swift in Sources */,
 				666E6F7D291CF45600CECD4B /* Coordinator.swift in Sources */,
@@ -719,6 +726,7 @@
 				4F9A001D29222B1B007D9057 /* Endpoint.swift in Sources */,
 				4F0372D62941DBD40014131F /* MusicError.swift in Sources */,
 				4F9A001F29222C97007D9057 /* NetworkError.swift in Sources */,
+				66541C012947B99A00AE25FB /* UpdateDiaryDetail.swift in Sources */,
 				98FDF8A1292F56580083FA05 /* Location.swift in Sources */,
 				7940FB33292E065F00276EFC /* DiaryDetailUseCase.swift in Sources */,
 				6692A9EF292F605E00DDA835 /* SettingsViewController.swift in Sources */,

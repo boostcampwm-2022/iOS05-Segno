@@ -9,7 +9,8 @@ import Foundation
 import RxSwift
 
 protocol DiaryEditUseCase {
-    func postDiary(_ newDiary: NewDiaryDetail) -> Completable 
+    func postDiary(_ newDiary: NewDiaryDetail) -> Completable
+    func updateDiary(_ diary: UpdateDiaryDetail) -> Completable
 }
 
 final class DiaryEditUseCaseImpl: DiaryEditUseCase {
@@ -28,6 +29,11 @@ final class DiaryEditUseCaseImpl: DiaryEditUseCase {
     
     func postDiary(_ newDiary: NewDiaryDetail) -> Completable {
         return diaryRepository.postDiary(newDiary)
+            .asCompletable()
+    }
+    
+    func updateDiary(_ diary: UpdateDiaryDetail) -> Completable {
+        return diaryRepository.updateDiary(diary)
             .asCompletable()
     }
 }
