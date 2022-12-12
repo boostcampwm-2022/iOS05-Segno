@@ -621,8 +621,8 @@ extension DiaryEditViewController {
         viewModel.addressSubject
             .withUnretained(self)
             .subscribe(onNext: {_, address in
-                self.locationInfoLabel.text = address
                 self.address = address
+                self.locationInfoLabel.text = address
             })
             .disposed(by: disposeBag)
     }

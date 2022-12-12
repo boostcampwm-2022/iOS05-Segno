@@ -71,11 +71,17 @@ final class DiaryEditViewModel {
     }
     
     func checkExistingDiary() {
-        if let diaryData,
-           let location = diaryData.location {
+        if let diaryData {
             diaryItem.onNext(diaryData)
-            locationSubject.onNext(location)
             isUpdating = true
+        }
+        
+        if let location = diaryData?.location {
+            locationSubject.onNext(location)
+        }
+        
+        if let music = diaryData?.musicInfo {
+            musicInfo = music
         }
     }
     
@@ -146,8 +152,8 @@ final class DiaryEditViewModel {
         getAddressUseCase.addressSubject
             .withUnretained(self)
             .subscribe(onNext: {_, address in
-                self.addressSubject.onNext(address)
                 self.isReceivingLocation.onNext(false)
+                self.addressSubject.onNext(address)
             })
             .disposed(by: disposeBag)
     }
@@ -155,6 +161,7 @@ final class DiaryEditViewModel {
     private func subscribeLocationSubject() {
         locationSubject
             .subscribe(onNext: { [weak self] location in
+                self?.locationInfo = location
                 self?.getAddressUseCase.getAddress(by: location)
             })
             .disposed(by: disposeBag)
@@ -238,6 +245,8 @@ final class DiaryEditViewModel {
                                       musicInfo: musicInfo,
                                       location: locationInfo,
                                       token: localUtilityManager.getToken(key: Metric.userToken))
+        
+        debugPrint(diary)
         
         diaryEditUseCase.updateDiary(diary)
             .subscribe(onCompleted: { [weak self] in
