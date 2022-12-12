@@ -31,7 +31,7 @@ final class LoginUseCaseImpl: LoginUseCase {
                 
                 _ = self.localUtilityRepository.createToken(token: tokenString)
                 // TODO: 추후 아래 updateToken 삭제하기!
-                _ = self.localUtilityRepository.updateToken(token: "D62WywExHJYoNkLIEsKs+neMK3Fad27IcKtQKfrE3MI=")
+//                _ = self.localUtilityRepository.updateToken(token: "D62WywExHJYoNkLIEsKs+neMK3Fad27IcKtQKfrE3MI=")
                 return true
             }
     }

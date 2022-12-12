@@ -221,8 +221,6 @@ final class DiaryDetailViewController: UIViewController {
     }
     
     private func bindDiaryItem() {
-        dateLabel.text = "11/22 14:54"
-        
         viewModel.idObservable
             .observe(on: MainScheduler.instance)
             .subscribe(onNext: { [weak self] id in
@@ -234,6 +232,13 @@ final class DiaryDetailViewController: UIViewController {
             .observe(on: MainScheduler.instance)
             .subscribe(onNext: { [weak self] userId in
                 self?.diaryUserId = userId
+            })
+            .disposed(by: disposeBag)
+        
+        viewModel.dateObservable
+            .observe(on: MainScheduler.instance)
+            .subscribe(onNext: { [weak self] date in
+                self?.dateLabel.text = date
             })
             .disposed(by: disposeBag)
         
