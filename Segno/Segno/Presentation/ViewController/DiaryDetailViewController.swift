@@ -155,6 +155,7 @@ final class DiaryDetailViewController: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
+        cleanUpTags()
         getDiary()
     }
     
@@ -201,7 +202,6 @@ final class DiaryDetailViewController: UIViewController {
         
         imageView.snp.makeConstraints {
             $0.width.height.equalTo(stackView.snp.width)
-            
         }
         
         textView.snp.makeConstraints {
@@ -230,8 +230,6 @@ final class DiaryDetailViewController: UIViewController {
     }
     
     private func bindDiaryItem() {
-        dateLabel.text = "11/22 14:54"
-        
         viewModel.idObservable
             .observe(on: MainScheduler.instance)
             .subscribe(onNext: { [weak self] id in
@@ -249,6 +247,13 @@ final class DiaryDetailViewController: UIViewController {
                 } else {
                     navigationItem.rightBarButtonItems = [reportBarButtonItem]
                 }
+            })
+            .disposed(by: disposeBag)
+        
+        viewModel.dateObservable
+            .observe(on: MainScheduler.instance)
+            .subscribe(onNext: { [weak self] date in
+                self?.dateLabel.text = date
             })
             .disposed(by: disposeBag)
         
@@ -361,6 +366,12 @@ final class DiaryDetailViewController: UIViewController {
     
     private func getAddress(by location: Location) {
         viewModel.getAddress(by: location)
+    }
+    
+    private func cleanUpTags() {
+        for subview in tagStackView.subviews {
+            subview.removeFromSuperview()
+        }
     }
     
     private func trashButtonTapped() {

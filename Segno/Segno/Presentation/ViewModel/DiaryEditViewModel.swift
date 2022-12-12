@@ -126,7 +126,7 @@ final class DiaryEditViewModel {
             .bind(to: addressSubject)
             .disposed(by: disposeBag)
     }
-
+    
     func toggleLocation() {
         guard let value = try? isReceivingLocation.value() else { return }
         isReceivingLocation.onNext(!value)
@@ -143,29 +143,22 @@ final class DiaryEditViewModel {
     }
     
     func saveDiary(title: String, body: String?, tags: [String], imageName: String) {
-        let location = try? locationSubject.value()
-        var newDiary: NewDiaryDetail
-        // music data가 있는 경우
-        if let musicInfo = musicInfo {
-            newDiary = NewDiaryDetail(title: title,
-                                      tags: tags,
-                                      imagePath: imageName,
-                                      bodyText: body,
-                                      musicInfo: musicInfo,
-                                      location: location,
-                                      token: localUtilityManager.getToken(key: Metric.userToken))
-        }
-        // music data가 없는 경우
-        else {
-            newDiary = NewDiaryDetail(title: title,
-                                      tags: tags,
-                                      imagePath: imageName,
-                                      bodyText: body,
-                                      musicInfo: nil,
-                                      location: location,
-                                      token: localUtilityManager.getToken(key: Metric.userToken))
-        }
+        let date = Date()
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "YYYY년 MM월 dd일 HH:mm:ss"
+        dateFormatter.locale = Locale(identifier: "ko")
+        let dateString = dateFormatter.string(from: date)
+        let location = try? locationSubject.value() 
         
+        let newDiary = NewDiaryDetail(date: dateString,
+                                      title: title,
+                                      tags: tags,
+                                      imagePath: imageName,
+                                      bodyText: body,
+                                      musicInfo: musicInfo ?? nil,
+                                      location: location,
+                                      token: localUtilityManager.getToken(key: Metric.userToken))
+
         diaryEditUseCase.postDiary(newDiary)
             .subscribe(onCompleted: { [weak self] in
                 debugPrint("post 성공")

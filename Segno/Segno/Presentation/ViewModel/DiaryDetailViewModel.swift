@@ -24,8 +24,7 @@ final class DiaryDetailViewModel {
     var playerErrorStatus = PublishSubject<MusicError>()
     var isSucceed = PublishSubject<Bool>()
     
-    // TODO: DiaryDetail에 date 추가
-    // lazy var dateObservable = diaryItem.map { $0.date }
+    lazy var dateObservable = diaryItem.map { $0.date }
     lazy var idObservable = diaryItem.map { $0.identifier }
     lazy var userIdObservable = diaryItem.map { $0.userId }
     lazy var titleObservable = diaryItem.map { $0.title }
