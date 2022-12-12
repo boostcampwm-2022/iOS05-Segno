@@ -180,4 +180,8 @@ final class DiaryEditViewModel {
     func stopLocation() {
         locationUseCase.stopLocation()
     }
+    
+    func subscribeError() -> Observable<LocationError> {
+        return locationUseCase.subscribeError()
+    }
 }

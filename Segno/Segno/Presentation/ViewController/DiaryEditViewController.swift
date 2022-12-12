@@ -222,6 +222,7 @@ final class DiaryEditViewController: UIViewController {
         subscribeSearchResult()
         subscribeSearchError()
         subscribeLocationResult()
+        subscribeLocationError()
         subscribeEditSucceed()
     }
     
@@ -553,6 +554,30 @@ extension DiaryEditViewController {
             .withUnretained(self)
             .subscribe(onNext: { _, location in
                 self.location = location
+            })
+            .disposed(by: disposeBag)
+    }
+    
+    private func subscribeLocationError() {
+        viewModel.subscribeError()
+            .observe(on: MainScheduler.instance)
+            .withUnretained(self)
+            .subscribe(onNext: { _, locationError in
+                switch locationError {
+                case .locationDisabled:
+                    self.makeOKAlert(title: "위치 꺼짐", message: locationError.errorDescription)
+                    self.locationInfoLabel.text = Metric.locationPlaceholder
+                    self.addlocationButton.tintColor = .appColor(.white)
+                case .didFailWithError:
+//                    debugPrint("========== didFail알럿 띄움")
+                    self.makeOKAlert(title: "위치 오류", message: locationError.errorDescription)
+                    self.locationInfoLabel.text = Metric.locationPlaceholder
+                    self.addlocationButton.tintColor = .appColor(.white)
+                case .unknown:
+                    self.makeOKAlert(title: "알 수 없는 오류", message: locationError.errorDescription)
+                    self.locationInfoLabel.text = Metric.locationPlaceholder
+                    self.addlocationButton.tintColor = .appColor(.white)
+                }
             })
             .disposed(by: disposeBag)
     }

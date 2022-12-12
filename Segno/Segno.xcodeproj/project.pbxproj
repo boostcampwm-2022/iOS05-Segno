@@ -116,6 +116,7 @@
 		98FDF8A1292F56580083FA05 /* Location.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98FDF8A0292F56580083FA05 /* Location.swift */; };
 		98FDF8A3292F5CCA0083FA05 /* MapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98FDF8A2292F5CCA0083FA05 /* MapViewController.swift */; };
 		98FDF8A5292F7A350083FA05 /* UIView+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98FDF8A4292F7A350083FA05 /* UIView+.swift */; };
+		98FFDB5F29475A6300237314 /* LocationError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98FFDB5E29475A6300237314 /* LocationError.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -225,6 +226,7 @@
 		98FDF8A0292F56580083FA05 /* Location.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Location.swift; sourceTree = "<group>"; };
 		98FDF8A2292F5CCA0083FA05 /* MapViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapViewController.swift; sourceTree = "<group>"; };
 		98FDF8A4292F7A350083FA05 /* UIView+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+.swift"; sourceTree = "<group>"; };
+		98FFDB5E29475A6300237314 /* LocationError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationError.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -250,6 +252,7 @@
 				4F589DD8293FBA0900DB39E5 /* ShazamError.swift */,
 				4F0372D52941DBD40014131F /* MusicError.swift */,
 				98BEE36D2934907700B20143 /* LoginError.swift */,
+				98FFDB5E29475A6300237314 /* LocationError.swift */,
 			);
 			path = Errors;
 			sourceTree = "<group>";
@@ -675,6 +678,7 @@
 				66A8CF6D29379A9900C17F84 /* UserDetailEndpoint.swift in Sources */,
 				4FEBFAAD291CF62E00E78139 /* DiaryDetail.swift in Sources */,
 				98AE6A88294450520039A666 /* MapViewModel.swift in Sources */,
+				98FFDB5F29475A6300237314 /* LocationError.swift in Sources */,
 				4FEBFAB1291CFB5500E78139 /* SHMediaItem+.swift in Sources */,
 				98003E0E293F20F6009FBC35 /* DarkModeManager.swift in Sources */,
 				66A8CF692937945300C17F84 /* UserDetailUseCase.swift in Sources */,

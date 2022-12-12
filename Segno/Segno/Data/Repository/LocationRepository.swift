@@ -13,6 +13,8 @@ import RxSwift
 protocol LocationRepository {
     var locationSubject: PublishSubject<Location> { get set }
     var addressSubject: PublishSubject<String> { get set }
+    var errorStatus: PublishSubject<LocationError> { get set }
+    var errorObservable: Observable<LocationError> { get }
     func getAddress(by location: Location)
     func getAddress(location: CLLocation)
     func getLocation()
@@ -22,6 +24,12 @@ protocol LocationRepository {
 final class LocationRepositoryImpl: NSObject, LocationRepository {
     var locationSubject = PublishSubject<Location>()
     var addressSubject = PublishSubject<String>()
+    var errorStatus = PublishSubject<LocationError>()
+    
+    var errorObservable: Observable<LocationError> {
+        errorStatus.asObservable()
+    }
+    
     private var locationManager = CLLocationManager()
     
     override init() {
@@ -35,9 +43,11 @@ final class LocationRepositoryImpl: NSObject, LocationRepository {
         DispatchQueue.global().async {
             if CLLocationManager.locationServicesEnabled() {
                 debugPrint("위치 서비스 on")
-                self.locationManager.startUpdatingLocation()
+                self.locationManager.requestLocation()
             } else {
                 debugPrint("위치 서비스 off 상태")
+                self.errorStatus.onNext(.locationDisabled)
+                
             }
         }
     }
@@ -81,5 +91,11 @@ extension LocationRepositoryImpl: CLLocationManagerDelegate {
     
     func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {
         debugPrint("didFailWithError")
+        guard let error = error as? CLError else {
+            debugPrint("CLError 다운캐스팅 불가")
+            return
+        }
+        debugPrint("에러 코드 : ", error.code.rawValue)
+        errorStatus.onNext(.didFailWithError)
     }
 }
