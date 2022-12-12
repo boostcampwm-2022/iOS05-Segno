@@ -15,7 +15,7 @@ enum MusicError: Error, LocalizedError {
     var errorDescription: String? {
         switch self {
         case .libraryAccessDenied:
-            return "음악 라이브러리 접근이 거부되었습니다. 설정에서 접근 권한을 활성화해주세요."
+            return "음악 라이브러리 접근이 거부되었습니다. 설정 - Segno에서 미디어 및 Apple Music 접근 권한을 활성화해주세요."
         case .failedToFetch:
             return "음악 검색 결과를 가져오는 데 실패했습니다."
         case .failedToPlay:
