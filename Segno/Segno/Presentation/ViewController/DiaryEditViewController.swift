@@ -456,7 +456,7 @@ extension DiaryEditViewController {
     
     private func subscribeSearchResult() {
         viewModel.musicInfo
-            .observe(on: MainScheduler.instance)
+            .observe(on: MainScheduler.asyncInstance)
             .subscribe(onNext: { result in
                 switch result {
                 case .success(let song):
@@ -466,8 +466,9 @@ extension DiaryEditViewController {
                     debugPrint(song)
                     
                     self.musicInfoLabel.text = "\(artist) - \(title)"
-                case .failure(_):
+                case .failure(let error):
                     self.musicInfoLabel.text = Metric.musicNotFound
+                    self.makeOKAlert(title: "오류", message: error.errorDescription)
                 default:
                     break
                 }
@@ -498,8 +499,16 @@ extension DiaryEditViewController {
     }
     
     private func saveDiary() {
-        guard let imageData = photoImageView.image?.jpegData(compressionQuality: 1),
-              var title = titleTextField.text else { return }
+        guard photoImageView.image != Metric.imageViewStockImage else {
+            makeOKAlert(title: "사진이 없습니다.", message: "사진은 필수 입력 항목입니다.")
+            return
+        }
+        
+        guard let imageData = photoImageView.image?.jpegData(compressionQuality: 1) else {
+            return
+        }
+        
+        guard var title = titleTextField.text else { return }
         if title.isEmpty {
             let dateFormatter = DateFormatter()
             dateFormatter.dateFormat = "yyyy년 MM월 dd일 HH시 mm분에 저장된 세뇨입니다."

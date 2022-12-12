@@ -86,16 +86,28 @@ final class SettingsViewController: UIViewController {
                     
                     cell.okButton.rx.tap
                         .flatMap { _ in
-                            guard let newNickname = cell.nicknameTextField.text else {
+                            guard let newNickname = cell.nicknameTextField.text,
+                                  newNickname.trimmingCharacters(in: .whitespacesAndNewlines) != "" else {
+                                self.makeOKAlert(title: "닉네임 오류", message: "닉네임이 비어있습니다.")
+                                cell.nicknameTextField.text = nil
                                 return Observable<Bool>.empty()
                             }
                             
                             return self.viewModel.changeNickname(to: newNickname)
                                 .asObservable()
                         }
-                        .subscribe(onNext: { result in
+                        .withUnretained(self)
+                        .observe(on: MainScheduler.instance)
+                        .subscribe(onNext: { _, result in
                             debugPrint("닉네임 변경 결과 : \(result)")
-                            // TODO: 성공/실패 알럿띄우기
+                            switch result {
+                            case true:
+                                cell.nicknameTextField.resignFirstResponder()
+                                self.makeOKAlert(title: "성공", message: "닉네임을 변경했습니다.")
+                                cell.nicknameTextField.text = nil
+                            case false:
+                                self.makeOKAlert(title: "실패", message: "닉네임 변경에 실패했습니다.")
+                            }
                         })
                         .disposed(by: self.disposeBag)
                     return cell

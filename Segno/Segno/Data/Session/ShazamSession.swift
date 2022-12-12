@@ -37,20 +37,20 @@ final class ShazamSession: NSObject {
         case .granted:
             record()
         case .denied:
-            stop()
             result.onNext(.failure(.recordDenied))
+            stop()
         case .undetermined:
             audioSession.requestRecordPermission { granted in
                 if granted {
                     self.record()
                 } else {
-                    self.stop()
                     self.result.onNext(.failure(.recordDenied))
+                    self.stop()
                 }
             }
         @unknown default:
-            stop()
             result.onNext(.failure(.unknown))
+            stop()
         }
     }
     
@@ -87,7 +87,7 @@ extension ShazamSession: SHSessionDelegate {
     }
     
     func session(_ session: SHSession, didNotFindMatchFor signature: SHSignature, error: Error?) {
-        stop()
         result.onNext(.failure(.matchFailed))
+        stop()
     }
 }
