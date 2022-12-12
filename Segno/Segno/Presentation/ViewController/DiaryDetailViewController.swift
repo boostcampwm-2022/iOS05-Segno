@@ -8,7 +8,6 @@
 import UIKit
 
 import MarqueeLabel
-import Kingfisher
 import RxCocoa
 import RxSwift
 import SnapKit
@@ -212,8 +211,7 @@ final class DiaryDetailViewController: UIViewController {
         viewModel.imagePathObservable
             .observe(on: MainScheduler.instance)
             .subscribe(onNext: { [weak self] imagePath in
-                let imageURL = BaseURL.getImageURL(imagePath: imagePath)
-                self?.imageView.kf.setImage(with: imageURL)
+                self?.imageView.setImage(imagePath: imagePath)
             })
             .disposed(by: disposeBag)
         
@@ -337,7 +335,6 @@ extension UIViewController {
 
 #if canImport(SwiftUI) && DEBUG
 import SwiftUI
-import Kingfisher
 
 struct DiaryDetailViewController_Preview: PreviewProvider {
     static var previews: some View {

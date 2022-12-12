@@ -21,6 +21,7 @@ final class LocationContentView: UIView {
         static let fontSize: CGFloat = 16
         static let spacing: CGFloat = 10
         static let mapButtonSize: CGFloat = 30
+        static let mapButtonCornerRadius = mapButtonSize / 2
         static let titleText: String = "위치"
     }
     
@@ -37,12 +38,15 @@ final class LocationContentView: UIView {
     
     lazy var locationLabel: UILabel = {
         let label = UILabel()
+        label.adjustsFontSizeToFitWidth = true
         label.font = .appFont(.surroundAir, size: Metric.fontSize)
         return label
     }()
     
     private lazy var mapButton: UIButton = {
         let button = UIButton()
+        button.backgroundColor = .appColor(.color4)
+        button.layer.cornerRadius = Metric.mapButtonCornerRadius
         button.setImage(UIImage(systemName: "map.fill"), for: .normal)
         button.tintColor = .appColor(.label)
         button.rx.tap
@@ -78,7 +82,10 @@ final class LocationContentView: UIView {
         
         locationLabel.snp.makeConstraints {
             $0.centerY.equalToSuperview()
-            $0.leading.equalTo(titleLabel.snp.trailing).offset(Metric.spacing)
+            $0.leading.equalTo(titleLabel.snp.trailing)
+                .offset(Metric.spacing)
+            $0.trailing.equalTo(mapButton.snp.leading)
+                .offset(-Metric.spacing)
         }
         
         mapButton.snp.makeConstraints {

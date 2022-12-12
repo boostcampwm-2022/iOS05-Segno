@@ -86,12 +86,15 @@ final class DiaryEditViewModel {
         isReceivingLocation
             .withUnretained(self)
             .subscribe(onNext: {
-                $1 ? self.locationUseCase.getLocation() : self.locationUseCase.stopLocation()
+                $1 ? self.getLocation() : self.stopLocation()
             })
             .disposed(by: disposeBag)
         
         locationUseCase.locationSubject
-            .bind(to: locationSubject)
+            .subscribe(onNext: { [weak self] location in
+                self?.locationSubject.onNext(location)
+                self?.getAddressUseCase.getAddress(by: location)
+            })
             .disposed(by: disposeBag)
         
         getAddressUseCase.addressSubject
@@ -148,5 +151,13 @@ final class DiaryEditViewModel {
                 self?.isSucceed.onNext(false)
             })
             .disposed(by: disposeBag)
+    }
+    
+    func getLocation() {
+        locationUseCase.getLocation()
+    }
+    
+    func stopLocation() {
+        locationUseCase.stopLocation()
     }
 }
