@@ -605,7 +605,7 @@ extension DiaryEditViewController: UITextViewDelegate {
     func textViewDidBeginEditing(_ textView: UITextView) {
         if textView.text == Metric.bodyPlaceholder {
             textView.text = nil
-            textView.textColor = .appColor(.black)
+            textView.textColor = .appColor(.label)
         }
     }
     
