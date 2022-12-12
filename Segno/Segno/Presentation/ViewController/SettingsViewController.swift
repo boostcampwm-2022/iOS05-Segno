@@ -86,7 +86,10 @@ final class SettingsViewController: UIViewController {
                     
                     cell.okButton.rx.tap
                         .flatMap { _ in
-                            guard let newNickname = cell.nicknameTextField.text else {
+                            guard let newNickname = cell.nicknameTextField.text,
+                                  newNickname.trimmingCharacters(in: .whitespacesAndNewlines) != "" else {
+                                self.makeOKAlert(title: "닉네임 오류", message: "닉네임이 비어있습니다.")
+                                cell.nicknameTextField.text = nil
                                 return Observable<Bool>.empty()
                             }
                             
@@ -99,6 +102,7 @@ final class SettingsViewController: UIViewController {
                             debugPrint("닉네임 변경 결과 : \(result)")
                             switch result {
                             case true:
+                                cell.nicknameTextField.resignFirstResponder()
                                 self.makeOKAlert(title: "성공", message: "닉네임을 변경했습니다.")
                                 cell.nicknameTextField.text = nil
                             case false:
