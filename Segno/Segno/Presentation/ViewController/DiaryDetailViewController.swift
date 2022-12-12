@@ -25,7 +25,7 @@ final class DiaryDetailViewController: UIViewController {
         static let stackViewInset: CGFloat = 16
         static let dateFontSize: CGFloat = 17
         static let titleFontSize: CGFloat = 32
-        static let textViewFontSize: CGFloat = 20
+        static let textViewFontSize: CGFloat = 24
         static let textViewHeight: CGFloat = 200
         static let textViewInset: CGFloat = 16
         static let tagScrollViewHeight: CGFloat = 30
