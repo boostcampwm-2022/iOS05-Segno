@@ -9,6 +9,7 @@ struct DiaryDetail: Encodable {
     let identifier: String
     let userId: String
     let title: String
+    let date: String
     let tags: [String]
     let imagePath: String
     let bodyText: String?
@@ -17,9 +18,10 @@ struct DiaryDetail: Encodable {
     
     var token: String?
     
-    init(identifier: String, userId: String, title: String, tags: [String], imagePath: String, bodyText: String?, musicInfo: MusicInfo?, location: Location?, token: String? = nil) {
+    init(identifier: String, userId: String, date: String, title: String, tags: [String], imagePath: String, bodyText: String?, musicInfo: MusicInfo?, location: Location?, token: String? = nil) {
         self.identifier = identifier
         self.userId = userId
+        self.date = date
         self.title = title
         self.tags = tags
         self.imagePath = imagePath
@@ -33,6 +35,7 @@ struct DiaryDetail: Encodable {
         self.init(
             identifier: diary.identifier,
             userId: diary.userId,
+            date: diary.date,
             title: diary.title,
             tags: diary.tags,
             imagePath: imagePath,
@@ -48,6 +51,7 @@ struct DiaryDetail: Encodable {
         self.init(
             identifier: diary.identifier,
             userId: diary.userId,
+            date: diary.date,
             title: diary.title,
             tags: diary.tags,
             imagePath: diary.imagePath,

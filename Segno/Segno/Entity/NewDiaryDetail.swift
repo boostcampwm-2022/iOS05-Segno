@@ -6,6 +6,7 @@
 //
 
 struct NewDiaryDetail: Encodable {
+    let date: String
     let title: String
     let tags: [String]
     let imagePath: String
@@ -14,7 +15,8 @@ struct NewDiaryDetail: Encodable {
     let location: Location?
     let token: String
     
-    init(title: String, tags: [String], imagePath: String, bodyText: String?, musicInfo: MusicInfo?, location: Location?, token: String) {
+    init(date: String, title: String, tags: [String], imagePath: String, bodyText: String?, musicInfo: MusicInfo?, location: Location?, token: String) {
+        self.date = date
         self.title = title
         self.tags = tags
         self.imagePath = imagePath
