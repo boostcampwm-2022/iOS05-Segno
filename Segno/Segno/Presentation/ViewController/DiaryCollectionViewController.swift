@@ -70,6 +70,14 @@ final class DiaryCollectionViewController: UIViewController {
         return label
     }()
     
+    private lazy var backBarButtonItem: UIBarButtonItem = {
+        let item = UIBarButtonItem(title: "리스트", style: .plain, target: self, action: nil)
+        item.tintColor = UIColor.appColor(.color4)
+        item.setTitleTextAttributes([
+            NSAttributedString.Key.font: UIFont.appFont(.surroundAir, size: Metric.navigationBackButtonTitleSize)], for: .normal)
+        return item
+    }()
+    
     init() {
         self.viewModel = DiaryCollectionViewModel()
         
@@ -108,10 +116,6 @@ final class DiaryCollectionViewController: UIViewController {
             NSAttributedString.Key.foregroundColor: UIColor.appColor(.color4) ?? .red
         ]
         
-        let backBarButtonItem = UIBarButtonItem(title: "리스트", style: .plain, target: self, action: nil)
-        backBarButtonItem.tintColor = UIColor.appColor(.color4)
-        backBarButtonItem.setTitleTextAttributes([
-            NSAttributedString.Key.font: UIFont.appFont(.surroundAir, size: Metric.navigationBackButtonTitleSize)], for: .normal)
         navigationItem.backBarButtonItem = backBarButtonItem
         
         searchBar.delegate = self

@@ -9,6 +9,7 @@ import RxSwift
 
 protocol DiaryDetailUseCase {
     func getDiary(id: String) -> Single<DiaryDetail>
+    func deleteDiary(id: String) -> Completable
 }
 
 final class DiaryDetailUseCaseImpl: DiaryDetailUseCase {
@@ -22,6 +23,7 @@ final class DiaryDetailUseCaseImpl: DiaryDetailUseCase {
     func getDiary(id: String) -> Single<DiaryDetail> {
         return repository.getDiary(id: id).map {
             return DiaryDetail(identifier: $0.id,
+                               userId: $0.userId,
                                title: $0.title,
                                tags: $0.tags,
                                imagePath: $0.imagePath,
@@ -29,5 +31,10 @@ final class DiaryDetailUseCaseImpl: DiaryDetailUseCase {
                                musicInfo: $0.musicInfo,
                                location: $0.location)
             }
+    }
+    
+    func deleteDiary(id: String) -> Completable {
+        return repository.deleteDiary(id: id)
+            .asCompletable()
     }
 }

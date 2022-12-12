@@ -54,6 +54,9 @@ final class DiaryDetailViewController: UIViewController {
         return label
     }()
     
+    private lazy var diaryId: String = ""
+    private lazy var diaryUserId: String = ""
+    
     private lazy var titleLabel: MarqueeLabel = {
         let label = MarqueeLabel(frame: .zero, rate: 32, fadeLength: 32.0)
         label.font = .appFont(.surround, size: Metric.titleFontSize)
@@ -107,6 +110,18 @@ final class DiaryDetailViewController: UIViewController {
         return locationContentView
     }()
     
+    private lazy var editBarButtonItem: UIBarButtonItem = {
+        let item = UIBarButtonItem(barButtonSystemItem: .edit, target: self, action: nil)
+        item.tintColor = UIColor.appColor(.color4)
+        return item
+    }()
+    
+    private lazy var trashBarButtonItem: UIBarButtonItem = {
+        let item = UIBarButtonItem(barButtonSystemItem: .trash, target: self, action: nil)
+        item.tintColor = UIColor.appColor(.color4)
+        return item
+    }()
+    
     init(viewModel: DiaryDetailViewModel) {
         self.viewModel = viewModel
         
@@ -120,9 +135,11 @@ final class DiaryDetailViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        setupView()
         setupLayout()
+        setupRx()
+        
         bindDiaryItem()
-//        viewModel.testDataInsert() // 임시 투입 메서드입니다.
         bindAddress()
     }
     
@@ -138,6 +155,10 @@ final class DiaryDetailViewController: UIViewController {
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         self.view.endEditing(true)
+    }
+    
+    private func setupView() {
+        navigationItem.rightBarButtonItems = [trashBarButtonItem, editBarButtonItem]
     }
     
     private func setupLayout() {
@@ -190,8 +211,31 @@ final class DiaryDetailViewController: UIViewController {
         }
     }
     
+    private func setupRx() {
+        trashBarButtonItem.rx.tap
+            .withUnretained(self)
+            .bind { _ in
+                self.trashButtonTapped()
+            }
+            .disposed(by: disposeBag)
+    }
+    
     private func bindDiaryItem() {
         dateLabel.text = "11/22 14:54"
+        
+        viewModel.idObservable
+            .observe(on: MainScheduler.instance)
+            .subscribe(onNext: { [weak self] id in
+                self?.diaryId = id
+            })
+            .disposed(by: disposeBag)
+        
+        viewModel.userIdObservable
+            .observe(on: MainScheduler.instance)
+            .subscribe(onNext: { [weak self] userId in
+                self?.diaryUserId = userId
+            })
+            .disposed(by: disposeBag)
         
         viewModel.titleObservable
             .observe(on: MainScheduler.instance)
@@ -240,11 +284,12 @@ final class DiaryDetailViewController: UIViewController {
         viewModel.addressSubject
             .observe(on: MainScheduler.instance)
             .subscribe(onNext: { [weak self] address in
-                self?.locationContentView.locationLabel.text  = address
+                self?.locationContentView.locationLabel.text = address
             })
             .disposed(by: disposeBag)
         
         subscribeMusicPlayer()
+        subscribeEditSucceed()
     }
     
     private func subscribeMusicPlayer() {
@@ -280,12 +325,32 @@ final class DiaryDetailViewController: UIViewController {
             .disposed(by: disposeBag)
     }
     
+    private func subscribeEditSucceed() {
+        viewModel.isSucceed
+            .observe(on: MainScheduler.instance)
+            .subscribe(onNext: { [weak self] result in
+                if result {
+                    self?.navigationController?.popViewController(animated: true)
+                } else {
+                    // TODO: 알럿
+                    self?.navigationController?.popViewController(animated: true)
+                }
+            })
+            .disposed(by: disposeBag)
+    }
+    
     private func getDiary() {
         viewModel.getDiary()
     }
     
     private func getAddress(by location: Location) {
         viewModel.getAddress(by: location)
+    }
+    
+    private func trashButtonTapped() {
+        makeCancelOKAlert(title: "해당 Segno를 삭제하시겠습니까?", message: "") { _ in
+            self.viewModel.deleteDiary(id: self.diaryId)
+        }
     }
 }
 
