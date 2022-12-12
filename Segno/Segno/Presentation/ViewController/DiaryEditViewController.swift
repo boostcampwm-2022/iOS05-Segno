@@ -5,6 +5,7 @@
 //  Created by Gordon Choi on 2022/11/23.
 //
 
+import AVFoundation
 import UIKit
 
 import MarqueeLabel
@@ -33,6 +34,8 @@ final class DiaryEditViewController: UIViewController {
         static let titlePlaceholder = "제목을 입력하세요."
         static let pickerActionSheetTitle = "옵션 선택"
         static let pickerActionSheetMessage = "원하는 옵션을 선택하세요."
+        static let cameraAccessDeniedTitle = "카메라 권한 설정 필요"
+        static let cameraAccessDeniedMessage = "카메라 권한 설정이 필요합니다. 설정 - Segno에서 카메라 권한을 허가해주세요."
         static let libaryText = "앨범"
         static let cameraText = "카메라"
         static let cancelText = "취소"
@@ -333,6 +336,7 @@ final class DiaryEditViewController: UIViewController {
         photoImageView.isUserInteractionEnabled = true
         photoImageView.addGestureRecognizer(photoImageViewTapGesture)
         photoImageViewTapGesture.rx.event
+            .observe(on: MainScheduler.asyncInstance)
             .bind(onNext: { recognizer in
                 self.view.endEditing(true)
                 self.presentPickerActionSheet()
@@ -375,13 +379,23 @@ final class DiaryEditViewController: UIViewController {
         }
         let cameraAction = UIAlertAction(title: Metric.cameraText, style: .default) { _ in
             self.imagePicker.sourceType = .camera
-            self.present(self.imagePicker, animated: true)
+            AVCaptureDevice.requestAccess(for: .video) { result in
+                DispatchQueue.main.async {
+                    switch result {
+                    case true:
+                        self.present(self.imagePicker, animated: true)
+                    case false:
+                        self.makeOKAlert(title: Metric.cameraAccessDeniedTitle, message: Metric.cameraAccessDeniedMessage)
+                    }
+                }
+            }
         }
         let cancelAction = UIAlertAction(title: Metric.cancelText, style: .cancel)
         alert.addAction(libraryAction)
         alert.addAction(cameraAction)
         alert.addAction(cancelAction)
-        present(alert, animated: true, completion: nil)
+        
+        self.present(alert, animated: true, completion: nil)
     }
     
     private func setImagePicker() {
