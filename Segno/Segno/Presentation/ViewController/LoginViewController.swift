@@ -60,7 +60,7 @@ final class LoginViewController: UIViewController {
     }()
     
     private lazy var appleButton: ASAuthorizationAppleIDButton = {
-        let button = ASAuthorizationAppleIDButton(type: .signIn, style: .black)
+        let button = ASAuthorizationAppleIDButton(type: .continue, style: .black)
         return button
     }()
     
