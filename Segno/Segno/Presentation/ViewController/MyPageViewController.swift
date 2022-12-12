@@ -41,6 +41,8 @@ final class MyPageViewController: UIViewController {
     private enum Metric {
         static let titleText: String = "안녕하세요,\nboostcamp님!"
         static let mypageText: String = "마이페이지"
+        static let logoutTitle: String = "로그아웃"
+        static let logoutMessage: String = "정말 로그아웃하시겠습니까?"
         static let settingsOffset: CGFloat = 100
         static let titleFontSize: CGFloat = 32
         static let titleOffset: CGFloat = 30
@@ -189,9 +191,10 @@ final class MyPageViewController: UIViewController {
     }
     
     private func logoutButtonTapped() {
-        _ = localUtilityRepository.deleteToken()
-        
-        mypageDelegate?.logoutButtonTapped()
+        makeCancelOKAlert(title: Metric.logoutTitle, message: Metric.logoutMessage) { [weak self] _ in
+            _ = self?.localUtilityRepository.deleteToken()
+            self?.mypageDelegate?.logoutButtonTapped()
+        }
     }
 }
 
