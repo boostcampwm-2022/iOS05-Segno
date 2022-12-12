@@ -10,6 +10,7 @@ import Foundation
 struct DiaryDetailDTO: Decodable {
     let id: String
     let userId: String
+    let date: String
     let title: String
     let tags: [String]
     let imagePath: String
@@ -19,6 +20,7 @@ struct DiaryDetailDTO: Decodable {
     
     init(id: String,
          userId: String,
+         date: String,
          title: String,
          tags: [String],
          imagePath: String,
@@ -27,6 +29,7 @@ struct DiaryDetailDTO: Decodable {
          location: Location? = nil) {
         self.id = id
         self.userId = userId
+        self.date = date
         self.title = title
         self.tags = tags
         self.imagePath = imagePath
@@ -37,17 +40,6 @@ struct DiaryDetailDTO: Decodable {
     
     enum CodingKeys: String, CodingKey {
         case id = "_id"
-        case userId, title, tags, imagePath, bodyText, musicInfo, location
+        case userId, date, title, tags, imagePath, bodyText, musicInfo, location
     }
-    
-    #if DEBUG
-    static let example = DiaryDetailDTO(
-        id: "id",
-        userId: "userId",
-        title: "title",
-        tags: ["tag1", "tag2"],
-        imagePath: "test.png",
-        bodyText: "bodyText"
-    )
-    #endif
 }

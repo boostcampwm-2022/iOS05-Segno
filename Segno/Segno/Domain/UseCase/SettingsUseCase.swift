@@ -15,10 +15,10 @@ protocol SettingsUseCase {
 }
 
 final class SettingsUseCaseImpl: SettingsUseCase {
-    let repository: LocalUtilityRepository
+    let repository: LocalUtilityManager
     private let disposeBag = DisposeBag()
     
-    init(repository: LocalUtilityRepository = LocalUtilityRepositoryImpl()) {
+    init(repository: LocalUtilityManager = LocalUtilityManagerImpl()) {
         self.repository = repository
     }
     

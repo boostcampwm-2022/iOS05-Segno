@@ -24,6 +24,7 @@ final class DiaryDetailUseCaseImpl: DiaryDetailUseCase {
         return repository.getDiary(id: id).map {
             return DiaryDetail(identifier: $0.id,
                                userId: $0.userId,
+                               date: $0.date,
                                title: $0.title,
                                tags: $0.tags,
                                imagePath: $0.imagePath,

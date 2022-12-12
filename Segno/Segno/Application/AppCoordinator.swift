@@ -8,7 +8,11 @@
 import UIKit
 
 final class AppCoordinator: Coordinator {
-    let localUtilityRepository = LocalUtilityRepositoryImpl()
+    private enum Metric {
+        static let userToken: String = "userToken"
+    }
+    
+    let localUtilityManager = LocalUtilityManagerImpl()
     var navigationController: UINavigationController
     var childCoordinators: [Coordinator] = []
     
@@ -18,7 +22,7 @@ final class AppCoordinator: Coordinator {
     }
     
     func start() {
-        let token = localUtilityRepository.getToken()
+        let token = localUtilityManager.getToken(key: Metric.userToken)
         if token.isEmpty {
             startLoginCoordinator()
         } else {

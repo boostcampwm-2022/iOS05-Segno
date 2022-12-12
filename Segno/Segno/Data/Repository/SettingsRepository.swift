@@ -12,10 +12,14 @@ protocol SettingsRepository {
 }
 
 final class SettingsRepositoryImpl: SettingsRepository {
-    private let localUtilityRepository = LocalUtilityRepositoryImpl()
+    private enum Metric {
+        static let userToken: String = "userToken"
+    }
+    
+    private let localUtilityManager = LocalUtilityManagerImpl()
     
     func changeNickname(to nickname: String) -> Single<Bool> {
-        let token = localUtilityRepository.getToken()
+        let token = localUtilityManager.getToken(key: Metric.userToken)
         let endpoint = ChangeNicknameEndpoint.item(token: token, nickname: nickname)
         return NetworkManager.shared.call(endpoint)
             .map { _ in

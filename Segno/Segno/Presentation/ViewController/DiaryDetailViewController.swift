@@ -34,6 +34,7 @@ final class DiaryDetailViewController: UIViewController {
     
     private let disposeBag = DisposeBag()
     private let viewModel: DiaryDetailViewModel
+    private let localUtilityManager: LocalUtilityManager
     weak var delegate: DiaryDetailViewDelegate?
     
     private lazy var scrollView: UIScrollView = {
@@ -110,6 +111,12 @@ final class DiaryDetailViewController: UIViewController {
         return locationContentView
     }()
     
+    private lazy var reportBarButtonItem: UIBarButtonItem = {
+        let item = UIBarButtonItem(title: "Report", style: .plain, target: self, action: nil)
+        item.tintColor = UIColor.appColor(.color4)
+        return item
+    }()
+    
     private lazy var editBarButtonItem: UIBarButtonItem = {
         let item = UIBarButtonItem(barButtonSystemItem: .edit, target: self, action: nil)
         item.tintColor = UIColor.appColor(.color4)
@@ -122,8 +129,10 @@ final class DiaryDetailViewController: UIViewController {
         return item
     }()
     
-    init(viewModel: DiaryDetailViewModel) {
+    init(viewModel: DiaryDetailViewModel,
+         localUtilityManager: LocalUtilityManager = LocalUtilityManagerImpl()) {
         self.viewModel = viewModel
+        self.localUtilityManager = localUtilityManager
         
         super.init(nibName: nil, bundle: nil)
     }
@@ -146,6 +155,7 @@ final class DiaryDetailViewController: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
+        cleanUpTags()
         getDiary()
     }
     
@@ -158,7 +168,7 @@ final class DiaryDetailViewController: UIViewController {
     }
     
     private func setupView() {
-        navigationItem.rightBarButtonItems = [trashBarButtonItem, editBarButtonItem]
+//        navigationItem.rightBarButtonItems = [trashBarButtonItem, editBarButtonItem, reportBarButtonItem]
     }
     
     private func setupLayout() {
@@ -192,7 +202,6 @@ final class DiaryDetailViewController: UIViewController {
         
         imageView.snp.makeConstraints {
             $0.width.height.equalTo(stackView.snp.width)
-            
         }
         
         textView.snp.makeConstraints {
@@ -221,8 +230,6 @@ final class DiaryDetailViewController: UIViewController {
     }
     
     private func bindDiaryItem() {
-        dateLabel.text = "11/22 14:54"
-        
         viewModel.idObservable
             .observe(on: MainScheduler.instance)
             .subscribe(onNext: { [weak self] id in
@@ -232,8 +239,21 @@ final class DiaryDetailViewController: UIViewController {
         
         viewModel.userIdObservable
             .observe(on: MainScheduler.instance)
-            .subscribe(onNext: { [weak self] userId in
-                self?.diaryUserId = userId
+        // TODO: [weak self]로는 에러가 많이 떠서 [self]로 하니 됨. 수정 필요.
+            .subscribe(onNext: { [self] diaryUserId in
+                let userId = localUtilityManager.getToken(key: "userId")
+                if userId == diaryUserId {
+                    navigationItem.rightBarButtonItems = [trashBarButtonItem, editBarButtonItem]
+                } else {
+                    navigationItem.rightBarButtonItems = [reportBarButtonItem]
+                }
+            })
+            .disposed(by: disposeBag)
+        
+        viewModel.dateObservable
+            .observe(on: MainScheduler.instance)
+            .subscribe(onNext: { [weak self] date in
+                self?.dateLabel.text = date
             })
             .disposed(by: disposeBag)
         
@@ -329,6 +349,7 @@ final class DiaryDetailViewController: UIViewController {
         viewModel.isSucceed
             .observe(on: MainScheduler.instance)
             .subscribe(onNext: { [weak self] result in
+                // TODO: Coordinator로 이동
                 if result {
                     self?.navigationController?.popViewController(animated: true)
                 } else {
@@ -345,6 +366,12 @@ final class DiaryDetailViewController: UIViewController {
     
     private func getAddress(by location: Location) {
         viewModel.getAddress(by: location)
+    }
+    
+    private func cleanUpTags() {
+        for subview in tagStackView.subviews {
+            subview.removeFromSuperview()
+        }
     }
     
     private func trashButtonTapped() {

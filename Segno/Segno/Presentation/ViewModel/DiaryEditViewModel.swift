@@ -10,6 +10,10 @@ import Foundation
 import RxSwift
 
 final class DiaryEditViewModel {
+    private enum Metric {
+        static let userToken: String = "userToken"
+    }
+    
     var locationSubject = BehaviorSubject<Location?>(value: nil)
     var addressSubject = PublishSubject<String>()
     
@@ -23,7 +27,7 @@ final class DiaryEditViewModel {
     let locationUseCase: LocationUseCase
     let getAddressUseCase: GetAddressUseCase
     let imageUseCase: ImageUseCase
-    let localUtilityRepository: LocalUtilityRepository
+    let localUtilityManager: LocalUtilityManager
     
     var musicInfo: MusicInfo?
     
@@ -39,14 +43,14 @@ final class DiaryEditViewModel {
          locationUseCase: LocationUseCase = LocationUseCaseImpl(),
          getAddressUseCase: GetAddressUseCase = GetAddressUseCaseImpl(),
          imageUseCase: ImageUseCase = ImageUseCaseImpl(),
-         localUtilityRepository: LocalUtilityRepository = LocalUtilityRepositoryImpl()) {
+         localUtilityManager: LocalUtilityManager = LocalUtilityManagerImpl()) {
         self.diaryEditUseCase = diaryEditUseCase
         self.diaryDetailUseCase = diaryDetailUseCase
         self.searchMusicUseCase = searchMusicUseCase
         self.locationUseCase = locationUseCase
         self.getAddressUseCase = getAddressUseCase
         self.imageUseCase = imageUseCase
-        self.localUtilityRepository = localUtilityRepository
+        self.localUtilityManager = localUtilityManager
         subscribeSearchingStatus()
         subscribeSearchResult()
         subscribeSearchError()
@@ -126,7 +130,7 @@ final class DiaryEditViewModel {
             })
             .disposed(by: disposeBag)
     }
-
+    
     func toggleLocation() {
         guard let value = try? isReceivingLocation.value() else { return }
         isReceivingLocation.onNext(!value)
@@ -143,29 +147,22 @@ final class DiaryEditViewModel {
     }
     
     func saveDiary(title: String, body: String?, tags: [String], imageName: String) {
-        let location = try? locationSubject.value()
-        var newDiary: NewDiaryDetail
-        // music data가 있는 경우
-        if let musicInfo = musicInfo {
-            newDiary = NewDiaryDetail(title: title,
-                                      tags: tags,
-                                      imagePath: imageName,
-                                      bodyText: body,
-                                      musicInfo: musicInfo,
-                                      location: location,
-                                      token: localUtilityRepository.getToken())
-        }
-        // music data가 없는 경우
-        else {
-            newDiary = NewDiaryDetail(title: title,
-                                      tags: tags,
-                                      imagePath: imageName,
-                                      bodyText: body,
-                                      musicInfo: nil,
-                                      location: location,
-                                      token: localUtilityRepository.getToken())
-        }
+        let date = Date()
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "YYYY년 MM월 dd일 HH:mm:ss"
+        dateFormatter.locale = Locale(identifier: "ko")
+        let dateString = dateFormatter.string(from: date)
+        let location = try? locationSubject.value() 
         
+        let newDiary = NewDiaryDetail(date: dateString,
+                                      title: title,
+                                      tags: tags,
+                                      imagePath: imageName,
+                                      bodyText: body,
+                                      musicInfo: musicInfo ?? nil,
+                                      location: location,
+                                      token: localUtilityManager.getToken(key: Metric.userToken))
+
         diaryEditUseCase.postDiary(newDiary)
             .subscribe(onCompleted: { [weak self] in
                 debugPrint("post 성공")
