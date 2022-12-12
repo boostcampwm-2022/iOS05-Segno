@@ -17,7 +17,11 @@ protocol DiaryRepository {
 }
 
 final class DiaryRepositoryImpl: DiaryRepository {
-    private let localUtilityRepository = LocalUtilityManagerImpl()
+    private enum Metric {
+        static let userToken: String = "userToken"
+    }
+    
+    private let localUtilityManager = LocalUtilityManagerImpl()
     
     func getDiaryListItem() -> Single<DiaryListDTO> {
         let endpoint = DiaryListItemEndpoint.item
@@ -49,7 +53,7 @@ final class DiaryRepositoryImpl: DiaryRepository {
     }
     
     func deleteDiary(id: String) -> Single<Bool> {
-        let token = localUtilityRepository.getToken()
+        let token = localUtilityManager.getToken(key: Metric.userToken)
         let diaryDeleteEndpoint = DiaryDeleteEndpoint.item(token: token, diaryId: id)
         
         let single = NetworkManager.shared.call(diaryDeleteEndpoint)

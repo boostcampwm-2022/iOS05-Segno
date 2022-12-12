@@ -10,6 +10,10 @@ import Foundation
 import RxSwift
 
 final class DiaryEditViewModel {
+    private enum Metric {
+        static let userToken: String = "userToken"
+    }
+    
     var locationSubject = BehaviorSubject<Location?>(value: nil)
     var addressSubject = PublishSubject<String>()
     
@@ -23,7 +27,7 @@ final class DiaryEditViewModel {
     let locationUseCase: LocationUseCase
     let getAddressUseCase: GetAddressUseCase
     let imageUseCase: ImageUseCase
-    let localUtilityRepository: LocalUtilityManager
+    let localUtilityManager: LocalUtilityManager
     
     var musicInfo: MusicInfo?
     
@@ -39,14 +43,14 @@ final class DiaryEditViewModel {
          locationUseCase: LocationUseCase = LocationUseCaseImpl(),
          getAddressUseCase: GetAddressUseCase = GetAddressUseCaseImpl(),
          imageUseCase: ImageUseCase = ImageUseCaseImpl(),
-         localUtilityRepository: LocalUtilityManager = LocalUtilityManagerImpl()) {
+         localUtilityManager: LocalUtilityManager = LocalUtilityManagerImpl()) {
         self.diaryEditUseCase = diaryEditUseCase
         self.diaryDetailUseCase = diaryDetailUseCase
         self.searchMusicUseCase = searchMusicUseCase
         self.locationUseCase = locationUseCase
         self.getAddressUseCase = getAddressUseCase
         self.imageUseCase = imageUseCase
-        self.localUtilityRepository = localUtilityRepository
+        self.localUtilityManager = localUtilityManager
         subscribeSearchingStatus()
         subscribeSearchResult()
         subscribeSearchError()
@@ -149,7 +153,7 @@ final class DiaryEditViewModel {
                                       bodyText: body,
                                       musicInfo: musicInfo,
                                       location: location,
-                                      token: localUtilityRepository.getToken())
+                                      token: localUtilityManager.getToken(key: Metric.userToken))
         }
         // music data가 없는 경우
         else {
@@ -159,7 +163,7 @@ final class DiaryEditViewModel {
                                       bodyText: body,
                                       musicInfo: nil,
                                       location: location,
-                                      token: localUtilityRepository.getToken())
+                                      token: localUtilityManager.getToken(key: Metric.userToken))
         }
         
         diaryEditUseCase.postDiary(newDiary)

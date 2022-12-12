@@ -8,21 +8,19 @@
 import Foundation
 
 protocol LocalUtilityManager {
-    func createToken(token: String) -> Bool
-    func getToken() -> String
-    func updateToken(token: String) -> Bool
-    func deleteToken() -> Bool
+    func createToken(key: String, token: String) -> Bool
+    func getToken(key: String) -> String
+    func updateToken(key: String, token: String) -> Bool
+    func deleteToken(key: String) -> Bool
     func setUserDefaults(_ value: Any, forKey defaultsKey: UserDefaultsKey)
     func getUserDefaultsObject(forKey defaultsKey: UserDefaultsKey) -> Any?
 }
 
 final class LocalUtilityManagerImpl: LocalUtilityManager {
-    private let keyName: String = "userToken"
-    
-    func createToken(token: String) -> Bool {
+    func createToken(key: String, token: String) -> Bool {
         let addQuery: [CFString: Any] = [
             kSecClass: kSecClassGenericPassword,
-            kSecAttrAccount: keyName,
+            kSecAttrAccount: key,
             kSecValueData: (token as AnyObject).data(using: String.Encoding.utf8.rawValue) as Any
         ]
         
@@ -30,17 +28,17 @@ final class LocalUtilityManagerImpl: LocalUtilityManager {
         if status == errSecSuccess { return true }
         else if status == errSecDuplicateItem {
             print(KeychainError.duplicatedKey)
-            return updateToken(token: token)
+            return updateToken(key: key, token: token)
         }
         
         print(KeychainError.unhandledError(status: status))
         return false
     }
     
-    func getToken() -> String {
+    func getToken(key: String) -> String {
         let getQuery: [CFString: Any] = [
             kSecClass: kSecClassGenericPassword,
-            kSecAttrAccount: keyName,
+            kSecAttrAccount: key,
             kSecReturnAttributes: true,
             kSecReturnData: true
         ]
@@ -59,10 +57,10 @@ final class LocalUtilityManagerImpl: LocalUtilityManager {
         return ""
     }
     
-    func updateToken(token: String) -> Bool {
+    func updateToken(key: String, token: String) -> Bool {
         let prevQuery: [CFString: Any] = [
             kSecClass: kSecClassGenericPassword,
-            kSecAttrAccount: keyName
+            kSecAttrAccount: key
         ]
         let updateQuery: [CFString: Any] = [ kSecValueData: (token as AnyObject).data(using: String.Encoding.utf8.rawValue) as Any ]
         
@@ -73,10 +71,10 @@ final class LocalUtilityManagerImpl: LocalUtilityManager {
         return false
     }
     
-    func deleteToken() -> Bool {
+    func deleteToken(key: String) -> Bool {
         let query: [CFString: Any] = [
             kSecClass: kSecClassGenericPassword,
-            kSecAttrAccount: keyName
+            kSecAttrAccount: key
         ]
         
         let status = SecItemDelete(query as CFDictionary)

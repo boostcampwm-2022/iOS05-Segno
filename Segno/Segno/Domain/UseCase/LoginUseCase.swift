@@ -12,14 +12,18 @@ protocol LoginUseCase {
 }
 
 final class LoginUseCaseImpl: LoginUseCase {
+    private enum Metric {
+        static let userToken: String = "userToken"
+    }
+    
     let repository: LoginRepository
-    let localUtilityRepository: LocalUtilityManager
+    let localUtilityManager: LocalUtilityManager
     private let disposeBag = DisposeBag()
 
     init(repository: LoginRepository = LoginRepositoryImpl(),
-         localUtilityRepository: LocalUtilityManager = LocalUtilityManagerImpl()) {
+         localUtilityManager: LocalUtilityManager = LocalUtilityManagerImpl()) {
         self.repository = repository
-        self.localUtilityRepository = localUtilityRepository
+        self.localUtilityManager = localUtilityManager
     }
 
     func sendLoginRequest(withApple email: String) -> Single<Bool> {
@@ -29,9 +33,7 @@ final class LoginUseCaseImpl: LoginUseCase {
                     return false
                 }
                 
-                _ = self.localUtilityRepository.createToken(token: tokenString)
-                // TODO: 추후 아래 updateToken 삭제하기!
-                _ = self.localUtilityRepository.updateToken(token: "D62WywExHJYoNkLIEsKs+neMK3Fad27IcKtQKfrE3MI=")
+                _ = self.localUtilityManager.createToken(key: Metric.userToken, token: tokenString)
                 return true
             }
     }

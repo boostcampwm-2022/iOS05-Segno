@@ -14,10 +14,14 @@ protocol MyPageRepository {
 }
 
 final class MyPageRepositoryImpl: MyPageRepository {
-    private let localUtilityRepository = LocalUtilityManagerImpl()
+    private enum Metric {
+        static let userToken: String = "userToken"
+    }
+    
+    private let localUtilityManager = LocalUtilityManagerImpl()
     
     func getUserDetail() -> Single<UserDetailDTO> {
-        let token = localUtilityRepository.getToken()
+        let token = localUtilityManager.getToken(key: Metric.userToken)
         let endpoint = UserDetailEndpoint.item(token)
 
         return NetworkManager.shared.call(endpoint)
