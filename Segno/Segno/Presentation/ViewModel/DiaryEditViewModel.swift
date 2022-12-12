@@ -170,6 +170,46 @@ final class DiaryEditViewModel {
             .disposed(by: disposeBag)
     }
     
+    func updateDiary(id: String, userId: String, title: String, body: String?, tags: [String], imageData: Data) {
+        imageUseCase.uploadImage(data: imageData)
+            .subscribe(onSuccess: { [weak self] imageInfo in
+                guard let imageName = imageInfo.filename else { return }
+                debugPrint("이미지 이름 : ", imageName)
+                self?.updateDiary(id: id, userId: userId, title: title, body: body, tags: tags, imageName: imageName)
+            })
+            .disposed(by: disposeBag)
+    }
+    
+    func updateDiary(id: String, userId: String, title: String, body: String?, tags: [String], imageName: String) {
+        let date = Date()
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "YYYY년 MM월 dd일 HH:mm:ss"
+        dateFormatter.locale = Locale(identifier: "ko")
+        let dateString = dateFormatter.string(from: date)
+        let location = try? locationSubject.value()
+        
+        let diary = DiaryDetail(identifier: id,
+                                   userId: userId,
+                                   date: dateString,
+                                   title: title,
+                                   tags: tags,
+                                   imagePath: imageName,
+                                   bodyText: body,
+                                   musicInfo: musicInfo ?? nil,
+                                   location: location,
+                                   token: localUtilityManager.getToken(key: Metric.userToken))
+
+        diaryEditUseCase.updateDiary(diary)
+            .subscribe(onCompleted: { [weak self] in
+                debugPrint("update 성공")
+                self?.isSucceed.onNext(true)
+            }, onError: { [weak self] _ in
+                debugPrint("update 실패")
+                self?.isSucceed.onNext(false)
+            })
+            .disposed(by: disposeBag)
+    }
+    
     func getLocation() {
         locationUseCase.getLocation()
     }

@@ -52,6 +52,17 @@ final class DiaryRepositoryImpl: DiaryRepository {
         return single
     }
     
+    func updateDiary(_ diary: DiaryDetail) -> Single<Bool> {
+        let diaryUpdateEndpoint = DiaryUpdateEndpoint.item(diary: diary)
+        
+        let single = NetworkManager.shared.call(diaryUpdateEndpoint)
+            .map { _ in
+                return true
+            }
+        
+        return single
+    }
+    
     func deleteDiary(id: String) -> Single<Bool> {
         let token = localUtilityManager.getToken(key: Metric.userToken)
         let diaryDeleteEndpoint = DiaryDeleteEndpoint.item(token: token, diaryId: id)
