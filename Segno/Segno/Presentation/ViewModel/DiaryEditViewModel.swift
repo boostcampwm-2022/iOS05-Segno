@@ -14,12 +14,20 @@ final class DiaryEditViewModel {
         static let userToken: String = "userToken"
     }
     
-    var locationSubject = BehaviorSubject<Location?>(value: nil)
+    var locationSubject = PublishSubject<Location>()
     var addressSubject = PublishSubject<String>()
     
     private let disposeBag = DisposeBag()
-    var diaryDetail: DiaryDetail?
-    // 에딧 화면에 들어갈 여러 요소들
+    private var diaryItem = PublishSubject<DiaryDetail>()
+    private var diaryData: DiaryDetail?
+    private var isUpdating = false
+    
+    lazy var idObservable = diaryItem.map { $0.identifier }
+    lazy var titleObservable = diaryItem.map { $0.title }
+    lazy var tagsObservable = diaryItem.map { $0.tags }
+    lazy var imagePathObservable = diaryItem.map { $0.imagePath }
+    lazy var bodyObservable = diaryItem.map { $0.bodyText }
+    lazy var musicObservable = diaryItem.map { $0.musicInfo }
     
     let diaryEditUseCase: DiaryEditUseCase
     let diaryDetailUseCase: DiaryDetailUseCase
@@ -30,6 +38,7 @@ final class DiaryEditViewModel {
     let localUtilityManager: LocalUtilityManager
     
     var musicInfo: MusicInfo?
+    var locationInfo: Location?
     
     var isSearching = BehaviorSubject(value: false)
     var isReceivingLocation = BehaviorSubject(value: false)
@@ -37,13 +46,15 @@ final class DiaryEditViewModel {
     var searchError = PublishSubject<ShazamError>()
     var isSucceed = PublishSubject<Bool>()
     
-    init(diaryEditUseCase: DiaryEditUseCase = DiaryEditUseCaseImpl(),
+    init(diaryData: DiaryDetail? = nil,
+         diaryEditUseCase: DiaryEditUseCase = DiaryEditUseCaseImpl(),
          diaryDetailUseCase: DiaryDetailUseCase = DiaryDetailUseCaseImpl(),
          searchMusicUseCase: SearchMusicUseCase = SearchMusicUseCaseImpl(),
          locationUseCase: LocationUseCase = LocationUseCaseImpl(),
          getAddressUseCase: GetAddressUseCase = GetAddressUseCaseImpl(),
          imageUseCase: ImageUseCase = ImageUseCaseImpl(),
          localUtilityManager: LocalUtilityManager = LocalUtilityManagerImpl()) {
+        self.diaryData = diaryData
         self.diaryEditUseCase = diaryEditUseCase
         self.diaryDetailUseCase = diaryDetailUseCase
         self.searchMusicUseCase = searchMusicUseCase
@@ -56,6 +67,16 @@ final class DiaryEditViewModel {
         subscribeSearchError()
         subscribeLocation()
         subscribeMusicInfo()
+        subscribeLocationSubject()
+    }
+    
+    func checkExistingDiary() {
+        if let diaryData,
+           let location = diaryData.location {
+            diaryItem.onNext(diaryData)
+            locationSubject.onNext(location)
+            isUpdating = true
+        }
     }
     
     func toggleSearchMusic() {
@@ -118,7 +139,7 @@ final class DiaryEditViewModel {
         locationUseCase.locationSubject
             .subscribe(onNext: { [weak self] location in
                 self?.locationSubject.onNext(location)
-                self?.getAddressUseCase.getAddress(by: location)
+                self?.locationInfo = location
             })
             .disposed(by: disposeBag)
         
@@ -127,36 +148,43 @@ final class DiaryEditViewModel {
             .disposed(by: disposeBag)
     }
     
+    private func subscribeLocationSubject() {
+        locationSubject
+            .subscribe(onNext: { [weak self] location in
+                self?.getAddressUseCase.getAddress(by: location)
+            })
+            .disposed(by: disposeBag)
+    }
+    
     func toggleLocation() {
         guard let value = try? isReceivingLocation.value() else { return }
         isReceivingLocation.onNext(!value)
     }
     
-    func saveDiary(title: String, body: String?, tags: [String], imageData: Data) {
+    func createDiary(title: String, body: String?, tags: [String], imageData: Data) {
         imageUseCase.uploadImage(data: imageData)
             .subscribe(onSuccess: { [weak self] imageInfo in
                 guard let imageName = imageInfo.filename else { return }
                 debugPrint("이미지 이름 : ", imageName)
-                self?.saveDiary(title: title, body: body, tags: tags, imageName: imageName)
+                self?.createDiary(title: title, body: body, tags: tags, imageName: imageName)
             })
             .disposed(by: disposeBag)
     }
     
-    func saveDiary(title: String, body: String?, tags: [String], imageName: String) {
+    func createDiary(title: String, body: String?, tags: [String], imageName: String) {
         let date = Date()
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = "YYYY년 MM월 dd일 HH:mm:ss"
         dateFormatter.locale = Locale(identifier: "ko")
         let dateString = dateFormatter.string(from: date)
-        let location = try? locationSubject.value() 
         
         let newDiary = NewDiaryDetail(date: dateString,
                                       title: title,
                                       tags: tags,
                                       imagePath: imageName,
                                       bodyText: body,
-                                      musicInfo: musicInfo ?? nil,
-                                      location: location,
+                                      musicInfo: musicInfo,
+                                      location: locationInfo,
                                       token: localUtilityManager.getToken(key: Metric.userToken))
 
         diaryEditUseCase.postDiary(newDiary)

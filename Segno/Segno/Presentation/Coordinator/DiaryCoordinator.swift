@@ -40,4 +40,9 @@ extension DiaryCoordinator: DiaryDetailViewDelegate {
         let mapKitViewController = MapViewController(viewModel: MapViewModel(), location: location)
         viewController.present(mapKitViewController, animated: true)
     }
+    
+    func editButtonTapped(diaryData: DiaryDetail?) {
+        let diaryEditViewController = DiaryEditViewController(viewModel: DiaryEditViewModel(diaryData: diaryData))
+        navigationController.pushViewController(diaryEditViewController, animated: true)
+    }
 }
