@@ -8,7 +8,7 @@
 import Foundation
 
 enum DiaryUpdateEndpoint: Endpoint {
-    case item(diary: DiaryDetail)
+    case item(diary: UpdateDiaryDetail)
     
     var baseURL: URL? {
         return URL(string: BaseURL.urlString)

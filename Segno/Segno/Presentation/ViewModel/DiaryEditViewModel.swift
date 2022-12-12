@@ -164,11 +164,8 @@ final class DiaryEditViewModel {
     func saveDiary(title: String, body: String?, tags: [String], imageData: Data) {
         switch isUpdating {
         case true:
-            guard let id = diaryData?.identifier,
-                  let userID = diaryData?.userId else {
-                return
-            }
-            updateDiary(id: id, userId: userID, title: title, body: body, tags: tags, imageData: imageData)
+            guard let id = diaryData?.identifier else { return }
+            updateDiary(id: id, title: title, body: body, tags: tags, imageData: imageData)
         case false:
             createDiary(title: title, body: body, tags: tags, imageData: imageData)
         }
@@ -211,33 +208,32 @@ final class DiaryEditViewModel {
             .disposed(by: disposeBag)
     }
     
-    func updateDiary(id: String, userId: String, title: String, body: String?, tags: [String], imageData: Data) {
+    func updateDiary(id: String, title: String, body: String?, tags: [String], imageData: Data) {
         imageUseCase.uploadImage(data: imageData)
             .subscribe(onSuccess: { [weak self] imageInfo in
                 guard let imageName = imageInfo.filename else { return }
                 debugPrint("이미지 이름 : ", imageName)
-                self?.updateDiary(id: id, userId: userId, title: title, body: body, tags: tags, imageName: imageName)
+                self?.updateDiary(id: id, title: title, body: body, tags: tags, imageName: imageName)
             })
             .disposed(by: disposeBag)
     }
     
-    func updateDiary(id: String, userId: String, title: String, body: String?, tags: [String], imageName: String) {
+    func updateDiary(id: String, title: String, body: String?, tags: [String], imageName: String) {
         let date = Date()
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = "YYYY년 MM월 dd일 HH:mm:ss"
         dateFormatter.locale = Locale(identifier: "ko")
         let dateString = dateFormatter.string(from: date)
         
-        let diary = DiaryDetail(identifier: id,
-                                userId: userId,
-                                date: dateString,
-                                title: title,
-                                tags: tags,
-                                imagePath: imageName,
-                                bodyText: body,
-                                musicInfo: musicInfo,
-                                location: locationInfo,
-                                token: localUtilityManager.getToken(key: Metric.userToken))
+        let diary = UpdateDiaryDetail(id: id,
+                                      date: dateString,
+                                      title: title,
+                                      tags: tags,
+                                      imagePath: imageName,
+                                      bodyText: body,
+                                      musicInfo: musicInfo,
+                                      location: locationInfo,
+                                      token: localUtilityManager.getToken(key: Metric.userToken))
         
         diaryEditUseCase.updateDiary(diary)
             .subscribe(onCompleted: { [weak self] in
