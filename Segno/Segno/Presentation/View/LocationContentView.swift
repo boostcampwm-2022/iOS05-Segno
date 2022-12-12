@@ -43,7 +43,7 @@ final class LocationContentView: UIView {
         return label
     }()
     
-    private lazy var mapButton: UIButton = {
+    lazy var mapButton: UIButton = {
         let button = UIButton()
         button.backgroundColor = .appColor(.color4)
         button.layer.cornerRadius = Metric.mapButtonCornerRadius

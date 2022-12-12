@@ -20,6 +20,7 @@ final class DiaryDetailViewController: UIViewController {
     private enum Metric {
         static let textViewPlaceHolder: String = "내용이 없네요"
         static let musicLibraryDeniedTitle: String = "음악 접근 권한 설정 필요"
+        static let locationEmptyMessage: String = "저장된 위치가 없습니다."
         static let stackViewSpacing: CGFloat = 10
         static let stackViewInset: CGFloat = 16
         static let dateFontSize: CGFloat = 17
@@ -299,6 +300,16 @@ final class DiaryDetailViewController: UIViewController {
             .observe(on: MainScheduler.instance)
             .subscribe(onNext: { [weak self] location in
                 self?.locationContentView.setLocation(cllocation: location)
+            })
+            .disposed(by: disposeBag)
+        
+        viewModel.locationObservable
+            .observe(on: MainScheduler.instance)
+            .subscribe(onNext: { [weak self] location in
+                if location == nil {
+                    self?.locationContentView.mapButton.isEnabled = false
+                    self?.locationContentView.locationLabel.text = Metric.locationEmptyMessage
+                }
             })
             .disposed(by: disposeBag)
         
