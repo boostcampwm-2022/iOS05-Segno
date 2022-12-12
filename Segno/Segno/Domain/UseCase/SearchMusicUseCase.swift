@@ -7,7 +7,7 @@
 
 import RxSwift
 
-typealias MusicInfoResult = Result<MusicInfo, Error>
+typealias MusicInfoResult = Result<MusicInfo, ShazamError>
 
 protocol SearchMusicUseCase {
     func startSearching()

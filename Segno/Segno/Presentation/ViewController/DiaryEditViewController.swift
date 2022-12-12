@@ -457,7 +457,7 @@ extension DiaryEditViewController {
     
     private func subscribeSearchResult() {
         viewModel.musicInfo
-            .observe(on: MainScheduler.instance)
+            .observe(on: MainScheduler.asyncInstance)
             .subscribe(onNext: { result in
                 switch result {
                 case .success(let song):
@@ -467,8 +467,9 @@ extension DiaryEditViewController {
                     debugPrint(song)
                     
                     self.musicInfoLabel.text = "\(artist) - \(title)"
-                case .failure(_):
+                case .failure(let error):
                     self.musicInfoLabel.text = Metric.musicNotFound
+                    self.makeOKAlert(title: "오류", message: error.errorDescription)
                 default:
                     break
                 }
