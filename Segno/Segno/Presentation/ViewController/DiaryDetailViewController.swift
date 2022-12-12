@@ -22,7 +22,7 @@ final class DiaryDetailViewController: UIViewController {
         static let stackViewSpacing: CGFloat = 10
         static let stackViewInset: CGFloat = 16
         static let dateFontSize: CGFloat = 17
-        static let titleFontSize: CGFloat = 20
+        static let titleFontSize: CGFloat = 32
         static let textViewFontSize: CGFloat = 20
         static let textViewHeight: CGFloat = 200
         static let textViewInset: CGFloat = 16
@@ -50,7 +50,7 @@ final class DiaryDetailViewController: UIViewController {
     
     private lazy var dateLabel: UILabel = {
         let label = UILabel()
-        label.font = .appFont(.surroundAir, size: Metric.dateFontSize)
+        label.font = .systemFont(ofSize: Metric.dateFontSize)
         return label
     }()
     
@@ -59,7 +59,7 @@ final class DiaryDetailViewController: UIViewController {
     
     private lazy var titleLabel: MarqueeLabel = {
         let label = MarqueeLabel(frame: .zero, rate: 32, fadeLength: 32.0)
-        label.font = .appFont(.surround, size: Metric.titleFontSize)
+        label.font = .appFont(.shiningStar, size: Metric.titleFontSize)
         label.trailingBuffer = 16
         return label
     }()

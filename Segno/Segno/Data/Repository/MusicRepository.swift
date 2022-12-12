@@ -13,7 +13,8 @@ protocol MusicRepository {
     func setupMusic(_ song: MusicInfo?)
     func toggleMusicPlayer()
     func stopPlayingMusic()
-    func subscribeSearchresult() -> Observable<ShazamSearchResult>
+    func subscribeSearchresult() -> Observable<ShazamSongDTO>
+    func subscribeSearchError() -> Observable<ShazamError>
     func subscribePlayingStatus() -> Observable<Bool>
     func subscribeDownloadStatus() -> Observable<Bool>
     func subscribePlayerError() -> Observable<MusicError>
@@ -50,8 +51,12 @@ final class MusicRepositoryImpl: MusicRepository {
         musicSession.stopMusic()
     }
     
-    func subscribeSearchresult() -> Observable<ShazamSearchResult> {
+    func subscribeSearchresult() -> Observable<ShazamSongDTO> {
         return shazamSession.resultObservable
+    }
+    
+    func subscribeSearchError() -> Observable<ShazamError> {
+        return shazamSession.errorObservable
     }
     
     func subscribePlayingStatus() -> Observable<Bool> {

@@ -10,14 +10,16 @@ import ShazamKit
 
 import RxSwift
 
-typealias ShazamSearchResult = Result<ShazamSongDTO, ShazamError>
-
 final class ShazamSession: NSObject {
-    private var result = PublishSubject<ShazamSearchResult>()
+    private var result = PublishSubject<ShazamSongDTO>()
+    private var errorStatus = PublishSubject<ShazamError>()
     private let disposeBag = DisposeBag()
     
-    var resultObservable: Observable<ShazamSearchResult> {
+    var resultObservable: Observable<ShazamSongDTO> {
         result.asObservable()
+    }
+    var errorObservable: Observable<ShazamError> {
+        errorStatus.asObservable()
     }
     
     private lazy var audioSession: AVAudioSession = .sharedInstance()
@@ -37,20 +39,17 @@ final class ShazamSession: NSObject {
         case .granted:
             record()
         case .denied:
-            result.onNext(.failure(.recordDenied))
-            stop()
+            errorStatus.onNext(.recordDenied)
         case .undetermined:
             audioSession.requestRecordPermission { granted in
                 if granted {
                     self.record()
                 } else {
-                    self.result.onNext(.failure(.recordDenied))
-                    self.stop()
+                    self.errorStatus.onNext(.recordDenied)
                 }
             }
         @unknown default:
-            result.onNext(.failure(.unknown))
-            stop()
+            errorStatus.onNext(.unknown)
         }
     }
     
@@ -68,26 +67,25 @@ final class ShazamSession: NSObject {
             audioEngine.prepare()
             try audioEngine.start()
         } catch {
-            result.onNext(.failure(.unknown))
+            errorStatus.onNext(.unknown)
         }
     }
 }
 
 extension ShazamSession: SHSessionDelegate {
     func session(_ session: SHSession, didFind match: SHMatch) {
-        stop()
-        
         guard let mediaItem = match.mediaItems.first,
               let shazamSong = ShazamSongDTO(mediaItem: mediaItem) else {
-            result.onNext(.failure(.matchFailed))
+            errorStatus.onNext(.matchFailed)
             return
         }
         
-        result.onNext(.success(shazamSong))
+        result.onNext(shazamSong)
+        stop()
     }
     
     func session(_ session: SHSession, didNotFindMatchFor signature: SHSignature, error: Error?) {
-        result.onNext(.failure(.matchFailed))
+        errorStatus.onNext(.matchFailed)
         stop()
     }
 }

@@ -24,6 +24,7 @@ final class TabBarCoordinator: Coordinator {
     init(_ navigationController: UINavigationController) {
         self.navigationController = navigationController
         self.tabBarController = UITabBarController()
+        tabBarController.tabBar.tintColor = .appColor(.color4)
     }
     
     func start() {

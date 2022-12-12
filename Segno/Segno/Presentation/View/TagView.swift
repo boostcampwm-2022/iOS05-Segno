@@ -10,14 +10,14 @@ import SnapKit
 
 final class TagView: UIView {
     private enum Metric {
-        static let tagFontSize: CGFloat = 12
+        static let tagFontSize: CGFloat = 16
         static let tagInset: CGFloat = 9
         static let cornerRadius: CGFloat = 15
     }
 
     lazy var tagLabel: UILabel = {
         let label = UILabel()
-        label.font = .appFont(.surround, size: Metric.tagFontSize)
+        label.font = .appFont(.shiningStar, size: Metric.tagFontSize)
         label.textColor = .appColor(.white)
         return label
     }()

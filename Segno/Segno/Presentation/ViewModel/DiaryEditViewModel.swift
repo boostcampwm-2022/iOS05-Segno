@@ -25,9 +25,12 @@ final class DiaryEditViewModel {
     let imageUseCase: ImageUseCase
     let localUtilityRepository: LocalUtilityRepository
     
+    var musicInfo: MusicInfo?
+    
     var isSearching = BehaviorSubject(value: false)
     var isReceivingLocation = BehaviorSubject(value: false)
-    var musicInfo = BehaviorSubject<MusicInfoResult?>(value: nil)
+    var musicInfoResult = PublishSubject<MusicInfo>()
+    var searchError = PublishSubject<ShazamError>()
     var isSucceed = PublishSubject<Bool>()
     
     init(diaryEditUseCase: DiaryEditUseCase = DiaryEditUseCaseImpl(),
@@ -46,7 +49,9 @@ final class DiaryEditViewModel {
         self.localUtilityRepository = localUtilityRepository
         subscribeSearchingStatus()
         subscribeSearchResult()
+        subscribeSearchError()
         subscribeLocation()
+        subscribeMusicInfo()
     }
     
     func toggleSearchMusic() {
@@ -75,9 +80,25 @@ final class DiaryEditViewModel {
     
     func subscribeSearchResult() {
         searchMusicUseCase.subscribeShazamResult()
-            .subscribe(onNext: {
-                self.toggleSearchMusic()
-                self.musicInfo.onNext($0)
+            .subscribe(onNext: { [weak self] result in
+                self?.toggleSearchMusic()
+                self?.musicInfoResult.onNext(result)
+            })
+            .disposed(by: disposeBag)
+    }
+    
+    private func subscribeMusicInfo() {
+        musicInfoResult
+            .subscribe(onNext: { [weak self] info in
+                self?.musicInfo = info
+            })
+            .disposed(by: disposeBag)
+    }
+    
+    private func subscribeSearchError() {
+        searchMusicUseCase.subscribeShazamError()
+            .subscribe(onNext: { [weak self] error in
+                self?.searchError.onNext(error)
             })
             .disposed(by: disposeBag)
     }
@@ -121,8 +142,7 @@ final class DiaryEditViewModel {
         let location = try? locationSubject.value()
         var newDiary: NewDiaryDetail
         // music data가 있는 경우
-        if let musicInfoResult = try? musicInfo.value(),
-           let musicInfo = try? musicInfoResult.get() {
+        if let musicInfo = musicInfo {
             newDiary = NewDiaryDetail(title: title,
                                       tags: tags,
                                       imagePath: imageName,

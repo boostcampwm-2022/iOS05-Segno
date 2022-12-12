@@ -56,10 +56,6 @@ final class DiaryDetailViewModel {
         bindAddress()
     }
     
-    func testDataInsert() {
-        diaryItem.onNext(DiaryDetail.dummy)
-    }
-    
     func getDiary() {
         getDetailUseCase.getDiary(id: itemIdentifier)
             .subscribe(onSuccess: { [weak self] diary in

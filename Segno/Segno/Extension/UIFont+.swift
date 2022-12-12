@@ -9,7 +9,6 @@ import UIKit
 
 enum SFont {
     case shiningStar
-    case surround
     case surroundAir
 }
 
@@ -21,8 +20,6 @@ extension UIFont {
         switch name {
         case .shiningStar:
             targetFont = UIFont(name: "Cafe24ShiningStar", size: size)
-        case .surround:
-            targetFont = UIFont(name: "Cafe24Ssurround", size: size)
         case .surroundAir:
             targetFont = UIFont(name: "Cafe24SsurroundAir", size: size)
         }

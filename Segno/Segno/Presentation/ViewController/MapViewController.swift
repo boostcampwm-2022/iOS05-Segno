@@ -25,7 +25,7 @@ class MapViewController: UIViewController {
     
     private lazy var titleLabel: UILabel = {
         let titleLabel = UILabel()
-        titleLabel.font = .appFont(.surround, size: Metric.titleSize)
+        titleLabel.font = .systemFont(ofSize: Metric.titleSize)
         titleLabel.text = "위치"
         return titleLabel
     }()
@@ -57,7 +57,7 @@ class MapViewController: UIViewController {
     
     private lazy var addressLabel: UILabel = {
         let addressLabel = UILabel()
-        addressLabel.font = .appFont(.surroundAir, size: Metric.addressSize)
+        addressLabel.font = .systemFont(ofSize: Metric.addressSize)
         return addressLabel
     }()
     
