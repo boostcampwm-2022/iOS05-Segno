@@ -13,6 +13,7 @@ protocol DiaryRepository {
     func getDiaryListItem() -> Single<DiaryListDTO>
     func getDiary(id: String) -> Single<DiaryDetailDTO>
     func postDiary(_ newDiary: NewDiaryDetail) -> Single<NewDiaryDetailDTO>
+    func updateDiary(_ diary: DiaryDetail) -> Single<Bool>
     func deleteDiary(id: String) -> Single<Bool>
 }
 

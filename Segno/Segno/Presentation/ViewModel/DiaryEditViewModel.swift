@@ -161,6 +161,19 @@ final class DiaryEditViewModel {
         isReceivingLocation.onNext(!value)
     }
     
+    func saveDiary(title: String, body: String?, tags: [String], imageData: Data) {
+        switch isUpdating {
+        case true:
+            guard let id = diaryData?.identifier,
+                  let userID = diaryData?.userId else {
+                return
+            }
+            updateDiary(id: id, userId: userID, title: title, body: body, tags: tags, imageData: imageData)
+        case false:
+            createDiary(title: title, body: body, tags: tags, imageData: imageData)
+        }
+    }
+    
     func createDiary(title: String, body: String?, tags: [String], imageData: Data) {
         imageUseCase.uploadImage(data: imageData)
             .subscribe(onSuccess: { [weak self] imageInfo in
@@ -186,7 +199,7 @@ final class DiaryEditViewModel {
                                       musicInfo: musicInfo,
                                       location: locationInfo,
                                       token: localUtilityManager.getToken(key: Metric.userToken))
-
+        
         diaryEditUseCase.postDiary(newDiary)
             .subscribe(onCompleted: { [weak self] in
                 debugPrint("post 성공")
@@ -214,19 +227,18 @@ final class DiaryEditViewModel {
         dateFormatter.dateFormat = "YYYY년 MM월 dd일 HH:mm:ss"
         dateFormatter.locale = Locale(identifier: "ko")
         let dateString = dateFormatter.string(from: date)
-        let location = try? locationSubject.value()
         
         let diary = DiaryDetail(identifier: id,
-                                   userId: userId,
-                                   date: dateString,
-                                   title: title,
-                                   tags: tags,
-                                   imagePath: imageName,
-                                   bodyText: body,
-                                   musicInfo: musicInfo ?? nil,
-                                   location: location,
-                                   token: localUtilityManager.getToken(key: Metric.userToken))
-
+                                userId: userId,
+                                date: dateString,
+                                title: title,
+                                tags: tags,
+                                imagePath: imageName,
+                                bodyText: body,
+                                musicInfo: musicInfo,
+                                location: locationInfo,
+                                token: localUtilityManager.getToken(key: Metric.userToken))
+        
         diaryEditUseCase.updateDiary(diary)
             .subscribe(onCompleted: { [weak self] in
                 debugPrint("update 성공")

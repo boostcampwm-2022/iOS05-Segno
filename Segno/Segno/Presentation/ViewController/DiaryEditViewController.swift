@@ -574,7 +574,7 @@ extension DiaryEditViewController {
             bodyText = ""
         }
         
-        viewModel.createDiary(title: title, body: bodyText, tags: tags, imageData: imageData)
+        viewModel.saveDiary(title: title, body: bodyText, tags: tags, imageData: imageData)
     }
 }
 
