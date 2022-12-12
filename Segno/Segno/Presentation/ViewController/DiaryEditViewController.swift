@@ -56,7 +56,6 @@ final class DiaryEditViewController: UIViewController {
     private let viewModel: DiaryEditViewModel
     private var disposeBag = DisposeBag()
     private var tags: [String] = []
-    private var location: Location?
     
     private lazy var mainScrollView: UIScrollView = {
         let scrollView = UIScrollView()
@@ -370,13 +369,12 @@ final class DiaryEditViewController: UIViewController {
             .observe(on: MainScheduler.instance)
             .subscribe(onNext: { [weak self] tags in
                 for tag in tags {
+                    self?.tags.append(tag)
                     let tagView = TagView(tagTitle: tag)
                     self?.tagStackView.addArrangedSubview(tagView)
                 }
             })
             .disposed(by: disposeBag)
-        
-        
     }
     
     private func bindImageView() {
@@ -489,7 +487,6 @@ final class DiaryEditViewController: UIViewController {
     }
 }
 
-// 샤잠킷 로직 부분
 extension DiaryEditViewController {
     private func subscribeSearchingStatus() {
         viewModel.isSearching
@@ -577,7 +574,7 @@ extension DiaryEditViewController {
             bodyText = ""
         }
         
-        viewModel.saveDiary(title: title, body: bodyText, tags: tags, imageData: imageData)
+        viewModel.createDiary(title: title, body: bodyText, tags: tags, imageData: imageData)
     }
 }
 
@@ -599,13 +596,6 @@ extension DiaryEditViewController {
         
         viewModel.addressSubject
             .bind(to: locationInfoLabel.rx.text)
-            .disposed(by: disposeBag)
-        
-        viewModel.locationSubject
-            .withUnretained(self)
-            .subscribe(onNext: { _, location in
-                self.location = location
-            })
             .disposed(by: disposeBag)
     }
 }
