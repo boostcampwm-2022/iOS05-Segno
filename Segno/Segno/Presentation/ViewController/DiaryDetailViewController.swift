@@ -144,7 +144,6 @@ final class DiaryDetailViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        setupView()
         setupLayout()
         setupRx()
         
@@ -165,10 +164,6 @@ final class DiaryDetailViewController: UIViewController {
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         self.view.endEditing(true)
-    }
-    
-    private func setupView() {
-//        navigationItem.rightBarButtonItems = [trashBarButtonItem, editBarButtonItem, reportBarButtonItem]
     }
     
     private func setupLayout() {
@@ -253,15 +248,12 @@ final class DiaryDetailViewController: UIViewController {
         
         viewModel.userIdObservable
             .observe(on: MainScheduler.instance)
-        // TODO: [weak self]로는 에러가 많이 떠서 [self]로 하니 됨. 수정 필요.
-            .subscribe(onNext: { [self] diaryUserId in
-                let userId = localUtilityManager.getToken(key: "userId")
-                print("self : \(userId)")
-                print("diary: \(diaryUserId)")
+            .subscribe(onNext: { [weak self] diaryUserId in
+                let userId = self?.localUtilityManager.getToken(key: "userId")
                 if userId == diaryUserId {
-                    navigationItem.rightBarButtonItems = [trashBarButtonItem, editBarButtonItem]
+                    self?.navigationItem.rightBarButtonItems = [self?.trashBarButtonItem ?? UIBarButtonItem(), self?.editBarButtonItem ?? UIBarButtonItem()]
                 } else {
-                    navigationItem.rightBarButtonItems = [reportBarButtonItem]
+                    self?.navigationItem.rightBarButtonItems = [self?.reportBarButtonItem ?? UIBarButtonItem()]
                 }
             })
             .disposed(by: disposeBag)
@@ -392,7 +384,10 @@ final class DiaryDetailViewController: UIViewController {
     
     private func reportButtonTapped() {
         makeCancelOKAlert(title: "해당 Segno를 신고하시겠습니까?", message: "") { _ in
-            self.makeOKAlert(title: "해당 Segno를 신고하였습니다.", message: "관리자가 확인 후 조치하도록 하겠습니다.")
+            self.makeOKAlert(title: "해당 Segno를 신고하였습니다.", message: "관리자가 확인 후 조치하도록 하겠습니다.") { _ in
+                // TODO: Coordinator로 이동
+                self.navigationController?.popViewController(animated: true)
+            }
         }
     }
     
