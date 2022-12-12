@@ -7,12 +7,11 @@
 
 import RxSwift
 
-typealias MusicInfoResult = Result<MusicInfo, ShazamError>
-
 protocol SearchMusicUseCase {
     func startSearching()
     func stopSearching()
-    func subscribeShazamResult() -> Observable<MusicInfoResult>
+    func subscribeShazamResult() -> Observable<MusicInfo>
+    func subscribeShazamError() -> Observable<ShazamError>
 }
 
 final class SearchMusicUseCaseImpl: SearchMusicUseCase {
@@ -32,16 +31,14 @@ final class SearchMusicUseCaseImpl: SearchMusicUseCase {
         musicRepository.stopSearchingMusic()
     }
     
-    func subscribeShazamResult() -> Observable<MusicInfoResult> {
+    func subscribeShazamResult() -> Observable<MusicInfo> {
         musicRepository.subscribeSearchresult()
             .map {
-                switch $0 {
-                case .success(let shazamSongDTO):
-                    let musicInfo = MusicInfo(shazamSong: shazamSongDTO)
-                    return .success(musicInfo)
-                case .failure(let error):
-                    return .failure(error)
-                }
+                return MusicInfo(shazamSong: $0)
             }
+    }
+    
+    func subscribeShazamError() -> Observable<ShazamError> {
+        musicRepository.subscribeSearchError()
     }
 }

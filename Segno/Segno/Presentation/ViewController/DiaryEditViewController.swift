@@ -220,6 +220,7 @@ final class DiaryEditViewController: UIViewController {
         bindButtonAction()
         subscribeSearchingStatus()
         subscribeSearchResult()
+        subscribeSearchError()
         subscribeLocationResult()
         subscribeEditSucceed()
     }
@@ -339,6 +340,33 @@ final class DiaryEditViewController: UIViewController {
             .disposed(by: disposeBag)
     }
     
+    private func bindButtonAction() {
+        addMusicButton.rx.tap
+            .withUnretained(self)
+            .bind { _ in
+                self.searchTapped()
+            }
+            .disposed(by: disposeBag)
+        
+        addlocationButton.rx.tap
+            .withUnretained(self)
+            .bind { _ in
+                self.locationButtonTapped()
+            }
+            .disposed(by: disposeBag)
+        
+        saveButton.rx.tap
+            .withUnretained(self)
+            .bind { _ in
+                if self.photoImageView.image == nil {
+                    debugPrint("이미지를 넣지 않으면 저장할 수 없습니다!")
+                } else {
+                    self.saveDiary()
+                }
+            }
+            .disposed(by: disposeBag)
+    }
+    
     private func presentPickerActionSheet() {
         let alert = UIAlertController(title: Metric.pickerActionSheetTitle, message: Metric.pickerActionSheetMessage, preferredStyle: .actionSheet)
         let libraryAction = UIAlertAction(title: Metric.libaryText, style: .default) { _ in
@@ -427,50 +455,27 @@ extension DiaryEditViewController {
             .disposed(by: disposeBag)
     }
     
-    private func bindButtonAction() {
-        addMusicButton.rx.tap
-            .withUnretained(self)
-            .bind { _ in
-                self.searchTapped()
-            }
-            .disposed(by: disposeBag)
-        
-        addlocationButton.rx.tap
-            .withUnretained(self)
-            .bind { _ in
-                self.locationButtonTapped()
-            }
-            .disposed(by: disposeBag)
-        
-        saveButton.rx.tap
-            .withUnretained(self)
-            .bind { _ in
-                if self.photoImageView.image == nil {
-                    debugPrint("이미지를 넣지 않으면 저장할 수 없습니다!")
-                } else {
-                    self.saveDiary()
-                }
-            }
+    private func subscribeSearchResult() {
+        viewModel.musicInfoResult
+            .observe(on: MainScheduler.instance)
+            .subscribe(onNext: { [weak self] result in
+                guard let song = self?.viewModel.musicInfo else { return }
+                let title = song.title
+                let artist = song.artist
+                
+                debugPrint(song)
+                
+                self?.musicInfoLabel.text = "\(artist) - \(title)"
+            })
             .disposed(by: disposeBag)
     }
     
-    private func subscribeSearchResult() {
-        viewModel.musicInfo
-            .observe(on: MainScheduler.asyncInstance)
-            .subscribe(onNext: { result in
-                switch result {
-                case .success(let song):
-                    let title = song.title
-                    let artist = song.artist
-                    
-                    debugPrint(song)
-                    
-                    self.musicInfoLabel.text = "\(artist) - \(title)"
-                case .failure(let error):
-                    self.musicInfoLabel.text = Metric.musicNotFound
-                    self.makeOKAlert(title: "오류", message: error.errorDescription)
-                default:
-                    break
+    private func subscribeSearchError() {
+        viewModel.searchError
+            .observe(on: MainScheduler.instance)
+            .subscribe(onNext: { [weak self] error in
+                self?.makeOKAlert(title: "Error!", message: error.errorDescription) { _ in
+                    self?.musicInfoLabel.text = Metric.musicNotFound
                 }
             })
             .disposed(by: disposeBag)

@@ -9,9 +9,9 @@ import UIKit
 
 extension UIViewController {
     // OK를 누르면 소멸하고 아무것도 하지 않는 얼럿입니다.
-    func makeOKAlert(title: String, message: String) {
+    func makeOKAlert(title: String, message: String, action: ((UIAlertAction) -> Void)? = nil) {
         let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
-        let action = UIAlertAction(title: "OK", style: .cancel, handler: nil)
+        let action = UIAlertAction(title: "OK", style: .cancel, handler: action)
         alert.addAction(action)
         present(alert, animated: true)
     }
