@@ -8,15 +8,15 @@
 import Foundation
 
 enum LocationError: Error, LocalizedError {
-    case didFailWithError
-    case locationDisabled
+    case denied
+    case restricted
     case unknown
     
     var errorDescription: String {
         switch self {
-        case .didFailWithError:
+        case .denied:
             return "현재 위치 정보를 받아올 수 없습니다. 설정에서 위치 정보를 받아올 수 있도록 설정해주세요."
-        case .locationDisabled:
+        case .restricted:
             return "기기에서 위치 정보를 받아올 수 없습니다. 설정 - 개인정보 보호 및 보안 - 위치 서비스에서 위치 정보를 받아올 수 있도록 설정해주세요."
         case .unknown:
             return "알 수 없는 오류가 발생했습니다."

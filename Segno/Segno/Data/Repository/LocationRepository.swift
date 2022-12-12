@@ -30,6 +30,10 @@ final class LocationRepositoryImpl: NSObject, LocationRepository {
         errorStatus.asObservable()
     }
     
+    var locationStatus: CLAuthorizationStatus {
+        locationManager.authorizationStatus
+    }
+    
     private var locationManager = CLLocationManager()
     
     override init() {
@@ -46,7 +50,7 @@ final class LocationRepositoryImpl: NSObject, LocationRepository {
                 self.locationManager.requestLocation()
             } else {
                 debugPrint("위치 서비스 off 상태")
-                self.errorStatus.onNext(.locationDisabled)
+                self.errorStatus.onNext(.restricted)
                 
             }
         }
@@ -91,11 +95,14 @@ extension LocationRepositoryImpl: CLLocationManagerDelegate {
     
     func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {
         debugPrint("didFailWithError")
-        guard let error = error as? CLError else {
-            debugPrint("CLError 다운캐스팅 불가")
-            return
+        debugPrint("현재 권한 상태 : ", locationStatus.rawValue)
+        switch locationStatus {
+        case .restricted:
+            errorStatus.onNext(.restricted)
+        case .denied:
+            errorStatus.onNext(.denied)
+        default:
+            getLocation()
         }
-        debugPrint("에러 코드 : ", error.code.rawValue)
-        errorStatus.onNext(.didFailWithError)
     }
 }

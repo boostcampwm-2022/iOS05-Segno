@@ -119,7 +119,11 @@ final class DiaryEditViewModel {
             .disposed(by: disposeBag)
         
         getAddressUseCase.addressSubject
-            .bind(to: addressSubject)
+            .withUnretained(self)
+            .subscribe(onNext: {_, address in
+                self.addressSubject.onNext(address)
+                self.isReceivingLocation.onNext(false)
+            })
             .disposed(by: disposeBag)
     }
 
