@@ -491,6 +491,7 @@ extension DiaryEditViewController {
             .subscribe(onNext: { [weak self] error in
                 self?.makeOKAlert(title: Metric.micAccessDeniedTitle , message: error.errorDescription) { _ in
                     self?.musicInfoLabel.text = Metric.musicNotFound
+                    self?.viewModel.isSearching.onNext(false)
                 }
             })
             .disposed(by: disposeBag)
