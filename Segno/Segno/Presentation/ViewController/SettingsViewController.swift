@@ -99,6 +99,11 @@ final class SettingsViewController: UIViewController {
                                 return Observable<Bool>.empty()
                             }
                             
+                            if newNickname.count > 10 {
+                                self.makeOKAlert(title: "닉네임 오류", message: "닉네임은 10글자 이하로 작성해주세요.")
+                                return Observable<Bool>.empty()
+                            }
+                            
                             return self.viewModel.changeNickname(to: newNickname)
                                 .asObservable()
                         }

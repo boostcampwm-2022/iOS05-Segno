@@ -55,6 +55,7 @@ final class MyPageViewController: UIViewController {
     
     private lazy var titleLabel: UILabel = {
         let label = UILabel()
+        label.adjustsFontSizeToFitWidth = true
         label.font = .systemFont(ofSize: Metric.titleFontSize, weight: .bold)
         label.numberOfLines = 0
         label.text = Metric.titleText

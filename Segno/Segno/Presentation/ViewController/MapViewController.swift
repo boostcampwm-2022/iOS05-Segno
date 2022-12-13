@@ -26,7 +26,7 @@ class MapViewController: UIViewController {
     
     private lazy var titleLabel: UILabel = {
         let titleLabel = UILabel()
-        titleLabel.font = .systemFont(ofSize: Metric.titleSize)
+        titleLabel.font = .systemFont(ofSize: Metric.titleSize, weight: .bold)
         titleLabel.text = "위치"
         return titleLabel
     }()
