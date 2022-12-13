@@ -13,6 +13,10 @@ import RxCocoa
 import RxSwift
 import SnapKit
 
+protocol DiaryEditViewDelegate: AnyObject {
+    func diaryDidSaved()
+}
+
 final class DiaryEditViewController: UIViewController {
     private enum Metric {
         // 스택 뷰 관련 설정
@@ -62,6 +66,8 @@ final class DiaryEditViewController: UIViewController {
     private var tags: [String] = []
     private var location: Location?
     private var address: String?
+    
+    weak var delegate: DiaryEditViewDelegate?
 
     private lazy var mainScrollView: UIScrollView = {
         let scrollView = UIScrollView()
@@ -555,12 +561,12 @@ extension DiaryEditViewController {
         viewModel.isSucceed
             .observe(on: MainScheduler.instance)
             .subscribe(onNext: { [weak self] result in
-                // TODO: Coordinator로 이동
                 if result {
-                    self?.navigationController?.popViewController(animated: true)
+                    self?.makeOKAlert(title: "저장 완료", message: "저장되었습니다.") { _ in
+                        self?.delegate?.diaryDidSaved()
+                    }
                 } else {
-                    // TODO: 알럿
-                    self?.navigationController?.popViewController(animated: true)
+                    self?.makeOKAlert(title: "Error!", message: "저장에 실패했습니다.")
                 }
             })
             .disposed(by: disposeBag)

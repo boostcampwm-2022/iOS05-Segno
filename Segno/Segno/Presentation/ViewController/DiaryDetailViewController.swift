@@ -15,6 +15,7 @@ import SnapKit
 protocol DiaryDetailViewDelegate: AnyObject {
     func mapButtonTapped(viewController: UIViewController, location: Location)
     func editButtonTapped(diaryData: DiaryDetail?)
+    func escapeToCollectionView()
 }
 
 final class DiaryDetailViewController: UIViewController {
@@ -330,7 +331,7 @@ final class DiaryDetailViewController: UIViewController {
             .disposed(by: disposeBag)
         
         subscribeMusicPlayer()
-        subscribeEditSucceed()
+        subscribeDeleteSucceeded()
     }
     
     private func subscribeMusicPlayer() {
@@ -366,16 +367,16 @@ final class DiaryDetailViewController: UIViewController {
             .disposed(by: disposeBag)
     }
     
-    private func subscribeEditSucceed() {
-        viewModel.isSucceed
+    private func subscribeDeleteSucceeded() {
+        viewModel.isSucceeded
             .observe(on: MainScheduler.instance)
             .subscribe(onNext: { [weak self] result in
-                // TODO: Coordinator로 이동
                 if result {
-                    self?.navigationController?.popViewController(animated: true)
+                    self?.makeOKAlert(title: "삭제 성공", message: "삭제되었습니다.") { _ in
+                        self?.delegate?.escapeToCollectionView()
+                    }
                 } else {
-                    // TODO: 알럿
-                    self?.navigationController?.popViewController(animated: true)
+                    self?.makeOKAlert(title: "Error!", message: "삭제에 실패했습니다.")
                 }
             })
             .disposed(by: disposeBag)
@@ -398,8 +399,7 @@ final class DiaryDetailViewController: UIViewController {
     private func reportButtonTapped() {
         makeCancelOKAlert(title: "해당 Segno를 신고하시겠습니까?", message: "") { _ in
             self.makeOKAlert(title: "해당 Segno를 신고하였습니다.", message: "관리자가 확인 후 조치하도록 하겠습니다.") { _ in
-                // TODO: Coordinator로 이동
-                self.navigationController?.popViewController(animated: true)
+                self.delegate?.escapeToCollectionView()
             }
         }
     }

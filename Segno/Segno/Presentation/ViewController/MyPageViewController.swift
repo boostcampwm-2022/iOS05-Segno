@@ -119,7 +119,10 @@ final class MyPageViewController: UIViewController {
         view.addSubviews([titleLabel, tableView])
         
         titleLabel.snp.makeConstraints { make in
-            make.top.leading.equalTo(view.safeAreaLayoutGuide).offset(Metric.titleOffset)
+            make.top.leading.equalTo(view.safeAreaLayoutGuide)
+                .offset(Metric.titleOffset)
+            make.trailing.equalTo(view.safeAreaLayoutGuide)
+                .inset(Metric.titleOffset)
         }
         
         tableView.snp.makeConstraints { make in

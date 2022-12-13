@@ -23,7 +23,7 @@ final class DiaryDetailViewModel {
     var isPlaying = BehaviorSubject(value: false)
     var isReady = BehaviorSubject(value: false)
     var playerErrorStatus = PublishSubject<MusicError>()
-    var isSucceed = PublishSubject<Bool>()
+    var isSucceeded = PublishSubject<Bool>()
     
     lazy var dateObservable = diaryItem.map { $0.date }
     lazy var idObservable = diaryItem.map { $0.identifier }
@@ -139,10 +139,10 @@ final class DiaryDetailViewModel {
         getDetailUseCase.deleteDiary(id: id)
             .subscribe(onCompleted: { [weak self] in
                 debugPrint("delete 성공")
-                self?.isSucceed.onNext(true)
+                self?.isSucceeded.onNext(true)
             }, onError: { [weak self] _ in
                 debugPrint("delete 실패")
-                self?.isSucceed.onNext(false)
+                self?.isSucceeded.onNext(false)
             })
             .disposed(by: disposeBag)
     }
