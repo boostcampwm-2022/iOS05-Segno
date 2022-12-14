@@ -15,7 +15,7 @@ import RxTest
 
 final class GetAddressUseCaseTest: XCTestCase {
     
-    class StubRepository: LocationRepository {
+    final class StubRepository: LocationRepository {
         var locationSubject: PublishSubject<Location>
         var addressSubject: PublishSubject<String>
         var errorStatus: PublishSubject<LocationError>
@@ -42,9 +42,8 @@ final class GetAddressUseCaseTest: XCTestCase {
         }
         func getLocation() { }
         func stopLocation() { }
-        
-        
     }
+    
     var scheduler: TestScheduler!
     var useCase: GetAddressUseCase!
     var repository: LocationRepository!
@@ -68,14 +67,14 @@ final class GetAddressUseCaseTest: XCTestCase {
         address = nil
         disposeBag = nil
     }
-
+    
     func test_getAddress() throws {
         // given
         let location = Location(
             latitude: 37.247935,
             longitude: 127.076536
         )
-
+        
         repository.addressSubject
             .bind(to: address)
             .disposed(by: disposeBag)
