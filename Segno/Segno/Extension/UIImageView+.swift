@@ -17,7 +17,7 @@ extension UIImageView {
         let memoryCache = KingfisherManager.shared.cache.memoryStorage
         memoryCache.config.expiration = .seconds(3600)
         
-        self.kf.setImage(with: resource)
+        kf.setImage(with: resource)
     }
     
     func setImage(urlString: String) {
@@ -27,6 +27,6 @@ extension UIImageView {
         let memoryCache = KingfisherManager.shared.cache.memoryStorage
         memoryCache.config.expiration = .seconds(3600)
         
-        self.kf.setImage(with: resource)
+        kf.setImage(with: resource)
     }
 }
