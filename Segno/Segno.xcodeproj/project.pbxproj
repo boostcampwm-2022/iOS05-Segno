@@ -7,13 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		4F0372D62941DBD40014131F /* MusicError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F0372D52941DBD40014131F /* MusicError.swift */; };
-		4F307A4629387C1100FA36A0 /* ShazamSession.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F307A4529387C1100FA36A0 /* ShazamSession.swift */; };
-		4F307A482938832900FA36A0 /* MusicSession.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F307A472938832900FA36A0 /* MusicSession.swift */; };
-		4F307A4A293889C200FA36A0 /* SearchMusicUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F307A49293889C200FA36A0 /* SearchMusicUseCase.swift */; };
-		4F307A4C29388D4600FA36A0 /* MusicRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F307A4B29388D4600FA36A0 /* MusicRepository.swift */; };
 		4F307A512939031A00FA36A0 /* MarqueeLabel in Frameworks */ = {isa = PBXBuildFile; productRef = 4F307A502939031A00FA36A0 /* MarqueeLabel */; };
-		4F31777F291BE4710019BDFC /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F31777E291BE4710019BDFC /* SceneDelegate.swift */; };
 		4F317786291BE4720019BDFC /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 4F317785291BE4720019BDFC /* Assets.xcassets */; };
 		4F317789291BE4720019BDFC /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4F317787291BE4720019BDFC /* LaunchScreen.storyboard */; };
 		4F3177A3291BF70B0019BDFC /* RxCocoa in Frameworks */ = {isa = PBXBuildFile; productRef = 4F3177A2291BF70B0019BDFC /* RxCocoa */; };
@@ -21,109 +15,227 @@
 		4F3177AB291BF70B0019BDFC /* RxSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 4F3177AA291BF70B0019BDFC /* RxSwift */; };
 		4F3177B0291BF7950019BDFC /* SnapKit in Frameworks */ = {isa = PBXBuildFile; productRef = 4F3177AF291BF7950019BDFC /* SnapKit */; };
 		4F3177B5291BF7BC0019BDFC /* Kingfisher in Frameworks */ = {isa = PBXBuildFile; productRef = 4F3177B4291BF7BC0019BDFC /* Kingfisher */; };
-		4F4E0D3E2924B925005ABA8F /* LoginRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F4E0D3D2924B925005ABA8F /* LoginRepository.swift */; };
-		4F4E0D74292521D0005ABA8F /* UserInfoDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F4E0D73292521D0005ABA8F /* UserInfoDTO.swift */; };
-		4F4E0D7629252236005ABA8F /* LoginEndpoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F4E0D7529252236005ABA8F /* LoginEndpoint.swift */; };
-		4F4E0D79292522B7005ABA8F /* BaseURL.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F4E0D78292522B7005ABA8F /* BaseURL.swift */; };
-		4F51A6FD294096480039D86A /* PlayMusicUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F51A6FC294096480039D86A /* PlayMusicUseCase.swift */; };
-		4F51A6FF2940FE810039D86A /* UIViewController+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F51A6FE2940FE810039D86A /* UIViewController+.swift */; };
-		4F5291DE293F065D00DF930A /* DiaryEditViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F5291DD293F065D00DF930A /* DiaryEditViewModel.swift */; };
-		4F589DD6293FB9AB00DB39E5 /* ShazamSongDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F589DD5293FB9AB00DB39E5 /* ShazamSongDTO.swift */; };
-		4F589DD9293FBA0900DB39E5 /* ShazamError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F589DD8293FBA0900DB39E5 /* ShazamError.swift */; };
-		4F6F74B1292C9BF3007E7AC1 /* UserInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F6F74B0292C9BF3007E7AC1 /* UserInfo.swift */; };
-		4F9A001B292227D7007D9057 /* NetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F9A001A292227D7007D9057 /* NetworkManager.swift */; };
-		4F9A001D29222B1B007D9057 /* Endpoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F9A001C29222B1B007D9057 /* Endpoint.swift */; };
-		4F9A001F29222C97007D9057 /* NetworkError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F9A001E29222C97007D9057 /* NetworkError.swift */; };
-		4F9A00202922337F007D9057 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F317780291BE4710019BDFC /* LoginViewController.swift */; };
-		4F9A00212922338E007D9057 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F31777C291BE4710019BDFC /* AppDelegate.swift */; };
-		4FA05B97292DFCCC00AFB020 /* DiaryEditViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FA05B96292DFCCC00AFB020 /* DiaryEditViewController.swift */; };
-		4FA324262923600C00DB04D5 /* DiaryListDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FA324252923600C00DB04D5 /* DiaryListDTO.swift */; };
-		4FA32428292363AB00DB04D5 /* DiaryRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FA32427292363AA00DB04D5 /* DiaryRepository.swift */; };
-		4FA3242B2923646F00DB04D5 /* DiaryListItemEndpoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FA3242A2923646F00DB04D5 /* DiaryListItemEndpoint.swift */; };
-		4FBB42192946333A0017DAB8 /* UIImageView+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FBB42182946333A0017DAB8 /* UIImageView+.swift */; };
-		4FCAC5C2292B5C9000BF9CDD /* LoginSession.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FCAC5C1292B5C9000BF9CDD /* LoginSession.swift */; };
-		4FEBFAAB291CF30E00E78139 /* DiaryListItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FEBFAAA291CF30E00E78139 /* DiaryListItem.swift */; };
-		4FEBFAAD291CF62E00E78139 /* DiaryDetail.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FEBFAAC291CF62E00E78139 /* DiaryDetail.swift */; };
-		4FEBFAAF291CF9F300E78139 /* MusicInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FEBFAAE291CF9F300E78139 /* MusicInfo.swift */; };
-		4FEBFAB1291CFB5500E78139 /* SHMediaItem+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FEBFAB0291CFB5500E78139 /* SHMediaItem+.swift */; };
-		66541BFB2947723F00AE25FB /* LocalUtilityManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66541BFA2947723F00AE25FB /* LocalUtilityManager.swift */; };
-		66541BFD29477D3D00AE25FB /* UserLoginDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66541BFC29477D3D00AE25FB /* UserLoginDTO.swift */; };
-		66541BFF2947AC5600AE25FB /* DiaryUpdateEndpoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66541BFE2947AC5600AE25FB /* DiaryUpdateEndpoint.swift */; };
-		66541C012947B99A00AE25FB /* UpdateDiaryDetail.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66541C002947B99A00AE25FB /* UpdateDiaryDetail.swift */; };
-		666E6F7D291CF45600CECD4B /* Coordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 666E6F7C291CF45600CECD4B /* Coordinator.swift */; };
-		666E6F7F291CF46800CECD4B /* AppCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 666E6F7E291CF46800CECD4B /* AppCoordinator.swift */; };
-		666E6F81291CF49E00CECD4B /* LoginCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 666E6F80291CF49E00CECD4B /* LoginCoordinator.swift */; };
-		666E6F83291CF4A600CECD4B /* TabBarCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 666E6F82291CF4A600CECD4B /* TabBarCoordinator.swift */; };
-		666E6F85291CF4AD00CECD4B /* MyPageCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 666E6F84291CF4AD00CECD4B /* MyPageCoordinator.swift */; };
-		666E6F87291CF4B400CECD4B /* DiaryCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 666E6F86291CF4B400CECD4B /* DiaryCoordinator.swift */; };
-		666E6F8A291CF82700CECD4B /* TabBarPageCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 666E6F89291CF82700CECD4B /* TabBarPageCase.swift */; };
-		666E6F8C291CFAC200CECD4B /* DiaryCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 666E6F8B291CFAC200CECD4B /* DiaryCollectionViewController.swift */; };
-		666E6F8E291CFADD00CECD4B /* MyPageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 666E6F8D291CFADD00CECD4B /* MyPageViewController.swift */; };
-		6692A9EF292F605E00DDA835 /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6692A9EE292F605E00DDA835 /* SettingsViewController.swift */; };
-		66A8CF612935F44100C17F84 /* MyPageViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66A8CF602935F44100C17F84 /* MyPageViewModel.swift */; };
-		66A8CF652937934A00C17F84 /* MyPageRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66A8CF642937934A00C17F84 /* MyPageRepository.swift */; };
-		66A8CF672937937300C17F84 /* UserDetailItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66A8CF662937937300C17F84 /* UserDetailItem.swift */; };
-		66A8CF692937945300C17F84 /* UserDetailUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66A8CF682937945300C17F84 /* UserDetailUseCase.swift */; };
-		66A8CF6B2937947A00C17F84 /* UserDetailDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66A8CF6A2937947A00C17F84 /* UserDetailDTO.swift */; };
-		66A8CF6D29379A9900C17F84 /* UserDetailEndpoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66A8CF6C29379A9900C17F84 /* UserDetailEndpoint.swift */; };
-		66F0D7EE2925FF8B0074872E /* DiaryCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66F0D7ED2925FF8B0074872E /* DiaryCell.swift */; };
-		791529D82932F364005A8DDB /* DiaryEditUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 791529D72932F364005A8DDB /* DiaryEditUseCase.swift */; };
-		791529DC29332CF2005A8DDB /* ImageDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 791529DB29332CF2005A8DDB /* ImageDTO.swift */; };
-		791529DE29333D40005A8DDB /* ImageEndpoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 791529DD29333D40005A8DDB /* ImageEndpoint.swift */; };
-		791529E0293344E9005A8DDB /* DiaryPostEndpoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 791529DF293344E8005A8DDB /* DiaryPostEndpoint.swift */; };
+		6618BC282949B6830008734D /* LoginUseCaseTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6618BC272949B6830008734D /* LoginUseCaseTest.swift */; };
+		6618BC2A2949B6930008734D /* DiaryListUseCaseTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6618BC292949B6930008734D /* DiaryListUseCaseTest.swift */; };
+		6618BC2F2949B7010008734D /* LoginUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9841D6162925FACC00318EA9 /* LoginUseCase.swift */; };
+		6618BC302949B7040008734D /* DiaryListUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 988414DA2923606B007C9132 /* DiaryListUseCase.swift */; };
+		6618BC312949B7060008734D /* DiaryDetailUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7940FB32292E065F00276EFC /* DiaryDetailUseCase.swift */; };
+		6618BC322949B70A0008734D /* DiaryEditUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 791529D72932F364005A8DDB /* DiaryEditUseCase.swift */; };
+		6618BC332949B70C0008734D /* LocationUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98138D4C2940F53F00D2CEDF /* LocationUseCase.swift */; };
+		6618BC342949B7100008734D /* GetAddressUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98AE6A8929445F2A0039A666 /* GetAddressUseCase.swift */; };
+		6618BC352949B7120008734D /* UserDetailUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66A8CF682937945300C17F84 /* UserDetailUseCase.swift */; };
+		6618BC362949B7160008734D /* SettingsUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9894EAF429373385005F2B15 /* SettingsUseCase.swift */; };
+		6618BC372949B7190008734D /* SearchMusicUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F307A49293889C200FA36A0 /* SearchMusicUseCase.swift */; };
+		6618BC382949B71C0008734D /* ChangeNicknameUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9825F41A29377875005F2163 /* ChangeNicknameUseCase.swift */; };
+		6618BC392949B71F0008734D /* PlayMusicUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F51A6FC294096480039D86A /* PlayMusicUseCase.swift */; };
+		6618BC3A2949B7220008734D /* ImageUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98B5EF332941B85A00287405 /* ImageUseCase.swift */; };
+		6618BC3C2949B8610008734D /* DiaryEditUseCaseTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6618BC3B2949B8610008734D /* DiaryEditUseCaseTest.swift */; };
+		6618BC3E2949B87A0008734D /* DiaryDetailUseCaseTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6618BC3D2949B87A0008734D /* DiaryDetailUseCaseTest.swift */; };
+		6618BC3F2949B9AF0008734D /* DiaryRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FA32427292363AA00DB04D5 /* DiaryRepository.swift */; };
+		6618BC402949B9C10008734D /* LoginRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F4E0D3D2924B925005ABA8F /* LoginRepository.swift */; };
+		6618BC412949B9FD0008734D /* LocalUtilityManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66541BFA2947723F00AE25FB /* LocalUtilityManager.swift */; };
+		6618BC422949BA050008734D /* ImageRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98B5EF352941B90400287405 /* ImageRepository.swift */; };
+		6618BC432949BA080008734D /* LocationRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98138D2A2940EA0800D2CEDF /* LocationRepository.swift */; };
+		6618BC442949BA0B0008734D /* MusicRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F307A4B29388D4600FA36A0 /* MusicRepository.swift */; };
+		6618BC452949BA0E0008734D /* SettingsRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9825F41C29377ACF005F2163 /* SettingsRepository.swift */; };
+		6618BC462949BA110008734D /* MyPageRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66A8CF642937934A00C17F84 /* MyPageRepository.swift */; };
+		6618BC472949BA150008734D /* UserDefaultsKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = 982A2A462924AE74006F6ACD /* UserDefaultsKey.swift */; };
+		6618BC482949BABF0008734D /* UIColor+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 791837FD292225DC00BC6992 /* UIColor+.swift */; };
+		6618BC492949BABF0008734D /* UIView+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98FDF8A4292F7A350083FA05 /* UIView+.swift */; };
+		6618BC4A2949BABF0008734D /* UIFont+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 791837FE292225DC00BC6992 /* UIFont+.swift */; };
+		6618BC4B2949BABF0008734D /* SHMediaItem+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FEBFAB0291CFB5500E78139 /* SHMediaItem+.swift */; };
+		6618BC4C2949BABF0008734D /* UIButton+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7918380729233F7100BC6992 /* UIButton+.swift */; };
+		6618BC4D2949BABF0008734D /* UIViewController+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F51A6FE2940FE810039D86A /* UIViewController+.swift */; };
+		6618BC4E2949BABF0008734D /* UIImageView+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FBB42182946333A0017DAB8 /* UIImageView+.swift */; };
+		6618BC4F2949BABF0008734D /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F31777C291BE4710019BDFC /* AppDelegate.swift */; };
+		6618BC502949BABF0008734D /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F31777E291BE4710019BDFC /* SceneDelegate.swift */; };
+		6618BC512949BABF0008734D /* AppCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 666E6F7E291CF46800CECD4B /* AppCoordinator.swift */; };
+		6618BC522949BABF0008734D /* DiaryListItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FEBFAAA291CF30E00E78139 /* DiaryListItem.swift */; };
+		6618BC532949BABF0008734D /* DiaryDetail.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FEBFAAC291CF62E00E78139 /* DiaryDetail.swift */; };
+		6618BC542949BABF0008734D /* NewDiaryDetail.swift in Sources */ = {isa = PBXBuildFile; fileRef = 982A4FBE2941F1CA005AEB1D /* NewDiaryDetail.swift */; };
+		6618BC552949BABF0008734D /* UpdateDiaryDetail.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66541C002947B99A00AE25FB /* UpdateDiaryDetail.swift */; };
+		6618BC562949BABF0008734D /* MusicInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FEBFAAE291CF9F300E78139 /* MusicInfo.swift */; };
+		6618BC572949BABF0008734D /* UserInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F6F74B0292C9BF3007E7AC1 /* UserInfo.swift */; };
+		6618BC582949BABF0008734D /* Location.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98FDF8A0292F56580083FA05 /* Location.swift */; };
+		6618BC592949BABF0008734D /* UserDetailItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66A8CF662937937300C17F84 /* UserDetailItem.swift */; };
+		6618BC5A2949BABF0008734D /* ImageInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98B5EF372941BC8F00287405 /* ImageInfo.swift */; };
+		6618BC5B2949BABF0008734D /* DarkMode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9894EAF729375281005F2B15 /* DarkMode.swift */; };
+		6618BC5C2949BABF0008734D /* DeleteTapGestureRecognizer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98138D282940B00900D2CEDF /* DeleteTapGestureRecognizer.swift */; };
+		6618BC5D2949BABF0008734D /* Coordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 666E6F7C291CF45600CECD4B /* Coordinator.swift */; };
+		6618BC5E2949BABF0008734D /* LoginCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 666E6F80291CF49E00CECD4B /* LoginCoordinator.swift */; };
+		6618BC5F2949BABF0008734D /* TabBarCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 666E6F82291CF4A600CECD4B /* TabBarCoordinator.swift */; };
+		6618BC602949BABF0008734D /* TabBarPageCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 666E6F89291CF82700CECD4B /* TabBarPageCase.swift */; };
+		6618BC612949BABF0008734D /* DiaryCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 666E6F86291CF4B400CECD4B /* DiaryCoordinator.swift */; };
+		6618BC622949BABF0008734D /* MyPageCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 666E6F84291CF4AD00CECD4B /* MyPageCoordinator.swift */; };
+		6618BC632949BABF0008734D /* DiaryCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66F0D7ED2925FF8B0074872E /* DiaryCell.swift */; };
+		6618BC642949BABF0008734D /* NicknameCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 983AE9D12934F041006547BD /* NicknameCell.swift */; };
+		6618BC652949BABF0008734D /* SettingsSwitchCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98BEE36F2934A19800B20143 /* SettingsSwitchCell.swift */; };
+		6618BC662949BABF0008734D /* SettingsActionSheetCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 983AE9D5293514E8006547BD /* SettingsActionSheetCell.swift */; };
+		6618BC672949BABF0008734D /* SettingsCellModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 983AE9D3293513AD006547BD /* SettingsCellModel.swift */; };
+		6618BC682949BABF0008734D /* TagView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98B5263D292CA46C00446413 /* TagView.swift */; };
+		6618BC692949BABF0008734D /* MusicContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98B5263F292CB92900446413 /* MusicContentView.swift */; };
+		6618BC6A2949BABF0008734D /* LocationContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98F5AD29292DDDEB00E53E25 /* LocationContentView.swift */; };
+		6618BC6B2949BABF0008734D /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F317780291BE4710019BDFC /* LoginViewController.swift */; };
+		6618BC6C2949BABF0008734D /* DiaryCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 666E6F8B291CFAC200CECD4B /* DiaryCollectionViewController.swift */; };
+		6618BC6D2949BABF0008734D /* DiaryDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 982A3698292C905300FDC6CF /* DiaryDetailViewController.swift */; };
+		6618BC6E2949BABF0008734D /* DiaryEditViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FA05B96292DFCCC00AFB020 /* DiaryEditViewController.swift */; };
+		6618BC6F2949BABF0008734D /* MyPageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 666E6F8D291CFADD00CECD4B /* MyPageViewController.swift */; };
+		6618BC702949BABF0008734D /* MapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98FDF8A2292F5CCA0083FA05 /* MapViewController.swift */; };
+		6618BC712949BABF0008734D /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6692A9EE292F605E00DDA835 /* SettingsViewController.swift */; };
+		6618BC722949BABF0008734D /* LoginViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9841D61A2926131200318EA9 /* LoginViewModel.swift */; };
+		6618BC732949BABF0008734D /* DiaryDetailViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 982B3B7E292E68FB0077A44B /* DiaryDetailViewModel.swift */; };
+		6618BC742949BABF0008734D /* DiaryEditViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F5291DD293F065D00DF930A /* DiaryEditViewModel.swift */; };
+		6618BC752949BABF0008734D /* DiaryCollectionViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 988414D829235345007C9132 /* DiaryCollectionViewModel.swift */; };
+		6618BC762949BABF0008734D /* MapViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98AE6A87294450520039A666 /* MapViewModel.swift */; };
+		6618BC772949BABF0008734D /* SettingsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 983AE9D72935CEE2006547BD /* SettingsViewModel.swift */; };
+		6618BC782949BABF0008734D /* MyPageViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66A8CF602935F44100C17F84 /* MyPageViewModel.swift */; };
+		6618BC792949BABF0008734D /* DarkModeManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98003E0D293F20F6009FBC35 /* DarkModeManager.swift */; };
+		6618BC7A2949BABF0008734D /* ShazamError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F589DD8293FBA0900DB39E5 /* ShazamError.swift */; };
+		6618BC7B2949BABF0008734D /* MusicError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F0372D52941DBD40014131F /* MusicError.swift */; };
+		6618BC7C2949BABF0008734D /* LoginError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98BEE36D2934907700B20143 /* LoginError.swift */; };
+		6618BC7D2949BABF0008734D /* LocationError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98FFDB5E29475A6300237314 /* LocationError.swift */; };
+		6618BC7E2949BABF0008734D /* LoginSession.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FCAC5C1292B5C9000BF9CDD /* LoginSession.swift */; };
+		6618BC7F2949BABF0008734D /* ShazamSession.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F307A4529387C1100FA36A0 /* ShazamSession.swift */; };
+		6618BC802949BABF0008734D /* MusicSession.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F307A472938832900FA36A0 /* MusicSession.swift */; };
+		6618BC812949BABF0008734D /* DiaryListDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FA324252923600C00DB04D5 /* DiaryListDTO.swift */; };
+		6618BC822949BABF0008734D /* UserInfoDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F4E0D73292521D0005ABA8F /* UserInfoDTO.swift */; };
+		6618BC832949BABF0008734D /* DiaryDetailDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7940FB2E292E063100276EFC /* DiaryDetailDTO.swift */; };
+		6618BC842949BABF0008734D /* NewDiaryDetailDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 982A4FC22941F580005AEB1D /* NewDiaryDetailDTO.swift */; };
+		6618BC852949BABF0008734D /* UserLoginDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66541BFC29477D3D00AE25FB /* UserLoginDTO.swift */; };
+		6618BC862949BABF0008734D /* UserDetailDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66A8CF6A2937947A00C17F84 /* UserDetailDTO.swift */; };
+		6618BC872949BABF0008734D /* ImageDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 791529DB29332CF2005A8DDB /* ImageDTO.swift */; };
+		6618BC882949BABF0008734D /* ShazamSongDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F589DD5293FB9AB00DB39E5 /* ShazamSongDTO.swift */; };
+		6618BC892949BABF0008734D /* NetworkError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F9A001E29222C97007D9057 /* NetworkError.swift */; };
+		6618BC8A2949BABF0008734D /* KeychainError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 988414D62923304F007C9132 /* KeychainError.swift */; };
+		6618BC8B2949BABF0008734D /* BaseURL.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F4E0D78292522B7005ABA8F /* BaseURL.swift */; };
+		6618BC8C2949BABF0008734D /* DiaryListItemEndpoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FA3242A2923646F00DB04D5 /* DiaryListItemEndpoint.swift */; };
+		6618BC8D2949BABF0008734D /* DiaryDetailEndpoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7940FB30292E065100276EFC /* DiaryDetailEndpoint.swift */; };
+		6618BC8E2949BABF0008734D /* DiaryPostEndpoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 791529DF293344E8005A8DDB /* DiaryPostEndpoint.swift */; };
+		6618BC8F2949BABF0008734D /* NewDiaryPostEndpoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 982A4FC02941F481005AEB1D /* NewDiaryPostEndpoint.swift */; };
+		6618BC902949BABF0008734D /* DiaryDeleteEndpoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79767E63293E2A1200E489DD /* DiaryDeleteEndpoint.swift */; };
+		6618BC912949BABF0008734D /* DiaryUpdateEndpoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66541BFE2947AC5600AE25FB /* DiaryUpdateEndpoint.swift */; };
+		6618BC922949BABF0008734D /* LoginEndpoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F4E0D7529252236005ABA8F /* LoginEndpoint.swift */; };
+		6618BC932949BABF0008734D /* UserDetailEndpoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66A8CF6C29379A9900C17F84 /* UserDetailEndpoint.swift */; };
+		6618BC942949BABF0008734D /* ImageEndpoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 791529DD29333D40005A8DDB /* ImageEndpoint.swift */; };
+		6618BC952949BABF0008734D /* ChangeNicknameEndpoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9838443D29387C0A00BCCEE2 /* ChangeNicknameEndpoint.swift */; };
+		6618BC962949BABF0008734D /* NetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F9A001A292227D7007D9057 /* NetworkManager.swift */; };
+		6618BC972949BABF0008734D /* Endpoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F9A001C29222B1B007D9057 /* Endpoint.swift */; };
+		6662A16A2949C48A0010DA2D /* UIColor+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 791837FD292225DC00BC6992 /* UIColor+.swift */; };
+		6662A16B2949C48A0010DA2D /* UIView+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98FDF8A4292F7A350083FA05 /* UIView+.swift */; };
+		6662A16C2949C48A0010DA2D /* UIFont+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 791837FE292225DC00BC6992 /* UIFont+.swift */; };
+		6662A16D2949C48A0010DA2D /* SHMediaItem+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FEBFAB0291CFB5500E78139 /* SHMediaItem+.swift */; };
+		6662A16E2949C48A0010DA2D /* UIButton+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7918380729233F7100BC6992 /* UIButton+.swift */; };
+		6662A16F2949C48A0010DA2D /* UIViewController+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F51A6FE2940FE810039D86A /* UIViewController+.swift */; };
+		6662A1702949C48A0010DA2D /* UIImageView+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FBB42182946333A0017DAB8 /* UIImageView+.swift */; };
+		6662A1712949C48A0010DA2D /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F31777C291BE4710019BDFC /* AppDelegate.swift */; };
+		6662A1722949C48A0010DA2D /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F31777E291BE4710019BDFC /* SceneDelegate.swift */; };
+		6662A1732949C48A0010DA2D /* AppCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 666E6F7E291CF46800CECD4B /* AppCoordinator.swift */; };
+		6662A1742949C48A0010DA2D /* LoginUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9841D6162925FACC00318EA9 /* LoginUseCase.swift */; };
+		6662A1752949C48A0010DA2D /* DiaryListUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 988414DA2923606B007C9132 /* DiaryListUseCase.swift */; };
+		6662A1762949C48A0010DA2D /* DiaryDetailUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7940FB32292E065F00276EFC /* DiaryDetailUseCase.swift */; };
+		6662A1772949C48A0010DA2D /* DiaryEditUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 791529D72932F364005A8DDB /* DiaryEditUseCase.swift */; };
+		6662A1782949C48A0010DA2D /* LocationUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98138D4C2940F53F00D2CEDF /* LocationUseCase.swift */; };
+		6662A1792949C48A0010DA2D /* GetAddressUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98AE6A8929445F2A0039A666 /* GetAddressUseCase.swift */; };
+		6662A17A2949C48A0010DA2D /* UserDetailUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66A8CF682937945300C17F84 /* UserDetailUseCase.swift */; };
+		6662A17B2949C48A0010DA2D /* SettingsUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9894EAF429373385005F2B15 /* SettingsUseCase.swift */; };
+		6662A17C2949C48A0010DA2D /* SearchMusicUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F307A49293889C200FA36A0 /* SearchMusicUseCase.swift */; };
+		6662A17D2949C48A0010DA2D /* ChangeNicknameUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9825F41A29377875005F2163 /* ChangeNicknameUseCase.swift */; };
+		6662A17E2949C48A0010DA2D /* PlayMusicUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F51A6FC294096480039D86A /* PlayMusicUseCase.swift */; };
+		6662A17F2949C48A0010DA2D /* ImageUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98B5EF332941B85A00287405 /* ImageUseCase.swift */; };
+		6662A1802949C48A0010DA2D /* DiaryListItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FEBFAAA291CF30E00E78139 /* DiaryListItem.swift */; };
+		6662A1812949C48A0010DA2D /* DiaryDetail.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FEBFAAC291CF62E00E78139 /* DiaryDetail.swift */; };
+		6662A1822949C48A0010DA2D /* NewDiaryDetail.swift in Sources */ = {isa = PBXBuildFile; fileRef = 982A4FBE2941F1CA005AEB1D /* NewDiaryDetail.swift */; };
+		6662A1832949C48A0010DA2D /* UpdateDiaryDetail.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66541C002947B99A00AE25FB /* UpdateDiaryDetail.swift */; };
+		6662A1842949C48A0010DA2D /* MusicInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FEBFAAE291CF9F300E78139 /* MusicInfo.swift */; };
+		6662A1852949C48A0010DA2D /* UserInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F6F74B0292C9BF3007E7AC1 /* UserInfo.swift */; };
+		6662A1862949C48A0010DA2D /* Location.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98FDF8A0292F56580083FA05 /* Location.swift */; };
+		6662A1872949C48A0010DA2D /* UserDetailItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66A8CF662937937300C17F84 /* UserDetailItem.swift */; };
+		6662A1882949C48A0010DA2D /* ImageInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98B5EF372941BC8F00287405 /* ImageInfo.swift */; };
+		6662A1892949C48A0010DA2D /* DarkMode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9894EAF729375281005F2B15 /* DarkMode.swift */; };
+		6662A18A2949C48A0010DA2D /* DeleteTapGestureRecognizer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98138D282940B00900D2CEDF /* DeleteTapGestureRecognizer.swift */; };
+		6662A18B2949C48A0010DA2D /* Coordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 666E6F7C291CF45600CECD4B /* Coordinator.swift */; };
+		6662A18C2949C48A0010DA2D /* LoginCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 666E6F80291CF49E00CECD4B /* LoginCoordinator.swift */; };
+		6662A18D2949C48A0010DA2D /* TabBarCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 666E6F82291CF4A600CECD4B /* TabBarCoordinator.swift */; };
+		6662A18E2949C48A0010DA2D /* TabBarPageCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 666E6F89291CF82700CECD4B /* TabBarPageCase.swift */; };
+		6662A18F2949C48A0010DA2D /* DiaryCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 666E6F86291CF4B400CECD4B /* DiaryCoordinator.swift */; };
+		6662A1902949C48A0010DA2D /* MyPageCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 666E6F84291CF4AD00CECD4B /* MyPageCoordinator.swift */; };
+		6662A1912949C48A0010DA2D /* DiaryCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66F0D7ED2925FF8B0074872E /* DiaryCell.swift */; };
+		6662A1922949C48A0010DA2D /* NicknameCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 983AE9D12934F041006547BD /* NicknameCell.swift */; };
+		6662A1932949C48A0010DA2D /* SettingsSwitchCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98BEE36F2934A19800B20143 /* SettingsSwitchCell.swift */; };
+		6662A1942949C48A0010DA2D /* SettingsActionSheetCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 983AE9D5293514E8006547BD /* SettingsActionSheetCell.swift */; };
+		6662A1952949C48A0010DA2D /* SettingsCellModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 983AE9D3293513AD006547BD /* SettingsCellModel.swift */; };
+		6662A1962949C48A0010DA2D /* TagView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98B5263D292CA46C00446413 /* TagView.swift */; };
+		6662A1972949C48A0010DA2D /* MusicContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98B5263F292CB92900446413 /* MusicContentView.swift */; };
+		6662A1982949C48A0010DA2D /* LocationContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98F5AD29292DDDEB00E53E25 /* LocationContentView.swift */; };
+		6662A1992949C48A0010DA2D /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F317780291BE4710019BDFC /* LoginViewController.swift */; };
+		6662A19A2949C48A0010DA2D /* DiaryCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 666E6F8B291CFAC200CECD4B /* DiaryCollectionViewController.swift */; };
+		6662A19B2949C48A0010DA2D /* DiaryDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 982A3698292C905300FDC6CF /* DiaryDetailViewController.swift */; };
+		6662A19C2949C48A0010DA2D /* DiaryEditViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FA05B96292DFCCC00AFB020 /* DiaryEditViewController.swift */; };
+		6662A19D2949C48A0010DA2D /* MyPageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 666E6F8D291CFADD00CECD4B /* MyPageViewController.swift */; };
+		6662A19E2949C48A0010DA2D /* MapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98FDF8A2292F5CCA0083FA05 /* MapViewController.swift */; };
+		6662A19F2949C48A0010DA2D /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6692A9EE292F605E00DDA835 /* SettingsViewController.swift */; };
+		6662A1A02949C48A0010DA2D /* LoginViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9841D61A2926131200318EA9 /* LoginViewModel.swift */; };
+		6662A1A12949C48A0010DA2D /* DiaryDetailViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 982B3B7E292E68FB0077A44B /* DiaryDetailViewModel.swift */; };
+		6662A1A22949C48A0010DA2D /* DiaryEditViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F5291DD293F065D00DF930A /* DiaryEditViewModel.swift */; };
+		6662A1A32949C48A0010DA2D /* DiaryCollectionViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 988414D829235345007C9132 /* DiaryCollectionViewModel.swift */; };
+		6662A1A42949C48A0010DA2D /* MapViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98AE6A87294450520039A666 /* MapViewModel.swift */; };
+		6662A1A52949C48A0010DA2D /* SettingsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 983AE9D72935CEE2006547BD /* SettingsViewModel.swift */; };
+		6662A1A62949C48A0010DA2D /* MyPageViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66A8CF602935F44100C17F84 /* MyPageViewModel.swift */; };
+		6662A1A72949C48A0010DA2D /* DarkModeManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98003E0D293F20F6009FBC35 /* DarkModeManager.swift */; };
+		6662A1A82949C48A0010DA2D /* LocalUtilityManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66541BFA2947723F00AE25FB /* LocalUtilityManager.swift */; };
+		6662A1A92949C48A0010DA2D /* ShazamError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F589DD8293FBA0900DB39E5 /* ShazamError.swift */; };
+		6662A1AA2949C48A0010DA2D /* MusicError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F0372D52941DBD40014131F /* MusicError.swift */; };
+		6662A1AB2949C48A0010DA2D /* LoginError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98BEE36D2934907700B20143 /* LoginError.swift */; };
+		6662A1AC2949C48A0010DA2D /* LocationError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98FFDB5E29475A6300237314 /* LocationError.swift */; };
+		6662A1AD2949C48A0010DA2D /* LoginSession.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FCAC5C1292B5C9000BF9CDD /* LoginSession.swift */; };
+		6662A1AE2949C48A0010DA2D /* ShazamSession.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F307A4529387C1100FA36A0 /* ShazamSession.swift */; };
+		6662A1AF2949C48A0010DA2D /* MusicSession.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F307A472938832900FA36A0 /* MusicSession.swift */; };
+		6662A1B02949C48A0010DA2D /* DiaryListDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FA324252923600C00DB04D5 /* DiaryListDTO.swift */; };
+		6662A1B12949C48A0010DA2D /* UserInfoDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F4E0D73292521D0005ABA8F /* UserInfoDTO.swift */; };
+		6662A1B22949C48A0010DA2D /* DiaryDetailDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7940FB2E292E063100276EFC /* DiaryDetailDTO.swift */; };
+		6662A1B32949C48A0010DA2D /* NewDiaryDetailDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 982A4FC22941F580005AEB1D /* NewDiaryDetailDTO.swift */; };
+		6662A1B42949C48A0010DA2D /* UserLoginDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66541BFC29477D3D00AE25FB /* UserLoginDTO.swift */; };
+		6662A1B52949C48A0010DA2D /* UserDetailDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66A8CF6A2937947A00C17F84 /* UserDetailDTO.swift */; };
+		6662A1B62949C48A0010DA2D /* ImageDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 791529DB29332CF2005A8DDB /* ImageDTO.swift */; };
+		6662A1B72949C48A0010DA2D /* ShazamSongDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F589DD5293FB9AB00DB39E5 /* ShazamSongDTO.swift */; };
+		6662A1B82949C48A0010DA2D /* DiaryRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FA32427292363AA00DB04D5 /* DiaryRepository.swift */; };
+		6662A1B92949C48A0010DA2D /* UserDefaultsKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = 982A2A462924AE74006F6ACD /* UserDefaultsKey.swift */; };
+		6662A1BA2949C48A0010DA2D /* LoginRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F4E0D3D2924B925005ABA8F /* LoginRepository.swift */; };
+		6662A1BB2949C48A0010DA2D /* MyPageRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66A8CF642937934A00C17F84 /* MyPageRepository.swift */; };
+		6662A1BC2949C48A0010DA2D /* SettingsRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9825F41C29377ACF005F2163 /* SettingsRepository.swift */; };
+		6662A1BD2949C48A0010DA2D /* MusicRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F307A4B29388D4600FA36A0 /* MusicRepository.swift */; };
+		6662A1BE2949C48A0010DA2D /* ImageRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98B5EF352941B90400287405 /* ImageRepository.swift */; };
+		6662A1BF2949C48A0010DA2D /* LocationRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98138D2A2940EA0800D2CEDF /* LocationRepository.swift */; };
+		6662A1C02949C48A0010DA2D /* NetworkError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F9A001E29222C97007D9057 /* NetworkError.swift */; };
+		6662A1C12949C48A0010DA2D /* KeychainError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 988414D62923304F007C9132 /* KeychainError.swift */; };
+		6662A1C22949C48A0010DA2D /* BaseURL.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F4E0D78292522B7005ABA8F /* BaseURL.swift */; };
+		6662A1C32949C48A0010DA2D /* DiaryListItemEndpoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FA3242A2923646F00DB04D5 /* DiaryListItemEndpoint.swift */; };
+		6662A1C42949C48A0010DA2D /* DiaryDetailEndpoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7940FB30292E065100276EFC /* DiaryDetailEndpoint.swift */; };
+		6662A1C52949C48A0010DA2D /* DiaryPostEndpoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 791529DF293344E8005A8DDB /* DiaryPostEndpoint.swift */; };
+		6662A1C62949C48A0010DA2D /* NewDiaryPostEndpoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 982A4FC02941F481005AEB1D /* NewDiaryPostEndpoint.swift */; };
+		6662A1C72949C48A0010DA2D /* DiaryDeleteEndpoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79767E63293E2A1200E489DD /* DiaryDeleteEndpoint.swift */; };
+		6662A1C82949C48A0010DA2D /* DiaryUpdateEndpoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66541BFE2947AC5600AE25FB /* DiaryUpdateEndpoint.swift */; };
+		6662A1C92949C48A0010DA2D /* LoginEndpoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F4E0D7529252236005ABA8F /* LoginEndpoint.swift */; };
+		6662A1CA2949C48A0010DA2D /* UserDetailEndpoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66A8CF6C29379A9900C17F84 /* UserDetailEndpoint.swift */; };
+		6662A1CB2949C48A0010DA2D /* ImageEndpoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 791529DD29333D40005A8DDB /* ImageEndpoint.swift */; };
+		6662A1CC2949C48A0010DA2D /* ChangeNicknameEndpoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9838443D29387C0A00BCCEE2 /* ChangeNicknameEndpoint.swift */; };
+		6662A1CD2949C48A0010DA2D /* NetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F9A001A292227D7007D9057 /* NetworkManager.swift */; };
+		6662A1CE2949C48A0010DA2D /* Endpoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F9A001C29222B1B007D9057 /* Endpoint.swift */; };
+		6662A1D32949C5200010DA2D /* RxCocoa in Frameworks */ = {isa = PBXBuildFile; productRef = 6662A1D22949C5200010DA2D /* RxCocoa */; };
+		6662A1D52949C8930010DA2D /* RxSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 6662A1D42949C8930010DA2D /* RxSwift */; };
+		6662A1D72949C8930010DA2D /* RxTest in Frameworks */ = {isa = PBXBuildFile; productRef = 6662A1D62949C8930010DA2D /* RxTest */; };
+		6662A1D92949C8930010DA2D /* SnapKit in Frameworks */ = {isa = PBXBuildFile; productRef = 6662A1D82949C8930010DA2D /* SnapKit */; };
+		6662A1DB2949C8930010DA2D /* Kingfisher in Frameworks */ = {isa = PBXBuildFile; productRef = 6662A1DA2949C8930010DA2D /* Kingfisher */; };
+		6662A1DD2949C8930010DA2D /* MarqueeLabel in Frameworks */ = {isa = PBXBuildFile; productRef = 6662A1DC2949C8930010DA2D /* MarqueeLabel */; };
+		6662A1DF2949C8B10010DA2D /* RxRelay in Frameworks */ = {isa = PBXBuildFile; productRef = 6662A1DE2949C8B10010DA2D /* RxRelay */; };
 		791837FA292225C600BC6992 /* Cafe24Shiningstar.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 791837F7292225BF00BC6992 /* Cafe24Shiningstar.ttf */; };
 		791837FB292225C800BC6992 /* Cafe24Ssurround.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 791837F9292225BF00BC6992 /* Cafe24Ssurround.ttf */; };
 		791837FC292225CB00BC6992 /* Cafe24SsurroundAir.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 791837F8292225BF00BC6992 /* Cafe24SsurroundAir.ttf */; };
-		791837FF292225DC00BC6992 /* UIColor+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 791837FD292225DC00BC6992 /* UIColor+.swift */; };
-		79183800292225DC00BC6992 /* UIFont+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 791837FE292225DC00BC6992 /* UIFont+.swift */; };
-		7918380829233F7100BC6992 /* UIButton+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7918380729233F7100BC6992 /* UIButton+.swift */; };
-		7940FB2F292E063100276EFC /* DiaryDetailDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7940FB2E292E063100276EFC /* DiaryDetailDTO.swift */; };
-		7940FB31292E065100276EFC /* DiaryDetailEndpoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7940FB30292E065100276EFC /* DiaryDetailEndpoint.swift */; };
-		7940FB33292E065F00276EFC /* DiaryDetailUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7940FB32292E065F00276EFC /* DiaryDetailUseCase.swift */; };
-		79767E64293E2A1200E489DD /* DiaryDeleteEndpoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79767E63293E2A1200E489DD /* DiaryDeleteEndpoint.swift */; };
-		98003E0E293F20F6009FBC35 /* DarkModeManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98003E0D293F20F6009FBC35 /* DarkModeManager.swift */; };
-		98138D292940B00900D2CEDF /* DeleteTapGestureRecognizer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98138D282940B00900D2CEDF /* DeleteTapGestureRecognizer.swift */; };
-		98138D2B2940EA0800D2CEDF /* LocationRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98138D2A2940EA0800D2CEDF /* LocationRepository.swift */; };
-		98138D4D2940F53F00D2CEDF /* LocationUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98138D4C2940F53F00D2CEDF /* LocationUseCase.swift */; };
-		9825F41B29377875005F2163 /* ChangeNicknameUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9825F41A29377875005F2163 /* ChangeNicknameUseCase.swift */; };
-		9825F41D29377ACF005F2163 /* SettingsRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9825F41C29377ACF005F2163 /* SettingsRepository.swift */; };
-		982A2A472924AE74006F6ACD /* UserDefaultsKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = 982A2A462924AE74006F6ACD /* UserDefaultsKey.swift */; };
-		982A3699292C905300FDC6CF /* DiaryDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 982A3698292C905300FDC6CF /* DiaryDetailViewController.swift */; };
-		982A4FBF2941F1CA005AEB1D /* NewDiaryDetail.swift in Sources */ = {isa = PBXBuildFile; fileRef = 982A4FBE2941F1CA005AEB1D /* NewDiaryDetail.swift */; };
-		982A4FC12941F481005AEB1D /* NewDiaryPostEndpoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 982A4FC02941F481005AEB1D /* NewDiaryPostEndpoint.swift */; };
-		982A4FC32941F580005AEB1D /* NewDiaryDetailDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 982A4FC22941F580005AEB1D /* NewDiaryDetailDTO.swift */; };
-		982B3B7F292E68FB0077A44B /* DiaryDetailViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 982B3B7E292E68FB0077A44B /* DiaryDetailViewModel.swift */; };
-		9838443E29387C0A00BCCEE2 /* ChangeNicknameEndpoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9838443D29387C0A00BCCEE2 /* ChangeNicknameEndpoint.swift */; };
-		983AE9D22934F041006547BD /* NicknameCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 983AE9D12934F041006547BD /* NicknameCell.swift */; };
-		983AE9D4293513AD006547BD /* SettingsCellModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 983AE9D3293513AD006547BD /* SettingsCellModel.swift */; };
-		983AE9D6293514E8006547BD /* SettingsActionSheetCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 983AE9D5293514E8006547BD /* SettingsActionSheetCell.swift */; };
-		983AE9D82935CEE2006547BD /* SettingsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 983AE9D72935CEE2006547BD /* SettingsViewModel.swift */; };
-		9841D6172925FACC00318EA9 /* LoginUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9841D6162925FACC00318EA9 /* LoginUseCase.swift */; };
-		9841D61B2926131200318EA9 /* LoginViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9841D61A2926131200318EA9 /* LoginViewModel.swift */; };
-		988414D72923304F007C9132 /* KeychainError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 988414D62923304F007C9132 /* KeychainError.swift */; };
-		988414D929235345007C9132 /* DiaryCollectionViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 988414D829235345007C9132 /* DiaryCollectionViewModel.swift */; };
-		988414DB2923606B007C9132 /* DiaryListUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 988414DA2923606B007C9132 /* DiaryListUseCase.swift */; };
 		988A934D29499FB70037D91C /* LocationUseCaseTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 988A934C29499FB70037D91C /* LocationUseCaseTest.swift */; };
-		9894EAF529373385005F2B15 /* SettingsUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9894EAF429373385005F2B15 /* SettingsUseCase.swift */; };
-		9894EAF829375281005F2B15 /* DarkMode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9894EAF729375281005F2B15 /* DarkMode.swift */; };
-		98AE6A88294450520039A666 /* MapViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98AE6A87294450520039A666 /* MapViewModel.swift */; };
-		98AE6A8A29445F2A0039A666 /* GetAddressUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98AE6A8929445F2A0039A666 /* GetAddressUseCase.swift */; };
-		98B5263E292CA46C00446413 /* TagView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98B5263D292CA46C00446413 /* TagView.swift */; };
-		98B52640292CB92900446413 /* MusicContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98B5263F292CB92900446413 /* MusicContentView.swift */; };
-		98B5EF342941B85A00287405 /* ImageUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98B5EF332941B85A00287405 /* ImageUseCase.swift */; };
-		98B5EF362941B90400287405 /* ImageRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98B5EF352941B90400287405 /* ImageRepository.swift */; };
-		98B5EF382941BC8F00287405 /* ImageInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98B5EF372941BC8F00287405 /* ImageInfo.swift */; };
-		98BEE36E2934907700B20143 /* LoginError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98BEE36D2934907700B20143 /* LoginError.swift */; };
-		98BEE3702934A19800B20143 /* SettingsSwitchCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98BEE36F2934A19800B20143 /* SettingsSwitchCell.swift */; };
-		98F5AD2A292DDDEB00E53E25 /* LocationContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98F5AD29292DDDEB00E53E25 /* LocationContentView.swift */; };
-		98FDF8A1292F56580083FA05 /* Location.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98FDF8A0292F56580083FA05 /* Location.swift */; };
-		98FDF8A3292F5CCA0083FA05 /* MapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98FDF8A2292F5CCA0083FA05 /* MapViewController.swift */; };
-		98FDF8A5292F7A350083FA05 /* UIView+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98FDF8A4292F7A350083FA05 /* UIView+.swift */; };
-		98FFDB5F29475A6300237314 /* LocationError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98FFDB5E29475A6300237314 /* LocationError.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
-		988A934729499EEB0037D91C /* PBXContainerItemProxy */ = {
+		6662A1CF2949C50B0010DA2D /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 4F317771291BE4710019BDFC /* Project object */;
 			proxyType = 1;
@@ -168,6 +280,10 @@
 		4FEBFAAC291CF62E00E78139 /* DiaryDetail.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiaryDetail.swift; sourceTree = "<group>"; };
 		4FEBFAAE291CF9F300E78139 /* MusicInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MusicInfo.swift; sourceTree = "<group>"; };
 		4FEBFAB0291CFB5500E78139 /* SHMediaItem+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "SHMediaItem+.swift"; sourceTree = "<group>"; };
+		6618BC272949B6830008734D /* LoginUseCaseTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginUseCaseTest.swift; sourceTree = "<group>"; };
+		6618BC292949B6930008734D /* DiaryListUseCaseTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiaryListUseCaseTest.swift; sourceTree = "<group>"; };
+		6618BC3B2949B8610008734D /* DiaryEditUseCaseTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiaryEditUseCaseTest.swift; sourceTree = "<group>"; };
+		6618BC3D2949B87A0008734D /* DiaryDetailUseCaseTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiaryDetailUseCaseTest.swift; sourceTree = "<group>"; };
 		66541BFA2947723F00AE25FB /* LocalUtilityManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalUtilityManager.swift; sourceTree = "<group>"; };
 		66541BFC29477D3D00AE25FB /* UserLoginDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserLoginDTO.swift; sourceTree = "<group>"; };
 		66541BFE2947AC5600AE25FB /* DiaryUpdateEndpoint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiaryUpdateEndpoint.swift; sourceTree = "<group>"; };
@@ -227,7 +343,7 @@
 		988414D829235345007C9132 /* DiaryCollectionViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiaryCollectionViewModel.swift; sourceTree = "<group>"; };
 		988414DA2923606B007C9132 /* DiaryListUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiaryListUseCase.swift; sourceTree = "<group>"; };
 		988A934329499EEB0037D91C /* SegnoTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SegnoTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		988A934C29499FB70037D91C /* LocationUseCaseTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = LocationUseCaseTest.swift; path = SegnoTests/LocationUseCaseTest.swift; sourceTree = "<group>"; };
+		988A934C29499FB70037D91C /* LocationUseCaseTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationUseCaseTest.swift; sourceTree = "<group>"; };
 		9894EAF429373385005F2B15 /* SettingsUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsUseCase.swift; sourceTree = "<group>"; };
 		9894EAF729375281005F2B15 /* DarkMode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DarkMode.swift; sourceTree = "<group>"; };
 		98AE6A87294450520039A666 /* MapViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapViewModel.swift; sourceTree = "<group>"; };
@@ -264,6 +380,13 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				6662A1D52949C8930010DA2D /* RxSwift in Frameworks */,
+				6662A1D92949C8930010DA2D /* SnapKit in Frameworks */,
+				6662A1DF2949C8B10010DA2D /* RxRelay in Frameworks */,
+				6662A1DD2949C8930010DA2D /* MarqueeLabel in Frameworks */,
+				6662A1D72949C8930010DA2D /* RxTest in Frameworks */,
+				6662A1D32949C5200010DA2D /* RxCocoa in Frameworks */,
+				6662A1DB2949C8930010DA2D /* Kingfisher in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -284,10 +407,10 @@
 		4F317770291BE4710019BDFC = {
 			isa = PBXGroup;
 			children = (
-				988A934C29499FB70037D91C /* LocationUseCaseTest.swift */,
 				4F31777B291BE4710019BDFC /* Segno */,
 				988A934429499EEB0037D91C /* SegnoTests */,
 				4F31777A291BE4710019BDFC /* Products */,
+				6662A1D12949C5200010DA2D /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -559,6 +682,13 @@
 			path = Session;
 			sourceTree = "<group>";
 		};
+		6662A1D12949C5200010DA2D /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 		666E6F88291CF81200CECD4B /* TabBar */ = {
 			isa = PBXGroup;
 			children = (
@@ -590,6 +720,11 @@
 		988A934429499EEB0037D91C /* SegnoTests */ = {
 			isa = PBXGroup;
 			children = (
+				6618BC3D2949B87A0008734D /* DiaryDetailUseCaseTest.swift */,
+				6618BC3B2949B8610008734D /* DiaryEditUseCaseTest.swift */,
+				6618BC292949B6930008734D /* DiaryListUseCaseTest.swift */,
+				6618BC272949B6830008734D /* LoginUseCaseTest.swift */,
+				988A934C29499FB70037D91C /* LocationUseCaseTest.swift */,
 			);
 			path = SegnoTests;
 			sourceTree = "<group>";
@@ -642,9 +777,18 @@
 			buildRules = (
 			);
 			dependencies = (
-				988A934829499EEB0037D91C /* PBXTargetDependency */,
+				6662A1D02949C50B0010DA2D /* PBXTargetDependency */,
 			);
 			name = SegnoTests;
+			packageProductDependencies = (
+				6662A1D22949C5200010DA2D /* RxCocoa */,
+				6662A1D42949C8930010DA2D /* RxSwift */,
+				6662A1D62949C8930010DA2D /* RxTest */,
+				6662A1D82949C8930010DA2D /* SnapKit */,
+				6662A1DA2949C8930010DA2D /* Kingfisher */,
+				6662A1DC2949C8930010DA2D /* MarqueeLabel */,
+				6662A1DE2949C8B10010DA2D /* RxRelay */,
+			);
 			productName = SegnoTests;
 			productReference = 988A934329499EEB0037D91C /* SegnoTests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
@@ -721,107 +865,107 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				98138D292940B00900D2CEDF /* DeleteTapGestureRecognizer.swift in Sources */,
-				98F5AD2A292DDDEB00E53E25 /* LocationContentView.swift in Sources */,
-				791529DE29333D40005A8DDB /* ImageEndpoint.swift in Sources */,
-				4F4E0D3E2924B925005ABA8F /* LoginRepository.swift in Sources */,
-				4F9A00212922338E007D9057 /* AppDelegate.swift in Sources */,
-				983AE9D82935CEE2006547BD /* SettingsViewModel.swift in Sources */,
-				98B5EF342941B85A00287405 /* ImageUseCase.swift in Sources */,
-				98B5EF362941B90400287405 /* ImageRepository.swift in Sources */,
-				9825F41D29377ACF005F2163 /* SettingsRepository.swift in Sources */,
-				66F0D7EE2925FF8B0074872E /* DiaryCell.swift in Sources */,
-				79767E64293E2A1200E489DD /* DiaryDeleteEndpoint.swift in Sources */,
-				982A4FC32941F580005AEB1D /* NewDiaryDetailDTO.swift in Sources */,
-				4F307A482938832900FA36A0 /* MusicSession.swift in Sources */,
-				4F9A00202922337F007D9057 /* LoginViewController.swift in Sources */,
-				982A2A472924AE74006F6ACD /* UserDefaultsKey.swift in Sources */,
-				66A8CF6B2937947A00C17F84 /* UserDetailDTO.swift in Sources */,
-				4F9A001B292227D7007D9057 /* NetworkManager.swift in Sources */,
-				9894EAF529373385005F2B15 /* SettingsUseCase.swift in Sources */,
-				4F51A6FF2940FE810039D86A /* UIViewController+.swift in Sources */,
-				4F5291DE293F065D00DF930A /* DiaryEditViewModel.swift in Sources */,
-				9841D6172925FACC00318EA9 /* LoginUseCase.swift in Sources */,
-				66A8CF6D29379A9900C17F84 /* UserDetailEndpoint.swift in Sources */,
-				4FEBFAAD291CF62E00E78139 /* DiaryDetail.swift in Sources */,
-				98AE6A88294450520039A666 /* MapViewModel.swift in Sources */,
-				98FFDB5F29475A6300237314 /* LocationError.swift in Sources */,
-				4FEBFAB1291CFB5500E78139 /* SHMediaItem+.swift in Sources */,
-				98003E0E293F20F6009FBC35 /* DarkModeManager.swift in Sources */,
-				66A8CF692937945300C17F84 /* UserDetailUseCase.swift in Sources */,
-				982A4FC12941F481005AEB1D /* NewDiaryPostEndpoint.swift in Sources */,
-				66A8CF612935F44100C17F84 /* MyPageViewModel.swift in Sources */,
-				98138D4D2940F53F00D2CEDF /* LocationUseCase.swift in Sources */,
-				988414D929235345007C9132 /* DiaryCollectionViewModel.swift in Sources */,
-				4F589DD6293FB9AB00DB39E5 /* ShazamSongDTO.swift in Sources */,
-				4F51A6FD294096480039D86A /* PlayMusicUseCase.swift in Sources */,
-				4FEBFAAF291CF9F300E78139 /* MusicInfo.swift in Sources */,
-				4FEBFAAB291CF30E00E78139 /* DiaryListItem.swift in Sources */,
-				7918380829233F7100BC6992 /* UIButton+.swift in Sources */,
-				98138D2B2940EA0800D2CEDF /* LocationRepository.swift in Sources */,
-				666E6F81291CF49E00CECD4B /* LoginCoordinator.swift in Sources */,
-				7940FB31292E065100276EFC /* DiaryDetailEndpoint.swift in Sources */,
-				666E6F85291CF4AD00CECD4B /* MyPageCoordinator.swift in Sources */,
-				9894EAF829375281005F2B15 /* DarkMode.swift in Sources */,
-				983AE9D22934F041006547BD /* NicknameCell.swift in Sources */,
-				983AE9D4293513AD006547BD /* SettingsCellModel.swift in Sources */,
-				4F4E0D79292522B7005ABA8F /* BaseURL.swift in Sources */,
-				98BEE3702934A19800B20143 /* SettingsSwitchCell.swift in Sources */,
-				4FA05B97292DFCCC00AFB020 /* DiaryEditViewController.swift in Sources */,
-				988414DB2923606B007C9132 /* DiaryListUseCase.swift in Sources */,
-				982B3B7F292E68FB0077A44B /* DiaryDetailViewModel.swift in Sources */,
-				66541BFF2947AC5600AE25FB /* DiaryUpdateEndpoint.swift in Sources */,
-				4FCAC5C2292B5C9000BF9CDD /* LoginSession.swift in Sources */,
-				66A8CF672937937300C17F84 /* UserDetailItem.swift in Sources */,
-				666E6F7D291CF45600CECD4B /* Coordinator.swift in Sources */,
-				982A3699292C905300FDC6CF /* DiaryDetailViewController.swift in Sources */,
-				9825F41B29377875005F2163 /* ChangeNicknameUseCase.swift in Sources */,
-				666E6F8C291CFAC200CECD4B /* DiaryCollectionViewController.swift in Sources */,
-				9838443E29387C0A00BCCEE2 /* ChangeNicknameEndpoint.swift in Sources */,
-				666E6F8A291CF82700CECD4B /* TabBarPageCase.swift in Sources */,
-				66A8CF652937934A00C17F84 /* MyPageRepository.swift in Sources */,
-				79183800292225DC00BC6992 /* UIFont+.swift in Sources */,
-				666E6F83291CF4A600CECD4B /* TabBarCoordinator.swift in Sources */,
-				791529E0293344E9005A8DDB /* DiaryPostEndpoint.swift in Sources */,
-				98B5EF382941BC8F00287405 /* ImageInfo.swift in Sources */,
-				4F9A001D29222B1B007D9057 /* Endpoint.swift in Sources */,
-				4F0372D62941DBD40014131F /* MusicError.swift in Sources */,
-				4F9A001F29222C97007D9057 /* NetworkError.swift in Sources */,
-				66541C012947B99A00AE25FB /* UpdateDiaryDetail.swift in Sources */,
-				98FDF8A1292F56580083FA05 /* Location.swift in Sources */,
-				7940FB33292E065F00276EFC /* DiaryDetailUseCase.swift in Sources */,
-				6692A9EF292F605E00DDA835 /* SettingsViewController.swift in Sources */,
-				4F589DD9293FBA0900DB39E5 /* ShazamError.swift in Sources */,
-				666E6F8E291CFADD00CECD4B /* MyPageViewController.swift in Sources */,
-				4F6F74B1292C9BF3007E7AC1 /* UserInfo.swift in Sources */,
-				66541BFD29477D3D00AE25FB /* UserLoginDTO.swift in Sources */,
-				4FBB42192946333A0017DAB8 /* UIImageView+.swift in Sources */,
-				98FDF8A5292F7A350083FA05 /* UIView+.swift in Sources */,
-				98FDF8A3292F5CCA0083FA05 /* MapViewController.swift in Sources */,
-				983AE9D6293514E8006547BD /* SettingsActionSheetCell.swift in Sources */,
-				4FA3242B2923646F00DB04D5 /* DiaryListItemEndpoint.swift in Sources */,
-				791837FF292225DC00BC6992 /* UIColor+.swift in Sources */,
-				4F307A4A293889C200FA36A0 /* SearchMusicUseCase.swift in Sources */,
-				98AE6A8A29445F2A0039A666 /* GetAddressUseCase.swift in Sources */,
-				666E6F7F291CF46800CECD4B /* AppCoordinator.swift in Sources */,
-				791529DC29332CF2005A8DDB /* ImageDTO.swift in Sources */,
-				9841D61B2926131200318EA9 /* LoginViewModel.swift in Sources */,
-				988414D72923304F007C9132 /* KeychainError.swift in Sources */,
-				98BEE36E2934907700B20143 /* LoginError.swift in Sources */,
-				98B5263E292CA46C00446413 /* TagView.swift in Sources */,
-				4F307A4C29388D4600FA36A0 /* MusicRepository.swift in Sources */,
-				7940FB2F292E063100276EFC /* DiaryDetailDTO.swift in Sources */,
-				66541BFB2947723F00AE25FB /* LocalUtilityManager.swift in Sources */,
-				4F4E0D7629252236005ABA8F /* LoginEndpoint.swift in Sources */,
-				791529D82932F364005A8DDB /* DiaryEditUseCase.swift in Sources */,
-				4FA324262923600C00DB04D5 /* DiaryListDTO.swift in Sources */,
-				982A4FBF2941F1CA005AEB1D /* NewDiaryDetail.swift in Sources */,
-				666E6F87291CF4B400CECD4B /* DiaryCoordinator.swift in Sources */,
-				4F31777F291BE4710019BDFC /* SceneDelegate.swift in Sources */,
-				4F307A4629387C1100FA36A0 /* ShazamSession.swift in Sources */,
-				4F4E0D74292521D0005ABA8F /* UserInfoDTO.swift in Sources */,
-				98B52640292CB92900446413 /* MusicContentView.swift in Sources */,
-				4FA32428292363AB00DB04D5 /* DiaryRepository.swift in Sources */,
+				6662A16A2949C48A0010DA2D /* UIColor+.swift in Sources */,
+				6662A16B2949C48A0010DA2D /* UIView+.swift in Sources */,
+				6662A16C2949C48A0010DA2D /* UIFont+.swift in Sources */,
+				6662A16D2949C48A0010DA2D /* SHMediaItem+.swift in Sources */,
+				6662A16E2949C48A0010DA2D /* UIButton+.swift in Sources */,
+				6662A16F2949C48A0010DA2D /* UIViewController+.swift in Sources */,
+				6662A1702949C48A0010DA2D /* UIImageView+.swift in Sources */,
+				6662A1712949C48A0010DA2D /* AppDelegate.swift in Sources */,
+				6662A1722949C48A0010DA2D /* SceneDelegate.swift in Sources */,
+				6662A1732949C48A0010DA2D /* AppCoordinator.swift in Sources */,
+				6662A1742949C48A0010DA2D /* LoginUseCase.swift in Sources */,
+				6662A1752949C48A0010DA2D /* DiaryListUseCase.swift in Sources */,
+				6662A1762949C48A0010DA2D /* DiaryDetailUseCase.swift in Sources */,
+				6662A1772949C48A0010DA2D /* DiaryEditUseCase.swift in Sources */,
+				6662A1782949C48A0010DA2D /* LocationUseCase.swift in Sources */,
+				6662A1792949C48A0010DA2D /* GetAddressUseCase.swift in Sources */,
+				6662A17A2949C48A0010DA2D /* UserDetailUseCase.swift in Sources */,
+				6662A17B2949C48A0010DA2D /* SettingsUseCase.swift in Sources */,
+				6662A17C2949C48A0010DA2D /* SearchMusicUseCase.swift in Sources */,
+				6662A17D2949C48A0010DA2D /* ChangeNicknameUseCase.swift in Sources */,
+				6662A17E2949C48A0010DA2D /* PlayMusicUseCase.swift in Sources */,
+				6662A17F2949C48A0010DA2D /* ImageUseCase.swift in Sources */,
+				6662A1802949C48A0010DA2D /* DiaryListItem.swift in Sources */,
+				6662A1812949C48A0010DA2D /* DiaryDetail.swift in Sources */,
+				6662A1822949C48A0010DA2D /* NewDiaryDetail.swift in Sources */,
+				6662A1832949C48A0010DA2D /* UpdateDiaryDetail.swift in Sources */,
+				6662A1842949C48A0010DA2D /* MusicInfo.swift in Sources */,
+				6662A1852949C48A0010DA2D /* UserInfo.swift in Sources */,
+				6662A1862949C48A0010DA2D /* Location.swift in Sources */,
+				6662A1872949C48A0010DA2D /* UserDetailItem.swift in Sources */,
+				6662A1882949C48A0010DA2D /* ImageInfo.swift in Sources */,
+				6662A1892949C48A0010DA2D /* DarkMode.swift in Sources */,
+				6662A18A2949C48A0010DA2D /* DeleteTapGestureRecognizer.swift in Sources */,
+				6662A18B2949C48A0010DA2D /* Coordinator.swift in Sources */,
+				6662A18C2949C48A0010DA2D /* LoginCoordinator.swift in Sources */,
+				6662A18D2949C48A0010DA2D /* TabBarCoordinator.swift in Sources */,
+				6662A18E2949C48A0010DA2D /* TabBarPageCase.swift in Sources */,
+				6662A18F2949C48A0010DA2D /* DiaryCoordinator.swift in Sources */,
+				6662A1902949C48A0010DA2D /* MyPageCoordinator.swift in Sources */,
+				6662A1912949C48A0010DA2D /* DiaryCell.swift in Sources */,
+				6662A1922949C48A0010DA2D /* NicknameCell.swift in Sources */,
+				6662A1932949C48A0010DA2D /* SettingsSwitchCell.swift in Sources */,
+				6662A1942949C48A0010DA2D /* SettingsActionSheetCell.swift in Sources */,
+				6662A1952949C48A0010DA2D /* SettingsCellModel.swift in Sources */,
+				6662A1962949C48A0010DA2D /* TagView.swift in Sources */,
+				6662A1972949C48A0010DA2D /* MusicContentView.swift in Sources */,
+				6662A1982949C48A0010DA2D /* LocationContentView.swift in Sources */,
+				6662A1992949C48A0010DA2D /* LoginViewController.swift in Sources */,
+				6662A19A2949C48A0010DA2D /* DiaryCollectionViewController.swift in Sources */,
+				6662A19B2949C48A0010DA2D /* DiaryDetailViewController.swift in Sources */,
+				6662A19C2949C48A0010DA2D /* DiaryEditViewController.swift in Sources */,
+				6662A19D2949C48A0010DA2D /* MyPageViewController.swift in Sources */,
+				6662A19E2949C48A0010DA2D /* MapViewController.swift in Sources */,
+				6662A19F2949C48A0010DA2D /* SettingsViewController.swift in Sources */,
+				6662A1A02949C48A0010DA2D /* LoginViewModel.swift in Sources */,
+				6662A1A12949C48A0010DA2D /* DiaryDetailViewModel.swift in Sources */,
+				6662A1A22949C48A0010DA2D /* DiaryEditViewModel.swift in Sources */,
+				6662A1A32949C48A0010DA2D /* DiaryCollectionViewModel.swift in Sources */,
+				6662A1A42949C48A0010DA2D /* MapViewModel.swift in Sources */,
+				6662A1A52949C48A0010DA2D /* SettingsViewModel.swift in Sources */,
+				6662A1A62949C48A0010DA2D /* MyPageViewModel.swift in Sources */,
+				6662A1A72949C48A0010DA2D /* DarkModeManager.swift in Sources */,
+				6662A1A82949C48A0010DA2D /* LocalUtilityManager.swift in Sources */,
+				6662A1A92949C48A0010DA2D /* ShazamError.swift in Sources */,
+				6662A1AA2949C48A0010DA2D /* MusicError.swift in Sources */,
+				6662A1AB2949C48A0010DA2D /* LoginError.swift in Sources */,
+				6662A1AC2949C48A0010DA2D /* LocationError.swift in Sources */,
+				6662A1AD2949C48A0010DA2D /* LoginSession.swift in Sources */,
+				6662A1AE2949C48A0010DA2D /* ShazamSession.swift in Sources */,
+				6662A1AF2949C48A0010DA2D /* MusicSession.swift in Sources */,
+				6662A1B02949C48A0010DA2D /* DiaryListDTO.swift in Sources */,
+				6662A1B12949C48A0010DA2D /* UserInfoDTO.swift in Sources */,
+				6662A1B22949C48A0010DA2D /* DiaryDetailDTO.swift in Sources */,
+				6662A1B32949C48A0010DA2D /* NewDiaryDetailDTO.swift in Sources */,
+				6662A1B42949C48A0010DA2D /* UserLoginDTO.swift in Sources */,
+				6662A1B52949C48A0010DA2D /* UserDetailDTO.swift in Sources */,
+				6662A1B62949C48A0010DA2D /* ImageDTO.swift in Sources */,
+				6662A1B72949C48A0010DA2D /* ShazamSongDTO.swift in Sources */,
+				6662A1B82949C48A0010DA2D /* DiaryRepository.swift in Sources */,
+				6662A1B92949C48A0010DA2D /* UserDefaultsKey.swift in Sources */,
+				6662A1BA2949C48A0010DA2D /* LoginRepository.swift in Sources */,
+				6662A1BB2949C48A0010DA2D /* MyPageRepository.swift in Sources */,
+				6662A1BC2949C48A0010DA2D /* SettingsRepository.swift in Sources */,
+				6662A1BD2949C48A0010DA2D /* MusicRepository.swift in Sources */,
+				6662A1BE2949C48A0010DA2D /* ImageRepository.swift in Sources */,
+				6662A1BF2949C48A0010DA2D /* LocationRepository.swift in Sources */,
+				6662A1C02949C48A0010DA2D /* NetworkError.swift in Sources */,
+				6662A1C12949C48A0010DA2D /* KeychainError.swift in Sources */,
+				6662A1C22949C48A0010DA2D /* BaseURL.swift in Sources */,
+				6662A1C32949C48A0010DA2D /* DiaryListItemEndpoint.swift in Sources */,
+				6662A1C42949C48A0010DA2D /* DiaryDetailEndpoint.swift in Sources */,
+				6662A1C52949C48A0010DA2D /* DiaryPostEndpoint.swift in Sources */,
+				6662A1C62949C48A0010DA2D /* NewDiaryPostEndpoint.swift in Sources */,
+				6662A1C72949C48A0010DA2D /* DiaryDeleteEndpoint.swift in Sources */,
+				6662A1C82949C48A0010DA2D /* DiaryUpdateEndpoint.swift in Sources */,
+				6662A1C92949C48A0010DA2D /* LoginEndpoint.swift in Sources */,
+				6662A1CA2949C48A0010DA2D /* UserDetailEndpoint.swift in Sources */,
+				6662A1CB2949C48A0010DA2D /* ImageEndpoint.swift in Sources */,
+				6662A1CC2949C48A0010DA2D /* ChangeNicknameEndpoint.swift in Sources */,
+				6662A1CD2949C48A0010DA2D /* NetworkManager.swift in Sources */,
+				6662A1CE2949C48A0010DA2D /* Endpoint.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -829,17 +973,122 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				6618BC482949BABF0008734D /* UIColor+.swift in Sources */,
+				6618BC492949BABF0008734D /* UIView+.swift in Sources */,
+				6618BC4A2949BABF0008734D /* UIFont+.swift in Sources */,
+				6618BC4B2949BABF0008734D /* SHMediaItem+.swift in Sources */,
+				6618BC4C2949BABF0008734D /* UIButton+.swift in Sources */,
+				6618BC4D2949BABF0008734D /* UIViewController+.swift in Sources */,
+				6618BC4E2949BABF0008734D /* UIImageView+.swift in Sources */,
+				6618BC4F2949BABF0008734D /* AppDelegate.swift in Sources */,
+				6618BC502949BABF0008734D /* SceneDelegate.swift in Sources */,
+				6618BC512949BABF0008734D /* AppCoordinator.swift in Sources */,
+				6618BC522949BABF0008734D /* DiaryListItem.swift in Sources */,
+				6618BC532949BABF0008734D /* DiaryDetail.swift in Sources */,
+				6618BC542949BABF0008734D /* NewDiaryDetail.swift in Sources */,
+				6618BC552949BABF0008734D /* UpdateDiaryDetail.swift in Sources */,
+				6618BC562949BABF0008734D /* MusicInfo.swift in Sources */,
+				6618BC572949BABF0008734D /* UserInfo.swift in Sources */,
+				6618BC582949BABF0008734D /* Location.swift in Sources */,
+				6618BC592949BABF0008734D /* UserDetailItem.swift in Sources */,
+				6618BC5A2949BABF0008734D /* ImageInfo.swift in Sources */,
+				6618BC5B2949BABF0008734D /* DarkMode.swift in Sources */,
+				6618BC5C2949BABF0008734D /* DeleteTapGestureRecognizer.swift in Sources */,
+				6618BC5D2949BABF0008734D /* Coordinator.swift in Sources */,
+				6618BC5E2949BABF0008734D /* LoginCoordinator.swift in Sources */,
+				6618BC5F2949BABF0008734D /* TabBarCoordinator.swift in Sources */,
+				6618BC602949BABF0008734D /* TabBarPageCase.swift in Sources */,
+				6618BC612949BABF0008734D /* DiaryCoordinator.swift in Sources */,
+				6618BC622949BABF0008734D /* MyPageCoordinator.swift in Sources */,
+				6618BC632949BABF0008734D /* DiaryCell.swift in Sources */,
+				6618BC642949BABF0008734D /* NicknameCell.swift in Sources */,
+				6618BC652949BABF0008734D /* SettingsSwitchCell.swift in Sources */,
+				6618BC662949BABF0008734D /* SettingsActionSheetCell.swift in Sources */,
+				6618BC672949BABF0008734D /* SettingsCellModel.swift in Sources */,
+				6618BC682949BABF0008734D /* TagView.swift in Sources */,
+				6618BC692949BABF0008734D /* MusicContentView.swift in Sources */,
+				6618BC6A2949BABF0008734D /* LocationContentView.swift in Sources */,
+				6618BC6B2949BABF0008734D /* LoginViewController.swift in Sources */,
+				6618BC6C2949BABF0008734D /* DiaryCollectionViewController.swift in Sources */,
+				6618BC6D2949BABF0008734D /* DiaryDetailViewController.swift in Sources */,
+				6618BC6E2949BABF0008734D /* DiaryEditViewController.swift in Sources */,
+				6618BC6F2949BABF0008734D /* MyPageViewController.swift in Sources */,
+				6618BC702949BABF0008734D /* MapViewController.swift in Sources */,
+				6618BC712949BABF0008734D /* SettingsViewController.swift in Sources */,
+				6618BC722949BABF0008734D /* LoginViewModel.swift in Sources */,
+				6618BC732949BABF0008734D /* DiaryDetailViewModel.swift in Sources */,
+				6618BC742949BABF0008734D /* DiaryEditViewModel.swift in Sources */,
+				6618BC752949BABF0008734D /* DiaryCollectionViewModel.swift in Sources */,
+				6618BC762949BABF0008734D /* MapViewModel.swift in Sources */,
+				6618BC772949BABF0008734D /* SettingsViewModel.swift in Sources */,
+				6618BC782949BABF0008734D /* MyPageViewModel.swift in Sources */,
+				6618BC792949BABF0008734D /* DarkModeManager.swift in Sources */,
+				6618BC7A2949BABF0008734D /* ShazamError.swift in Sources */,
+				6618BC7B2949BABF0008734D /* MusicError.swift in Sources */,
+				6618BC7C2949BABF0008734D /* LoginError.swift in Sources */,
+				6618BC7D2949BABF0008734D /* LocationError.swift in Sources */,
+				6618BC7E2949BABF0008734D /* LoginSession.swift in Sources */,
+				6618BC7F2949BABF0008734D /* ShazamSession.swift in Sources */,
+				6618BC802949BABF0008734D /* MusicSession.swift in Sources */,
+				6618BC812949BABF0008734D /* DiaryListDTO.swift in Sources */,
+				6618BC822949BABF0008734D /* UserInfoDTO.swift in Sources */,
+				6618BC832949BABF0008734D /* DiaryDetailDTO.swift in Sources */,
+				6618BC842949BABF0008734D /* NewDiaryDetailDTO.swift in Sources */,
+				6618BC852949BABF0008734D /* UserLoginDTO.swift in Sources */,
+				6618BC862949BABF0008734D /* UserDetailDTO.swift in Sources */,
+				6618BC872949BABF0008734D /* ImageDTO.swift in Sources */,
+				6618BC882949BABF0008734D /* ShazamSongDTO.swift in Sources */,
+				6618BC892949BABF0008734D /* NetworkError.swift in Sources */,
+				6618BC8A2949BABF0008734D /* KeychainError.swift in Sources */,
+				6618BC8B2949BABF0008734D /* BaseURL.swift in Sources */,
+				6618BC8C2949BABF0008734D /* DiaryListItemEndpoint.swift in Sources */,
+				6618BC8D2949BABF0008734D /* DiaryDetailEndpoint.swift in Sources */,
+				6618BC8E2949BABF0008734D /* DiaryPostEndpoint.swift in Sources */,
+				6618BC8F2949BABF0008734D /* NewDiaryPostEndpoint.swift in Sources */,
+				6618BC902949BABF0008734D /* DiaryDeleteEndpoint.swift in Sources */,
+				6618BC912949BABF0008734D /* DiaryUpdateEndpoint.swift in Sources */,
+				6618BC922949BABF0008734D /* LoginEndpoint.swift in Sources */,
+				6618BC932949BABF0008734D /* UserDetailEndpoint.swift in Sources */,
+				6618BC942949BABF0008734D /* ImageEndpoint.swift in Sources */,
+				6618BC952949BABF0008734D /* ChangeNicknameEndpoint.swift in Sources */,
+				6618BC962949BABF0008734D /* NetworkManager.swift in Sources */,
+				6618BC972949BABF0008734D /* Endpoint.swift in Sources */,
+				6618BC312949B7060008734D /* DiaryDetailUseCase.swift in Sources */,
+				6618BC392949B71F0008734D /* PlayMusicUseCase.swift in Sources */,
+				6618BC472949BA150008734D /* UserDefaultsKey.swift in Sources */,
+				6618BC432949BA080008734D /* LocationRepository.swift in Sources */,
+				6618BC382949B71C0008734D /* ChangeNicknameUseCase.swift in Sources */,
+				6618BC3C2949B8610008734D /* DiaryEditUseCaseTest.swift in Sources */,
+				6618BC3E2949B87A0008734D /* DiaryDetailUseCaseTest.swift in Sources */,
+				6618BC342949B7100008734D /* GetAddressUseCase.swift in Sources */,
+				6618BC412949B9FD0008734D /* LocalUtilityManager.swift in Sources */,
+				6618BC442949BA0B0008734D /* MusicRepository.swift in Sources */,
+				6618BC322949B70A0008734D /* DiaryEditUseCase.swift in Sources */,
+				6618BC402949B9C10008734D /* LoginRepository.swift in Sources */,
+				6618BC362949B7160008734D /* SettingsUseCase.swift in Sources */,
+				6618BC352949B7120008734D /* UserDetailUseCase.swift in Sources */,
+				6618BC372949B7190008734D /* SearchMusicUseCase.swift in Sources */,
+				6618BC302949B7040008734D /* DiaryListUseCase.swift in Sources */,
+				6618BC422949BA050008734D /* ImageRepository.swift in Sources */,
+				6618BC2A2949B6930008734D /* DiaryListUseCaseTest.swift in Sources */,
+				6618BC332949B70C0008734D /* LocationUseCase.swift in Sources */,
 				988A934D29499FB70037D91C /* LocationUseCaseTest.swift in Sources */,
+				6618BC462949BA110008734D /* MyPageRepository.swift in Sources */,
+				6618BC282949B6830008734D /* LoginUseCaseTest.swift in Sources */,
+				6618BC452949BA0E0008734D /* SettingsRepository.swift in Sources */,
+				6618BC3A2949B7220008734D /* ImageUseCase.swift in Sources */,
+				6618BC2F2949B7010008734D /* LoginUseCase.swift in Sources */,
+				6618BC3F2949B9AF0008734D /* DiaryRepository.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
-		988A934829499EEB0037D91C /* PBXTargetDependency */ = {
+		6662A1D02949C50B0010DA2D /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = 4F317778291BE4710019BDFC /* Segno */;
-			targetProxy = 988A934729499EEB0037D91C /* PBXContainerItemProxy */;
+			targetProxy = 6662A1CF2949C50B0010DA2D /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
@@ -1038,13 +1287,14 @@
 		988A934929499EEB0037D91C /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = 4QG3GC35LA;
 				GENERATE_INFOPLIST_FILE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 16.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -1067,13 +1317,14 @@
 		988A934A29499EEB0037D91C /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = 4QG3GC35LA;
 				GENERATE_INFOPLIST_FILE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 16.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -1189,6 +1440,41 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 4F3177B3291BF7BC0019BDFC /* XCRemoteSwiftPackageReference "Kingfisher" */;
 			productName = Kingfisher;
+		};
+		6662A1D22949C5200010DA2D /* RxCocoa */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 4F3177A1291BF70B0019BDFC /* XCRemoteSwiftPackageReference "RxSwift" */;
+			productName = RxCocoa;
+		};
+		6662A1D42949C8930010DA2D /* RxSwift */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 4F3177A1291BF70B0019BDFC /* XCRemoteSwiftPackageReference "RxSwift" */;
+			productName = RxSwift;
+		};
+		6662A1D62949C8930010DA2D /* RxTest */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 4F3177A1291BF70B0019BDFC /* XCRemoteSwiftPackageReference "RxSwift" */;
+			productName = RxTest;
+		};
+		6662A1D82949C8930010DA2D /* SnapKit */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 4F3177AE291BF7950019BDFC /* XCRemoteSwiftPackageReference "SnapKit" */;
+			productName = SnapKit;
+		};
+		6662A1DA2949C8930010DA2D /* Kingfisher */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 4F3177B3291BF7BC0019BDFC /* XCRemoteSwiftPackageReference "Kingfisher" */;
+			productName = Kingfisher;
+		};
+		6662A1DC2949C8930010DA2D /* MarqueeLabel */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 4F307A4F2939031A00FA36A0 /* XCRemoteSwiftPackageReference "MarqueeLabel" */;
+			productName = MarqueeLabel;
+		};
+		6662A1DE2949C8B10010DA2D /* RxRelay */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 4F3177A1291BF70B0019BDFC /* XCRemoteSwiftPackageReference "RxSwift" */;
+			productName = RxRelay;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};
