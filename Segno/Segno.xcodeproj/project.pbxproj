@@ -103,6 +103,7 @@
 		988414D72923304F007C9132 /* KeychainError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 988414D62923304F007C9132 /* KeychainError.swift */; };
 		988414D929235345007C9132 /* DiaryCollectionViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 988414D829235345007C9132 /* DiaryCollectionViewModel.swift */; };
 		988414DB2923606B007C9132 /* DiaryListUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 988414DA2923606B007C9132 /* DiaryListUseCase.swift */; };
+		988A934D29499FB70037D91C /* LocationUseCaseTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 988A934C29499FB70037D91C /* LocationUseCaseTest.swift */; };
 		9894EAF529373385005F2B15 /* SettingsUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9894EAF429373385005F2B15 /* SettingsUseCase.swift */; };
 		9894EAF829375281005F2B15 /* DarkMode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9894EAF729375281005F2B15 /* DarkMode.swift */; };
 		98AE6A88294450520039A666 /* MapViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98AE6A87294450520039A666 /* MapViewModel.swift */; };
@@ -120,6 +121,16 @@
 		98FDF8A5292F7A350083FA05 /* UIView+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98FDF8A4292F7A350083FA05 /* UIView+.swift */; };
 		98FFDB5F29475A6300237314 /* LocationError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98FFDB5E29475A6300237314 /* LocationError.swift */; };
 /* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		988A934729499EEB0037D91C /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 4F317771291BE4710019BDFC /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 4F317778291BE4710019BDFC;
+			remoteInfo = Segno;
+		};
+/* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
 		4F0372D52941DBD40014131F /* MusicError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MusicError.swift; sourceTree = "<group>"; };
@@ -215,6 +226,8 @@
 		988414D62923304F007C9132 /* KeychainError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeychainError.swift; sourceTree = "<group>"; };
 		988414D829235345007C9132 /* DiaryCollectionViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiaryCollectionViewModel.swift; sourceTree = "<group>"; };
 		988414DA2923606B007C9132 /* DiaryListUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiaryListUseCase.swift; sourceTree = "<group>"; };
+		988A934329499EEB0037D91C /* SegnoTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SegnoTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		988A934C29499FB70037D91C /* LocationUseCaseTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = LocationUseCaseTest.swift; path = SegnoTests/LocationUseCaseTest.swift; sourceTree = "<group>"; };
 		9894EAF429373385005F2B15 /* SettingsUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsUseCase.swift; sourceTree = "<group>"; };
 		9894EAF729375281005F2B15 /* DarkMode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DarkMode.swift; sourceTree = "<group>"; };
 		98AE6A87294450520039A666 /* MapViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapViewModel.swift; sourceTree = "<group>"; };
@@ -247,6 +260,13 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		988A934029499EEB0037D91C /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
@@ -264,7 +284,9 @@
 		4F317770291BE4710019BDFC = {
 			isa = PBXGroup;
 			children = (
+				988A934C29499FB70037D91C /* LocationUseCaseTest.swift */,
 				4F31777B291BE4710019BDFC /* Segno */,
+				988A934429499EEB0037D91C /* SegnoTests */,
 				4F31777A291BE4710019BDFC /* Products */,
 			);
 			sourceTree = "<group>";
@@ -273,6 +295,7 @@
 			isa = PBXGroup;
 			children = (
 				4F317779291BE4710019BDFC /* Segno.app */,
+				988A934329499EEB0037D91C /* SegnoTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -564,6 +587,13 @@
 			path = Manager;
 			sourceTree = "<group>";
 		};
+		988A934429499EEB0037D91C /* SegnoTests */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = SegnoTests;
+			sourceTree = "<group>";
+		};
 		9894EAF629375272005F2B15 /* Utility */ = {
 			isa = PBXGroup;
 			children = (
@@ -601,6 +631,24 @@
 			productReference = 4F317779291BE4710019BDFC /* Segno.app */;
 			productType = "com.apple.product-type.application";
 		};
+		988A934229499EEB0037D91C /* SegnoTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 988A934B29499EEB0037D91C /* Build configuration list for PBXNativeTarget "SegnoTests" */;
+			buildPhases = (
+				988A933F29499EEB0037D91C /* Sources */,
+				988A934029499EEB0037D91C /* Frameworks */,
+				988A934129499EEB0037D91C /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				988A934829499EEB0037D91C /* PBXTargetDependency */,
+			);
+			name = SegnoTests;
+			productName = SegnoTests;
+			productReference = 988A934329499EEB0037D91C /* SegnoTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -613,6 +661,11 @@
 				TargetAttributes = {
 					4F317778291BE4710019BDFC = {
 						CreatedOnToolsVersion = 14.1;
+					};
+					988A934229499EEB0037D91C = {
+						CreatedOnToolsVersion = 14.1;
+						LastSwiftMigration = 1410;
+						TestTargetID = 4F317778291BE4710019BDFC;
 					};
 				};
 			};
@@ -636,6 +689,7 @@
 			projectRoot = "";
 			targets = (
 				4F317778291BE4710019BDFC /* Segno */,
+				988A934229499EEB0037D91C /* SegnoTests */,
 			);
 		};
 /* End PBXProject section */
@@ -650,6 +704,13 @@
 				791837FC292225CB00BC6992 /* Cafe24SsurroundAir.ttf in Resources */,
 				4F317789291BE4720019BDFC /* LaunchScreen.storyboard in Resources */,
 				4F317786291BE4720019BDFC /* Assets.xcassets in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		988A934129499EEB0037D91C /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -764,7 +825,23 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		988A933F29499EEB0037D91C /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				988A934D29499FB70037D91C /* LocationUseCaseTest.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		988A934829499EEB0037D91C /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 4F317778291BE4710019BDFC /* Segno */;
+			targetProxy = 988A934729499EEB0037D91C /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
 		4F317787291BE4720019BDFC /* LaunchScreen.storyboard */ = {
@@ -958,6 +1035,63 @@
 			};
 			name = Release;
 		};
+		988A934929499EEB0037D91C /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 4QG3GC35LA;
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.1;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				MACOSX_DEPLOYMENT_TARGET = 13.0;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.codershigh.boostcamp.Segno.SegnoTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = auto;
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator macosx";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Segno.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/Segno";
+			};
+			name = Debug;
+		};
+		988A934A29499EEB0037D91C /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 4QG3GC35LA;
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.1;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				MACOSX_DEPLOYMENT_TARGET = 13.0;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.codershigh.boostcamp.Segno.SegnoTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = auto;
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator macosx";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Segno.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/Segno";
+			};
+			name = Release;
+		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -975,6 +1109,15 @@
 			buildConfigurations = (
 				4F31778E291BE4720019BDFC /* Debug */,
 				4F31778F291BE4720019BDFC /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		988A934B29499EEB0037D91C /* Build configuration list for PBXNativeTarget "SegnoTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				988A934929499EEB0037D91C /* Debug */,
+				988A934A29499EEB0037D91C /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
