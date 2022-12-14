@@ -18,6 +18,6 @@ extension UIButton {
         let backgroundImage = UIGraphicsGetImageFromCurrentImageContext()
         UIGraphicsEndImageContext()
          
-        self.setBackgroundImage(backgroundImage, for: state)
+        setBackgroundImage(backgroundImage, for: state)
     }
 }
