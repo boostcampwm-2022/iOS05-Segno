@@ -231,7 +231,7 @@
 		791837FA292225C600BC6992 /* Cafe24Shiningstar.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 791837F7292225BF00BC6992 /* Cafe24Shiningstar.ttf */; };
 		791837FB292225C800BC6992 /* Cafe24Ssurround.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 791837F9292225BF00BC6992 /* Cafe24Ssurround.ttf */; };
 		791837FC292225CB00BC6992 /* Cafe24SsurroundAir.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 791837F8292225BF00BC6992 /* Cafe24SsurroundAir.ttf */; };
-		988A934D29499FB70037D91C /* LocationUseCaseTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 988A934C29499FB70037D91C /* LocationUseCaseTest.swift */; };
+		988A935A294A22FA0037D91C /* GetAddressUseCaseTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 988A9359294A22FA0037D91C /* GetAddressUseCaseTest.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -343,7 +343,7 @@
 		988414D829235345007C9132 /* DiaryCollectionViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiaryCollectionViewModel.swift; sourceTree = "<group>"; };
 		988414DA2923606B007C9132 /* DiaryListUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiaryListUseCase.swift; sourceTree = "<group>"; };
 		988A934329499EEB0037D91C /* SegnoTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SegnoTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		988A934C29499FB70037D91C /* LocationUseCaseTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationUseCaseTest.swift; sourceTree = "<group>"; };
+		988A9359294A22FA0037D91C /* GetAddressUseCaseTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetAddressUseCaseTest.swift; sourceTree = "<group>"; };
 		9894EAF429373385005F2B15 /* SettingsUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsUseCase.swift; sourceTree = "<group>"; };
 		9894EAF729375281005F2B15 /* DarkMode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DarkMode.swift; sourceTree = "<group>"; };
 		98AE6A87294450520039A666 /* MapViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapViewModel.swift; sourceTree = "<group>"; };
@@ -720,11 +720,11 @@
 		988A934429499EEB0037D91C /* SegnoTests */ = {
 			isa = PBXGroup;
 			children = (
+				988A9359294A22FA0037D91C /* GetAddressUseCaseTest.swift */,
 				6618BC3D2949B87A0008734D /* DiaryDetailUseCaseTest.swift */,
 				6618BC3B2949B8610008734D /* DiaryEditUseCaseTest.swift */,
 				6618BC292949B6930008734D /* DiaryListUseCaseTest.swift */,
 				6618BC272949B6830008734D /* LoginUseCaseTest.swift */,
-				988A934C29499FB70037D91C /* LocationUseCaseTest.swift */,
 			);
 			path = SegnoTests;
 			sourceTree = "<group>";
@@ -992,6 +992,7 @@
 				6618BC582949BABF0008734D /* Location.swift in Sources */,
 				6618BC592949BABF0008734D /* UserDetailItem.swift in Sources */,
 				6618BC5A2949BABF0008734D /* ImageInfo.swift in Sources */,
+				988A935A294A22FA0037D91C /* GetAddressUseCaseTest.swift in Sources */,
 				6618BC5B2949BABF0008734D /* DarkMode.swift in Sources */,
 				6618BC5C2949BABF0008734D /* DeleteTapGestureRecognizer.swift in Sources */,
 				6618BC5D2949BABF0008734D /* Coordinator.swift in Sources */,
@@ -1072,7 +1073,6 @@
 				6618BC422949BA050008734D /* ImageRepository.swift in Sources */,
 				6618BC2A2949B6930008734D /* DiaryListUseCaseTest.swift in Sources */,
 				6618BC332949B70C0008734D /* LocationUseCase.swift in Sources */,
-				988A934D29499FB70037D91C /* LocationUseCaseTest.swift in Sources */,
 				6618BC462949BA110008734D /* MyPageRepository.swift in Sources */,
 				6618BC282949B6830008734D /* LoginUseCaseTest.swift in Sources */,
 				6618BC452949BA0E0008734D /* SettingsRepository.swift in Sources */,
