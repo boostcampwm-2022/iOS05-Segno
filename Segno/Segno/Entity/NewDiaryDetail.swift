@@ -15,7 +15,14 @@ struct NewDiaryDetail: Encodable {
     let location: Location?
     let token: String
     
-    init(date: String, title: String, tags: [String], imagePath: String, bodyText: String?, musicInfo: MusicInfo?, location: Location?, token: String) {
+    init(date: String,
+         title: String,
+         tags: [String],
+         imagePath: String,
+         bodyText: String?,
+         musicInfo: MusicInfo?,
+         location: Location?,
+         token: String) {
         self.date = date
         self.title = title
         self.tags = tags
