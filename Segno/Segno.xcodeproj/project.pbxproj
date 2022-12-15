@@ -233,6 +233,7 @@
 		791837FC292225CB00BC6992 /* Cafe24SsurroundAir.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 791837F8292225BF00BC6992 /* Cafe24SsurroundAir.ttf */; };
 		9858D021294B0BA600559040 /* UserDetailUseCaseTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9858D020294B0BA600559040 /* UserDetailUseCaseTest.swift */; };
 		9858D023294B29E100559040 /* LocationUseCaseTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9858D022294B29E100559040 /* LocationUseCaseTest.swift */; };
+		9858D029294B7B9D00559040 /* SearchMusicUseCaseTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9858D028294B7B9D00559040 /* SearchMusicUseCaseTest.swift */; };
 		988A935A294A22FA0037D91C /* GetAddressUseCaseTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 988A9359294A22FA0037D91C /* GetAddressUseCaseTest.swift */; };
 /* End PBXBuildFile section */
 
@@ -343,6 +344,7 @@
 		9841D61A2926131200318EA9 /* LoginViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewModel.swift; sourceTree = "<group>"; };
 		9858D020294B0BA600559040 /* UserDetailUseCaseTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDetailUseCaseTest.swift; sourceTree = "<group>"; };
 		9858D022294B29E100559040 /* LocationUseCaseTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationUseCaseTest.swift; sourceTree = "<group>"; };
+		9858D028294B7B9D00559040 /* SearchMusicUseCaseTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchMusicUseCaseTest.swift; sourceTree = "<group>"; };
 		988414D62923304F007C9132 /* KeychainError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeychainError.swift; sourceTree = "<group>"; };
 		988414D829235345007C9132 /* DiaryCollectionViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiaryCollectionViewModel.swift; sourceTree = "<group>"; };
 		988414DA2923606B007C9132 /* DiaryListUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiaryListUseCase.swift; sourceTree = "<group>"; };
@@ -724,6 +726,7 @@
 		988A934429499EEB0037D91C /* SegnoTests */ = {
 			isa = PBXGroup;
 			children = (
+				9858D028294B7B9D00559040 /* SearchMusicUseCaseTest.swift */,
 				9858D022294B29E100559040 /* LocationUseCaseTest.swift */,
 				9858D020294B0BA600559040 /* UserDetailUseCaseTest.swift */,
 				988A9359294A22FA0037D91C /* GetAddressUseCaseTest.swift */,
@@ -991,6 +994,7 @@
 				6618BC512949BABF0008734D /* AppCoordinator.swift in Sources */,
 				9858D023294B29E100559040 /* LocationUseCaseTest.swift in Sources */,
 				6618BC522949BABF0008734D /* DiaryListItem.swift in Sources */,
+				9858D029294B7B9D00559040 /* SearchMusicUseCaseTest.swift in Sources */,
 				6618BC532949BABF0008734D /* DiaryDetail.swift in Sources */,
 				6618BC542949BABF0008734D /* NewDiaryDetail.swift in Sources */,
 				6618BC552949BABF0008734D /* UpdateDiaryDetail.swift in Sources */,
