@@ -1,12 +1,5 @@
 # iOS05 - Segno
 
-## iOS 5조, "달 세뇨" (Dal Segno) 팀원 소개
-|S035 유태호|S040 이예준|S041 이윤종|S054 최경민|
-|---|---|---|---|
-|![](https://avatars.githubusercontent.com/u/35491206?v=4)|![](https://avatars.githubusercontent.com/u/107831192?v=4)|![](https://avatars.githubusercontent.com/u/29617557?v=4)|![](https://avatars.githubusercontent.com/u/80261919?v=4)|
-|[@BaeRoNuI](https://github.com/BaeRoNuI)|[@rudah7](https://github.com/rudah7)|[@LEEYOONJONG](https://github.com/LEEYOONJONG)|[@radiantchoi](https://github.com/radiantchoi)|
-|감동|청춘|감성|낭만|
-
 # 🎼 프로젝트 소개
 
 > 다시 이곳의 추억에서부터, **세뇨** (**Segno**)
@@ -26,25 +19,38 @@ D.S.로 표기되는 "달 세뇨" 음악 기호와 함께 쓰이는 기호입니
 
 그 때 그 순간 들려오는 음악을 인식해 검색하고, 사진과 함께 저장한다면, 언제든 이 **세뇨**로 돌아와 다시 삶이라는 **연주를 시작**할 수 있습니다.
 
+## iOS 5조, "달 세뇨" (Dal Segno) 팀원 소개
+|S035 유태호|S040 이예준|S041 이윤종|S054 최경민|
+|---|---|---|---|
+|![](https://avatars.githubusercontent.com/u/35491206?v=4)|![](https://avatars.githubusercontent.com/u/107831192?v=4)|![](https://avatars.githubusercontent.com/u/29617557?v=4)|![](https://avatars.githubusercontent.com/u/80261919?v=4)|
+|[@BaeRoNuI](https://github.com/BaeRoNuI)|[@rudah7](https://github.com/rudah7)|[@LEEYOONJONG](https://github.com/LEEYOONJONG)|[@radiantchoi](https://github.com/radiantchoi)|
+|감동|청춘|감성|낭만|
+
+# Flow Chart
+![flowchart](https://user-images.githubusercontent.com/80261919/205933203-5c1e0870-ac03-46a3-b284-9a41ee5158f1.png)
+
+# Architecture
+![SegnoPresentation](https://user-images.githubusercontent.com/80261919/207883100-38e74ff7-9f00-46d5-bc77-cd7a3d80f119.jpg)
+
+# 시연 영상
+[<img src="https://user-images.githubusercontent.com/29617557/207881176-d27fc5be-2a15-4baa-8978-117e6a54e256.png" width="300">](https://youtu.be/pH8ucljwNdM)
+
+클릭하여 영상을 보실 수 있습니다.
+
 # 🎯 프로젝트 기능
-
-## 소셜 로그인
-
-- 별도 회원가입 없이 Apple 계정을 통한 로그인을 지원합니다.
-- (예시 gif 첨부)
 
 ## 일기 목록 열람
 
-- 로그인하고 나면, 지금까지 자신이 썼던 일기 목록을 썸네일, 제목을 통해 모두 볼 수 있습니다.
+- 로그인하고 나면, 지금까지 자신과 다른 사람이 썼던 일기 목록을 썸네일, 제목을 통해 모두 볼 수 있습니다.
 - 제목을 기준으로 검색해서 필터링해서 볼 수 있습니다.
-- (예시 gif 첨부)
+<img src="https://user-images.githubusercontent.com/80261919/207882619-aa2d6348-59cf-4433-9cf0-50fdad25a025.gif" width="300">
 
 ## 각 일기 열람
 
 - 각 일기에서는 작성했던 일기 내용을 구체적으로 볼 수 있습니다.
     - 기록해 두었다면, 일기를 작성했던 위치를 애플 지도로 확인할 수 있습니다.
     - 기록해 두었다면, 해당 위치에서 기록한 음악을 재생할 수 있습니다.
-- (예시 영상 첨부)
+- [일기 열람 시연 영상](https://windy-crayfish-861.notion.site/cea3fdca26254c1ab14b17af4d4e1723)
 
 ## 일기 작성 및 삭제
 
@@ -52,7 +58,11 @@ D.S.로 표기되는 "달 세뇨" 음악 기호와 함께 쓰이는 기호입니
     - 필수 입력 요소 : 사진
     - 선택 입력 요소 : 제목 - 자동 설정된 제목으로 저장됩니다.
     - 선택 입력 요소 : 내용, 위치, 음악 정보
-- (예시 gif 첨부)
+- 자신이 쓰지 않은 일기의 경우, 대신 신고 버튼을 눌러 신고할 수 있습니다.
+
+|일기 작성|일기 수정|일기 삭제|
+|---|---|---|
+|<img src="https://user-images.githubusercontent.com/80261919/207883367-bcab8948-9694-47ad-a75d-6fc41bdff331.gif" width="300">|<img src="https://user-images.githubusercontent.com/80261919/207883356-45d19d64-ed79-483f-a531-b1a97df2bde5.gif" width="300">|<img src="https://user-images.githubusercontent.com/80261919/207883293-0b0e776c-2549-4ed3-a9ed-81e0cdfdb38e.gif" width="300">|
 
 # ⛳️ 기술 스택
 
@@ -96,9 +106,13 @@ D.S.로 표기되는 "달 세뇨" 음악 기호와 함께 쓰이는 기호입니
 
 **Result! →** Third-Party 라이브러리와 비교하여 설정해줘야 할 요소들이 적어 빠른 개발이 가능했습니다.
 
-# Flow Chart
-![flowchart](https://user-images.githubusercontent.com/80261919/205933203-5c1e0870-ac03-46a3-b284-9a41ee5158f1.png)
+# 📝 고민했던 점에 대한 기록 - Weekly Dal Segno
+[Week 2 - Apple OAuth + Clean Architecture](https://windy-crayfish-861.notion.site/11-17-Apple-OAuth-Clean-Architecture-9ea050c70f7b4511b55f6066088064c2)
 
-# Architecture
-(향후 구조도 삽입)
+[Week 3 - RxSwift Materialize](https://windy-crayfish-861.notion.site/11-24-RxSwift-materialize-78afec14d601428e8e71caa9a16ed109)
 
+[Week 4 - ShazamKit + MusicKit](https://windy-crayfish-861.notion.site/12-4-ShazamKit-MusicKit-96d91af95da84dd2a70ff5f338ab4521)
+
+[Week 5 - Delegate to Rx data stream](https://windy-crayfish-861.notion.site/12-10-Delegate-d7501be5476744f690e27c4e5efd2552)
+
+[Week 6 - Testing on Clean Architecture](https://yoonjong.tistory.com/entry/클린-아키텍처-구조에서-유즈케이스-테스트하기)
