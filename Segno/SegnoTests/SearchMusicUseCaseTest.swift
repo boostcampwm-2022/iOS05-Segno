@@ -110,6 +110,7 @@ final class SearchMusicUseCaseTest: XCTestCase {
         // then
         XCTAssertEqual(repository.searchingMusicCount, 1)
     }
+    
     func test_stop_searching() throws {
         // given when
         useCase.stopSearching()
@@ -134,6 +135,16 @@ final class SearchMusicUseCaseTest: XCTestCase {
                 XCTAssertEqual(musicInfo, correctMusicInfo)
             })
             
+            .disposed(by: disposeBag)
+    }
+    
+    func test_subscribe_shazam_error() throws {
+        // given when
+        useCase.subscribeShazamError()
+            .subscribe(onNext: { shazamError in
+                // then
+                XCTAssertEqual(shazamError, .unknown)
+            })
             .disposed(by: disposeBag)
     }
 }
