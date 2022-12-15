@@ -110,4 +110,11 @@ final class SearchMusicUseCaseTest: XCTestCase {
         // then
         XCTAssertEqual(repository.searchingMusicCount, 1)
     }
+    func test_stop_searching() throws {
+        // given when
+        useCase.stopSearching()
+        
+        // then
+        XCTAssertEqual(repository.searchingMusicCount, -1)
+    }
 }
