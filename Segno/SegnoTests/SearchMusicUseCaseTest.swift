@@ -117,4 +117,23 @@ final class SearchMusicUseCaseTest: XCTestCase {
         // then
         XCTAssertEqual(repository.searchingMusicCount, -1)
     }
+    
+    func test_subscribe_shazam_result() throws {
+        // given when
+        useCase.subscribeShazamResult()
+            .subscribe(onNext: { musicInfo in
+                guard let dto = ShazamSongDTO(mediaItem:
+                                            SHMatchedMediaItem(
+                                                properties: [
+                                                    SHMediaItemProperty("Hello") : "Any"
+                                                ]
+                                            )) else { return }
+                let correctMusicInfo = MusicInfo(shazamSong: dto)
+                
+                // then
+                XCTAssertEqual(musicInfo, correctMusicInfo)
+            })
+            
+            .disposed(by: disposeBag)
+    }
 }
