@@ -79,9 +79,10 @@ final class GetAddressUseCaseTest: XCTestCase {
             .bind(to: address)
             .disposed(by: disposeBag)
         
+        let correctAddress = Recorded.events(.next(0, "경기도 수원시 영통구 영통동 1024-3"))
+
         // when
         useCase.getAddress(by: location)
-        let correctAddress = Recorded.events(.next(0, "경기도 수원시 영통구 영통동 1024-3"))
         
         // then
         XCTAssertEqual(address.events, correctAddress)
