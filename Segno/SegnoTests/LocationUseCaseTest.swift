@@ -49,6 +49,7 @@ final class LocationUseCaseTest: XCTestCase {
     var useCase: LocationUseCase!
     var repository: LocationRepository!
     var location: TestableObserver<Location>!
+    var error: TestableObserver<LocationError>!
     var disposeBag: DisposeBag!
     
     override func setUpWithError() throws {
@@ -57,6 +58,7 @@ final class LocationUseCaseTest: XCTestCase {
         repository = StubRepository()
         useCase = LocationUseCaseImpl(repository: repository)
         location = scheduler.createObserver(Location.self)
+        error = scheduler.createObserver(LocationError.self)
         disposeBag = DisposeBag()
     }
     
@@ -66,6 +68,7 @@ final class LocationUseCaseTest: XCTestCase {
         repository = nil
         useCase = nil
         location = nil
+        error = nil
         disposeBag = nil
     }
     
@@ -83,6 +86,21 @@ final class LocationUseCaseTest: XCTestCase {
             .next(0, Location(latitude: 37.247935,
                               longitude: 127.076536
                              ))
+        ])
+    }
+    
+    func test_stopLocation() throws {
+        // given
+        repository.errorObservable
+            .bind(to: error)
+            .disposed(by: disposeBag)
+        
+        // when
+        useCase.stopLocation()
+        
+        // then
+        XCTAssertEqual(error.events, [
+            .next(0, .denied)
         ])
     }
 }
