@@ -12,7 +12,7 @@ final class AppCoordinator: Coordinator {
         static let userToken: String = "userToken"
     }
     
-    let localUtilityManager = LocalUtilityManagerImpl()
+    private let localUtilityManager = LocalUtilityManagerImpl()
     var navigationController: UINavigationController
     var childCoordinators: [Coordinator] = []
     

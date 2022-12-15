@@ -14,7 +14,6 @@ import SnapKit
 
 protocol LoginViewControllerDelegate: AnyObject {
     func loginDidSucceed()
-    func loginDidFail()
 }
 
 final class LoginViewController: UIViewController {
@@ -169,7 +168,7 @@ final class LoginViewController: UIViewController {
                     case true:
                         self?.delegate?.loginDidSucceed()
                     case false:
-                        self?.delegate?.loginDidFail()
+                        self?.makeOKAlert(title: "로그인 실패", message: "로그인에 실패했습니다.")
                     }
                 }
             })

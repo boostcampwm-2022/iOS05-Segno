@@ -17,9 +17,11 @@ final class TabBarCoordinator: Coordinator {
     }
     
     var navigationController: UINavigationController
-    var tabBarController: UITabBarController
     var childCoordinators: [Coordinator] = []
+    
     weak var delegate: TabBarCoordinatorDelegate?
+    
+    private var tabBarController: UITabBarController
     
     init(_ navigationController: UINavigationController) {
         self.navigationController = navigationController
@@ -51,6 +53,7 @@ private extension TabBarCoordinator {
             [NSAttributedString.Key.font: UIFont.appFont(.shiningStar, size: Metric.tabBarItemFontSize)],
             for: .normal)
         connectTabCoordinator(page: page, to: tabNavigationController)
+        
         return tabNavigationController
     }
     
