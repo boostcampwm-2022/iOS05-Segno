@@ -17,14 +17,6 @@ protocol LoginViewControllerDelegate: AnyObject {
 }
 
 final class LoginViewController: UIViewController {
-    
-    // MARK: - Property
-    private let viewModel: LoginViewModel
-    private let disposeBag = DisposeBag()
-    
-    private var session: LoginSession?
-    weak var delegate: LoginViewControllerDelegate?
-    
     private enum Metric {
         static let titleText = "Segno"
         static let subTitleText = "다시 이곳의 추억에서부터"
@@ -40,6 +32,13 @@ final class LoginViewController: UIViewController {
         static let titleHeight: CGFloat = 100
         static let titleOffset: CGFloat = 200
     }
+    
+    // MARK: - Property
+    private let viewModel: LoginViewModel
+    private let disposeBag = DisposeBag()
+    
+    private var session: LoginSession?
+    weak var delegate: LoginViewControllerDelegate?
     
     // MARK: - View
     private lazy var titleLabel: UILabel = {

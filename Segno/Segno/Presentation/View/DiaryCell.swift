@@ -8,11 +8,17 @@
 import UIKit
 
 final class DiaryCell: UICollectionViewCell {
+    // MARK: - Namespaces
     private enum Metric {
         static let labelFontSize: CGFloat = 20
         static let cornerRadius: CGFloat = 20
     }
     
+    private enum Literal {
+        static let thumbnaliImageName = UIImage(systemName: "photo.on.rectangle")
+    }
+    
+    // MARK: - Views
     private lazy var thumbnailImageView: UIImageView = {
         let imageView = UIImageView()
         return imageView
@@ -27,6 +33,7 @@ final class DiaryCell: UICollectionViewCell {
         return label
     }()
     
+    // MARK: - Initializers
     override init(frame: CGRect) {
         super.init(frame: frame)
         
@@ -38,12 +45,13 @@ final class DiaryCell: UICollectionViewCell {
         fatalError("init(coder:) has not been implemented")
     }
     
+    // MARK: - View setup methods
     private func setupView() {
         contentView.backgroundColor = .appColor(.color2)
         contentView.clipsToBounds = true
         contentView.layer.cornerRadius = Metric.cornerRadius
         
-        thumbnailImageView.image = UIImage(systemName: "photo.on.rectangle")
+        thumbnailImageView.image = Literal.thumbnaliImageName
         thumbnailImageView.tintColor = .appColor(.color4)
     }
     
@@ -67,6 +75,7 @@ final class DiaryCell: UICollectionViewCell {
         }
     }
     
+    // MARK: - Configure cell method
     func configure(with model: DiaryListItem) {
         titleLabel.text = model.title
         thumbnailImageView.setImage(imagePath: model.thumbnailPath)

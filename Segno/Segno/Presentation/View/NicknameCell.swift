@@ -10,11 +10,8 @@ import UIKit
 import RxSwift
 
 final class NicknameCell: UITableViewCell {
+    // MARK: - Namespaces
     private enum Metric {
-        static let nicknameLabelText: String = "닉네임 변경"
-        static let textfieldPlaceholder: String = "사용할 닉네임을 입력해주세요"
-        static let buttonText: String = "확인"
-        
         static let buttonWidth: CGFloat = 70
         static let cornerRadius: CGFloat = 8
         static let edgeSpacing: CGFloat = 16
@@ -25,8 +22,16 @@ final class NicknameCell: UITableViewCell {
         static let textSize: CGFloat = 14
     }
     
+    private enum Literal {
+        static let nicknameLabelText: String = "닉네임 변경"
+        static let textfieldPlaceholder: String = "사용할 닉네임을 입력해주세요"
+        static let buttonText: String = "확인"
+    }
+    
+    // MARK: - Properties
     private let disposeBag = DisposeBag()
 
+    // MARK: - Views
     private lazy var nicknameView: UIView = {
         let view = UIView(frame: CGRect(x: 0, y: 0, width: Metric.nicknameViewWidth, height: Metric.nicknameViewHeight))
         return view
@@ -34,35 +39,32 @@ final class NicknameCell: UITableViewCell {
     
     private lazy var nicknameLabel: UILabel = {
         let label = UILabel()
-        label.text = Metric.nicknameLabelText
         label.font = .systemFont(ofSize: Metric.textSize)
+        label.text = Literal.nicknameLabelText
         label.textColor = .appColor(.grey3)
         return label
     }()
     
     lazy var nicknameTextField: UITextField = {
         let textfield = UITextField()
-        textfield.placeholder = Metric.textfieldPlaceholder
         textfield.backgroundColor = .appColor(.grey1)
+        textfield.layer.cornerRadius = Metric.cornerRadius
         textfield.leftView = UIView(frame: CGRect(x: 0, y: 0, width: Metric.leftViewSpacing, height: 0))
         textfield.leftViewMode = .always
-        textfield.layer.cornerRadius = Metric.cornerRadius
+        textfield.placeholder = Literal.textfieldPlaceholder
         return textfield
     }()
     
     lazy var okButton: UIButton = {
         let button = UIButton()
-        button.setTitle(Metric.buttonText, for: .normal)
         button.backgroundColor = .appColor(.color4)
-        button.setTitleColor(.appColor(.white), for: .normal)
         button.layer.cornerRadius = Metric.cornerRadius
+        button.setTitle(Literal.buttonText, for: .normal)
+        button.setTitleColor(.appColor(.white), for: .normal)
         return button
     }()
     
-    required init?(coder: NSCoder) {
-        super.init(coder: coder)
-    }
-    
+    // MARK: - Initializers
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         
@@ -70,6 +72,11 @@ final class NicknameCell: UITableViewCell {
         setupLayout()
     }
     
+    required init?(coder: NSCoder) {
+        super.init(coder: coder)
+    }
+    
+    // MARK: View setup methods
     private func setupView() {
         self.backgroundColor = .appColor(.background)
     }

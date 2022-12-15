@@ -17,22 +17,29 @@ protocol LocationContentViewDelegate: AnyObject {
 }
 
 final class LocationContentView: UIView {
+    // MARK: - Namespaces
     private enum Metric {
         static let fontSize: CGFloat = 16
         static let spacing: CGFloat = 10
         static let mapButtonSize: CGFloat = 30
         static let mapButtonCornerRadius = mapButtonSize / 2
-        static let titleText: String = "위치"
     }
     
+    private enum Literal {
+        static let titleText: String = "위치"
+        static let mapImage = UIImage(systemName: "map.fill")
+    }
+    
+    // MARK: - Properties
     private var location: Location?
     private let disposeBag = DisposeBag()
     weak var delegate: LocationContentViewDelegate?
     
+    // MARK: - Views
     private lazy var titleLabel: UILabel = {
         let label = UILabel()
         label.font = .systemFont(ofSize: Metric.fontSize, weight: .bold)
-        label.text = Metric.titleText
+        label.text = Literal.titleText
         return label
     }()
     
@@ -47,19 +54,20 @@ final class LocationContentView: UIView {
         let button = UIButton()
         button.backgroundColor = .appColor(.color4)
         button.layer.cornerRadius = Metric.mapButtonCornerRadius
-        button.setImage(UIImage(systemName: "map.fill"), for: .normal)
+        button.setImage(Literal.mapImage, for: .normal)
         button.tintColor = .appColor(.label)
+        
         button.rx.tap
             .bind { [weak self] in
-                debugPrint("===>", self?.location)
                 guard let location = self?.location else { return }
                 self?.delegate?.mapButtonTapped(location: location)
             }
             .disposed(by: disposeBag)
+        
         return button
     }()
     
-    
+    // MARK: - Initializers
     override init(frame: CGRect) {
         super.init(frame: frame)
         
@@ -70,6 +78,7 @@ final class LocationContentView: UIView {
         fatalError("init(coder:) has not been implemented")
     }
     
+    // MARK: Setup view method
     private func setLayout() {
         [titleLabel, locationLabel, mapButton].forEach {
             addSubview($0)
@@ -95,6 +104,7 @@ final class LocationContentView: UIView {
         }
     }
     
+    // MARK: - Configure cell method
     func setLocation(cllocation: CLLocation) {
         let latitude = cllocation.coordinate.latitude
         let longitude = cllocation.coordinate.longitude
