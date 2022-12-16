@@ -63,7 +63,6 @@ final class DiaryListUseCaseTest: XCTestCase {
     var scheduler: TestScheduler!
     var useCase: DiaryListUseCase!
     var repository: DiaryRepository!
-    var manager: LocalUtilityManager!
     var info: TestableObserver<[DiaryListItem]>!
     var disposeBag: DisposeBag!
 
@@ -83,7 +82,6 @@ final class DiaryListUseCaseTest: XCTestCase {
         scheduler = nil
         useCase = nil
         repository = nil
-        manager = nil
         disposeBag = nil
     }
 
