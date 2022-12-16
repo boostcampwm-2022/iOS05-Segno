@@ -100,6 +100,18 @@ final class DiaryEditUseCaseTest: XCTestCase {
     }
     
     func test_updateDiary() throws {
+        // given
+        let updateDiaryDetail = UpdateDiaryDetail(id: "1", date: "2022/12/17 03:00:00", title: "dummy", tags: [], imagePath: "dummydummy", bodyText: nil, musicInfo: nil, location: nil, token: "token")
+        var events: [CompletableEvent] = []
         
+        // when
+        useCase.updateDiary(updateDiaryDetail)
+            .subscribe { event in
+                events.append(event)
+            }
+            .disposed(by: DisposeBag())
+        
+        // then
+        XCTAssertEqual(events, [.completed])
     }
 }
