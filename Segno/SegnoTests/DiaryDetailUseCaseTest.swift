@@ -60,8 +60,6 @@ final class DiaryDetailUseCaseTest: XCTestCase {
         }
     }
     
-    private var sut: DiaryDetailUseCase!
-    
     var scheduler: TestScheduler!
     var useCase: DiaryDetailUseCase!
     var repository: DiaryRepository!
