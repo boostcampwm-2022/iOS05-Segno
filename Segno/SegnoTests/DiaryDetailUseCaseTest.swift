@@ -103,6 +103,17 @@ final class DiaryDetailUseCaseTest: XCTestCase {
     }
     
     func test_deleteDiary() throws {
-        
+        // given
+        var events: [CompletableEvent] = []
+
+        // when
+        useCase.deleteDiary(id: "1")
+            .subscribe { event in
+                events.append(event)
+            }
+            .disposed(by: DisposeBag())
+
+        // then
+        XCTAssertEqual(events, [.completed])
     }
 }
