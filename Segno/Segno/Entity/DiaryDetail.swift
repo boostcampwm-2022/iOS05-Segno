@@ -5,7 +5,7 @@
 //  Created by Gordon Choi on 2022/11/10.
 //
 
-struct DiaryDetail: Encodable {
+struct DiaryDetail: Encodable, Equatable {
     let identifier: String
     let userId: String
     let title: String
