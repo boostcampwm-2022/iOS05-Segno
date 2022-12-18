@@ -30,3 +30,34 @@ extension UIViewController {
         present(alert, animated: true)
     }
 }
+
+enum DeviceType {
+    case iPhone14Pro
+    
+    func name() -> String {
+        switch self {
+        case .iPhone14Pro:
+            return "iPhone 14 Pro"
+        }
+    }
+}
+
+#if canImport(SwiftUI) && DEBUG
+import SwiftUI
+extension UIViewController {
+    private struct Preview: UIViewControllerRepresentable {
+        let viewController: UIViewController
+        
+        func makeUIViewController(context: Context) -> UIViewController {
+            return viewController
+        }
+        
+        func updateUIViewController(_ uiViewController: UIViewController, context: Context) {
+        }
+    }
+    
+    func showPreview(_ deviceType: DeviceType = .iPhone14Pro) -> some View {
+        Preview(viewController: self).previewDevice(PreviewDevice(rawValue: deviceType.name()))
+    }
+}
+#endif
