@@ -57,11 +57,16 @@ final class DiaryEditViewController: UIViewController {
         static let locationPlaceholder = "여기는 어디인가요?"
         static let tagPlaceholder = "태그를 입력해주세요. enter로 태그를 구분합니다."
         static let saveButtonTitle = "저장"
+        static let savedTitle = "저장 완료"
+        static let saved = "저장되었습니다."
         static let errorTitle = "오류!"
         static let failedToSave = "저장에 실패했습니다."
+        static let photoIsRequired = "사진은 필수 입력 항목입니다."
         static let imageViewStockImage = UIImage(systemName: "photo")
         static let musicButtonImage = UIImage(systemName: "music.note")
         static let locationButtonImage = UIImage(systemName: "location.fill")
+        static let dateFormat = "yyyy년 MM월 dd일 HH시 mm분에 저장된 세뇨입니다."
+        static let localeIdentifier = "ko_KR"
     }
     
     // MARK: - Properties
@@ -384,9 +389,7 @@ final class DiaryEditViewController: UIViewController {
         saveButton.rx.tap
             .withUnretained(self)
             .bind { _ in
-                if self.photoImageView.image == nil {
-                    debugPrint("이미지를 넣지 않으면 저장할 수 없습니다!")
-                } else {
+                if self.photoImageView.image != nil {
                     self.saveDiary()
                 }
             }
@@ -545,11 +548,11 @@ final class DiaryEditViewController: UIViewController {
             .observe(on: MainScheduler.instance)
             .subscribe(onNext: { [weak self] result in
                 if result {
-                    self?.makeOKAlert(title: "저장 완료", message: "저장되었습니다.") { _ in
+                    self?.makeOKAlert(title: Literal.savedTitle, message: Literal.saved) { _ in
                         self?.delegate?.diaryDidSaved()
                     }
                 } else {
-                    self?.makeOKAlert(title: Literal.errorTitle, message: "저장에 실패했습니다.")
+                    self?.makeOKAlert(title: Literal.errorTitle, message: Literal.failedToSave)
                 }
             })
             .disposed(by: disposeBag)
@@ -575,15 +578,15 @@ final class DiaryEditViewController: UIViewController {
             .subscribe(onNext: { _, locationError in
                 switch locationError {
                 case .restricted:
-                    self.makeOKAlert(title: "위치 꺼짐", message: locationError.errorDescription)
+                    self.makeOKAlert(title: Literal.errorTitle, message: locationError.errorDescription)
                     self.locationInfoLabel.text = Literal.locationPlaceholder
                     self.addlocationButton.tintColor = .appColor(.white)
                 case .denied:
-                    self.makeOKAlert(title: "위치 오류", message: locationError.errorDescription)
+                    self.makeOKAlert(title: Literal.errorTitle, message: locationError.errorDescription)
                     self.locationInfoLabel.text = Literal.locationPlaceholder
                     self.addlocationButton.tintColor = .appColor(.white)
                 case .unknown:
-                    self.makeOKAlert(title: "알 수 없는 오류", message: locationError.errorDescription)
+                    self.makeOKAlert(title: Literal.errorTitle, message: locationError.errorDescription)
                     self.locationInfoLabel.text = Literal.locationPlaceholder
                     self.addlocationButton.tintColor = .appColor(.white)
                 }
@@ -616,7 +619,7 @@ final class DiaryEditViewController: UIViewController {
 
     private func saveDiary() {
         guard photoImageView.image != Literal.imageViewStockImage else {
-            makeOKAlert(title: "사진이 없습니다.", message: "사진은 필수 입력 항목입니다.")
+            makeOKAlert(title: Literal.errorTitle, message: Literal.photoIsRequired)
             return
         }
         
@@ -627,8 +630,8 @@ final class DiaryEditViewController: UIViewController {
         guard var title = titleTextField.text else { return }
         if title.isEmpty {
             let dateFormatter = DateFormatter()
-            dateFormatter.dateFormat = "yyyy년 MM월 dd일 HH시 mm분에 저장된 세뇨입니다."
-            dateFormatter.locale = Locale(identifier: "ko_KR")
+            dateFormatter.dateFormat = Literal.dateFormat
+            dateFormatter.locale = Locale(identifier: Literal.localeIdentifier)
             title = dateFormatter.string(from: Date())
         }
         
