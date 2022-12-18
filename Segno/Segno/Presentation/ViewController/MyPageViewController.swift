@@ -33,11 +33,7 @@ protocol MyPageViewDelegate: AnyObject {
 }
 
 final class MyPageViewController: UIViewController {
-    private let disposeBag = DisposeBag()
-    private let viewModel: MyPageViewModel
-    private let localUtilityManager: LocalUtilityManager
-    weak var mypageDelegate: MyPageViewDelegate?
-    
+    // MARK: - Namespaces
     private enum Metric {
         static let logoutMessage: String = "정말 로그아웃하시겠습니까?"
         static let logoutTitle: String = "로그아웃"
@@ -53,6 +49,13 @@ final class MyPageViewController: UIViewController {
         static let navigationBackButtonTitleSize: CGFloat = 16
     }
     
+    // MARK: - Properties
+    private let disposeBag = DisposeBag()
+    private let viewModel: MyPageViewModel
+    private let localUtilityManager: LocalUtilityManager
+    weak var mypageDelegate: MyPageViewDelegate?
+    
+    // MARK: - Views
     private lazy var titleLabel: UILabel = {
         let label = UILabel()
         label.adjustsFontSizeToFitWidth = true
@@ -72,6 +75,7 @@ final class MyPageViewController: UIViewController {
         return tableView
     }()
     
+    // MARK: - Initializers
     init(viewModel: MyPageViewModel = MyPageViewModel(),
          localUtilityManager: LocalUtilityManager = LocalUtilityManagerImpl()) {
         self.viewModel = MyPageViewModel()
@@ -84,6 +88,7 @@ final class MyPageViewController: UIViewController {
         fatalError("init(coder:) has not been implemented")
     }
     
+    // MARK: - Lifecycle methods
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -99,6 +104,7 @@ final class MyPageViewController: UIViewController {
         getUserDetail()
     }
 
+    // MARK: - Setup view methods
     private func setupView() {
         view.backgroundColor = .appColor(.background)
         
@@ -131,6 +137,7 @@ final class MyPageViewController: UIViewController {
         }
     }
     
+    // MARK: - Binding table view metohds
     private func bindTableView() {
         viewModel.nicknameObservable
             .observe(on: MainScheduler.instance)
@@ -188,22 +195,25 @@ final class MyPageViewController: UIViewController {
             .disposed(by: disposeBag)
     }
     
+    // MARK: - Getting data methods
     private func getUserDetail() {
         viewModel.getUserDetail()
     }
     
+    // MARK: - Action methods
     private func settingButtonTapped() {
         mypageDelegate?.settingButtonTapped()
     }
     
     private func logoutButtonTapped() {
         makeCancelOKAlert(title: Metric.logoutTitle, message: Metric.logoutMessage) { [weak self] _ in
-            _ = self?.localUtilityManager.deleteToken(key: Metric.userToken)
+            self?.localUtilityManager.deleteToken(key: Metric.userToken)
             self?.mypageDelegate?.logoutButtonTapped()
         }
     }
 }
 
+// MARK: - Preview methods
 #if canImport(SwiftUI) && DEBUG
 import SwiftUI
 

@@ -742,7 +742,7 @@ extension DiaryEditViewController: UITextViewDelegate {
     }
 }
 
-// MARK: - Preview Methods
+// MARK: - Preview methods
 #if canImport(SwiftUI) && DEBUG
 import SwiftUI
 import CoreLocation

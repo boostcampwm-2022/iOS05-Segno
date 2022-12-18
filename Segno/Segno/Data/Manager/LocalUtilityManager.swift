@@ -11,7 +11,7 @@ protocol LocalUtilityManager {
     func createToken(key: String, token: String) -> Bool
     func getToken(key: String) -> String
     func updateToken(key: String, token: String) -> Bool
-    func deleteToken(key: String) -> Bool
+    @discardableResult func deleteToken(key: String) -> Bool
     func setUserDefaults(_ value: Any, forKey defaultsKey: UserDefaultsKey)
     func getUserDefaultsObject(forKey defaultsKey: UserDefaultsKey) -> Any?
 }
@@ -71,6 +71,7 @@ final class LocalUtilityManagerImpl: LocalUtilityManager {
         return false
     }
     
+    @discardableResult
     func deleteToken(key: String) -> Bool {
         let query: [CFString: Any] = [
             kSecClass: kSecClassGenericPassword,
