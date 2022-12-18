@@ -26,16 +26,23 @@ final class DiaryCollectionViewController: UIViewController {
     
     // MARK: - Namespaces
     private enum Metric {
-        static let title = "Segno"
         static let buttonFontSize: CGFloat = 80
         static let buttonLabelOffset: CGFloat = 7
         static let buttonOffset: CGFloat = -20
         static let buttonRadius: CGFloat = 40
-        static let buttonText: String = "+"
         static let buttonWidthAndHeight: CGFloat = 80
         static let inset: CGFloat = 20
         static let navigationTitleSize: CGFloat = 20
         static let navigationBackButtonTitleSize: CGFloat = 16
+    }
+    
+    private enum Literal {
+        static let title = "Segno"
+        static let buttonText: String = "+"
+        static let searchBarPlaceholder = "제목으로 검색"
+        static let backImage = UIImage(named: "search_back")
+        static let cancelImage = UIImage(named: "search_cancel")
+        static let backButtonText = "리스트"
     }
     
     // MARK: - Properties
@@ -50,10 +57,10 @@ final class DiaryCollectionViewController: UIViewController {
     // MARK: - Views
     private lazy var searchBar: UISearchBar = {
         let bar = UISearchBar()
-        bar.placeholder = "제목으로 검색"
+        bar.placeholder = Literal.searchBarPlaceholder
         bar.searchTextField.font = .appFont(.shiningStar, size: 20)
-        bar.setImage(UIImage(named: "search_back"), for: .search, state: .normal)
-        bar.setImage(UIImage(named: "search_cancel"), for: .clear, state: .normal)
+        bar.setImage(Literal.backImage, for: .search, state: .normal)
+        bar.setImage(Literal.cancelImage, for: .clear, state: .normal)
         return bar
     }()
     
@@ -69,13 +76,13 @@ final class DiaryCollectionViewController: UIViewController {
     private lazy var appendButtonLabel: UILabel = {
         let label = UILabel()
         label.font = .appFont(.surroundAir, size: Metric.buttonFontSize)
-        label.text = Metric.buttonText
+        label.text = Literal.buttonText
         label.textColor = .appColor(.white)
         return label
     }()
     
     private lazy var backBarButtonItem: UIBarButtonItem = {
-        let item = UIBarButtonItem(title: "리스트", style: .plain, target: self, action: nil)
+        let item = UIBarButtonItem(title: Literal.backButtonText, style: .plain, target: self, action: nil)
         item.tintColor = UIColor.appColor(.color4)
         item.setTitleTextAttributes([
             NSAttributedString.Key.font: UIFont.systemFont(ofSize: Metric.navigationBackButtonTitleSize)
@@ -118,7 +125,7 @@ final class DiaryCollectionViewController: UIViewController {
     private func setupView() {
         view.backgroundColor = .appColor(.background)
         
-        title = Metric.title
+        title = Literal.title
         navigationController?.navigationBar.titleTextAttributes = [
             NSAttributedString.Key.font: UIFont.systemFont(ofSize: Metric.navigationTitleSize, weight: .bold),
             NSAttributedString.Key.foregroundColor: UIColor.appColor(.color4) ?? .red
