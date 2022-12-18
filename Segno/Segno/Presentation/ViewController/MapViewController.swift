@@ -12,8 +12,8 @@ import RxCocoa
 import RxSwift
 import SnapKit
 
-class MapViewController: UIViewController {
-
+final class MapViewController: UIViewController {
+    // MARK: - Namespaces
     private enum Metric {
         static let topSpace: CGFloat = 30
         static let bottomSpace: CGFloat = 80
@@ -24,16 +24,18 @@ class MapViewController: UIViewController {
         static let addressSize: CGFloat = 16
     }
     
+    // MARK: - Properties
+    private let viewModel: MapViewModel
+    private let disposeBag = DisposeBag()
+    private let location: Location
+    
+    // MARK: - Views
     private lazy var titleLabel: UILabel = {
         let titleLabel = UILabel()
         titleLabel.font = .systemFont(ofSize: Metric.titleSize, weight: .bold)
         titleLabel.text = "위치"
         return titleLabel
     }()
-    
-    private let viewModel: MapViewModel
-    private let disposeBag = DisposeBag()
-    private let location: Location
     
     private lazy var closeButton: UIButton = {
         let closeButton = UIButton()
@@ -62,6 +64,7 @@ class MapViewController: UIViewController {
         return addressLabel
     }()
     
+    // MARK: - Initializers
     init(viewModel: MapViewModel, location: Location) {
         self.viewModel = viewModel
         self.location = location
@@ -73,7 +76,7 @@ class MapViewController: UIViewController {
         fatalError("init(coder:) has not been implemented")
     }
     
-    
+    // MARK: - Lifecycle methods
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -84,10 +87,11 @@ class MapViewController: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        debugPrint("====", location)
+        
         getAddress()
     }
     
+    // MARK: - Setup view methods
     private func setupMapView() {
         let latitude = location.latitude
         let longitude = location.longitude
@@ -127,19 +131,20 @@ class MapViewController: UIViewController {
         }
     }
     
+    // MARK: Bind view methods
     private func bindAddressItem() {
-        // TODO: Location to Address 변환 작업
         viewModel.addressSubject
             .bind(to: addressLabel.rx.text)
             .disposed(by: disposeBag)
-//        addressLabel.text = "경기도 수원시 영통구 덕영대로 1732"
     }
     
+    // MARK: - Get data methods
     private func getAddress() {
         viewModel.getAddress(by: location)
     }
 }
 
+// MARK: - Preview methods
 #if canImport(SwiftUI) && DEBUG
 import SwiftUI
 
