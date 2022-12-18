@@ -38,7 +38,15 @@ final class DiaryDetailViewController: UIViewController {
         static let textViewPlaceHolder: String = "내용이 없네요"
         static let musicLibraryDeniedTitle: String = "음악 접근 권한 설정 필요"
         static let locationEmptyMessage: String = "저장된 위치가 없습니다."
-        static let reportTitle = "신고"
+        static let reportButtonTitle = "신고"
+        static let deleteSucceededTitle = "삭제 성공"
+        static let deleted = "삭제되었습니다."
+        static let errorTitle = "오류!"
+        static let failedToDelete = "삭제에 실패했습니다."
+        static let reportAlertTitle = "해당 Segno를 신고하시겠습니까?"
+        static let reportedTitle = "해당 Segno를 신고하였습니다."
+        static let willBeChecked = "관리자가 확인 후 조치하도록 하겠습니다."
+        static let confirmDeletingTitle = "해당 Segno를 삭제하시겠습니까?"
     }
     
     // MARK: - Properties
@@ -121,7 +129,7 @@ final class DiaryDetailViewController: UIViewController {
     }()
     
     private lazy var reportBarButtonItem: UIBarButtonItem = {
-        let item = UIBarButtonItem(title: Literal.reportTitle, style: .plain, target: self, action: nil)
+        let item = UIBarButtonItem(title: Literal.reportButtonTitle, style: .plain, target: self, action: nil)
         item.tintColor = UIColor.appColor(.color4)
         return item
     }()
@@ -389,11 +397,11 @@ final class DiaryDetailViewController: UIViewController {
             .observe(on: MainScheduler.instance)
             .subscribe(onNext: { [weak self] result in
                 if result {
-                    self?.makeOKAlert(title: "삭제 성공", message: "삭제되었습니다.") { _ in
+                    self?.makeOKAlert(title: Literal.deleteSucceededTitle, message: Literal.deleted) { _ in
                         self?.delegate?.escapeToCollectionView()
                     }
                 } else {
-                    self?.makeOKAlert(title: "Error!", message: "삭제에 실패했습니다.")
+                    self?.makeOKAlert(title: Literal.errorTitle, message: Literal.failedToDelete)
                 }
             })
             .disposed(by: disposeBag)
@@ -410,8 +418,8 @@ final class DiaryDetailViewController: UIViewController {
     
     // MARK: - Action methods
     private func reportButtonTapped() {
-        makeCancelOKAlert(title: "해당 Segno를 신고하시겠습니까?", message: "") { _ in
-            self.makeOKAlert(title: "해당 Segno를 신고하였습니다.", message: "관리자가 확인 후 조치하도록 하겠습니다.") { _ in
+        makeCancelOKAlert(title: Literal.reportAlertTitle, message: "") { _ in
+            self.makeOKAlert(title: Literal.reportedTitle, message: Literal.willBeChecked) { _ in
                 self.delegate?.escapeToCollectionView()
             }
         }
@@ -422,7 +430,7 @@ final class DiaryDetailViewController: UIViewController {
     }
     
     private func trashButtonTapped() {
-        makeCancelOKAlert(title: "해당 Segno를 삭제하시겠습니까?", message: "") { _ in
+        makeCancelOKAlert(title: Literal.confirmDeletingTitle, message: "") { _ in
             self.viewModel.deleteDiary(id: self.diaryId)
         }
     }
