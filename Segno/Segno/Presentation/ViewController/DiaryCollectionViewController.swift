@@ -24,6 +24,7 @@ final class DiaryCollectionViewController: UIViewController {
         case main
     }
     
+    // MARK: - Namespaces
     private enum Metric {
         static let title = "Segno"
         static let buttonFontSize: CGFloat = 80
@@ -37,12 +38,16 @@ final class DiaryCollectionViewController: UIViewController {
         static let navigationBackButtonTitleSize: CGFloat = 16
     }
     
-    let disposeBag = DisposeBag()
+    // MARK: - Properties
     private let viewModel: DiaryCollectionViewModel
     private var dataSource: DataSource?
     private var diaryCells: [DiaryListItem] = []
+    private let disposeBag = DisposeBag()
+    private lazy var refreshControl = UIRefreshControl()
+    
     weak var delegate: DiaryCollectionViewDelegate?
     
+    // MARK: - Views
     private lazy var searchBar: UISearchBar = {
         let bar = UISearchBar()
         bar.placeholder = "제목으로 검색"
@@ -51,8 +56,6 @@ final class DiaryCollectionViewController: UIViewController {
         bar.setImage(UIImage(named: "search_cancel"), for: .clear, state: .normal)
         return bar
     }()
-    
-    private lazy var refreshControl = UIRefreshControl()
     
     private lazy var diaryCollectionView: UICollectionView = {
         let layout = makeCollectionViewLayout()
@@ -80,6 +83,7 @@ final class DiaryCollectionViewController: UIViewController {
         return item
     }()
     
+    // MARK: - Initializers
     init() {
         self.viewModel = DiaryCollectionViewModel()
         
@@ -90,12 +94,13 @@ final class DiaryCollectionViewController: UIViewController {
         fatalError("init(coder:) has not been implemented")
     }
     
+    // MARK: - Lifecycle methods
     override func viewDidLoad() {
         super.viewDidLoad()
         
         setupView()
         setupLayout()
-        setupRx()
+        bindControls()
         setRecognizer()
         
         dataSource = makeDataSource()
@@ -109,6 +114,7 @@ final class DiaryCollectionViewController: UIViewController {
         updateSnapshot(with: searchBar.text)
     }
     
+    // MARK: - Setup view methods
     private func setupView() {
         view.backgroundColor = .appColor(.background)
         
@@ -167,7 +173,14 @@ final class DiaryCollectionViewController: UIViewController {
         }
     }
     
-    private func setupRx() {
+    private func setRecognizer() {
+        let tap = UITapGestureRecognizer(target: self, action: #selector(singleTapMethod))
+        diaryCollectionView.addGestureRecognizer(tap)
+        tap.cancelsTouchesInView = false
+    }
+    
+    // MARK: - Bind control methods
+    private func bindControls() {
         appendButton.rx.tap
             .withUnretained(self)
             .bind { _ in
@@ -181,13 +194,8 @@ final class DiaryCollectionViewController: UIViewController {
                 self.refresh()
             }).disposed(by: disposeBag)
     }
-    
-    private func setRecognizer() {
-        let tap = UITapGestureRecognizer(target: self, action: #selector(singleTapMethod))
-        diaryCollectionView.addGestureRecognizer(tap)
-        tap.cancelsTouchesInView = false
-    }
-    
+
+    // MARK: - Action methods
     @objc private func singleTapMethod(sender: UITapGestureRecognizer) {
         view.endEditing(true)
     }
@@ -198,6 +206,11 @@ final class DiaryCollectionViewController: UIViewController {
         refreshControl.endRefreshing()
     }
     
+    private func appendButtonTapped() {
+        delegate?.diaryAppendButtonTapped()
+    }
+    
+    // MARK: - Data source related methods
     private func makeDataSource() -> DataSource {
         let cellRegistration = UICollectionView.CellRegistration<DiaryCell, DiaryListItem> { (cell, _, item) in
             cell.configure(with: item)
@@ -224,13 +237,10 @@ final class DiaryCollectionViewController: UIViewController {
     private func getDatasource() {
         viewModel.getDiaryList()
     }
-    
-    private func appendButtonTapped() {
-        delegate?.diaryAppendButtonTapped()
-    }
 }
 
 extension DiaryCollectionViewController: UICollectionViewDelegate {
+    // MARK: - Collection view delegate methods
     func makeCollectionViewLayout() -> UICollectionViewFlowLayout {
         let layout = UICollectionViewFlowLayout()
         let cellWidth: CGFloat = UIScreen.main.bounds.width / 2 - 1
@@ -267,6 +277,7 @@ extension DiaryCollectionViewController: UICollectionViewDelegate {
 }
 
 extension DiaryCollectionViewController: UISearchBarDelegate {
+    // MARK: - Search bar delegate methods
     func searchBarTextDidBeginEditing(_ searchBar: UISearchBar) {
         searchBar.showsCancelButton = true
     }
