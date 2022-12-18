@@ -35,9 +35,9 @@ final class DiaryDetailViewController: UIViewController {
     }
     
     private enum Literal {
-        static let textViewPlaceHolder: String = "내용이 없네요"
-        static let musicLibraryDeniedTitle: String = "음악 접근 권한 설정 필요"
-        static let locationEmptyMessage: String = "저장된 위치가 없습니다."
+        static let textViewPlaceHolder = "내용이 없네요"
+        static let musicLibraryDeniedTitle = "음악 접근 권한 설정 필요"
+        static let locationEmptyMessage = "저장된 위치가 없습니다."
         static let reportButtonTitle = "신고"
         static let deleteSucceededTitle = "삭제 성공"
         static let deleted = "삭제되었습니다."

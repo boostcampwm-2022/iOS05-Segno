@@ -30,9 +30,9 @@ final class SettingsViewController: UIViewController {
     }
     
     private enum Literal {
-        static let settingString: String = "설정"
-        static let darkModeSettingString: String = "다크 모드 설정"
-        static let cancelMessage: String = "취소"
+        static let settingString = "설정"
+        static let darkModeSettingString = "다크 모드 설정"
+        static let cancelMessage = "취소"
         static let nicknameCellIdentifier = "NicknameCell"
         static let settingsSwitchCellIdentifier = "SettingsSwitchCell"
         static let settingsActionSheetCellIdentifier = "SettingsActionSheetCell"

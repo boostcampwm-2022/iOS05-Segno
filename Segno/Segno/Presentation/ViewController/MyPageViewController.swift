@@ -44,11 +44,11 @@ final class MyPageViewController: UIViewController {
     }
     
     private enum Literal {
-        static let logoutMessage: String = "정말 로그아웃하시겠습니까?"
-        static let logoutTitle: String = "로그아웃"
-        static let mypageText: String = "마이페이지"
-        static let titleText: String = "안녕하세요,\nboostcamp님!"
-        static let userToken: String = "userToken"
+        static let logoutMessage = "정말 로그아웃하시겠습니까?"
+        static let logoutTitle = "로그아웃"
+        static let mypageText = "마이페이지"
+        static let titleText = "안녕하세요,\nboostcamp님!"
+        static let userToken = "userToken"
         static let writtenDiaryCellIdentifier = "writtenDiary"
         static let settingsCellIdentifier = "settings"
         static let logoutCellIdentifier = "logout"
