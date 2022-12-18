@@ -8,12 +8,12 @@
 import RxSwift
 
 final class MyPageViewModel {
-    let useCase: UserDetailUseCase
-    var userDetailItem = PublishSubject<UserDetailItem>()
+    private let useCase: UserDetailUseCase
+    private var disposeBag = DisposeBag()
+    private var userDetailItem = PublishSubject<UserDetailItem>()
+    
     lazy var nicknameObservable = userDetailItem.map { $0.nickname }
     lazy var writtenDiaryObservable = userDetailItem.map { $0.diaryCount }
-    
-    private var disposeBag = DisposeBag()
     
     init(useCase: UserDetailUseCase = UserDetailUseCaseImpl()) {
         self.useCase = useCase

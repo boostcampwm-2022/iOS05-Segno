@@ -14,14 +14,13 @@ final class DiaryEditViewModel {
         static let userToken: String = "userToken"
     }
     
-    var locationSubject = PublishSubject<Location>()
-    var addressSubject = PublishSubject<String>()
-    
-    private var disposeBag = DisposeBag()
     private var diaryItem = PublishSubject<DiaryDetail>()
     private var diaryData: DiaryDetail?
     private var isUpdating = false
+    private var disposeBag = DisposeBag()
     
+    var locationSubject = PublishSubject<Location>()
+    var addressSubject = PublishSubject<String>()
     lazy var idObservable = diaryItem.map { $0.identifier }
     lazy var titleObservable = diaryItem.map { $0.title }
     lazy var tagsObservable = diaryItem.map { $0.tags }
