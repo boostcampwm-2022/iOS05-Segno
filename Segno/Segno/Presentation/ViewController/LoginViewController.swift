@@ -78,7 +78,7 @@ final class LoginViewController: UIViewController {
         return view
     }()
     
-    // MARK: - initializer
+    // MARK: - Initializer
     init(viewModel: LoginViewModel = LoginViewModel()) {
         self.viewModel = viewModel
         
