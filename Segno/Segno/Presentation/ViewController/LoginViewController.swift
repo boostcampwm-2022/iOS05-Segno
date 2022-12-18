@@ -17,11 +17,8 @@ protocol LoginViewControllerDelegate: AnyObject {
 }
 
 final class LoginViewController: UIViewController {
+    // MARK: - Namespaces
     private enum Metric {
-        static let titleText = "Segno"
-        static let subTitleText = "다시 이곳의 추억에서부터"
-        static let footerText = "D.S."
-        
         static let buttonHeight: CGFloat = 50
         static let footerBottomOffset: CGFloat = -100
         static let footerHeight: CGFloat = 50
@@ -33,17 +30,23 @@ final class LoginViewController: UIViewController {
         static let titleOffset: CGFloat = 200
     }
     
-    // MARK: - Property
+    private enum Literal {
+        static let titleText = "Segno"
+        static let subTitleText = "다시 이곳의 추억에서부터"
+        static let footerText = "D.S."
+    }
+    
+    // MARK: - Properties
     private let viewModel: LoginViewModel
     private let disposeBag = DisposeBag()
     
     private var session: LoginSession?
     weak var delegate: LoginViewControllerDelegate?
     
-    // MARK: - View
+    // MARK: - Views
     private lazy var titleLabel: UILabel = {
         let label = UILabel()
-        label.text = Metric.titleText
+        label.text = Literal.titleText
         label.font = .appFont(.shiningStar, size: Metric.titleFontSize)
         label.textColor = .appColor(.black)
         return label
@@ -51,7 +54,7 @@ final class LoginViewController: UIViewController {
     
     private lazy var subTitleLabel: UILabel = {
         let label = UILabel()
-        label.text = Metric.subTitleText
+        label.text = Literal.subTitleText
         label.font = .appFont(.shiningStar, size: Metric.subTitleFontSize)
         label.textColor = .appColor(.grey2)
         return label
@@ -64,7 +67,7 @@ final class LoginViewController: UIViewController {
     
     private lazy var footerLabel: UILabel = {
         let label = UILabel()
-        label.text = Metric.footerText
+        label.text = Literal.footerText
         label.textAlignment = .right
         label.textColor = .appColor(.grey2)
         return label
@@ -78,7 +81,7 @@ final class LoginViewController: UIViewController {
         return view
     }()
     
-    // MARK: - Initializer
+    // MARK: - Initializers
     init(viewModel: LoginViewModel = LoginViewModel()) {
         self.viewModel = viewModel
         
@@ -89,36 +92,19 @@ final class LoginViewController: UIViewController {
         fatalError("Not imported")
     }
     
-    // MARK: - Life Cycle
+    // MARK: - Lifecycle Methods
     override func viewDidLoad() {
         super.viewDidLoad()
         
         setupView()
         setupLayout()
-        setupRx()
+        bindLoginButton()
         session = LoginSession(presenter: self)
         bindAppleLoginResult()
         subscribeLoginResult()
     }
     
-    // MARK: - Private
-    private func bindAppleLoginResult() {
-        session?.appleEmail
-            .subscribe(onNext: { email in
-                self.viewModel.signIn(withApple: email)
-            })
-            .disposed(by: disposeBag)
-    }
-    
-    private func setupRx() {
-        appleButton.rx.controlEvent(.touchDown)
-            .withUnretained(self)
-            .bind { _ in
-                self.appleButtonTapped()
-            }
-            .disposed(by: disposeBag)
-    }
-    
+    // MARK: - Setup view methods
     private func setupView() {
         view.backgroundColor = .appColor(.background)
     }
@@ -159,6 +145,25 @@ final class LoginViewController: UIViewController {
         }
     }
     
+    // MARK: Binding methods
+    private func bindLoginButton() {
+        appleButton.rx.controlEvent(.touchDown)
+            .withUnretained(self)
+            .bind { _ in
+                self.appleButtonTapped()
+            }
+            .disposed(by: disposeBag)
+    }
+    
+    // MARK: - Subscribing methods
+    private func bindAppleLoginResult() {
+        session?.appleEmail
+            .subscribe(onNext: { email in
+                self.viewModel.signIn(withApple: email)
+            })
+            .disposed(by: disposeBag)
+    }
+    
     private func subscribeLoginResult() {
         viewModel.isLoginSucceeded
             .subscribe(onNext: { [weak self] result in
@@ -174,13 +179,14 @@ final class LoginViewController: UIViewController {
             .disposed(by: disposeBag)
     }
     
-    // MARK: - Public
+    // MARK: - Action methods
     private func appleButtonTapped() {
         session?.performAppleLogin()
     }
 }
 
 extension LoginViewController: ASAuthorizationControllerPresentationContextProviding {
+    // MARK: Login service delegate methods
     func presentationAnchor(for controller: ASAuthorizationController) -> ASPresentationAnchor {
         return view.window ?? UIWindow()
     }
