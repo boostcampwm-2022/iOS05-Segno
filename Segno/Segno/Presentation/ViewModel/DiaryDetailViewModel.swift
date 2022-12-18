@@ -35,7 +35,7 @@ final class DiaryDetailViewModel {
     lazy var musicObservable = diaryItem.map { $0.musicInfo }
     lazy var locationObservable = diaryItem.map { $0.location }
         
-    private let disposeBag = DisposeBag()
+    private var disposeBag = DisposeBag()
     
     init(itemIdentifier: String,
          getDetailUseCase: DiaryDetailUseCase = DiaryDetailUseCaseImpl(),

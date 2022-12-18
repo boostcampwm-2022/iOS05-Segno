@@ -49,7 +49,7 @@ final class DiaryCollectionViewController: UIViewController {
     private let viewModel: DiaryCollectionViewModel
     private var dataSource: DataSource?
     private var diaryCells: [DiaryListItem] = []
-    private let disposeBag = DisposeBag()
+    private var disposeBag = DisposeBag()
     private lazy var refreshControl = UIRefreshControl()
     
     weak var delegate: DiaryCollectionViewDelegate?

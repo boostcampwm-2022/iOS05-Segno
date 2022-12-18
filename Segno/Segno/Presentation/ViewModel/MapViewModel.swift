@@ -9,7 +9,7 @@ import RxSwift
 
 final class MapViewModel {
     private let getAddressUseCase: GetAddressUseCase
-    private let disposeBag = DisposeBag()
+    private var disposeBag = DisposeBag()
     
     var addressSubject = PublishSubject<String>()
     

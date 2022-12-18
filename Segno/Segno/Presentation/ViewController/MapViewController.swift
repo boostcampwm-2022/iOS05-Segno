@@ -26,8 +26,8 @@ final class MapViewController: UIViewController {
     
     // MARK: - Properties
     private let viewModel: MapViewModel
-    private let disposeBag = DisposeBag()
     private let location: Location
+    private var disposeBag = DisposeBag()
     
     // MARK: - Views
     private lazy var titleLabel: UILabel = {

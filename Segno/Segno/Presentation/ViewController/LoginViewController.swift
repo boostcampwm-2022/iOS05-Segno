@@ -38,9 +38,9 @@ final class LoginViewController: UIViewController {
     
     // MARK: - Properties
     private let viewModel: LoginViewModel
-    private let disposeBag = DisposeBag()
-    
+    private var disposeBag = DisposeBag()
     private var session: LoginSession?
+    
     weak var delegate: LoginViewControllerDelegate?
     
     // MARK: - Views

@@ -55,7 +55,7 @@ final class MyPageViewController: UIViewController {
     }
     
     // MARK: - Properties
-    private let disposeBag = DisposeBag()
+    private var disposeBag = DisposeBag()
     private let viewModel: MyPageViewModel
     private let localUtilityManager: LocalUtilityManager
     weak var mypageDelegate: MyPageViewDelegate?

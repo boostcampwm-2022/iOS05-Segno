@@ -16,7 +16,7 @@ protocol SettingsUseCase {
 
 final class SettingsUseCaseImpl: SettingsUseCase {
     let repository: LocalUtilityManager
-    private let disposeBag = DisposeBag()
+    private var disposeBag = DisposeBag()
     
     init(repository: LocalUtilityManager = LocalUtilityManagerImpl()) {
         self.repository = repository

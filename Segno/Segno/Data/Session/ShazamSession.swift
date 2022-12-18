@@ -13,7 +13,7 @@ import RxSwift
 final class ShazamSession: NSObject {
     private var result = PublishSubject<ShazamSongDTO>()
     private var errorStatus = PublishSubject<ShazamError>()
-    private let disposeBag = DisposeBag()
+    private var disposeBag = DisposeBag()
     
     var resultObservable: Observable<ShazamSongDTO> {
         result.asObservable()

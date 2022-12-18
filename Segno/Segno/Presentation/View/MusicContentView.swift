@@ -32,7 +32,7 @@ final class MusicContentView: UIView {
     }
     
     // MARK: - Properties
-    private let disposeBag = DisposeBag()
+    private var disposeBag = DisposeBag()
     weak var delegate: MusicContentViewDelegate?
     
     // MARK: - Views

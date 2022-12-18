@@ -17,7 +17,7 @@ final class DiaryEditViewModel {
     var locationSubject = PublishSubject<Location>()
     var addressSubject = PublishSubject<String>()
     
-    private let disposeBag = DisposeBag()
+    private var disposeBag = DisposeBag()
     private var diaryItem = PublishSubject<DiaryDetail>()
     private var diaryData: DiaryDetail?
     private var isUpdating = false
