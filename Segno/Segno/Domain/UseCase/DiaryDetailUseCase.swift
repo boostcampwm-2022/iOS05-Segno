@@ -14,7 +14,7 @@ protocol DiaryDetailUseCase {
 
 final class DiaryDetailUseCaseImpl: DiaryDetailUseCase {
     let repository: DiaryRepository
-    private let disposeBag = DisposeBag()
+    private var disposeBag = DisposeBag()
     
     init(repository: DiaryRepository = DiaryRepositoryImpl()) {
         self.repository = repository

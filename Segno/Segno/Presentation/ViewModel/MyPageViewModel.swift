@@ -13,7 +13,7 @@ final class MyPageViewModel {
     lazy var nicknameObservable = userDetailItem.map { $0.nickname }
     lazy var writtenDiaryObservable = userDetailItem.map { $0.diaryCount }
     
-    private let disposeBag = DisposeBag()
+    private var disposeBag = DisposeBag()
     
     init(useCase: UserDetailUseCase = UserDetailUseCaseImpl()) {
         self.useCase = useCase

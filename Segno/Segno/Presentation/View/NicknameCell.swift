@@ -29,7 +29,7 @@ final class NicknameCell: UITableViewCell {
     }
     
     // MARK: - Properties
-    private let disposeBag = DisposeBag()
+    private var disposeBag = DisposeBag()
 
     // MARK: - Views
     private lazy var nicknameView: UIView = {

@@ -10,7 +10,7 @@ import RxSwift
 final class DiaryCollectionViewModel {
     let useCase: DiaryListUseCase
     var diaryListItems = PublishSubject<[DiaryListItem]>()
-    private let disposeBag = DisposeBag()
+    private var disposeBag = DisposeBag()
     
     init(useCase: DiaryListUseCase = DiaryListUseCaseImpl()) {
         self.useCase = useCase

@@ -50,9 +50,9 @@ final class DiaryDetailViewController: UIViewController {
     }
     
     // MARK: - Properties
-    private let disposeBag = DisposeBag()
     private let viewModel: DiaryDetailViewModel
     private let localUtilityManager: LocalUtilityManager
+    private var disposeBag = DisposeBag()
     private lazy var diaryId: String = ""
     private lazy var diaryUserId: String = ""
     

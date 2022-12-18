@@ -46,8 +46,8 @@ final class SettingsViewController: UIViewController {
     }
     
     // MARK: - Properties
-    private let disposeBag = DisposeBag()
     private let viewModel: SettingsViewModel
+    private var disposeBag = DisposeBag()
     
     // MARK: - Views
     private lazy var tableView: UITableView = {

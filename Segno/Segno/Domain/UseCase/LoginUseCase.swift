@@ -19,7 +19,7 @@ final class LoginUseCaseImpl: LoginUseCase {
     
     let repository: LoginRepository
     let localUtilityManager: LocalUtilityManager
-    private let disposeBag = DisposeBag()
+    private var disposeBag = DisposeBag()
 
     init(repository: LoginRepository = LoginRepositoryImpl(),
          localUtilityManager: LocalUtilityManager = LocalUtilityManagerImpl()) {

@@ -32,7 +32,7 @@ final class LocationContentView: UIView {
     
     // MARK: - Properties
     private var location: Location?
-    private let disposeBag = DisposeBag()
+    private var disposeBag = DisposeBag()
     weak var delegate: LocationContentViewDelegate?
     
     // MARK: - Views

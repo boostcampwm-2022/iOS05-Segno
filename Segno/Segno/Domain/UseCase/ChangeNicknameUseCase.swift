@@ -13,7 +13,7 @@ protocol ChangeNicknameUseCase {
 
 final class ChangeNicknameUseCaseImpl: ChangeNicknameUseCase {
     let repository: SettingsRepository
-    private let disposeBag = DisposeBag()
+    private var disposeBag = DisposeBag()
     
     init(repository: SettingsRepository = SettingsRepositoryImpl()) {
         self.repository = repository
