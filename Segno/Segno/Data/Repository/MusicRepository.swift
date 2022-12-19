@@ -23,7 +23,7 @@ protocol MusicRepository {
 final class MusicRepositoryImpl: MusicRepository {
     private let shazamSession: ShazamSession
     private let musicSession: MusicSession
-    private let disposeBag = DisposeBag()
+    private var disposeBag = DisposeBag()
     
     init(shazamSession: ShazamSession = ShazamSession(),
          musicSession: MusicSession = MusicSession()) {

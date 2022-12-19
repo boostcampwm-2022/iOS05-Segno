@@ -19,10 +19,8 @@ protocol DiaryDetailViewDelegate: AnyObject {
 }
 
 final class DiaryDetailViewController: UIViewController {
+    // MARK: - Namespaces
     private enum Metric {
-        static let textViewPlaceHolder: String = "내용이 없네요"
-        static let musicLibraryDeniedTitle: String = "음악 접근 권한 설정 필요"
-        static let locationEmptyMessage: String = "저장된 위치가 없습니다."
         static let stackViewSpacing: CGFloat = 10
         static let stackViewInset: CGFloat = 16
         static let dateFontSize: CGFloat = 17
@@ -36,11 +34,31 @@ final class DiaryDetailViewController: UIViewController {
         static let standardCornerRadius: CGFloat = 8
     }
     
-    private let disposeBag = DisposeBag()
+    private enum Literal {
+        static let textViewPlaceHolder = "내용이 없네요"
+        static let musicLibraryDeniedTitle = "음악 접근 권한 설정 필요"
+        static let locationEmptyMessage = "저장된 위치가 없습니다."
+        static let reportButtonTitle = "신고"
+        static let deleteSucceededTitle = "삭제 성공"
+        static let deleted = "삭제되었습니다."
+        static let errorTitle = "오류!"
+        static let failedToDelete = "삭제에 실패했습니다."
+        static let reportAlertTitle = "해당 Segno를 신고하시겠습니까?"
+        static let reportedTitle = "해당 Segno를 신고하였습니다."
+        static let willBeChecked = "관리자가 확인 후 조치하도록 하겠습니다."
+        static let confirmDeletingTitle = "해당 Segno를 삭제하시겠습니까?"
+    }
+    
+    // MARK: - Properties
     private let viewModel: DiaryDetailViewModel
     private let localUtilityManager: LocalUtilityManager
+    private var disposeBag = DisposeBag()
+    private lazy var diaryId: String = ""
+    private lazy var diaryUserId: String = ""
+    
     weak var delegate: DiaryDetailViewDelegate?
     
+    // MARK: - Views
     private lazy var scrollView: UIScrollView = {
         let scrollView = UIScrollView()
         return scrollView
@@ -58,9 +76,6 @@ final class DiaryDetailViewController: UIViewController {
         label.font = .systemFont(ofSize: Metric.dateFontSize)
         return label
     }()
-    
-    private lazy var diaryId: String = ""
-    private lazy var diaryUserId: String = ""
     
     private lazy var titleLabel: MarqueeLabel = {
         let label = MarqueeLabel(frame: .zero, rate: 32, fadeLength: 32.0)
@@ -81,8 +96,6 @@ final class DiaryDetailViewController: UIViewController {
         return stackView
     }()
     
-    private lazy var tagViews: [TagView] = []
-    
     private lazy var imageView: UIImageView = {
         let imageView = UIImageView()
         imageView.backgroundColor = .appColor(.color3)
@@ -94,11 +107,11 @@ final class DiaryDetailViewController: UIViewController {
     private lazy var textView: UITextView = {
         let textView = UITextView()
         textView.backgroundColor = .appColor(.grey1)
-        textView.text = Metric.textViewPlaceHolder
         textView.font = .appFont(.shiningStar, size: Metric.textViewFontSize)
-        textView.textColor = .appColor(.label)
-        textView.layer.cornerRadius = Metric.standardCornerRadius
         textView.isEditable = false
+        textView.layer.cornerRadius = Metric.standardCornerRadius
+        textView.text = Literal.textViewPlaceHolder
+        textView.textColor = .appColor(.label)
         textView.textContainerInset = UIEdgeInsets(top: Metric.textViewInset, left: Metric.textViewInset, bottom: Metric.textViewInset, right: Metric.textViewInset)
         return textView
     }()
@@ -116,7 +129,7 @@ final class DiaryDetailViewController: UIViewController {
     }()
     
     private lazy var reportBarButtonItem: UIBarButtonItem = {
-        let item = UIBarButtonItem(title: "Report", style: .plain, target: self, action: nil)
+        let item = UIBarButtonItem(title: Literal.reportButtonTitle, style: .plain, target: self, action: nil)
         item.tintColor = UIColor.appColor(.color4)
         return item
     }()
@@ -133,6 +146,7 @@ final class DiaryDetailViewController: UIViewController {
         return item
     }()
     
+    // MARK: - Initializers
     init(viewModel: DiaryDetailViewModel,
          localUtilityManager: LocalUtilityManager = LocalUtilityManagerImpl()) {
         self.viewModel = viewModel
@@ -145,14 +159,15 @@ final class DiaryDetailViewController: UIViewController {
         fatalError("init(coder:) has not been implemented")
     }
     
+    // MARK: Lifecycle methods
     override func viewDidLoad() {
         super.viewDidLoad()
         
         setupLayout()
-        setupRx()
+        bindActions()
         
         bindDiaryItem()
-        bindAddress()
+        subscribeAddress()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -170,6 +185,7 @@ final class DiaryDetailViewController: UIViewController {
         self.view.endEditing(true)
     }
     
+    // MARK: - Setup view methods
     private func setupLayout() {
         view.backgroundColor = .appColor(.background)
         
@@ -219,7 +235,14 @@ final class DiaryDetailViewController: UIViewController {
         }
     }
     
-    private func setupRx() {
+    private func cleanUpTags() {
+        for subview in tagStackView.subviews {
+            subview.removeFromSuperview()
+        }
+    }
+    
+    // MARK: - Binding action methods
+    private func bindActions() {
         reportBarButtonItem.rx.tap
             .withUnretained(self)
             .bind { _ in
@@ -242,6 +265,7 @@ final class DiaryDetailViewController: UIViewController {
             .disposed(by: disposeBag)
     }
     
+    // MARK: - Property subscribing methods
     private func bindDiaryItem() {
         viewModel.idObservable
             .observe(on: MainScheduler.instance)
@@ -318,7 +342,7 @@ final class DiaryDetailViewController: UIViewController {
             .subscribe(onNext: { [weak self] location in
                 if location == nil {
                     self?.locationContentView.mapButton.isEnabled = false
-                    self?.locationContentView.locationLabel.text = Metric.locationEmptyMessage
+                    self?.locationContentView.locationLabel.text = Literal.locationEmptyMessage
                 }
             })
             .disposed(by: disposeBag)
@@ -334,6 +358,7 @@ final class DiaryDetailViewController: UIViewController {
         subscribeDeleteSucceeded()
     }
     
+    // MARK: - Subscribe utilities methods
     private func subscribeMusicPlayer() {
         viewModel.isPlaying
             .observe(on: MainScheduler.instance)
@@ -352,12 +377,12 @@ final class DiaryDetailViewController: UIViewController {
         viewModel.playerErrorStatus
             .observe(on: MainScheduler.instance)
             .subscribe(onNext: { [weak self] error in
-                self?.makeOKAlert(title: Metric.musicLibraryDeniedTitle, message: error.localizedDescription)
+                self?.makeOKAlert(title: Literal.musicLibraryDeniedTitle, message: error.localizedDescription)
             })
             .disposed(by: disposeBag)
     }
     
-    private func bindAddress() {
+    private func subscribeAddress() {
         viewModel.locationObservable
             .compactMap { $0 }
             .observe(on: MainScheduler.instance)
@@ -372,16 +397,17 @@ final class DiaryDetailViewController: UIViewController {
             .observe(on: MainScheduler.instance)
             .subscribe(onNext: { [weak self] result in
                 if result {
-                    self?.makeOKAlert(title: "삭제 성공", message: "삭제되었습니다.") { _ in
+                    self?.makeOKAlert(title: Literal.deleteSucceededTitle, message: Literal.deleted) { _ in
                         self?.delegate?.escapeToCollectionView()
                     }
                 } else {
-                    self?.makeOKAlert(title: "Error!", message: "삭제에 실패했습니다.")
+                    self?.makeOKAlert(title: Literal.errorTitle, message: Literal.failedToDelete)
                 }
             })
             .disposed(by: disposeBag)
     }
     
+    // MARK: - Getting data methods
     private func getDiary() {
         viewModel.getDiary()
     }
@@ -390,15 +416,10 @@ final class DiaryDetailViewController: UIViewController {
         viewModel.getAddress(by: location)
     }
     
-    private func cleanUpTags() {
-        for subview in tagStackView.subviews {
-            subview.removeFromSuperview()
-        }
-    }
-    
+    // MARK: - Action methods
     private func reportButtonTapped() {
-        makeCancelOKAlert(title: "해당 Segno를 신고하시겠습니까?", message: "") { _ in
-            self.makeOKAlert(title: "해당 Segno를 신고하였습니다.", message: "관리자가 확인 후 조치하도록 하겠습니다.") { _ in
+        makeCancelOKAlert(title: Literal.reportAlertTitle, message: "") { _ in
+            self.makeOKAlert(title: Literal.reportedTitle, message: Literal.willBeChecked) { _ in
                 self.delegate?.escapeToCollectionView()
             }
         }
@@ -409,56 +430,27 @@ final class DiaryDetailViewController: UIViewController {
     }
     
     private func trashButtonTapped() {
-        makeCancelOKAlert(title: "해당 Segno를 삭제하시겠습니까?", message: "") { _ in
+        makeCancelOKAlert(title: Literal.confirmDeletingTitle, message: "") { _ in
             self.viewModel.deleteDiary(id: self.diaryId)
         }
     }
 }
 
 extension DiaryDetailViewController: MusicContentViewDelegate {
+    // MARK: Music content view method
     func playButtonTapped() {
         viewModel.toggleMusicPlayer()
     }
 }
 
 extension DiaryDetailViewController: LocationContentViewDelegate {
+    // MARK: - Location content view method
     func mapButtonTapped(location: Location) {
         delegate?.mapButtonTapped(viewController: self, location: location)
     }
 }
 
-enum DeviceType {
-    case iPhone14Pro
-    
-    func name() -> String {
-        switch self {
-        case .iPhone14Pro:
-            return "iPhone 14 Pro"
-        }
-    }
-}
-
-#if canImport(SwiftUI) && DEBUG
-import SwiftUI
-extension UIViewController {
-    
-    private struct Preview: UIViewControllerRepresentable {
-        let viewController: UIViewController
-        
-        func makeUIViewController(context: Context) -> UIViewController {
-            return viewController
-        }
-        
-        func updateUIViewController(_ uiViewController: UIViewController, context: Context) {
-        }
-    }
-    
-    func showPreview(_ deviceType: DeviceType = .iPhone14Pro) -> some View {
-        Preview(viewController: self).previewDevice(PreviewDevice(rawValue: deviceType.name()))
-    }
-}
-#endif
-
+// MARK: - Preview methods
 #if canImport(SwiftUI) && DEBUG
 import SwiftUI
 

@@ -12,6 +12,7 @@ import RxSwift
 import SnapKit
 
 final class SettingsActionSheetCell: UITableViewCell {
+    // MARK: - Namespaces
     private enum Metric {
         static let labelFontSize: CGFloat = 16
         static let edgeSpacing: CGFloat = 20
@@ -19,6 +20,7 @@ final class SettingsActionSheetCell: UITableViewCell {
         static let cellHeight: CGFloat = 44
     }
     
+    // MARK: - Views
     private lazy var labelView: UIView = {
         let view = UIView(frame: CGRect(x: 0, y: 0, width: Metric.cellWidth, height: Metric.cellHeight))
         return view

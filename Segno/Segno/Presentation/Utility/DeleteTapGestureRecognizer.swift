@@ -7,7 +7,7 @@
 
 import UIKit
 
-class DeleteGestureRecognizer: UITapGestureRecognizer {
+final class DeleteGestureRecognizer: UITapGestureRecognizer {
     var title: String?
 }
 

@@ -14,6 +14,7 @@ protocol MyPageCoordinatorDelegate: AnyObject {
 final class MyPageCoordinator: Coordinator {
     var navigationController: UINavigationController
     var childCoordinators: [Coordinator] = []
+    
     weak var delegate: MyPageCoordinatorDelegate?
     
     init(_ navigationController: UINavigationController) {

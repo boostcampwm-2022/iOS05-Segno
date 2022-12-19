@@ -5,8 +5,6 @@
 //  Created by YOONJONG on 2022/11/30.
 //
 
-import Foundation
-
 enum DarkMode: Int, CaseIterable {
     case system
     case light

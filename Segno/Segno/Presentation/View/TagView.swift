@@ -6,15 +6,18 @@
 //
 
 import UIKit
+
 import SnapKit
 
 final class TagView: UIView {
+    // MARK: - Namespaces
     private enum Metric {
         static let tagFontSize: CGFloat = 16
         static let tagInset: CGFloat = 9
         static let cornerRadius: CGFloat = 15
     }
-
+    
+    // MARK: - Views
     lazy var tagLabel: UILabel = {
         let label = UILabel()
         label.font = .appFont(.shiningStar, size: Metric.tagFontSize)
@@ -22,6 +25,7 @@ final class TagView: UIView {
         return label
     }()
     
+    // MARK: - Initializers
     init(tagTitle: String) {
         super.init(frame: CGRect())
     
@@ -32,6 +36,7 @@ final class TagView: UIView {
         fatalError("init(coder:) has not been implemented")
     }
     
+    // MARK: - Setup view method
     private func setupLayout(tagTitle: String) {
         addSubview(tagLabel)
         backgroundColor = .appColor(.color4)

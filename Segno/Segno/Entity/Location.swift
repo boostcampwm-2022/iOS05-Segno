@@ -13,6 +13,6 @@ struct Location: Codable, Equatable {
     let longitude: Double
     
     func createCLLocation() -> CLLocation {
-        CLLocation(latitude: self.latitude, longitude: self.longitude)
+        CLLocation(latitude: latitude, longitude: longitude)
     }
 }

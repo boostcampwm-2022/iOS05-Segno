@@ -17,14 +17,13 @@ protocol DiaryEditViewDelegate: AnyObject {
     func diaryDidSaved()
 }
 
+// TODO: 적절히 기능을 분산시키거나, extension을 통해 파일을 분리하는 것을 고려해 봅시다.
 final class DiaryEditViewController: UIViewController {
+    // MARK: - Namespaces
     private enum Metric {
-        // 스택 뷰 관련 설정
         static let standardSpacing: CGFloat = 8
         static let doubleSpacing: CGFloat = 16
         static let stackViewInset: CGFloat = 16
-        
-        // 스택 뷰 안에 들어가는 컨텐츠 설정
         static let majorContentHeight: CGFloat = 400
         static let bodyContentHeight: CGFloat = 200
         static let minorContentHeight: CGFloat = 60
@@ -35,6 +34,13 @@ final class DiaryEditViewController: UIViewController {
         static let smallFontSize: CGFloat = 16
         static let textFieldFontSize: CGFloat = 12
         static let padding: CGFloat = 12
+        static let leftView = UIView(frame: CGRect(x: 0.0, y: 0.0, width: padding, height: 0.0))
+        static let buttonCornerRadius = CGFloat(minorContentHeight / 2)
+        static let halfMinorCornerRadius = CGFloat(halfMinorContentHeight / 2)
+        static let semiMinorCornerRadius = CGFloat(semiMinorContentHeight / 2)
+    }
+    
+    private enum Literal {
         static let titlePlaceholder = "제목을 입력하세요."
         static let pickerActionSheetTitle = "옵션 선택"
         static let pickerActionSheetMessage = "원하는 옵션을 선택하세요."
@@ -50,25 +56,32 @@ final class DiaryEditViewController: UIViewController {
         static let musicNotFound = "음악을 찾지 못했어요."
         static let locationPlaceholder = "여기는 어디인가요?"
         static let tagPlaceholder = "태그를 입력해주세요. enter로 태그를 구분합니다."
+        static let saveButtonTitle = "저장"
+        static let savedTitle = "저장 완료"
+        static let saved = "저장되었습니다."
+        static let errorTitle = "오류!"
+        static let failedToSave = "저장에 실패했습니다."
+        static let photoIsRequired = "사진은 필수 입력 항목입니다."
         static let imageViewStockImage = UIImage(systemName: "photo")
-        static let leftView = UIView(frame: CGRect(x: 0.0, y: 0.0, width: padding, height: 0.0))
-        // 스택 뷰 안에 들어가는 버튼 설정
         static let musicButtonImage = UIImage(systemName: "music.note")
         static let locationButtonImage = UIImage(systemName: "location.fill")
-        static let saveButtonTitle = "저장"
-        static let buttonCornerRadius = CGFloat(minorContentHeight / 2)
-        static let halfMinorCornerRadius = CGFloat(halfMinorContentHeight / 2)
-        static let semiMinorCornerRadius = CGFloat(semiMinorContentHeight / 2)
+        static let dateFormat = "yyyy년 MM월 dd일 HH시 mm분에 저장된 세뇨입니다."
+        static let localeIdentifier = "ko_KR"
     }
     
+    // MARK: - Properties
     private let viewModel: DiaryEditViewModel
     private var disposeBag = DisposeBag()
     private var tags: [String] = []
     private var location: Location?
     private var address: String?
     
+    private let imagePicker = UIImagePickerController()
+    private lazy var photoImageViewTapGesture = UITapGestureRecognizer()
+
     weak var delegate: DiaryEditViewDelegate?
 
+    // MARK: - Views
     private lazy var mainScrollView: UIScrollView = {
         let scrollView = UIScrollView()
         scrollView.keyboardDismissMode = .onDrag
@@ -83,11 +96,10 @@ final class DiaryEditViewController: UIViewController {
         return stackView
     }()
     
-    // TODO: 이미지 뷰를 버튼처럼 활용할 수 있도록 액션 연결
     private lazy var titleTextField: UITextField = {
         let textField = UITextField()
         textField.font = .systemFont(ofSize: Metric.mediumFontSize)
-        textField.placeholder = Metric.titlePlaceholder
+        textField.placeholder = Literal.titlePlaceholder
         return textField
     }()
     
@@ -95,7 +107,7 @@ final class DiaryEditViewController: UIViewController {
         let imageView = UIImageView()
         imageView.backgroundColor = .appColor(.color4)
         imageView.contentMode = .scaleAspectFit
-        imageView.image = Metric.imageViewStockImage
+        imageView.image = Literal.imageViewStockImage
         imageView.tintColor = .appColor(.white)
         imageView.layer.cornerRadius = Metric.standardCornerRadius
         return imageView
@@ -105,7 +117,7 @@ final class DiaryEditViewController: UIViewController {
         let textView = UITextView()
         textView.backgroundColor = .appColor(.color2)
         textView.font = .appFont(.shiningStar, size: Metric.mediumFontSize)
-        textView.text = Metric.bodyPlaceholder
+        textView.text = Literal.bodyPlaceholder
         textView.textColor = .appColor(.grey3)
         textView.layer.cornerRadius = Metric.standardCornerRadius
         textView.textContainerInset = .init(top: Metric.padding, left: Metric.padding, bottom: Metric.padding, right: Metric.padding)
@@ -116,7 +128,7 @@ final class DiaryEditViewController: UIViewController {
     private lazy var tagTextField: UITextField = {
         let textField = UITextField()
         textField.backgroundColor = .appColor(.grey1)
-        textField.placeholder = Metric.tagPlaceholder
+        textField.placeholder = Literal.tagPlaceholder
         textField.leftView = Metric.leftView
         textField.leftViewMode = .always
         textField.font = .systemFont(ofSize: Metric.textFieldFontSize)
@@ -157,14 +169,14 @@ final class DiaryEditViewController: UIViewController {
         button.backgroundColor = .appColor(.color3)
         button.layer.cornerRadius = Metric.buttonCornerRadius
         button.tintColor = .appColor(.white)
-        button.setImage(Metric.musicButtonImage, for: .normal)
+        button.setImage(Literal.musicButtonImage, for: .normal)
         return button
     }()
     
     private lazy var musicInfoLabel: MarqueeLabel = {
         let label = MarqueeLabel(frame: .zero, rate: 32, fadeLength: 32.0)
         label.font = .systemFont(ofSize: Metric.smallFontSize)
-        label.text = Metric.musicPlaceholder
+        label.text = Literal.musicPlaceholder
         label.trailingBuffer = 16.0
         return label
     }()
@@ -186,14 +198,14 @@ final class DiaryEditViewController: UIViewController {
         button.backgroundColor = .appColor(.color3)
         button.layer.cornerRadius = Metric.buttonCornerRadius
         button.tintColor = .appColor(.white)
-        button.setImage(Metric.locationButtonImage, for: .normal)
+        button.setImage(Literal.locationButtonImage, for: .normal)
         return button
     }()
     
     private lazy var locationInfoLabel: UILabel = {
         let label = UILabel()
         label.font = .systemFont(ofSize: Metric.smallFontSize)
-        label.text = Metric.locationPlaceholder
+        label.text = Literal.locationPlaceholder
         label.adjustsFontSizeToFitWidth = true
         return label
     }()
@@ -202,15 +214,12 @@ final class DiaryEditViewController: UIViewController {
         let button = UIButton()
         button.backgroundColor = .appColor(.color4)
         button.layer.cornerRadius = Metric.semiMinorCornerRadius
-        button.setTitle(Metric.saveButtonTitle, for: .normal)
+        button.setTitle(Literal.saveButtonTitle, for: .normal)
         button.titleLabel?.font = .systemFont(ofSize: Metric.smallFontSize)
         return button
     }()
-    
-    private lazy var photoImageViewTapGesture = UITapGestureRecognizer()
-    
-    private let imagePicker = UIImagePickerController()
-    
+
+    // MARK: - Initializers
     init(viewModel: DiaryEditViewModel = DiaryEditViewModel()) {
         self.viewModel = viewModel
         
@@ -221,22 +230,26 @@ final class DiaryEditViewController: UIViewController {
         fatalError("init(coder:) has not been implemented")
     }
     
+    // MARK: - Lifecycle methods
     override func viewDidLoad() {
         super.viewDidLoad()
         
         setupView()
+        
         bindImageView()
+        bindButtonAction()
         setImagePicker()
         setRecognizer()
-        bindButtonAction()
-        subscribeSearchingStatus()
-        subscribeSearchResult()
-        subscribeSearchError()
-        subscribeLocationResult()
-        subscribeLocationError()
-        subscribeEditSucceed()
-        subscribeExistingDiary()
         
+        subscribeMusicSearchingStatus()
+        subscribeMusicResult()
+        subscribeLocationResult()
+        subscribeEditSucceed()
+        
+        subscribeSearchError()
+        subscribeLocationError()
+        
+        subscribeExistingDiary()
         checkExistingDiary()
     }
     
@@ -255,6 +268,7 @@ final class DiaryEditViewController: UIViewController {
         viewModel.stopLocation()
     }
     
+    // MARK: - Setup view methods
     private func setupView() {
         view.backgroundColor = .appColor(.background)
         
@@ -343,11 +357,88 @@ final class DiaryEditViewController: UIViewController {
         }
         locationStackView.addArrangedSubview(locationInfoLabel)
     }
-    
-    private func checkExistingDiary() {
-        viewModel.checkExistingDiary()
+
+    // MARK: - Action binding methods
+    private func bindImageView() {
+        photoImageView.isUserInteractionEnabled = true
+        photoImageView.addGestureRecognizer(photoImageViewTapGesture)
+        photoImageViewTapGesture.rx.event
+            .observe(on: MainScheduler.asyncInstance)
+            .bind(onNext: { recognizer in
+                self.view.endEditing(true)
+                self.presentPickerActionSheet()
+            })
+            .disposed(by: disposeBag)
     }
     
+    private func bindButtonAction() {
+        addMusicButton.rx.tap
+            .withUnretained(self)
+            .bind { _ in
+                self.musicButtonTapped()
+            }
+            .disposed(by: disposeBag)
+        
+        addlocationButton.rx.tap
+            .withUnretained(self)
+            .bind { _ in
+                self.locationButtonTapped()
+            }
+            .disposed(by: disposeBag)
+        
+        saveButton.rx.tap
+            .withUnretained(self)
+            .bind { _ in
+                if self.photoImageView.image != nil {
+                    self.saveDiary()
+                }
+            }
+            .disposed(by: disposeBag)
+    }
+    
+    // MARK: - Image picker related methods
+    private func presentPickerActionSheet() {
+        let alert = UIAlertController(title: Literal.pickerActionSheetTitle, message: Literal.pickerActionSheetMessage, preferredStyle: .actionSheet)
+        
+        let libraryAction = UIAlertAction(title: Literal.libaryText, style: .default) { _ in
+            self.imagePicker.sourceType = .photoLibrary
+            self.present(self.imagePicker, animated: true)
+        }
+        
+        let cameraAction = UIAlertAction(title: Literal.cameraText, style: .default) { _ in
+            self.imagePicker.sourceType = .camera
+            AVCaptureDevice.requestAccess(for: .video) { result in
+                DispatchQueue.main.async {
+                    switch result {
+                    case true:
+                        self.present(self.imagePicker, animated: true)
+                    case false:
+                        self.makeOKAlert(title: Literal.cameraAccessDeniedTitle, message: Literal.cameraAccessDeniedMessage)
+                    }
+                }
+            }
+        }
+        
+        let cancelAction = UIAlertAction(title: Literal.cancelText, style: .cancel)
+        
+        alert.addAction(libraryAction)
+        alert.addAction(cameraAction)
+        alert.addAction(cancelAction)
+        
+        present(alert, animated: true, completion: nil)
+    }
+    
+    private func setImagePicker() {
+        imagePicker.allowsEditing = true
+        imagePicker.delegate = self
+    }
+    
+    private func setRecognizer() {
+        let singleTapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(singleTapMethod))
+        mainScrollView.addGestureRecognizer(singleTapGestureRecognizer)
+    }
+    
+    // MARK: - Diary property subscribing methods
     private func subscribeExistingDiary() {
         viewModel.titleObservable
             .observe(on: MainScheduler.instance)
@@ -390,82 +481,120 @@ final class DiaryEditViewController: UIViewController {
             .disposed(by: disposeBag)
     }
     
-    private func bindImageView() {
-        photoImageView.isUserInteractionEnabled = true
-        photoImageView.addGestureRecognizer(photoImageViewTapGesture)
-        photoImageViewTapGesture.rx.event
-            .observe(on: MainScheduler.asyncInstance)
-            .bind(onNext: { recognizer in
-                self.view.endEditing(true)
-                self.presentPickerActionSheet()
+    private func checkExistingDiary() {
+        viewModel.checkExistingDiary()
+    }
+    
+    // MARK: - Search result subscribing methods
+    private func subscribeMusicSearchingStatus() {
+        viewModel.isSearching
+            .observe(on: MainScheduler.instance)
+            .subscribe(onNext: { searchState in
+                switch searchState {
+                case true:
+                    self.musicInfoLabel.text = Literal.searching
+                case false:
+                    self.musicInfoLabel.text = Literal.musicPlaceholder
+                }
             })
             .disposed(by: disposeBag)
     }
     
-    private func bindButtonAction() {
-        addMusicButton.rx.tap
-            .withUnretained(self)
-            .bind { _ in
-                self.searchTapped()
-            }
-            .disposed(by: disposeBag)
-        
-        addlocationButton.rx.tap
-            .withUnretained(self)
-            .bind { _ in
-                self.locationButtonTapped()
-            }
-            .disposed(by: disposeBag)
-        
-        saveButton.rx.tap
-            .withUnretained(self)
-            .bind { _ in
-                if self.photoImageView.image == nil {
-                    debugPrint("이미지를 넣지 않으면 저장할 수 없습니다!")
-                } else {
-                    self.saveDiary()
-                }
-            }
+    private func subscribeMusicResult() {
+        viewModel.musicInfoResult
+            .observe(on: MainScheduler.instance)
+            .subscribe(onNext: { [weak self] result in
+                guard let song = self?.viewModel.musicInfo else { return }
+                let title = song.title
+                let artist = song.artist
+                
+                debugPrint(song)
+                
+                self?.musicInfoLabel.text = "\(artist) - \(title)"
+            })
             .disposed(by: disposeBag)
     }
     
-    private func presentPickerActionSheet() {
-        let alert = UIAlertController(title: Metric.pickerActionSheetTitle, message: Metric.pickerActionSheetMessage, preferredStyle: .actionSheet)
-        let libraryAction = UIAlertAction(title: Metric.libaryText, style: .default) { _ in
-            self.imagePicker.sourceType = .photoLibrary
-            self.present(self.imagePicker, animated: true)
-        }
-        let cameraAction = UIAlertAction(title: Metric.cameraText, style: .default) { _ in
-            self.imagePicker.sourceType = .camera
-            AVCaptureDevice.requestAccess(for: .video) { result in
-                DispatchQueue.main.async {
-                    switch result {
-                    case true:
-                        self.present(self.imagePicker, animated: true)
-                    case false:
-                        self.makeOKAlert(title: Metric.cameraAccessDeniedTitle, message: Metric.cameraAccessDeniedMessage)
+    private func subscribeLocationResult() {
+        viewModel.isReceivingLocation
+            .withUnretained(self)
+            .subscribe(onNext: { _, searchState in
+                switch searchState {
+                case true:
+                    self.locationInfoLabel.text = Literal.searching
+                    self.addlocationButton.tintColor = .systemRed
+                case false:
+                    if self.location == nil {
+                        self.locationInfoLabel.text = Literal.locationPlaceholder
+                    } else {
+                        self.locationInfoLabel.text = self.address
                     }
+                    self.addlocationButton.tintColor = .appColor(.white)
                 }
-            }
-        }
-        let cancelAction = UIAlertAction(title: Metric.cancelText, style: .cancel)
-        alert.addAction(libraryAction)
-        alert.addAction(cameraAction)
-        alert.addAction(cancelAction)
+            })
+            .disposed(by: disposeBag)
         
-        self.present(alert, animated: true, completion: nil)
+        viewModel.addressSubject
+            .withUnretained(self)
+            .subscribe(onNext: {_, address in
+                self.address = address
+                self.locationInfoLabel.text = address
+            })
+            .disposed(by: disposeBag)
     }
     
-    private func setImagePicker() {
-        imagePicker.allowsEditing = true
-        imagePicker.delegate = self
+    private func subscribeEditSucceed() {
+        viewModel.isSucceed
+            .observe(on: MainScheduler.instance)
+            .subscribe(onNext: { [weak self] result in
+                if result {
+                    self?.makeOKAlert(title: Literal.savedTitle, message: Literal.saved) { _ in
+                        self?.delegate?.diaryDidSaved()
+                    }
+                } else {
+                    self?.makeOKAlert(title: Literal.errorTitle, message: Literal.failedToSave)
+                }
+            })
+            .disposed(by: disposeBag)
     }
     
-    private func setRecognizer() {
-        let singleTapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(singleTapMethod))
-        mainScrollView.addGestureRecognizer(singleTapGestureRecognizer)
+    // MARK: - Error subscribing methods
+    private func subscribeSearchError() {
+        viewModel.searchError
+            .observe(on: MainScheduler.instance)
+            .subscribe(onNext: { [weak self] error in
+                self?.makeOKAlert(title: Literal.micAccessDeniedTitle , message: error.errorDescription) { _ in
+                    self?.musicInfoLabel.text = Literal.musicNotFound
+                    self?.viewModel.isSearching.onNext(false)
+                }
+            })
+            .disposed(by: disposeBag)
     }
     
+    private func subscribeLocationError() {
+        viewModel.subscribeError()
+            .observe(on: MainScheduler.instance)
+            .withUnretained(self)
+            .subscribe(onNext: { _, locationError in
+                switch locationError {
+                case .restricted:
+                    self.makeOKAlert(title: Literal.errorTitle, message: locationError.errorDescription)
+                    self.locationInfoLabel.text = Literal.locationPlaceholder
+                    self.addlocationButton.tintColor = .appColor(.white)
+                case .denied:
+                    self.makeOKAlert(title: Literal.errorTitle, message: locationError.errorDescription)
+                    self.locationInfoLabel.text = Literal.locationPlaceholder
+                    self.addlocationButton.tintColor = .appColor(.white)
+                case .unknown:
+                    self.makeOKAlert(title: Literal.errorTitle, message: locationError.errorDescription)
+                    self.locationInfoLabel.text = Literal.locationPlaceholder
+                    self.addlocationButton.tintColor = .appColor(.white)
+                }
+            })
+            .disposed(by: disposeBag)
+    }
+    
+    // MARK: - Keyboard setting methods
     private func registerForKeyboardNotification() {
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardShow), name: UIResponder.keyboardWillShowNotification, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardHide), name: UIResponder.keyboardWillHideNotification, object: nil)
@@ -487,9 +616,44 @@ final class DiaryEditViewController: UIViewController {
         mainScrollView.scrollIndicatorInsets = contentInset
         mainScrollView.scrollRectToVisible(frame, animated: true)
     }
+
+    private func saveDiary() {
+        guard photoImageView.image != Literal.imageViewStockImage else {
+            makeOKAlert(title: Literal.errorTitle, message: Literal.photoIsRequired)
+            return
+        }
+        
+        guard let imageData = photoImageView.image?.jpegData(compressionQuality: 1) else {
+            return
+        }
+        
+        guard var title = titleTextField.text else { return }
+        if title.isEmpty {
+            let dateFormatter = DateFormatter()
+            dateFormatter.dateFormat = Literal.dateFormat
+            dateFormatter.locale = Locale(identifier: Literal.localeIdentifier)
+            title = dateFormatter.string(from: Date())
+        }
+        
+        guard var bodyText = bodyTextView.text else { return }
+        if bodyTextView.text == Literal.bodyPlaceholder || bodyTextView.text.isEmpty {
+            bodyText = ""
+        }
+        
+        viewModel.saveDiary(title: title, body: bodyText, tags: tags, imageData: imageData)
+    }
+    
+    // MARK: - Action methods
+    private func musicButtonTapped() {
+        viewModel.toggleSearchMusic()
+    }
+    
+    private func locationButtonTapped() {
+        viewModel.toggleLocation()
+    }
     
     @objc private func singleTapMethod(sender: UITapGestureRecognizer) {
-        self.view.endEditing(true)
+        view.endEditing(true)
     }
     
     
@@ -501,7 +665,6 @@ final class DiaryEditViewController: UIViewController {
     @objc private func keyboardShow(notification: NSNotification) {
         let userInfo: NSDictionary = notification.userInfo! as NSDictionary
         guard let keyboardFrame: CGRect = userInfo.value(forKey: UIResponder.keyboardFrameEndUserInfoKey) as? CGRect else { return }
-        
 
         if bodyTextView.isFirstResponder {
             keyboardAnimate(keyboardRectangle: keyboardFrame, frame: bodyTextView.frame)
@@ -511,152 +674,8 @@ final class DiaryEditViewController: UIViewController {
     }
 }
 
-extension DiaryEditViewController {
-    private func subscribeSearchingStatus() {
-        viewModel.isSearching
-            .observe(on: MainScheduler.instance)
-            .subscribe(onNext: { searchState in
-                switch searchState {
-                case true:
-                    self.musicInfoLabel.text = Metric.searching
-                case false:
-                    self.musicInfoLabel.text = Metric.musicPlaceholder
-                }
-            })
-            .disposed(by: disposeBag)
-    }
-    
-    private func subscribeSearchResult() {
-        viewModel.musicInfoResult
-            .observe(on: MainScheduler.instance)
-            .subscribe(onNext: { [weak self] result in
-                guard let song = self?.viewModel.musicInfo else { return }
-                let title = song.title
-                let artist = song.artist
-                
-                debugPrint(song)
-                
-                self?.musicInfoLabel.text = "\(artist) - \(title)"
-            })
-            .disposed(by: disposeBag)
-    }
-    
-    private func subscribeSearchError() {
-        viewModel.searchError
-            .observe(on: MainScheduler.instance)
-            .subscribe(onNext: { [weak self] error in
-                self?.makeOKAlert(title: Metric.micAccessDeniedTitle , message: error.errorDescription) { _ in
-                    self?.musicInfoLabel.text = Metric.musicNotFound
-                    self?.viewModel.isSearching.onNext(false)
-                }
-            })
-            .disposed(by: disposeBag)
-    }
-    
-    private func searchTapped() {
-        viewModel.toggleSearchMusic()
-    }
-    
-    private func subscribeEditSucceed() {
-        viewModel.isSucceed
-            .observe(on: MainScheduler.instance)
-            .subscribe(onNext: { [weak self] result in
-                if result {
-                    self?.makeOKAlert(title: "저장 완료", message: "저장되었습니다.") { _ in
-                        self?.delegate?.diaryDidSaved()
-                    }
-                } else {
-                    self?.makeOKAlert(title: "Error!", message: "저장에 실패했습니다.")
-                }
-            })
-            .disposed(by: disposeBag)
-    }
-    
-    private func locationButtonTapped() {
-        viewModel.toggleLocation()
-    }
-    
-    private func saveDiary() {
-        guard photoImageView.image != Metric.imageViewStockImage else {
-            makeOKAlert(title: "사진이 없습니다.", message: "사진은 필수 입력 항목입니다.")
-            return
-        }
-        
-        guard let imageData = photoImageView.image?.jpegData(compressionQuality: 1) else {
-            return
-        }
-        
-        guard var title = titleTextField.text else { return }
-        if title.isEmpty {
-            let dateFormatter = DateFormatter()
-            dateFormatter.dateFormat = "yyyy년 MM월 dd일 HH시 mm분에 저장된 세뇨입니다."
-            dateFormatter.locale = Locale(identifier: "ko_KR")
-            title = dateFormatter.string(from: Date())
-        }
-        
-        guard var bodyText = bodyTextView.text else { return }
-        if bodyTextView.text == Metric.bodyPlaceholder || bodyTextView.text.isEmpty {
-            bodyText = ""
-        }
-        
-        viewModel.saveDiary(title: title, body: bodyText, tags: tags, imageData: imageData)
-    }
-}
-
-
-extension DiaryEditViewController {
-    private func subscribeLocationResult() {
-        viewModel.isReceivingLocation
-            .withUnretained(self)
-            .subscribe(onNext: { _, searchState in
-                switch searchState {
-                case true:
-                    self.locationInfoLabel.text = Metric.searching
-                    self.addlocationButton.tintColor = .systemRed
-                case false:
-                    if self.location == nil {
-                        self.locationInfoLabel.text = Metric.locationPlaceholder
-                    } else {
-                        self.locationInfoLabel.text = self.address
-                    }
-                    self.addlocationButton.tintColor = .appColor(.white)
-                }
-            })
-            .disposed(by: disposeBag)
-        
-        viewModel.addressSubject
-            .withUnretained(self)
-            .subscribe(onNext: {_, address in
-                self.address = address
-                self.locationInfoLabel.text = address
-            })
-            .disposed(by: disposeBag)
-    }
-    
-    private func subscribeLocationError() {
-        viewModel.subscribeError()
-            .observe(on: MainScheduler.instance)
-            .withUnretained(self)
-            .subscribe(onNext: { _, locationError in
-                switch locationError {
-                case .restricted:
-                    self.makeOKAlert(title: "위치 꺼짐", message: locationError.errorDescription)
-                    self.locationInfoLabel.text = Metric.locationPlaceholder
-                    self.addlocationButton.tintColor = .appColor(.white)
-                case .denied:                  
-                    self.makeOKAlert(title: "위치 오류", message: locationError.errorDescription)
-                    self.locationInfoLabel.text = Metric.locationPlaceholder
-                    self.addlocationButton.tintColor = .appColor(.white)
-                case .unknown:
-                    self.makeOKAlert(title: "알 수 없는 오류", message: locationError.errorDescription)
-                    self.locationInfoLabel.text = Metric.locationPlaceholder
-                    self.addlocationButton.tintColor = .appColor(.white)
-                }
-            })
-            .disposed(by: disposeBag)
-    }
-}
 extension DiaryEditViewController: UIImagePickerControllerDelegate, UINavigationControllerDelegate {
+    // MARK: - Image picker delegate methods
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
         var newImage: UIImage? = nil
         
@@ -672,6 +691,7 @@ extension DiaryEditViewController: UIImagePickerControllerDelegate, UINavigation
 }
 
 extension DiaryEditViewController: UITextFieldDelegate {
+    // MARK: Text field delegate methods
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         if textField == tagTextField {
             guard let tagText = tagTextField.text, !tagText.isEmpty, !tags.contains(tagText) else {
@@ -706,8 +726,9 @@ extension DiaryEditViewController: UITextFieldDelegate {
 }
 
 extension DiaryEditViewController: UITextViewDelegate {
+    // MARK: - Text view delegate methods
     func textViewDidBeginEditing(_ textView: UITextView) {
-        if textView.text == Metric.bodyPlaceholder {
+        if textView.text == Literal.bodyPlaceholder {
             textView.text = nil
             textView.textColor = .appColor(.label)
         }
@@ -715,12 +736,13 @@ extension DiaryEditViewController: UITextViewDelegate {
     
     func textViewDidEndEditing(_ textView: UITextView) {
         if textView.text.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty {
-            textView.text = Metric.bodyPlaceholder
+            textView.text = Literal.bodyPlaceholder
             textView.textColor = .appColor(.grey3)
         }
     }
 }
 
+// MARK: - Preview methods
 #if canImport(SwiftUI) && DEBUG
 import SwiftUI
 import CoreLocation

@@ -13,13 +13,13 @@ protocol LoginUseCase {
 
 final class LoginUseCaseImpl: LoginUseCase {
     private enum Metric {
-        static let userToken: String = "userToken"
-        static let userId: String = "userId"
+        static let userToken = "userToken"
+        static let userId = "userId"
     }
     
     let repository: LoginRepository
     let localUtilityManager: LocalUtilityManager
-    private let disposeBag = DisposeBag()
+    private var disposeBag = DisposeBag()
 
     init(repository: LoginRepository = LoginRepositoryImpl(),
          localUtilityManager: LocalUtilityManager = LocalUtilityManagerImpl()) {

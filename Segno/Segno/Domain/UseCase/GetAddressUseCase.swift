@@ -17,7 +17,7 @@ protocol GetAddressUseCase {
 final class GetAddressUseCaseImpl: GetAddressUseCase {
     var addressSubject = PublishSubject<String>()
     let repository: LocationRepository
-    private let disposeBag = DisposeBag()
+    private var disposeBag = DisposeBag()
     
     init(repository: LocationRepository = LocationRepositoryImpl()) {
         self.repository = repository

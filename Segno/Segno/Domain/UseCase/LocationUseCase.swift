@@ -19,7 +19,7 @@ protocol LocationUseCase {
 final class LocationUseCaseImpl: LocationUseCase {
     var locationSubject = PublishSubject<Location>()
     let repository: LocationRepository
-    private let disposeBag = DisposeBag()
+    private var disposeBag = DisposeBag()
     
     init(repository: LocationRepository = LocationRepositoryImpl()) {
         self.repository = repository
