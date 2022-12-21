@@ -11,7 +11,7 @@ import RxSwift
 
 struct NetworkManager {
     static let shared = NetworkManager()
-    private let disposeBag = DisposeBag()
+    private var disposeBag = DisposeBag()
     
     private init() {}
     

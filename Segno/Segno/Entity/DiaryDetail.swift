@@ -5,7 +5,7 @@
 //  Created by Gordon Choi on 2022/11/10.
 //
 
-struct DiaryDetail: Encodable {
+struct DiaryDetail: Encodable, Equatable {
     let identifier: String
     let userId: String
     let title: String
@@ -15,10 +15,18 @@ struct DiaryDetail: Encodable {
     let bodyText: String?
     let musicInfo: MusicInfo?
     let location: Location?
+    let token: String?
     
-    var token: String?
-    
-    init(identifier: String, userId: String, date: String, title: String, tags: [String], imagePath: String, bodyText: String?, musicInfo: MusicInfo?, location: Location?, token: String? = nil) {
+    init(identifier: String,
+         userId: String,
+         date: String,
+         title: String,
+         tags: [String],
+         imagePath: String,
+         bodyText: String?,
+         musicInfo: MusicInfo?,
+         location: Location?,
+         token: String? = nil) {
         self.identifier = identifier
         self.userId = userId
         self.date = date
@@ -43,22 +51,6 @@ struct DiaryDetail: Encodable {
             musicInfo: diary.musicInfo,
             location: diary.location,
             token: diary.token
-        )
-    }
-    
-    // DUMMY
-    init(_ diary: DiaryDetail, token: String) {
-        self.init(
-            identifier: diary.identifier,
-            userId: diary.userId,
-            date: diary.date,
-            title: diary.title,
-            tags: diary.tags,
-            imagePath: diary.imagePath,
-            bodyText: diary.bodyText,
-            musicInfo: diary.musicInfo,
-            location: diary.location,
-            token: token
         )
     }
 }

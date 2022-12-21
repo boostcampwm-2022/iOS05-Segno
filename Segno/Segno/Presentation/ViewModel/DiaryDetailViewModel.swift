@@ -12,19 +12,18 @@ import RxSwift
 final class DiaryDetailViewModel {
     
     private let itemIdentifier: String
-    let getDetailUseCase: DiaryDetailUseCase
-    let playMusicUseCase: PlayMusicUseCase
-    let settingsUseCase: SettingsUseCase
-    let getAddressUseCase: GetAddressUseCase
+    private let getDetailUseCase: DiaryDetailUseCase
+    private let playMusicUseCase: PlayMusicUseCase
+    private let settingsUseCase: SettingsUseCase
+    private let getAddressUseCase: GetAddressUseCase
+    private var diaryItem = PublishSubject<DiaryDetail>()
     
     var diaryData: DiaryDetail?
-    var diaryItem = PublishSubject<DiaryDetail>()
     var addressSubject = PublishSubject<String>()
     var isPlaying = BehaviorSubject(value: false)
     var isReady = BehaviorSubject(value: false)
     var playerErrorStatus = PublishSubject<MusicError>()
     var isSucceeded = PublishSubject<Bool>()
-    
     lazy var dateObservable = diaryItem.map { $0.date }
     lazy var idObservable = diaryItem.map { $0.identifier }
     lazy var userIdObservable = diaryItem.map { $0.userId }
@@ -35,7 +34,7 @@ final class DiaryDetailViewModel {
     lazy var musicObservable = diaryItem.map { $0.musicInfo }
     lazy var locationObservable = diaryItem.map { $0.location }
         
-    private let disposeBag = DisposeBag()
+    private var disposeBag = DisposeBag()
     
     init(itemIdentifier: String,
          getDetailUseCase: DiaryDetailUseCase = DiaryDetailUseCaseImpl(),

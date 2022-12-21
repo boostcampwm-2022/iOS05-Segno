@@ -16,6 +16,7 @@ protocol MusicContentViewDelegate: AnyObject {
 }
 
 final class MusicContentView: UIView {
+    // MARK: - Namespaces
     private enum Metric {
         static let fontSize: CGFloat = 16
         static let spacing: CGFloat = 10
@@ -23,13 +24,18 @@ final class MusicContentView: UIView {
         static let albumArtCornerRadius: CGFloat = 5
         static let playButtonSize: CGFloat = 30
         static let playButtonCornerRadius = playButtonSize / 2
+    }
+    
+    private enum Literal {
         static let playImage = UIImage(systemName: "play.fill")
         static let pauseImage = UIImage(systemName: "pause.fill")
     }
     
-    private let disposeBag = DisposeBag()
+    // MARK: - Properties
+    private var disposeBag = DisposeBag()
     weak var delegate: MusicContentViewDelegate?
     
+    // MARK: - Views
     private lazy var albumArtImageView: UIImageView = {
         let imageView = UIImageView()
         imageView.backgroundColor = .appColor(.grey2)
@@ -39,7 +45,6 @@ final class MusicContentView: UIView {
     
     private lazy var musicInfoLabel: MarqueeLabel = {
         let label = MarqueeLabel(frame: .zero, rate: 32, fadeLength: 32.0)
-//        label.font = .appFont(.surround, size: Metric.fontSize)
         label.font = .systemFont(ofSize: Metric.fontSize)
         return label
     }()
@@ -48,16 +53,19 @@ final class MusicContentView: UIView {
         let button = UIButton()
         button.backgroundColor = .appColor(.color4)
         button.layer.cornerRadius = Metric.playButtonCornerRadius
-        button.setImage(Metric.playImage, for: .normal)
+        button.setImage(Literal.playImage, for: .normal)
         button.tintColor = .appColor(.label)
+        
         button.rx.tap
             .bind { [weak self] in
                 self?.delegate?.playButtonTapped()
             }
             .disposed(by: disposeBag)
+        
         return button
     }()
     
+    // MARK: - Initializers
     override init(frame: CGRect) {
         super.init(frame: frame)
         
@@ -68,6 +76,7 @@ final class MusicContentView: UIView {
         fatalError("init(coder:) has not been implemented")
     }
     
+    // MARK: - Setup view methods
     private func setLayout() {
         [albumArtImageView, musicInfoLabel, playButton].forEach {
             addSubview($0)
@@ -94,12 +103,14 @@ final class MusicContentView: UIView {
         }
     }
     
+    // MARK: - Configure cell method
     func setMusic(info: MusicInfo) {
         musicInfoLabel.text = "\(info.artist) - \(info.title)  "
         guard let imageURL = info.imageURL else { return }
         albumArtImageView.setImage(urlString: imageURL)
     }
     
+    // MARK: - Change status methods
     func activatePlayButton(isReady status: Bool) {
         playButton.isEnabled = status
     }
@@ -107,9 +118,9 @@ final class MusicContentView: UIView {
     func changeButtonIcon(isPlaying status: Bool) {
         switch status {
         case true:
-            playButton.setImage(Metric.pauseImage, for: .normal)
+            playButton.setImage(Literal.pauseImage, for: .normal)
         case false:
-            playButton.setImage(Metric.playImage, for: .normal)
+            playButton.setImage(Literal.playImage, for: .normal)
         }
     }
 }

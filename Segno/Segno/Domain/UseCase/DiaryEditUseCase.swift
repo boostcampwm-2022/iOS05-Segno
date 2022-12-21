@@ -17,7 +17,7 @@ final class DiaryEditUseCaseImpl: DiaryEditUseCase {
     let localUtilityManager: LocalUtilityManagerImpl
     let diaryRepository: DiaryRepository
     let imageRepository: ImageRepository
-    private let disposeBag = DisposeBag()
+    private var disposeBag = DisposeBag()
     
     init(localUtilityManager: LocalUtilityManagerImpl = LocalUtilityManagerImpl(),
          diaryRepository: DiaryRepository = DiaryRepositoryImpl(),

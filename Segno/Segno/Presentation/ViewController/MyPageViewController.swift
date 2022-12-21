@@ -33,18 +33,8 @@ protocol MyPageViewDelegate: AnyObject {
 }
 
 final class MyPageViewController: UIViewController {
-    private let disposeBag = DisposeBag()
-    private let viewModel: MyPageViewModel
-    private let localUtilityManager: LocalUtilityManager
-    weak var mypageDelegate: MyPageViewDelegate?
-    
+    // MARK: - Namespaces
     private enum Metric {
-        static let logoutMessage: String = "정말 로그아웃하시겠습니까?"
-        static let logoutTitle: String = "로그아웃"
-        static let mypageText: String = "마이페이지"
-        static let titleText: String = "안녕하세요,\nboostcamp님!"
-        static let userToken: String = "userToken"
-        
         static let settingsOffset: CGFloat = 100
         static let titleFontSize: CGFloat = 32
         static let titleOffset: CGFloat = 30
@@ -53,25 +43,44 @@ final class MyPageViewController: UIViewController {
         static let navigationBackButtonTitleSize: CGFloat = 16
     }
     
+    private enum Literal {
+        static let logoutMessage = "정말 로그아웃하시겠습니까?"
+        static let logoutTitle = "로그아웃"
+        static let mypageText = "마이페이지"
+        static let titleText = "안녕하세요,\nboostcamp님!"
+        static let userToken = "userToken"
+        static let writtenDiaryCellIdentifier = "writtenDiary"
+        static let settingsCellIdentifier = "settings"
+        static let logoutCellIdentifier = "logout"
+    }
+    
+    // MARK: - Properties
+    private var disposeBag = DisposeBag()
+    private let viewModel: MyPageViewModel
+    private let localUtilityManager: LocalUtilityManager
+    weak var mypageDelegate: MyPageViewDelegate?
+    
+    // MARK: - Views
     private lazy var titleLabel: UILabel = {
         let label = UILabel()
         label.adjustsFontSizeToFitWidth = true
         label.font = .systemFont(ofSize: Metric.titleFontSize, weight: .bold)
         label.numberOfLines = 0
-        label.text = Metric.titleText
+        label.text = Literal.titleText
         return label
     }()
     
     private lazy var tableView: UITableView = {
         let tableView = UITableView()
         tableView.backgroundColor = .appColor(.background)
-        tableView.register(SettingsActionSheetCell.self, forCellReuseIdentifier: "writtenDiary")
-        tableView.register(SettingsActionSheetCell.self, forCellReuseIdentifier: "settings")
-        tableView.register(SettingsActionSheetCell.self, forCellReuseIdentifier: "logout")
+        tableView.register(SettingsActionSheetCell.self, forCellReuseIdentifier: Literal.writtenDiaryCellIdentifier)
+        tableView.register(SettingsActionSheetCell.self, forCellReuseIdentifier: Literal.settingsCellIdentifier)
+        tableView.register(SettingsActionSheetCell.self, forCellReuseIdentifier: Literal.logoutCellIdentifier)
         tableView.separatorInset = UIEdgeInsets(top: 0, left: Metric.separatorInset, bottom: 0, right: Metric.separatorInset)
         return tableView
     }()
     
+    // MARK: - Initializers
     init(viewModel: MyPageViewModel = MyPageViewModel(),
          localUtilityManager: LocalUtilityManager = LocalUtilityManagerImpl()) {
         self.viewModel = MyPageViewModel()
@@ -84,6 +93,7 @@ final class MyPageViewController: UIViewController {
         fatalError("init(coder:) has not been implemented")
     }
     
+    // MARK: - Lifecycle methods
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -99,6 +109,7 @@ final class MyPageViewController: UIViewController {
         getUserDetail()
     }
 
+    // MARK: - Setup view methods
     private func setupView() {
         view.backgroundColor = .appColor(.background)
         
@@ -107,7 +118,7 @@ final class MyPageViewController: UIViewController {
             NSAttributedString.Key.foregroundColor: UIColor.appColor(.color4) ?? .red
         ]
         
-        let backBarButtonItem = UIBarButtonItem(title: Metric.mypageText, style: .plain, target: self, action: nil)
+        let backBarButtonItem = UIBarButtonItem(title: Literal.mypageText, style: .plain, target: self, action: nil)
         backBarButtonItem.tintColor = UIColor.appColor(.color4)
         backBarButtonItem.setTitleTextAttributes([
             NSAttributedString.Key.font: UIFont.systemFont(ofSize: Metric.navigationBackButtonTitleSize)
@@ -131,6 +142,7 @@ final class MyPageViewController: UIViewController {
         }
     }
     
+    // MARK: - Binding table view metohds
     private func bindTableView() {
         viewModel.nicknameObservable
             .observe(on: MainScheduler.instance)
@@ -155,15 +167,18 @@ final class MyPageViewController: UIViewController {
                     .bind(to: (self?.tableView.rx.items)!) { (tableView, row, element) in
                         switch element {
                         case .writtenDiary(let title, let subtitle):
-                            guard let cell = tableView.dequeueReusableCell(withIdentifier: "writtenDiary") as? SettingsActionSheetCell else { return UITableViewCell() }
+                            guard let cell = tableView.dequeueReusableCell(withIdentifier: Literal.writtenDiaryCellIdentifier)
+                                    as? SettingsActionSheetCell else { return UITableViewCell() }
                             cell.configure(left: title, right: subtitle)
                             return cell
                         case .settings(let title):
-                            guard let cell = tableView.dequeueReusableCell(withIdentifier: "settings") as? SettingsActionSheetCell else { return UITableViewCell() }
+                            guard let cell = tableView.dequeueReusableCell(withIdentifier: Literal.settingsCellIdentifier)
+                                    as? SettingsActionSheetCell else { return UITableViewCell() }
                             cell.configure(center: title)
                             return cell
                         case .logout(let title, let color):
-                            guard let cell = tableView.dequeueReusableCell(withIdentifier: "logout") as? SettingsActionSheetCell else { return UITableViewCell() }
+                            guard let cell = tableView.dequeueReusableCell(withIdentifier: Literal.logoutCellIdentifier)
+                                    as? SettingsActionSheetCell else { return UITableViewCell() }
                             cell.configure(center: title, color: color)
                             return cell
                         }
@@ -188,22 +203,25 @@ final class MyPageViewController: UIViewController {
             .disposed(by: disposeBag)
     }
     
+    // MARK: - Getting data methods
     private func getUserDetail() {
         viewModel.getUserDetail()
     }
     
+    // MARK: - Action methods
     private func settingButtonTapped() {
         mypageDelegate?.settingButtonTapped()
     }
     
     private func logoutButtonTapped() {
-        makeCancelOKAlert(title: Metric.logoutTitle, message: Metric.logoutMessage) { [weak self] _ in
-            _ = self?.localUtilityManager.deleteToken(key: Metric.userToken)
+        makeCancelOKAlert(title: Literal.logoutTitle, message: Literal.logoutMessage) { [weak self] _ in
+            self?.localUtilityManager.deleteToken(key: Literal.userToken)
             self?.mypageDelegate?.logoutButtonTapped()
         }
     }
 }
 
+// MARK: - Preview methods
 #if canImport(SwiftUI) && DEBUG
 import SwiftUI
 

@@ -13,7 +13,7 @@ protocol UserDetailUseCase {
 
 final class UserDetailUseCaseImpl: UserDetailUseCase {
     let repository: MyPageRepository
-    private let disposeBag = DisposeBag()
+    private var disposeBag = DisposeBag()
     
     init(repository: MyPageRepository = MyPageRepositoryImpl()) {
         self.repository = repository

@@ -15,7 +15,7 @@ protocol SearchMusicUseCase {
 }
 
 final class SearchMusicUseCaseImpl: SearchMusicUseCase {
-    private let disposeBag = DisposeBag()
+    private var disposeBag = DisposeBag()
     
     let musicRepository: MusicRepository
     
