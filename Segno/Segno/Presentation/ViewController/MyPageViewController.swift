@@ -15,6 +15,7 @@ enum MyPageCellActions: Int {
     case diary
     case setting
     case logout
+    case resign
     
     var toRow: Int {
         return self.rawValue
@@ -25,6 +26,7 @@ enum MyPageCellModel {
     case writtenDiary(title: String, subtitle: String)
     case settings(title: String)
     case logout(title: String, color: UIColor)
+    case resign(title: String, color: UIColor)
 }
 
 protocol MyPageViewDelegate: AnyObject {
@@ -52,6 +54,7 @@ final class MyPageViewController: UIViewController {
         static let writtenDiaryCellIdentifier = "writtenDiary"
         static let settingsCellIdentifier = "settings"
         static let logoutCellIdentifier = "logout"
+        static let resignCellIdentifier = "resign"
     }
     
     // MARK: - Properties
@@ -76,6 +79,7 @@ final class MyPageViewController: UIViewController {
         tableView.register(SettingsActionSheetCell.self, forCellReuseIdentifier: Literal.writtenDiaryCellIdentifier)
         tableView.register(SettingsActionSheetCell.self, forCellReuseIdentifier: Literal.settingsCellIdentifier)
         tableView.register(SettingsActionSheetCell.self, forCellReuseIdentifier: Literal.logoutCellIdentifier)
+        tableView.register(SettingsActionSheetCell.self, forCellReuseIdentifier: Literal.resignCellIdentifier)
         tableView.separatorInset = UIEdgeInsets(top: 0, left: Metric.separatorInset, bottom: 0, right: Metric.separatorInset)
         return tableView
     }()
@@ -162,7 +166,8 @@ final class MyPageViewController: UIViewController {
                 _ = Observable<[MyPageCellModel]>.just([
                     .writtenDiary(title: "작성한 일기 수", subtitle: result),
                     .settings(title: "설정"),
-                    .logout(title: "logout", color: .red)
+                    .logout(title: "logout", color: .red),
+                    .resign(title: "회원탈퇴", color: .red)
                 ])
                     .bind(to: (self?.tableView.rx.items)!) { (tableView, row, element) in
                         switch element {
@@ -181,6 +186,11 @@ final class MyPageViewController: UIViewController {
                                     as? SettingsActionSheetCell else { return UITableViewCell() }
                             cell.configure(center: title, color: color)
                             return cell
+                        case .resign(let title, let color):
+                            guard let cell = tableView.dequeueReusableCell(withIdentifier: Literal.resignCellIdentifier)
+                                    as? SettingsActionSheetCell else { return UITableViewCell() }
+                            cell.configure(center: title, color: color)
+                            return cell
                         }
                     }
                     .disposed(by: self?.disposeBag ?? DisposeBag())
@@ -196,6 +206,8 @@ final class MyPageViewController: UIViewController {
                     self?.settingButtonTapped()
                 case .logout:
                     self?.logoutButtonTapped()
+                case .resign:
+                    self?.resignButtonTapped()
                 default:
                     break
                 }
@@ -218,6 +230,11 @@ final class MyPageViewController: UIViewController {
             self?.localUtilityManager.deleteToken(key: Literal.userToken)
             self?.mypageDelegate?.logoutButtonTapped()
         }
+    }
+    
+    private func resignButtonTapped() {
+        // TODO: 회원탈퇴 로직 구현
+        debugPrint("회원탈퇴")
     }
 }
 
