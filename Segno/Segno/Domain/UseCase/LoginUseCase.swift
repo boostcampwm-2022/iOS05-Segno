@@ -9,6 +9,7 @@ import RxSwift
 
 protocol LoginUseCase {
     func sendLoginRequest(withApple email: String) -> Single<Bool>
+    func sendLogoutRequest(token: String) -> Single<Bool>
 }
 
 final class LoginUseCaseImpl: LoginUseCase {
@@ -33,9 +34,13 @@ final class LoginUseCaseImpl: LoginUseCase {
                 guard let token = $0.token,
                       let userId = $0.userId else { return false }
                 
-                _ = self.localUtilityManager.createToken(key: Metric.userToken, token: token)
-                _ = self.localUtilityManager.createToken(key: Metric.userId, token: userId)
-                return true
+                let tokenResult = self.localUtilityManager.createToken(key: Metric.userToken, token: token)
+                let idResult = self.localUtilityManager.createToken(key: Metric.userId, token: userId)
+                return tokenResult && idResult
             }
+    }
+    
+    func sendLogoutRequest(token: String) -> Single<Bool> {
+        return repository.sendLogoutRequest(token: token)
     }
 }

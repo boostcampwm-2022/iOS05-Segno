@@ -11,7 +11,7 @@ import RxSwift
 
 protocol LoginRepository {
     func sendLoginRequest(withApple email: String) -> Single<UserLoginDTO>
-    func sendLogoutRequest()
+    func sendLogoutRequest(token: String) -> Single<Bool>
 }
 
 final class LoginRepositoryImpl: LoginRepository {
@@ -24,7 +24,11 @@ final class LoginRepositoryImpl: LoginRepository {
             }
     }
     
-    func sendLogoutRequest() {
-        // TODO: Logout
+    func sendLogoutRequest(token: String) -> Single<Bool> {
+        let endpoint = LogoutEndpoint.item(token)
+        return NetworkManager.shared.call(endpoint)
+            .map { _ in
+                return true
+            }
     }
 }

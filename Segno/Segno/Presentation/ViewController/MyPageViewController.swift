@@ -215,6 +215,10 @@ final class MyPageViewController: UIViewController {
     
     private func logoutButtonTapped() {
         makeCancelOKAlert(title: Literal.logoutTitle, message: Literal.logoutMessage) { [weak self] _ in
+            let token = self?.localUtilityManager.getToken(key: Literal.userToken)
+            if let token = token {
+                self?.viewModel.logout(token: token)
+            }
             self?.localUtilityManager.deleteToken(key: Literal.userToken)
             self?.mypageDelegate?.logoutButtonTapped()
         }
