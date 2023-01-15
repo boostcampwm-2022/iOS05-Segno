@@ -16,6 +16,7 @@ final class LoginSession: NSObject {
         static let errorMessage: String = "다시 시도해주세요."
         static let parsingErrorMessage: String = "파싱 오류"
     }
+    
     private let presenter: LoginViewController
     var authorizationController: ASAuthorizationController?
     var appleEmail = PublishSubject<String>()
