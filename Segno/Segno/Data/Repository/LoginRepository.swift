@@ -12,6 +12,7 @@ import RxSwift
 protocol LoginRepository {
     func sendLoginRequest(withApple email: String) -> Single<UserLoginDTO>
     func sendLogoutRequest()
+    func sendResignRequest(token: String) -> Completable
 }
 
 final class LoginRepositoryImpl: LoginRepository {
@@ -26,5 +27,11 @@ final class LoginRepositoryImpl: LoginRepository {
     
     func sendLogoutRequest() {
         // TODO: Logout
+    }
+    
+    func sendResignRequest(token: String) -> Completable {
+        let endpoint = ResignEndpoint.resign(token)
+        return NetworkManager.shared.call(endpoint)
+            .asCompletable()
     }
 }
