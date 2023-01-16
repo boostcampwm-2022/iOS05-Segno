@@ -14,6 +14,7 @@ final class MyPageViewModel {
     
     lazy var nicknameObservable = userDetailItem.map { $0.nickname }
     lazy var writtenDiaryObservable = userDetailItem.map { $0.diaryCount }
+    var failureObservable = Observable<Bool>.empty()
     
     init(useCase: UserDetailUseCase = UserDetailUseCaseImpl()) {
         self.useCase = useCase
@@ -23,8 +24,9 @@ final class MyPageViewModel {
         useCase.getUserDetail()
             .subscribe(onSuccess: { [weak self] userDetail in
                 self?.userDetailItem.onNext(userDetail)
-            }, onFailure: { error in
+            }, onFailure: { [weak self] error in
                 print(error.localizedDescription)
+                self?.failureObservable = Observable<Bool>.just(false)
             })
             .disposed(by: disposeBag)
     }
