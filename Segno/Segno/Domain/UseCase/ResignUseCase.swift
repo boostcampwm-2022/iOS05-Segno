@@ -12,7 +12,7 @@ protocol ResignUseCase {
 }
 
 final class ResignUseCaseImpl: ResignUseCase {
-    private enum Metric {
+    private enum Literal {
         static let userToken = "userToken"
     }
     
@@ -26,7 +26,7 @@ final class ResignUseCaseImpl: ResignUseCase {
     }
     
     func sendResignRequest() -> Completable {
-        let token = localUtilityManager.getToken(key: Metric.userToken)
+        let token = localUtilityManager.getToken(key: Literal.userToken)
         return repository.sendResignRequest(token: token)
     }
 }

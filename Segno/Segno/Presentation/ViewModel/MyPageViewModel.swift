@@ -35,8 +35,9 @@ final class MyPageViewModel {
     func resign() {
         resignUseCase.sendResignRequest()
             .subscribe(onCompleted: {
-                
+                // 탈퇴시 수행할 액션?
             }, onError: { [weak self] error in
+                // 탈퇴 과정에서 에러가 났을 경우?
                 debugPrint(error.localizedDescription)
             })
             .disposed(by: disposeBag)

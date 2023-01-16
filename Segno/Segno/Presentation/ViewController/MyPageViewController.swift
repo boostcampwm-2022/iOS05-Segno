@@ -48,6 +48,10 @@ final class MyPageViewController: UIViewController {
     private enum Literal {
         static let logoutMessage = "정말 로그아웃하시겠습니까?"
         static let logoutTitle = "로그아웃"
+        static let resignMessage = "정말 탈퇴하시겠습니까? 지금까지 작성한 글들이 모두 삭제됩니다."
+        static let resignTitle = "회원 탈퇴"
+        static let confirmResignMessage = "이용해 주셔서 감사합니다."
+        static let confirmResignTitle = "회원 탈퇴 완료"
         static let mypageText = "마이페이지"
         static let titleText = "안녕하세요,\nboostcamp님!"
         static let userToken = "userToken"
@@ -233,8 +237,18 @@ final class MyPageViewController: UIViewController {
     }
     
     private func resignButtonTapped() {
-        // TODO: 회원탈퇴 로직 구현
-        debugPrint("회원탈퇴")
+        makeCancelOKAlert(title: Literal.resignTitle, message: Literal.resignMessage) { [weak self] _ in
+            self?.performResign()
+        }
+    }
+    
+    private func performResign() {
+        viewModel.resign()
+        makeOKAlert(title: Literal.confirmResignTitle, message: Literal.confirmResignMessage) { [weak self] _ in
+            // TODO: 로그아웃에 쓰이는 과정을 하나의 메서드로 빼기
+            self?.localUtilityManager.deleteToken(key: Literal.userToken)
+            self?.mypageDelegate?.logoutButtonTapped()
+        }
     }
 }
 
