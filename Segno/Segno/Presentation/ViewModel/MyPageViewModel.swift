@@ -9,6 +9,7 @@ import RxSwift
 
 final class MyPageViewModel {
     private let useCase: UserDetailUseCase
+    private let loginUseCase: LoginUseCase
     private var disposeBag = DisposeBag()
     private var userDetailItem = PublishSubject<UserDetailItem>()
     
@@ -16,8 +17,12 @@ final class MyPageViewModel {
     lazy var writtenDiaryObservable = userDetailItem.map { $0.diaryCount }
     var failureObservable = Observable<Bool>.empty()
     
-    init(useCase: UserDetailUseCase = UserDetailUseCaseImpl()) {
+    var isLogoutSucceeded = PublishSubject<Bool>()
+    
+    init(useCase: UserDetailUseCase = UserDetailUseCaseImpl(),
+         loginUseCase: LoginUseCase = LoginUseCaseImpl()) {
         self.useCase = useCase
+        self.loginUseCase = loginUseCase
     }
     
     func getUserDetail() {
@@ -27,6 +32,16 @@ final class MyPageViewModel {
             }, onFailure: { [weak self] error in
                 print(error.localizedDescription)
                 self?.failureObservable = Observable<Bool>.just(false)
+            })
+            .disposed(by: disposeBag)
+    }
+    
+    func logout(token: String) {
+        loginUseCase.sendLogoutRequest(token: token)
+            .subscribe(onSuccess: { [weak self] result in
+                self?.isLogoutSucceeded.onNext(result)
+            }, onFailure: { [weak self] _ in
+                self?.isLogoutSucceeded.onNext(false)
             })
             .disposed(by: disposeBag)
     }
