@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		4F1D4E36297453E800339559 /* ResignEndpoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F1D4E35297453E800339559 /* ResignEndpoint.swift */; };
+		4F1D4E382975312300339559 /* ResignUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F1D4E372975312300339559 /* ResignUseCase.swift */; };
 		4F307A512939031A00FA36A0 /* MarqueeLabel in Frameworks */ = {isa = PBXBuildFile; productRef = 4F307A502939031A00FA36A0 /* MarqueeLabel */; };
 		4F317786291BE4720019BDFC /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 4F317785291BE4720019BDFC /* Assets.xcassets */; };
 		4F317789291BE4720019BDFC /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4F317787291BE4720019BDFC /* LaunchScreen.storyboard */; };
@@ -254,6 +255,7 @@
 /* Begin PBXFileReference section */
 		4F0372D52941DBD40014131F /* MusicError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MusicError.swift; sourceTree = "<group>"; };
 		4F1D4E35297453E800339559 /* ResignEndpoint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResignEndpoint.swift; sourceTree = "<group>"; };
+		4F1D4E372975312300339559 /* ResignUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResignUseCase.swift; sourceTree = "<group>"; };
 		4F307A4529387C1100FA36A0 /* ShazamSession.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShazamSession.swift; sourceTree = "<group>"; };
 		4F307A472938832900FA36A0 /* MusicSession.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MusicSession.swift; sourceTree = "<group>"; };
 		4F307A49293889C200FA36A0 /* SearchMusicUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchMusicUseCase.swift; sourceTree = "<group>"; };
@@ -549,6 +551,7 @@
 				9825F41A29377875005F2163 /* ChangeNicknameUseCase.swift */,
 				4F51A6FC294096480039D86A /* PlayMusicUseCase.swift */,
 				98B5EF332941B85A00287405 /* ImageUseCase.swift */,
+				4F1D4E372975312300339559 /* ResignUseCase.swift */,
 			);
 			path = UseCase;
 			sourceTree = "<group>";
@@ -961,6 +964,7 @@
 				6662A1B12949C48A0010DA2D /* UserInfoDTO.swift in Sources */,
 				6662A1B22949C48A0010DA2D /* DiaryDetailDTO.swift in Sources */,
 				6662A1B32949C48A0010DA2D /* NewDiaryDetailDTO.swift in Sources */,
+				4F1D4E382975312300339559 /* ResignUseCase.swift in Sources */,
 				6662A1B42949C48A0010DA2D /* UserLoginDTO.swift in Sources */,
 				6662A1B52949C48A0010DA2D /* UserDetailDTO.swift in Sources */,
 				6662A1B62949C48A0010DA2D /* ImageDTO.swift in Sources */,
