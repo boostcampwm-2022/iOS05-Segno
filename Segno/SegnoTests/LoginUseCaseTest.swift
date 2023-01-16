@@ -25,6 +25,12 @@ final class LoginUseCaseTest: XCTestCase {
         func sendLogoutRequest() {
             
         }
+        
+        func sendResignRequest(token: String) -> Completable {
+            return Completable.create { completable in
+                return Disposables.create()
+            }
+        }
     }
     
     var scheduler: TestScheduler!

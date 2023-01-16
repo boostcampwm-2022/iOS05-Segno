@@ -8,23 +8,36 @@
 import RxSwift
 
 final class MyPageViewModel {
-    private let useCase: UserDetailUseCase
+    private let userDetailUseCase: UserDetailUseCase
+    private let resignUseCase: ResignUseCase
     private var disposeBag = DisposeBag()
     private var userDetailItem = PublishSubject<UserDetailItem>()
     
     lazy var nicknameObservable = userDetailItem.map { $0.nickname }
     lazy var writtenDiaryObservable = userDetailItem.map { $0.diaryCount }
     
-    init(useCase: UserDetailUseCase = UserDetailUseCaseImpl()) {
-        self.useCase = useCase
+    init(userDetailUseCase: UserDetailUseCase = UserDetailUseCaseImpl(),
+         resignUseCase: ResignUseCase = ResignUseCaseImpl()) {
+        self.userDetailUseCase = userDetailUseCase
+        self.resignUseCase = resignUseCase
     }
     
     func getUserDetail() {
-        useCase.getUserDetail()
+        userDetailUseCase.getUserDetail()
             .subscribe(onSuccess: { [weak self] userDetail in
                 self?.userDetailItem.onNext(userDetail)
             }, onFailure: { error in
                 print(error.localizedDescription)
+            })
+            .disposed(by: disposeBag)
+    }
+    
+    func resign() {
+        resignUseCase.sendResignRequest()
+            .subscribe(onCompleted: {
+                
+            }, onError: { [weak self] error in
+                debugPrint(error.localizedDescription)
             })
             .disposed(by: disposeBag)
     }
