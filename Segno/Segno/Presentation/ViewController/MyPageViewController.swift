@@ -256,6 +256,7 @@ final class MyPageViewController: UIViewController {
             self?.localUtilityManager.deleteToken(key: Literal.userToken)
             self?.mypageDelegate?.logoutButtonTapped()
         }
+    }
         
     private func checkUserDetail() {
         viewModel.failureObservable

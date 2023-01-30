@@ -11,7 +11,7 @@ import RxSwift
 
 protocol LoginRepository {
     func sendLoginRequest(withApple email: String) -> Single<UserLoginDTO>
-    func sendLogoutRequest()
+    func sendLogoutRequest(token: String) -> Single<Bool>
     func sendResignRequest(token: String) -> Completable
 }
 

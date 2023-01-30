@@ -16,10 +16,11 @@ final class MyPageViewModel {
     
     lazy var nicknameObservable = userDetailItem.map { $0.nickname }
     lazy var writtenDiaryObservable = userDetailItem.map { $0.diaryCount }
-    var failureObservable = Observable<Bool>.empty()
+    var failureObservable = PublishSubject<Bool>()
+    var isLogoutSucceeded = PublishSubject<Bool>()
     
     init(userDetailUseCase: UserDetailUseCase = UserDetailUseCaseImpl(),
-         resignUseCase: ResignUseCase = ResignUseCaseImpl()
+         resignUseCase: ResignUseCase = ResignUseCaseImpl(),
          loginUseCase: LoginUseCase = LoginUseCaseImpl()) {
         self.userDetailUseCase = userDetailUseCase
         self.resignUseCase = resignUseCase
@@ -32,7 +33,7 @@ final class MyPageViewModel {
                 self?.userDetailItem.onNext(userDetail)
             }, onFailure: { [weak self] error in
                 print(error.localizedDescription)
-                self?.failureObservable = Observable<Bool>.just(false)
+                self?.failureObservable.onNext(false)
             })
             .disposed(by: disposeBag)
     }
