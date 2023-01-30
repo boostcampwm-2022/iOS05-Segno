@@ -8,7 +8,8 @@
 import RxSwift
 
 final class MyPageViewModel {
-    private let useCase: UserDetailUseCase
+    private let userDetailUseCase: UserDetailUseCase
+    private let resignUseCase: ResignUseCase
     private let loginUseCase: LoginUseCase
     private var disposeBag = DisposeBag()
     private var userDetailItem = PublishSubject<UserDetailItem>()
@@ -17,16 +18,16 @@ final class MyPageViewModel {
     lazy var writtenDiaryObservable = userDetailItem.map { $0.diaryCount }
     var failureObservable = Observable<Bool>.empty()
     
-    var isLogoutSucceeded = PublishSubject<Bool>()
-    
-    init(useCase: UserDetailUseCase = UserDetailUseCaseImpl(),
+    init(userDetailUseCase: UserDetailUseCase = UserDetailUseCaseImpl(),
+         resignUseCase: ResignUseCase = ResignUseCaseImpl()
          loginUseCase: LoginUseCase = LoginUseCaseImpl()) {
-        self.useCase = useCase
+        self.userDetailUseCase = userDetailUseCase
+        self.resignUseCase = resignUseCase
         self.loginUseCase = loginUseCase
     }
     
     func getUserDetail() {
-        useCase.getUserDetail()
+        userDetailUseCase.getUserDetail()
             .subscribe(onSuccess: { [weak self] userDetail in
                 self?.userDetailItem.onNext(userDetail)
             }, onFailure: { [weak self] error in
@@ -42,6 +43,17 @@ final class MyPageViewModel {
                 self?.isLogoutSucceeded.onNext(result)
             }, onFailure: { [weak self] _ in
                 self?.isLogoutSucceeded.onNext(false)
+            })
+            .disposed(by: disposeBag)
+    }
+    
+    func resign() {
+        resignUseCase.sendResignRequest()
+            .subscribe(onCompleted: {
+                // 탈퇴시 수행할 액션?
+            }, onError: { [weak self] error in
+                // 탈퇴 과정에서 에러가 났을 경우?
+                debugPrint(error.localizedDescription)
             })
             .disposed(by: disposeBag)
     }

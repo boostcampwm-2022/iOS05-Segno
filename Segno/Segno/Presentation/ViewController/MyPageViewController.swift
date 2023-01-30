@@ -15,6 +15,7 @@ enum MyPageCellActions: Int {
     case diary
     case setting
     case logout
+    case resign
     
     var toRow: Int {
         return self.rawValue
@@ -25,6 +26,7 @@ enum MyPageCellModel {
     case writtenDiary(title: String, subtitle: String)
     case settings(title: String)
     case logout(title: String, color: UIColor)
+    case resign(title: String, color: UIColor)
 }
 
 protocol MyPageViewDelegate: AnyObject {
@@ -48,12 +50,17 @@ final class MyPageViewController: UIViewController {
         static let checkMessage = "로그인 화면으로 돌아갑니다."
         static let logoutMessage = "정말 로그아웃하시겠습니까?"
         static let logoutTitle = "로그아웃"
+        static let resignMessage = "정말 탈퇴하시겠습니까? 지금까지 작성한 글들이 모두 삭제됩니다."
+        static let resignTitle = "회원 탈퇴"
+        static let confirmResignMessage = "이용해 주셔서 감사합니다."
+        static let confirmResignTitle = "회원 탈퇴 완료"
         static let mypageText = "마이페이지"
         static let titleText = "안녕하세요,\nboostcamp님!"
         static let userToken = "userToken"
         static let writtenDiaryCellIdentifier = "writtenDiary"
         static let settingsCellIdentifier = "settings"
         static let logoutCellIdentifier = "logout"
+        static let resignCellIdentifier = "resign"
     }
     
     // MARK: - Properties
@@ -78,6 +85,7 @@ final class MyPageViewController: UIViewController {
         tableView.register(SettingsActionSheetCell.self, forCellReuseIdentifier: Literal.writtenDiaryCellIdentifier)
         tableView.register(SettingsActionSheetCell.self, forCellReuseIdentifier: Literal.settingsCellIdentifier)
         tableView.register(SettingsActionSheetCell.self, forCellReuseIdentifier: Literal.logoutCellIdentifier)
+        tableView.register(SettingsActionSheetCell.self, forCellReuseIdentifier: Literal.resignCellIdentifier)
         tableView.separatorInset = UIEdgeInsets(top: 0, left: Metric.separatorInset, bottom: 0, right: Metric.separatorInset)
         return tableView
     }()
@@ -165,7 +173,8 @@ final class MyPageViewController: UIViewController {
                 _ = Observable<[MyPageCellModel]>.just([
                     .writtenDiary(title: "작성한 일기 수", subtitle: result),
                     .settings(title: "설정"),
-                    .logout(title: "logout", color: .red)
+                    .logout(title: "logout", color: .red),
+                    .resign(title: "회원탈퇴", color: .red)
                 ])
                     .bind(to: (self?.tableView.rx.items)!) { (tableView, row, element) in
                         switch element {
@@ -184,6 +193,11 @@ final class MyPageViewController: UIViewController {
                                     as? SettingsActionSheetCell else { return UITableViewCell() }
                             cell.configure(center: title, color: color)
                             return cell
+                        case .resign(let title, let color):
+                            guard let cell = tableView.dequeueReusableCell(withIdentifier: Literal.resignCellIdentifier)
+                                    as? SettingsActionSheetCell else { return UITableViewCell() }
+                            cell.configure(center: title, color: color)
+                            return cell
                         }
                     }
                     .disposed(by: self?.disposeBag ?? DisposeBag())
@@ -199,6 +213,8 @@ final class MyPageViewController: UIViewController {
                     self?.settingButtonTapped()
                 case .logout:
                     self?.logoutButtonTapped()
+                case .resign:
+                    self?.resignButtonTapped()
                 default:
                     break
                 }
@@ -227,6 +243,20 @@ final class MyPageViewController: UIViewController {
         }
     }
     
+    private func resignButtonTapped() {
+        makeCancelOKAlert(title: Literal.resignTitle, message: Literal.resignMessage) { [weak self] _ in
+            self?.performResign()
+        }
+    }
+    
+    private func performResign() {
+        viewModel.resign()
+        makeOKAlert(title: Literal.confirmResignTitle, message: Literal.confirmResignMessage) { [weak self] _ in
+            // TODO: 로그아웃에 쓰이는 과정을 하나의 메서드로 빼기
+            self?.localUtilityManager.deleteToken(key: Literal.userToken)
+            self?.mypageDelegate?.logoutButtonTapped()
+        }
+        
     private func checkUserDetail() {
         viewModel.failureObservable
             .subscribe(onNext: { [weak self] _ in
