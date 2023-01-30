@@ -25,8 +25,12 @@ final class LoginRepositoryImpl: LoginRepository {
             }
     }
     
-    func sendLogoutRequest() {
-        // TODO: Logout
+    func sendLogoutRequest(token: String) -> Single<Bool> {
+        let endpoint = LogoutEndpoint.item(token)
+        return NetworkManager.shared.call(endpoint)
+            .map { _ in
+                return true
+            }
     }
     
     func sendResignRequest(token: String) -> Completable {

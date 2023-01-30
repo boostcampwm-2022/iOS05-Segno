@@ -46,6 +46,8 @@ final class MyPageViewController: UIViewController {
     }
     
     private enum Literal {
+        static let checkTitle = "로그인 정보가 없습니다."
+        static let checkMessage = "로그인 화면으로 돌아갑니다."
         static let logoutMessage = "정말 로그아웃하시겠습니까?"
         static let logoutTitle = "로그아웃"
         static let resignMessage = "정말 탈퇴하시겠습니까? 지금까지 작성한 글들이 모두 삭제됩니다."
@@ -115,6 +117,7 @@ final class MyPageViewController: UIViewController {
         
         tableView.dataSource = nil
         getUserDetail()
+        checkUserDetail()
     }
 
     // MARK: - Setup view methods
@@ -231,6 +234,10 @@ final class MyPageViewController: UIViewController {
     
     private func logoutButtonTapped() {
         makeCancelOKAlert(title: Literal.logoutTitle, message: Literal.logoutMessage) { [weak self] _ in
+            let token = self?.localUtilityManager.getToken(key: Literal.userToken)
+            if let token = token {
+                self?.viewModel.logout(token: token)
+            }
             self?.localUtilityManager.deleteToken(key: Literal.userToken)
             self?.mypageDelegate?.logoutButtonTapped()
         }
@@ -249,6 +256,16 @@ final class MyPageViewController: UIViewController {
             self?.localUtilityManager.deleteToken(key: Literal.userToken)
             self?.mypageDelegate?.logoutButtonTapped()
         }
+        
+    private func checkUserDetail() {
+        viewModel.failureObservable
+            .subscribe(onNext: { [weak self] _ in
+                self?.makeOKAlert(title: Literal.checkTitle, message: Literal.checkMessage) { [weak self] _ in
+                    self?.localUtilityManager.deleteToken(key: Literal.userToken)
+                    self?.mypageDelegate?.logoutButtonTapped()
+                }
+            })
+            .disposed(by: disposeBag)
     }
 }
 

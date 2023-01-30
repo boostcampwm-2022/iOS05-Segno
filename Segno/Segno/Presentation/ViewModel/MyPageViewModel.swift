@@ -10,24 +10,39 @@ import RxSwift
 final class MyPageViewModel {
     private let userDetailUseCase: UserDetailUseCase
     private let resignUseCase: ResignUseCase
+    private let loginUseCase: LoginUseCase
     private var disposeBag = DisposeBag()
     private var userDetailItem = PublishSubject<UserDetailItem>()
     
     lazy var nicknameObservable = userDetailItem.map { $0.nickname }
     lazy var writtenDiaryObservable = userDetailItem.map { $0.diaryCount }
+    var failureObservable = Observable<Bool>.empty()
     
     init(userDetailUseCase: UserDetailUseCase = UserDetailUseCaseImpl(),
-         resignUseCase: ResignUseCase = ResignUseCaseImpl()) {
+         resignUseCase: ResignUseCase = ResignUseCaseImpl()
+         loginUseCase: LoginUseCase = LoginUseCaseImpl()) {
         self.userDetailUseCase = userDetailUseCase
         self.resignUseCase = resignUseCase
+        self.loginUseCase = loginUseCase
     }
     
     func getUserDetail() {
         userDetailUseCase.getUserDetail()
             .subscribe(onSuccess: { [weak self] userDetail in
                 self?.userDetailItem.onNext(userDetail)
-            }, onFailure: { error in
+            }, onFailure: { [weak self] error in
                 print(error.localizedDescription)
+                self?.failureObservable = Observable<Bool>.just(false)
+            })
+            .disposed(by: disposeBag)
+    }
+    
+    func logout(token: String) {
+        loginUseCase.sendLogoutRequest(token: token)
+            .subscribe(onSuccess: { [weak self] result in
+                self?.isLogoutSucceeded.onNext(result)
+            }, onFailure: { [weak self] _ in
+                self?.isLogoutSucceeded.onNext(false)
             })
             .disposed(by: disposeBag)
     }
