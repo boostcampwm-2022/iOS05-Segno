@@ -29,8 +29,8 @@ final class DiaryDetailViewController: UIViewController {
         static let textViewHeight: CGFloat = 200
         static let textViewInset: CGFloat = 16
         static let tagScrollViewHeight: CGFloat = 30
-        static let musicContentViewHeight: CGFloat = 30
-        static let locationContentViewHeight: CGFloat = 30
+        static let musicContentViewHeight: CGFloat = 60
+        static let locationContentViewHeight: CGFloat = 60
         static let standardCornerRadius: CGFloat = 8
     }
     

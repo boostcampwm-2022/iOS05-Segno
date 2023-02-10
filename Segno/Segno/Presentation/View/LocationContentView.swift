@@ -21,7 +21,7 @@ final class LocationContentView: UIView {
     private enum Metric {
         static let fontSize: CGFloat = 16
         static let spacing: CGFloat = 10
-        static let mapButtonSize: CGFloat = 30
+        static let mapButtonSize: CGFloat = 60
         static let mapButtonCornerRadius = mapButtonSize / 2
     }
     

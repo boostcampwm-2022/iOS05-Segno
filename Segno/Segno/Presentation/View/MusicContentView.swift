@@ -20,9 +20,9 @@ final class MusicContentView: UIView {
     private enum Metric {
         static let fontSize: CGFloat = 16
         static let spacing: CGFloat = 10
-        static let albumArtImageViewSize: CGFloat = 30
+        static let albumArtImageViewSize: CGFloat = 60
         static let albumArtCornerRadius: CGFloat = 5
-        static let playButtonSize: CGFloat = 30
+        static let playButtonSize: CGFloat = 60
         static let playButtonCornerRadius = playButtonSize / 2
     }
     
