@@ -24,11 +24,12 @@ final class MusicContentView: UIView {
         static let albumArtCornerRadius: CGFloat = 5
         static let playButtonSize: CGFloat = 60
         static let playButtonCornerRadius = playButtonSize / 2
+        static let symbolConfig = UIImage.SymbolConfiguration(pointSize: 15, weight: .bold, scale: .large)
     }
     
     private enum Literal {
-        static let playImage = UIImage(systemName: "play.fill")
-        static let pauseImage = UIImage(systemName: "pause.fill")
+        static let playImage = UIImage(systemName: "play.fill", withConfiguration: Metric.symbolConfig)
+        static let pauseImage = UIImage(systemName: "pause.fill", withConfiguration: Metric.symbolConfig)
     }
     
     // MARK: - Properties

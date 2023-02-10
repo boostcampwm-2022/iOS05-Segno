@@ -23,11 +23,12 @@ final class LocationContentView: UIView {
         static let spacing: CGFloat = 10
         static let mapButtonSize: CGFloat = 60
         static let mapButtonCornerRadius = mapButtonSize / 2
+        static let symbolConfig = UIImage.SymbolConfiguration(pointSize: 15, weight: .bold, scale: .large)
     }
     
     private enum Literal {
         static let titleText: String = "위치"
-        static let mapImage = UIImage(systemName: "map.fill")
+        static let mapImage = UIImage(systemName: "map.fill", withConfiguration: Metric.symbolConfig)
     }
     
     // MARK: - Properties

@@ -39,6 +39,7 @@ final class DiaryEditViewController: UIViewController {
         static let buttonCornerRadius = CGFloat(minorContentHeight / 2)
         static let halfMinorCornerRadius = CGFloat(halfMinorContentHeight / 2)
         static let semiMinorCornerRadius = CGFloat(semiMinorContentHeight / 2)
+        static let symbolConfig = UIImage.SymbolConfiguration(pointSize: 20, weight: .bold, scale: .large)
     }
     
     private enum Literal {
@@ -64,8 +65,8 @@ final class DiaryEditViewController: UIViewController {
         static let failedToSave = "저장에 실패했습니다."
         static let photoIsRequired = "사진은 필수 입력 항목입니다."
         static let imageViewStockImage = UIImage(systemName: "photo")
-        static let musicButtonImage = UIImage(systemName: "music.note")
-        static let locationButtonImage = UIImage(systemName: "location.fill")
+        static let musicButtonImage = UIImage(systemName: "music.note", withConfiguration: Metric.symbolConfig)
+        static let locationButtonImage = UIImage(systemName: "location.fill", withConfiguration: Metric.symbolConfig)
         static let dateFormat = "yyyy년 MM월 dd일 HH시 mm분에 저장된 세뇨입니다."
         static let localeIdentifier = "ko_KR"
     }
