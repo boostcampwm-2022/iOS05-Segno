@@ -7,6 +7,8 @@
 
 import UIKit
 
+import Kingfisher
+
 extension UIButton {
     func setBackgroundColor(_ color: UIColor, for state: UIControl.State) {
         UIGraphicsBeginImageContext(CGSize(width: 1.0, height: 1.0))
@@ -19,5 +21,15 @@ extension UIButton {
         UIGraphicsEndImageContext()
          
         setBackgroundImage(backgroundImage, for: state)
+    }
+    
+    func setImage(urlString: String) {
+        guard let imageURL = URL(string: urlString) else { return }
+        let resource = ImageResource(downloadURL: imageURL, cacheKey: urlString)
+        
+        let memoryCache = KingfisherManager.shared.cache.memoryStorage
+        memoryCache.config.expiration = .seconds(3600)
+        
+        kf.setImage(with: resource, for: .normal)
     }
 }

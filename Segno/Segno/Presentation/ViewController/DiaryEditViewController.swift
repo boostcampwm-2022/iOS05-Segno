@@ -466,6 +466,8 @@ final class DiaryEditViewController: UIViewController {
             .subscribe(onNext: { [weak self] info in
                 guard let info else { return }
                 self?.musicInfoLabel.text = "\(info.artist) - \(info.title)"
+                guard let imageURL = info.imageURL else { return }
+                self?.addMusicButton.setImage(urlString: imageURL)
             })
             .disposed(by: disposeBag)
         
