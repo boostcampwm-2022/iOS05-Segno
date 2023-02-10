@@ -34,6 +34,7 @@ final class DiaryEditViewController: UIViewController {
         static let smallFontSize: CGFloat = 16
         static let textFieldFontSize: CGFloat = 12
         static let padding: CGFloat = 12
+        static let albumArtCornerRadius: CGFloat = 5
         static let leftView = UIView(frame: CGRect(x: 0.0, y: 0.0, width: padding, height: 0.0))
         static let buttonCornerRadius = CGFloat(minorContentHeight / 2)
         static let halfMinorCornerRadius = CGFloat(halfMinorContentHeight / 2)
@@ -156,7 +157,6 @@ final class DiaryEditViewController: UIViewController {
         let stackView = UIStackView()
         stackView.axis = .horizontal
         stackView.backgroundColor = .appColor(.grey1)
-        stackView.distribution = .equalSpacing
         stackView.layer.cornerRadius = Metric.buttonCornerRadius
         stackView.spacing = Metric.doubleSpacing
         stackView.layoutMargins = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: Metric.padding)
@@ -173,8 +173,16 @@ final class DiaryEditViewController: UIViewController {
         return button
     }()
     
+    private lazy var musicAlbumArt: UIImageView = {
+        let imageView = UIImageView()
+        imageView.backgroundColor = .appColor(.grey1)
+        imageView.layer.cornerRadius = Metric.albumArtCornerRadius
+        return imageView
+    }()
+    
     private lazy var musicInfoLabel: MarqueeLabel = {
         let label = MarqueeLabel(frame: .zero, rate: 32, fadeLength: 32.0)
+        label.textAlignment = .right
         label.font = .systemFont(ofSize: Metric.smallFontSize)
         label.text = Literal.musicPlaceholder
         label.trailingBuffer = 16.0
@@ -347,6 +355,10 @@ final class DiaryEditViewController: UIViewController {
         addMusicButton.snp.makeConstraints {
             $0.width.equalTo(Metric.minorContentHeight)
         }
+        musicStackView.addArrangedSubview(musicAlbumArt)
+        musicAlbumArt.snp.makeConstraints {
+            $0.width.equalTo(Metric.minorContentHeight)
+        }
         musicStackView.addArrangedSubview(musicInfoLabel)
     }
     
@@ -466,8 +478,6 @@ final class DiaryEditViewController: UIViewController {
             .subscribe(onNext: { [weak self] info in
                 guard let info else { return }
                 self?.musicInfoLabel.text = "\(info.artist) - \(info.title)"
-                guard let imageURL = info.imageURL else { return }
-                self?.addMusicButton.setImage(urlString: imageURL)
             })
             .disposed(by: disposeBag)
         
@@ -513,6 +523,9 @@ final class DiaryEditViewController: UIViewController {
                 debugPrint(song)
                 
                 self?.musicInfoLabel.text = "\(artist) - \(title)"
+                
+                guard let imageURL = song.imageURL else { return }
+                self?.musicAlbumArt.setImage(urlString: imageURL)
             })
             .disposed(by: disposeBag)
     }
