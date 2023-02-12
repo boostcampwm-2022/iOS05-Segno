@@ -34,10 +34,12 @@ final class DiaryEditViewController: UIViewController {
         static let smallFontSize: CGFloat = 16
         static let textFieldFontSize: CGFloat = 12
         static let padding: CGFloat = 12
+        static let albumArtCornerRadius: CGFloat = 5
         static let leftView = UIView(frame: CGRect(x: 0.0, y: 0.0, width: padding, height: 0.0))
         static let buttonCornerRadius = CGFloat(minorContentHeight / 2)
         static let halfMinorCornerRadius = CGFloat(halfMinorContentHeight / 2)
         static let semiMinorCornerRadius = CGFloat(semiMinorContentHeight / 2)
+        static let symbolConfig = UIImage.SymbolConfiguration(pointSize: 20, weight: .bold, scale: .large)
     }
     
     private enum Literal {
@@ -63,8 +65,8 @@ final class DiaryEditViewController: UIViewController {
         static let failedToSave = "저장에 실패했습니다."
         static let photoIsRequired = "사진은 필수 입력 항목입니다."
         static let imageViewStockImage = UIImage(systemName: "photo")
-        static let musicButtonImage = UIImage(systemName: "music.note")
-        static let locationButtonImage = UIImage(systemName: "location.fill")
+        static let musicButtonImage = UIImage(systemName: "music.note", withConfiguration: Metric.symbolConfig)
+        static let locationButtonImage = UIImage(systemName: "location.fill", withConfiguration: Metric.symbolConfig)
         static let dateFormat = "yyyy년 MM월 dd일 HH시 mm분에 저장된 세뇨입니다."
         static let localeIdentifier = "ko_KR"
     }
@@ -156,7 +158,6 @@ final class DiaryEditViewController: UIViewController {
         let stackView = UIStackView()
         stackView.axis = .horizontal
         stackView.backgroundColor = .appColor(.grey1)
-        stackView.distribution = .equalSpacing
         stackView.layer.cornerRadius = Metric.buttonCornerRadius
         stackView.spacing = Metric.doubleSpacing
         stackView.layoutMargins = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: Metric.padding)
@@ -173,8 +174,16 @@ final class DiaryEditViewController: UIViewController {
         return button
     }()
     
+    private lazy var musicAlbumArt: UIImageView = {
+        let imageView = UIImageView()
+        imageView.backgroundColor = .appColor(.grey1)
+        imageView.layer.cornerRadius = Metric.albumArtCornerRadius
+        return imageView
+    }()
+    
     private lazy var musicInfoLabel: MarqueeLabel = {
         let label = MarqueeLabel(frame: .zero, rate: 32, fadeLength: 32.0)
+        label.textAlignment = .right
         label.font = .systemFont(ofSize: Metric.smallFontSize)
         label.text = Literal.musicPlaceholder
         label.trailingBuffer = 16.0
@@ -347,6 +356,10 @@ final class DiaryEditViewController: UIViewController {
         addMusicButton.snp.makeConstraints {
             $0.width.equalTo(Metric.minorContentHeight)
         }
+        musicStackView.addArrangedSubview(musicAlbumArt)
+        musicAlbumArt.snp.makeConstraints {
+            $0.width.equalTo(Metric.minorContentHeight)
+        }
         musicStackView.addArrangedSubview(musicInfoLabel)
     }
     
@@ -511,6 +524,9 @@ final class DiaryEditViewController: UIViewController {
                 debugPrint(song)
                 
                 self?.musicInfoLabel.text = "\(artist) - \(title)"
+                
+                guard let imageURL = song.imageURL else { return }
+                self?.musicAlbumArt.setImage(urlString: imageURL)
             })
             .disposed(by: disposeBag)
     }
