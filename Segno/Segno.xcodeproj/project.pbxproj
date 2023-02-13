@@ -17,6 +17,7 @@
 		4F3177AB291BF70B0019BDFC /* RxSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 4F3177AA291BF70B0019BDFC /* RxSwift */; };
 		4F3177B0291BF7950019BDFC /* SnapKit in Frameworks */ = {isa = PBXBuildFile; productRef = 4F3177AF291BF7950019BDFC /* SnapKit */; };
 		4F3177B5291BF7BC0019BDFC /* Kingfisher in Frameworks */ = {isa = PBXBuildFile; productRef = 4F3177B4291BF7BC0019BDFC /* Kingfisher */; };
+		4FFB46EF299A9978000BBE16 /* CheckSubscriptionUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FFB46EE299A9978000BBE16 /* CheckSubscriptionUseCase.swift */; };
 		6618BC282949B6830008734D /* LoginUseCaseTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6618BC272949B6830008734D /* LoginUseCaseTest.swift */; };
 		6618BC2A2949B6930008734D /* DiaryListUseCaseTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6618BC292949B6930008734D /* DiaryListUseCaseTest.swift */; };
 		6618BC2F2949B7010008734D /* LoginUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9841D6162925FACC00318EA9 /* LoginUseCase.swift */; };
@@ -291,6 +292,7 @@
 		4FEBFAAC291CF62E00E78139 /* DiaryDetail.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiaryDetail.swift; sourceTree = "<group>"; };
 		4FEBFAAE291CF9F300E78139 /* MusicInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MusicInfo.swift; sourceTree = "<group>"; };
 		4FEBFAB0291CFB5500E78139 /* SHMediaItem+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "SHMediaItem+.swift"; sourceTree = "<group>"; };
+		4FFB46EE299A9978000BBE16 /* CheckSubscriptionUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheckSubscriptionUseCase.swift; sourceTree = "<group>"; };
 		6618BC272949B6830008734D /* LoginUseCaseTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginUseCaseTest.swift; sourceTree = "<group>"; };
 		6618BC292949B6930008734D /* DiaryListUseCaseTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiaryListUseCaseTest.swift; sourceTree = "<group>"; };
 		6618BC3B2949B8610008734D /* DiaryEditUseCaseTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiaryEditUseCaseTest.swift; sourceTree = "<group>"; };
@@ -554,6 +556,7 @@
 				4F51A6FC294096480039D86A /* PlayMusicUseCase.swift */,
 				98B5EF332941B85A00287405 /* ImageUseCase.swift */,
 				4F1D4E372975312300339559 /* ResignUseCase.swift */,
+				4FFB46EE299A9978000BBE16 /* CheckSubscriptionUseCase.swift */,
 			);
 			path = UseCase;
 			sourceTree = "<group>";
@@ -903,6 +906,7 @@
 				6662A1712949C48A0010DA2D /* AppDelegate.swift in Sources */,
 				6662A1722949C48A0010DA2D /* SceneDelegate.swift in Sources */,
 				6662A1732949C48A0010DA2D /* AppCoordinator.swift in Sources */,
+				4FFB46EF299A9978000BBE16 /* CheckSubscriptionUseCase.swift in Sources */,
 				6662A1742949C48A0010DA2D /* LoginUseCase.swift in Sources */,
 				6662A1752949C48A0010DA2D /* DiaryListUseCase.swift in Sources */,
 				6662A1762949C48A0010DA2D /* DiaryDetailUseCase.swift in Sources */,
