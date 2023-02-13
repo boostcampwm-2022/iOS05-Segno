@@ -10,6 +10,7 @@ import RxSwift
 protocol MusicRepository {
     func startSearchingMusic()
     func stopSearchingMusic()
+    func isSubscribedToAppleMusic() -> Single<Bool>
     func setupMusic(_ song: MusicInfo?)
     func toggleMusicPlayer()
     func stopPlayingMusic()
@@ -22,12 +23,15 @@ protocol MusicRepository {
 
 final class MusicRepositoryImpl: MusicRepository {
     private let shazamSession: ShazamSession
+    private let checkSubscriptionSession: CheckSubscriptionSession
     private let musicSession: MusicSession
     private var disposeBag = DisposeBag()
     
     init(shazamSession: ShazamSession = ShazamSession(),
+         checkSubscriptionSession: CheckSubscriptionSession = CheckSubscriptionSession(),
          musicSession: MusicSession = MusicSession()) {
         self.shazamSession = shazamSession
+        self.checkSubscriptionSession = checkSubscriptionSession
         self.musicSession = musicSession
     }
     
@@ -41,6 +45,10 @@ final class MusicRepositoryImpl: MusicRepository {
     
     func stopSearchingMusic() {
         shazamSession.stop()
+    }
+    
+    func isSubscribedToAppleMusic() -> Single<Bool> {
+        return checkSubscriptionSession.isSubscribedToAppleMusic()
     }
     
     func toggleMusicPlayer() {

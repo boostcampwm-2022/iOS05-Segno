@@ -13,6 +13,7 @@ final class DiaryDetailViewModel {
     
     private let itemIdentifier: String
     private let getDetailUseCase: DiaryDetailUseCase
+    private let checkSubscriptionUseCase: CheckSubscriptionUseCase
     private let playMusicUseCase: PlayMusicUseCase
     private let settingsUseCase: SettingsUseCase
     private let getAddressUseCase: GetAddressUseCase
@@ -38,11 +39,13 @@ final class DiaryDetailViewModel {
     
     init(itemIdentifier: String,
          getDetailUseCase: DiaryDetailUseCase = DiaryDetailUseCaseImpl(),
+         checkSubscriptionUseCase: CheckSubscriptionUseCase = CheckSubscriptionUseCaseImpl(),
          playMusicUseCase: PlayMusicUseCase = PlayMusicUseCaseImpl(),
          getAddressUseCase: GetAddressUseCase = GetAddressUseCaseImpl(),
          settingsUseCase: SettingsUseCase = SettingsUseCaseImpl()) {
         self.itemIdentifier = itemIdentifier
         self.getDetailUseCase = getDetailUseCase
+        self.checkSubscriptionUseCase = checkSubscriptionUseCase
         self.playMusicUseCase = playMusicUseCase
         self.getAddressUseCase = getAddressUseCase
         self.settingsUseCase = settingsUseCase

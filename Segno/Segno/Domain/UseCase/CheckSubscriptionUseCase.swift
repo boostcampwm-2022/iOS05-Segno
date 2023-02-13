@@ -21,9 +21,6 @@ final class CheckSubscriptionUseCaseImpl: CheckSubscriptionUseCase {
     }
     
     func isSubscribedToAppleMusic() -> Single<Bool> {
-        return Single.create { observer in
-            observer(.success(true))
-            return Disposables.create()
-        }
+        return musicRepository.isSubscribedToAppleMusic()
     }
 }
