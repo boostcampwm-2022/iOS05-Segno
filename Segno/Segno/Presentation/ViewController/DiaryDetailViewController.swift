@@ -439,7 +439,7 @@ final class DiaryDetailViewController: UIViewController {
 extension DiaryDetailViewController: MusicContentViewDelegate {
     // MARK: Music content view method
     func playButtonTapped() {
-        viewModel.toggleMusicPlayer()
+        viewModel.checkAppleMusicSubscription()
     }
 }
 

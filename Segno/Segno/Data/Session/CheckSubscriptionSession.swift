@@ -10,18 +10,18 @@ import StoreKit
 import RxSwift
 
 final class CheckSubscriptionSession {
-    func isSubscribedToAppleMusic() -> Single<Bool> {
+    func isSubscribedToAppleMusic() -> Completable {
         let serviceController = SKCloudServiceController()
         
-        return Single.create { observer in
+        return Completable.create { observer in
             serviceController.requestCapabilities { capabilities, error in
-                if let error = error {
-                    observer(.failure(error))
+                if error != nil {
+                    observer(.error(MusicError.failedToCheckAuthorization))
                 } else {
                     if capabilities.contains(.musicCatalogPlayback) {
-                        observer(.success(true))
+                        observer(.completed)
                     } else {
-                        observer(.success(false))
+                        observer(.error(MusicError.notAuthorized))
                     }
                 }
             }

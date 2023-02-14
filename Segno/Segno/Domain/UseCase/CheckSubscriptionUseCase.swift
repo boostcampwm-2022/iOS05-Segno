@@ -10,7 +10,7 @@ import Foundation
 import RxSwift
 
 protocol CheckSubscriptionUseCase {
-    func isSubscribedToAppleMusic() -> Single<Bool>
+    func isSubscribedToAppleMusic() -> Completable
 }
 
 final class CheckSubscriptionUseCaseImpl: CheckSubscriptionUseCase {
@@ -20,7 +20,7 @@ final class CheckSubscriptionUseCaseImpl: CheckSubscriptionUseCase {
         self.musicRepository = musicRepository
     }
     
-    func isSubscribedToAppleMusic() -> Single<Bool> {
+    func isSubscribedToAppleMusic() -> Completable {
         return musicRepository.isSubscribedToAppleMusic()
     }
 }

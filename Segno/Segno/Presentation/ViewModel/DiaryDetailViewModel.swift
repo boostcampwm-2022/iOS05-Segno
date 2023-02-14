@@ -76,6 +76,16 @@ final class DiaryDetailViewModel {
             .disposed(by: disposeBag)
     }
     
+    func checkAppleMusicSubscription() {
+        checkSubscriptionUseCase.isSubscribedToAppleMusic()
+            .subscribe(onCompleted: { [weak self] in
+                self?.toggleMusicPlayer()
+            }, onError: { [weak self] error in
+                self?.playerErrorStatus.onNext(error as? MusicError ?? .unknown)
+            })
+            .disposed(by: disposeBag)
+    }
+    
     func toggleMusicPlayer() {
         playMusicUseCase.togglePlayer()
     }

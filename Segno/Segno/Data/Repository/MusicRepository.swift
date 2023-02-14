@@ -10,7 +10,7 @@ import RxSwift
 protocol MusicRepository {
     func startSearchingMusic()
     func stopSearchingMusic()
-    func isSubscribedToAppleMusic() -> Single<Bool>
+    func isSubscribedToAppleMusic() -> Completable
     func setupMusic(_ song: MusicInfo?)
     func toggleMusicPlayer()
     func stopPlayingMusic()
@@ -47,7 +47,7 @@ final class MusicRepositoryImpl: MusicRepository {
         shazamSession.stop()
     }
     
-    func isSubscribedToAppleMusic() -> Single<Bool> {
+    func isSubscribedToAppleMusic() -> Completable {
         return checkSubscriptionSession.isSubscribedToAppleMusic()
     }
     
