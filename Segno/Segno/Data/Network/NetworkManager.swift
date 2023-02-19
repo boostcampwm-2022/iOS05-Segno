@@ -52,7 +52,7 @@ struct NetworkManager {
                 if (200...299) ~= httpResponse.statusCode {
                     observer(.success(data))
                 } else {
-                    observer(.failure(NetworkError.invalidNetworkStatusCode))
+                    observer(.failure(NetworkError.invalidNetworkStatusCode(code: httpResponse.statusCode)))
                 }
             }
             
